@@ -55,6 +55,3 @@ The following command will open the door if the door is locked.
 
 The following command will give you a full description of your location.
 *	GPS
-
-
-More Instructions as we go along.
