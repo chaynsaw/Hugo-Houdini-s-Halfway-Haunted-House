@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<house> <!-- root element -->
+    <room id="foyer">
+        <roomName>Foyer</roomName> <!-- element nodes surround text node -->
+        <desc>The entry to the haunted house</desc>
+        <roomExits type="array">
+            <exit>Living Room</exit>
+            <exit>Dining Room</exit>
+        </roomExits>
+        <roomItems type="array">
+            <item>Bowl of Candy</item>
+            <item>Screw Driver</item>
+        </roomItems>
+    </room>
+    <room id="livingRoom">
+        <roomName>Living Room</roomName>
+        <desc>A comfortable place to have a sit</desc>
+        <roomExits type="array">
+            <exit>Foyer</exit>
+            <exit>Garden</exit>
+        </roomExits>
+        <roomItems type="array">
+            <item>Pencil</item>
+            <item>Bloody couch pillow</item>
+        </roomItems>
+    </room>
+</house>
