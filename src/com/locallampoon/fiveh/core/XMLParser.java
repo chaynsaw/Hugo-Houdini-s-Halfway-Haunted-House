@@ -13,14 +13,20 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class xmlParser {
+public class XMLParser {
 
-    private static final String ROOM_FILE = "src/com/locallampoon/fiveh/data/roomtest.xml";
+    private static final String ROOM_FILE = "src/com/locallampoon/fiveh/data/rooms.xml";
 
-    public Map parseRooms() {
+
+    // comment out parseRooms() and uncomment main for testing
+    public Map<String, Room> parseRooms() {
+//    public static void main(String[] args) {
+
 
         // Instantiate the Factory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -40,7 +46,7 @@ public class xmlParser {
             doc.getDocumentElement().normalize();
             // get <room> from xml
             NodeList rooms = doc.getElementsByTagName("room");
-
+            // iterate through room nodes to get detailed room info
             for (int i = 0; i < rooms.getLength(); i++) {
                 Node roomNode = rooms.item(i);
 
@@ -52,18 +58,21 @@ public class xmlParser {
                     String roomName = element.getElementsByTagName("roomName").item(0).getTextContent();
                     String desc = element.getElementsByTagName("desc").item(0).getTextContent();
                     NodeList exitNodes = element.getElementsByTagName("exit");
-                    String[] exits = new String[exitNodes.getLength()];
+                    Map<String, String> exits = new HashMap<>();
                     // iterate through exitNodes to get exits array
-                    for (int j = 0; j < exits.length; j++) {
-                        exits[j] = exitNodes.item(j).getTextContent();
+                    for (int j = 0; j < exitNodes.getLength(); j++) {
+                        Node currentNode = exitNodes.item(j);
+                        String key = currentNode.getAttributes().getNamedItem("dir").getNodeValue();
+                        String value = currentNode.getTextContent();
+                        exits.put(key, value);
                     }
                     NodeList itemNodes = element.getElementsByTagName("item");
-                    String[] items = new String[itemNodes.getLength()];
+                    List<String> items = new ArrayList<>();
                     // iterate through itemNodes to get items
-                    for (int j = 0; j < items.length; j++) {
-                        items[j] = itemNodes.item(j).getTextContent();
+                    for (int j = 0; j < itemNodes.getLength(); j++) {
+                        Node currentNode = itemNodes.item(j);
+                        items.add(currentNode.getTextContent());
                     }
-
                     // put new KVP into map using id as key and new Room ctor as value
                     roomMap.put(id, new Room(roomName, desc, exits, items));
                 }
@@ -72,5 +81,14 @@ public class xmlParser {
             e.printStackTrace();
         }
         return roomMap;
+
+        // uncomment to use as main for testing
+//        Room r = roomMap.get("masterBedroom");
+//        System.out.println(r.getRoomName());
+//        System.out.println(r.getDesc());
+//        System.out.println(r.getExits());
+//        System.out.println(r.getItems());
     }
+
+
 }
