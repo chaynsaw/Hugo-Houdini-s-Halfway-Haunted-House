@@ -9,34 +9,39 @@ public class Player {
     //INSTANCE VARIABLE
     private String character;
     private List<String> inventory = new ArrayList<>();
-    private int health = 5;
-    private boolean isStrong;
+    private int health;
+    private boolean isStrong;//Players will use to move heavy items
     private boolean isSmart;
     private Room currentRoom;
-    private int maxSize = 5;
+    private int maxItemSize;
+    private boolean isDead;
+//    AttackMonster attackMonster;
 
     // CONSTRUCTOR
     public Player(){
+        this.health=5;
+        this.isDead=false;
+        this.maxItemSize=5;
+        this.isSmart=false;
+        this.isStrong=false;
     }
-
-    public Player(String character, List<String> inventory, int health, boolean isStrong, boolean isSmart) {
-        this.character = character;
-        this.inventory = inventory;
-        this.health = health;
-        this.isStrong = isStrong;
-        this.isSmart = isSmart;
-    }
+//    public Player(List<String> inventory, int health, boolean isStrong, boolean isSmart){
+//        this();
+//        this.inventory = inventory;
+//        this.isStrong = isStrong;
+//        this.isSmart = isSmart;
+//
+//    }
 
     //METHODS
     public void move(Room room){
         // Players will be able to move based on the command. (GO EAST, GO SOUTH..ETC)
+        currentRoom = room;
     }
-    public void jump(){
-        // Players will be able to jump when he/she has to jump across to avoid obstacles
-    }
+
     public void addItem(String item){
         // Players will be able to add Items to their inventory until the maximum items are reached
-        if (inventory.size()< maxSize)
+        if (inventory.size()< maxItemSize)
             this.inventory.add(item);
         else{
             System.out.println("You need to drop an item to add more to your inventory");
@@ -54,12 +59,22 @@ public class Player {
                 System.out.println("You do not have " + item + " in your inventory");
             }
 
-
     }
-    public void browse(){
-        // Players will get full description of the room and current location.
 
+    public void  attack(Player jock){
+        int damage =1;
+        jock.takeDamage(damage);
     }
+
+    public void takeDamage (int damage){
+        if (health - damage <=0){
+            health = 0;
+            isDead = true;
+        } else {
+            health -= damage;
+        }
+    }
+
     public void getCurrentItemDetails(){
         if(inventory.isEmpty()){
             System.out.println("Your nothing in your inventory");
@@ -78,13 +93,15 @@ public class Player {
 //        return returnString;
     }
 
+    //ACCESSOR METHOD
 
-    public void fight(){
-
+    public Room getCurrentRoom() {
+        return currentRoom;
     }
 
-
-
+    public int getMaxItemSize() {
+        return maxItemSize;
+    }
 
     public String getCharacter() {
         return character;
@@ -110,16 +127,20 @@ public class Player {
         return isSmart;
     }
 
+    public boolean isDead() {
+        return isDead;
+    }
+
     public static void main(String[] args) {
         Player p1 = new Player();
 
-        p1.addItem("Book");
-        p1.addItem("Pencil");
-        p1.addItem("Water");
-        p1.addItem("Fire");
-        p1.addItem("Pen");
-        p1.addItem("phone");
-        p1.addItem("rope");
+//        p1.addItem("Book");
+//        p1.addItem("Pencil");
+//        p1.addItem("Water");
+//        p1.addItem("Fire");
+//        p1.addItem("Pen");
+//        p1.addItem("phone");
+//        p1.addItem("rope");
 
 
         System.out.println(p1.inventory);
