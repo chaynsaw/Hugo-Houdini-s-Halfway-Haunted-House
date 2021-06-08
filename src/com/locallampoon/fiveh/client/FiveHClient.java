@@ -1,7 +1,16 @@
 package com.locallampoon.fiveh.client;
 
+import com.locallampoon.fiveh.core.Game;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 class FiveHClient {
-    public static void main(String[] args) {
+    static Game game;
+    public static void main(String[] args) throws IOException {
+        game = new Game();
+        game.start();
 
     }
 }

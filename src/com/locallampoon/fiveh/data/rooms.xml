@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- 0= north,    1 = south,      2 = east,      3 = west,      4 = up,     5 = down -->
 <house><!-- root element -->
     <room id="hall">
         <roomName>Hall</roomName> <!-- element nodes surround text node -->
@@ -8,9 +9,12 @@
             table, to the west something metallic enclosed in a glass cabinet catches the candle light. The stairs lead
             up into the darkness. </desc>
         <roomExits type="array">
-            <exit dir="east">Dining Room</exit>
-            <exit dir="west">Trophy Room</exit>
-            <exit dir="up">Upstairs Hall</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2">Dining Room</exit>
+            <exit dir="3">Trophy Room</exit>
+            <exit dir="4">Upstairs Landing</exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item>Bowl of Candy</item>
@@ -23,7 +27,12 @@
         "magic" wands, antique pistols. Mounted animal heads adorn the high walls, grotesque sneers left on their faces
         by a taxidermist with an odd sense of taste. A large grisly bear looms over the room from the far corner.</desc>
         <roomExits type="array">
-            <exit dir="east">Hall</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2">Hall</exit>
+            <exit dir="3"></exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -35,9 +44,12 @@
         <floor>First</floor>
         <desc>This is where you eat.</desc>
         <roomExits type="array">
-            <exit dir="north">Kitchen</exit>
-            <exit dir="south">Gardens</exit>
-            <exit dir="west">Hall</exit>
+            <exit dir="0">Kitchen</exit>
+            <exit dir="1">Gardens</exit>
+            <exit dir="2"></exit>
+            <exit dir="3">Hall</exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -49,7 +61,12 @@
         <floor>First</floor>
         <desc>Pretty flowers.</desc>
         <roomExits type="array">
-            <exit dir="north">Dining Room</exit>
+            <exit dir="0">Dining Room</exit>
+            <exit dir="1"></exit>
+            <exit dir="2"></exit>
+            <exit dir="3"></exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -61,8 +78,12 @@
         <floor>First</floor>
         <desc>Where the food comes from.</desc>
         <roomExits type="array">
-            <exit dir="south">Dining Room</exit>
-            <exit dir="east">Pantry</exit>
+            <exit dir="0"></exit>
+            <exit dir="1">Dining Room</exit>
+            <exit dir="2">Pantry</exit>
+            <exit dir="3"></exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -74,7 +95,12 @@
         <floor>First</floor>
         <desc>Food stores.</desc>
         <roomExits type="array">
-            <exit dir="west">Kitchen</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2"></exit>
+            <exit dir="3">Kitchen</exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -86,8 +112,12 @@
         <floor>First</floor>
         <desc>A single desk with papers strew across it sits in the middle of hte room.</desc>
         <roomExits type="array">
-            <exit dir="north">Hall</exit>
-            <exit dir="west">Library</exit>
+            <exit dir="0">Hall</exit>
+            <exit dir="1"></exit>
+            <exit dir="2"></exit>
+            <exit dir="3">Library</exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item>Pantry Key</item>
@@ -99,8 +129,12 @@
         <floor>First</floor>
         <desc>Books line the walls.</desc>
         <roomExits type="array">
-            <exit dir="east">Study</exit>
-            <exit dir="down">Dungeon</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2">Study</exit>
+            <exit dir="3"></exit>
+            <exit dir="4"></exit>
+            <exit dir="5">Dungeon</exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -112,8 +146,12 @@
         <floor>Basement</floor>
         <desc>Barred cells line a dark hallway, manacles hanging from the walls.</desc>
         <roomExits type="array">
-            <exit dir="east">Sacrificial Chamber</exit>
-            <exit dir="up">Library</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2">Sacrificial Chamber</exit>
+            <exit dir="3"></exit>
+            <exit dir="4">Library</exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -125,7 +163,12 @@
         <floor>Basement</floor>
         <desc>Its gross, close your eyes.</desc>
         <roomExits type="array">
-            <exit dir="west">Dungeon</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2">Hall</exit>
+            <exit dir="3">Dungeon</exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -137,11 +180,12 @@
         <floor>Second</floor>
         <desc>A dark hall at the top of the stairs</desc>
         <roomExits type="array">
-            <exit dir="north">Nursery</exit>
-            <exit dir="east">Master Bedroom</exit>
-            <exit dir="west">Guest Bedroom</exit>
-            <exit dir="up">Attic</exit>
-            <exit dir="down">Hall</exit>
+            <exit dir="0">Nursery</exit>
+            <exit dir="1"></exit>
+            <exit dir="2">Master Bedroom</exit>
+            <exit dir="3">Guest Bedroom</exit>
+            <exit dir="4">Attic</exit>
+            <exit dir="5">Hall</exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -153,7 +197,12 @@
         <floor>Second</floor>
         <desc>A baby's bedroom</desc>
         <roomExits type="array">
-            <exit dir="south">Upstairs Landing</exit>
+            <exit dir="0"></exit>
+            <exit dir="1">Upstairs Landing</exit>
+            <exit dir="2"></exit>
+            <exit dir="3"></exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -165,7 +214,12 @@
         <floor>Second</floor>
         <desc>A giant bed fills the majority of the room</desc>
         <roomExits type="array">
-            <exit dir="west">Upstairs Landing</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2"></exit>
+            <exit dir="3">Upstairs Landing</exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item>Study Key</item>
@@ -176,7 +230,12 @@
         <floor>Second</floor>
         <desc>A modest bedroom, pictures line the walls.</desc>
         <roomExits type="array">
-            <exit dir="east">Upstairs Landing</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2">Upstairs Landing</exit>
+            <exit dir="3"></exit>
+            <exit dir="4"></exit>
+            <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -188,7 +247,12 @@
         <floor>Third</floor>
         <desc>The control room for the Haunted House.</desc>
         <roomExits type="array">
-            <exit dir="down">Upstairs Landing</exit>
+            <exit dir="0"></exit>
+            <exit dir="1"></exit>
+            <exit dir="2"></exit>
+            <exit dir="3"></exit>
+            <exit dir="4"></exit>
+            <exit dir="5">Upstairs Landing</exit>
         </roomExits>
         <roomItems type="array">
             <item></item>

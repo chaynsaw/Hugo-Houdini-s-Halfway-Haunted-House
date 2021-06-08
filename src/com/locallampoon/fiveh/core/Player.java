@@ -25,6 +25,10 @@ public class Player {
         this.isSmart=false;
         this.isStrong=false;
     }
+    public Player(Room currentRoom) {
+        this();
+        this.currentRoom = currentRoom;
+    }
 //    public Player(List<String> inventory, int health, boolean isStrong, boolean isSmart){
 //        this();
 //        this.inventory = inventory;
