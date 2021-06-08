@@ -42,7 +42,10 @@
     <room id="diningRoom">
         <roomName>Dining Room</roomName>
         <floor>First</floor>
-        <desc>This is where you eat.</desc>
+        <desc>A long table occupies the middle of the room, fully set for a dinner of eight.  Dust covers the fine
+        dinnerware and glasses.  A single glass at the head of the table, next to a lit candle, stands out with red
+        lipstick on the rim.  Northward, the sounds of a busy kitchen come from a dark room, and to the south a door
+        opens to the outside.</desc>
         <roomExits type="array">
             <exit dir="0">kitchen</exit>
             <exit dir="1">gardens</exit>
@@ -52,14 +55,16 @@
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
+            <item>Smudged Glass</item>
             <item></item>
         </roomItems>
     </room>
     <room id="garden">
         <roomName>Garden</roomName>
         <floor>First</floor>
-        <desc>Pretty flowers.</desc>
+        <desc>Wilted flowers line broken cobblestone paths through the gardens, casting ominous shadows. A gardener's
+        trowel sits at the base of a withered rose bush. An odd red stain is showing on it, just above the line of the
+        soil. The door to the north leads back inside.</desc>
         <roomExits type="array">
             <exit dir="0">diningRoom</exit>
             <exit dir="1"></exit>
@@ -69,14 +74,16 @@
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
+            <item>Bloodied Trowel</item>
             <item></item>
         </roomItems>
     </room>
     <room id="kitchen">
         <roomName>Kitchen</roomName>
         <floor>First</floor>
-        <desc>Where the food comes from.</desc>
+        <desc>Sounds of a bustling kitchen come from this entirely unoccupied room. The stoves are off, the pans are
+        still.  Behind a curtain you notice a poorly hidden speaker where the noises seem to originate from. The south
+        door showing a dining room table, and along the east wall there is a closed door.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1">diningRoom</exit>
@@ -86,14 +93,15 @@
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
+            <item>Bluetooth Speaker</item>
             <item></item>
         </roomItems>
     </room>
     <room id="pantry">
         <roomName>Pantry</roomName>
         <floor>First</floor>
-        <desc>Food stores.</desc>
+        <desc>Dusty glass bottles, jars, and cans fill this large pantry. The smell of spices wafts out of several open
+        glass bottles. Is that an eyeball floating in that jar?</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
@@ -103,14 +111,17 @@
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
+            <item>Eyeball Jar</item>
             <item></item>
         </roomItems>
     </room>
     <room id="study">
         <roomName>Study</roomName>
         <floor>First</floor>
-        <desc>A single desk with papers strew across it sits in the middle of hte room.</desc>
+        <desc>A single desk with papers strew across it sits in the middle of the room.  A single desk lamp illuminates
+        the room, casting erie shadows into the corners. Out of the corner of your eye you swear something moved, but
+        but nothing else living appears to be with you.  The entry hall opens to the north, and to the west a room lined
+        with bookshelves opens, lit by sconces along the walls.</desc>
         <roomExits type="array">
             <exit dir="0">hall</exit>
             <exit dir="1"></exit>
@@ -127,7 +138,8 @@
     <room id="library">
         <roomName>Library</roomName>
         <floor>First</floor>
-        <desc>Books line the walls.</desc>
+        <desc>Book shelves line the walls, lit by three sconces along the north, south, and east walls. The north sconce
+        flickers incessantly, it seems to be hanging slightly askew. To the east a single lit desk sits alone in a room.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
@@ -144,7 +156,8 @@
     <room id="dungeon">
         <roomName>Dungeon</roomName>
         <floor>Basement</floor>
-        <desc>Barred cells line a dark hallway, manacles hanging from the walls.</desc>
+        <desc>A long subterranean hall leads east to a large iron door. On either side of the hall, several cells are barred
+        by rusted iron gates, manacles chained to the wall. </desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
@@ -161,24 +174,27 @@
     <room id="sacrificialChamber">
         <roomName>Sacrificial Chamber</roomName>
         <floor>Basement</floor>
-        <desc>Its gross, close your eyes.</desc>
+        <desc>A macabre scene lies before you. A blood drenched altar sits in the center of the room, surrounded by seven
+        lit candles. Bodies lie in the corner of the room, mouths agape in horror, no...wait...that's a CPR dummy. There
+        does not appear to be another exit from this room other than the door to the west you entered from.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
-            <exit dir="2">hall</exit>
+            <exit dir="2"></exit>
             <exit dir="3">dungeon</exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
+            <item>CPR Dummy</item>
             <item></item>
         </roomItems>
     </room>
     <room id="upstairsLanding">
         <roomName>Upstairs Landing</roomName>
         <floor>Second</floor>
-        <desc>A dark hall at the top of the stairs</desc>
+        <desc>A small landing at the top of the stairs emerges from the darkness. Closed doors to the north, east and
+        west beg to be opened. A string dangles from the ceiling, indicating something might lie in the attic upwards</desc>
         <roomExits type="array">
             <exit dir="0">nursery</exit>
             <exit dir="1"></exit>
@@ -195,7 +211,9 @@
     <room id="nursery">
         <roomName>Nursery</roomName>
         <floor>Second</floor>
-        <desc>A baby's bedroom</desc>
+        <desc>A baby's bedroom opens before you, the crib knocked onto its side. A rocking chair, seeming moving on its
+        own, slowly creaks back and forth in the corner. A small child's toys lay strewn about the floor. The only exit
+        is the south door you came through.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1">upstairsLanding</exit>
@@ -205,14 +223,16 @@
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
+            <item>Baby's Rattle</item>
             <item></item>
         </roomItems>
     </room>
     <room id="masterBedroom">
         <roomName>Master Bedroom</roomName>
         <floor>Second</floor>
-        <desc>A giant bed fills the majority of the room</desc>
+        <desc>The door opens to reveal a luxurious bedroom, impeccably kept. Not a speck of dust is in sight. A
+        phonograph is playing Louis Armstrong's "What a Wonderful World" softly by the bedside. A small silver key lies
+        on the bedside table. THe only exit is the west door you entered through.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
@@ -228,7 +248,9 @@
     <room id="guestRoom">
         <roomName>Guest Room</roomName>
         <floor>Second</floor>
-        <desc>A modest bedroom, pictures line the walls.</desc>
+        <desc>You enter a modest bedroom, old stained family photos line the walls. There is a slight mildew smell, as
+        there appears to be water damage on west wall. On closer inspection, black sludge slowly oozes down the wall
+        from the ceiling. THe only exit from this room is the east door you entered through.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
@@ -245,7 +267,9 @@
     <room id="attic">
         <roomName>Attic</roomName>
         <floor>Third</floor>
-        <desc>The control room for the Haunted House.</desc>
+        <desc>Someone shouts "Hey, get out of here!" as you climb the stairs into the attic. It seems you accidentally
+        entered the control center for the haunted house. A man dressed in a cheap vampire costume hunches over a CCTV
+        monitor while another person, the one who yelled at you, handling several radios.  You should probably go back down.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
