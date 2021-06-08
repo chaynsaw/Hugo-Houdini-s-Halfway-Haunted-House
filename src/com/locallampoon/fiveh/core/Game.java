@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class Game implements Serializable {
     private Player player;
-    private Map<Integer, Room> houseMap;
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("go", "get", "drop", "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
+    private Map<String, Room> houseMap;
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("go", "move","get", "drop", "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
     private static final List<String> ACTION_ITEMS = new ArrayList<>(Arrays.asList("key", "book", "amulet", "oregano", "sword", "duffel",
             "north", "south", "east", "west"));
 
@@ -35,11 +35,11 @@ public class Game implements Serializable {
         this.player = player;
     }
 
-    public Map<Integer, Room> getHouseMap() {
+    public Map<String, Room> getHouseMap() {
         return houseMap;
     }
 
-    private void setHouseMap(Map<Integer, Room> houseMap) {
+    private void setHouseMap(Map<String, Room> houseMap) {
         this.houseMap = houseMap;
     }
 
@@ -125,16 +125,16 @@ public class Game implements Serializable {
             System.out.print("> ");
             input = bufferedReader.readLine();
             output = inputListener(input);
-//            List<String> roomExits = player.getCurrentRoom().getExits();
-//            System.out.println(roomExits);
+            List<String> roomExits = player.getCurrentRoom().getExits();
+            System.out.println(roomExits);
 
+            // TODO: Finish switch to contain all Verbs and Noun interaction
             switch (output.get(0)) {
                 case "go":
+                case "move":
                     int dirMovement = playerMovement(output.get(1));
-                    System.out.println("this is our dirMovement int: " + dirMovement);
-//                    Room roomKeyID = houseMap.get(roomExits.get(dirMovement));
-//                    System.out.println("This is our key for the HashMap: " + roomKeyID);
-//                    player.move(roomKeyID);
+                    Room roomKeyID = houseMap.get(roomExits.get(dirMovement));
+                    player.move(roomKeyID);
                     break;
                 default:
                     System.out.println("suck it");

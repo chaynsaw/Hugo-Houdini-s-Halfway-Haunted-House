@@ -10,10 +10,10 @@
             up into the darkness. </desc>
         <roomExits type="array">
             <exit dir="0"></exit>
-            <exit dir="1"></exit>
-            <exit dir="2">Dining Room</exit>
-            <exit dir="3">Trophy Room</exit>
-            <exit dir="4">Upstairs Landing</exit>
+            <exit dir="1" >study</exit>
+            <exit dir="2" >diningRoom</exit>
+            <exit dir="3" >trophyRoom</exit>
+            <exit dir="4">upstairsLanding</exit>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
@@ -29,7 +29,7 @@
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
-            <exit dir="2">Hall</exit>
+            <exit dir="2">hall</exit>
             <exit dir="3"></exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
@@ -44,10 +44,10 @@
         <floor>First</floor>
         <desc>This is where you eat.</desc>
         <roomExits type="array">
-            <exit dir="0">Kitchen</exit>
-            <exit dir="1">Gardens</exit>
+            <exit dir="0">kitchen</exit>
+            <exit dir="1">gardens</exit>
             <exit dir="2"></exit>
-            <exit dir="3">Hall</exit>
+            <exit dir="3">hall</exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
         </roomExits>
@@ -61,7 +61,7 @@
         <floor>First</floor>
         <desc>Pretty flowers.</desc>
         <roomExits type="array">
-            <exit dir="0">Dining Room</exit>
+            <exit dir="0">diningRoom</exit>
             <exit dir="1"></exit>
             <exit dir="2"></exit>
             <exit dir="3"></exit>
@@ -79,8 +79,8 @@
         <desc>Where the food comes from.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
-            <exit dir="1">Dining Room</exit>
-            <exit dir="2">Pantry</exit>
+            <exit dir="1">diningRoom</exit>
+            <exit dir="2">pantry</exit>
             <exit dir="3"></exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
@@ -98,7 +98,7 @@
             <exit dir="0"></exit>
             <exit dir="1"></exit>
             <exit dir="2"></exit>
-            <exit dir="3">Kitchen</exit>
+            <exit dir="3">kitchen</exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
         </roomExits>
@@ -112,10 +112,10 @@
         <floor>First</floor>
         <desc>A single desk with papers strew across it sits in the middle of hte room.</desc>
         <roomExits type="array">
-            <exit dir="0">Hall</exit>
+            <exit dir="0">hall</exit>
             <exit dir="1"></exit>
             <exit dir="2"></exit>
-            <exit dir="3">Library</exit>
+            <exit dir="3">library</exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
         </roomExits>
@@ -131,10 +131,10 @@
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
-            <exit dir="2">Study</exit>
+            <exit dir="2">study</exit>
             <exit dir="3"></exit>
             <exit dir="4"></exit>
-            <exit dir="5">Dungeon</exit>
+            <exit dir="5">dungeon</exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -148,9 +148,9 @@
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
-            <exit dir="2">Sacrificial Chamber</exit>
+            <exit dir="2">sacrificialChamber</exit>
             <exit dir="3"></exit>
-            <exit dir="4">Library</exit>
+            <exit dir="4"></exit>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
@@ -158,15 +158,15 @@
             <item></item>
         </roomItems>
     </room>
-    <room id="sacraficialChamber">
+    <room id="sacrificialChamber">
         <roomName>Sacrificial Chamber</roomName>
         <floor>Basement</floor>
         <desc>Its gross, close your eyes.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
-            <exit dir="2">Hall</exit>
-            <exit dir="3">Dungeon</exit>
+            <exit dir="2">hall</exit>
+            <exit dir="3">dungeon</exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
         </roomExits>
@@ -180,12 +180,12 @@
         <floor>Second</floor>
         <desc>A dark hall at the top of the stairs</desc>
         <roomExits type="array">
-            <exit dir="0">Nursery</exit>
+            <exit dir="0">nursery</exit>
             <exit dir="1"></exit>
-            <exit dir="2">Master Bedroom</exit>
-            <exit dir="3">Guest Bedroom</exit>
-            <exit dir="4">Attic</exit>
-            <exit dir="5">Hall</exit>
+            <exit dir="2">masterBedroom</exit>
+            <exit dir="3">guestBedroom</exit>
+            <exit dir="4">attic</exit>
+            <exit dir="5">hall</exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
@@ -198,7 +198,7 @@
         <desc>A baby's bedroom</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
-            <exit dir="1">Upstairs Landing</exit>
+            <exit dir="1">upstairsLanding</exit>
             <exit dir="2"></exit>
             <exit dir="3"></exit>
             <exit dir="4"></exit>
@@ -217,7 +217,7 @@
             <exit dir="0"></exit>
             <exit dir="1"></exit>
             <exit dir="2"></exit>
-            <exit dir="3">Upstairs Landing</exit>
+            <exit dir="3">upstairsLanding</exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
         </roomExits>
@@ -232,7 +232,7 @@
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
-            <exit dir="2">Upstairs Landing</exit>
+            <exit dir="2">upstairsLanding</exit>
             <exit dir="3"></exit>
             <exit dir="4"></exit>
             <exit dir="5"></exit>
@@ -252,7 +252,7 @@
             <exit dir="2"></exit>
             <exit dir="3"></exit>
             <exit dir="4"></exit>
-            <exit dir="5">Upstairs Landing</exit>
+            <exit dir="5">upstairsLanding</exit>
         </roomExits>
         <roomItems type="array">
             <item></item>
