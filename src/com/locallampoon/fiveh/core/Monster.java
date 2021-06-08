@@ -10,7 +10,7 @@ class Monster {
 
     // CONSTRUCTOR
 
-    public Monster(){
+    Monster(){
         this.health = 6;
         this.isStrong = false;
         this.isSmart = false;
@@ -19,16 +19,16 @@ class Monster {
     }
 
 
-    public Monster(Room currentRoom) {
+    Monster(Room currentRoom) {
         this();
         this.currentRoom = currentRoom;
 
     }
-    public void  attack(Player ghost){
+    void  attack(Player ghost){
         int damage =1;
         ghost.takeDamage(damage);
     }
-    public void takeDamage (int damage){
+    void takeDamage (int damage){
         if (health - damage <=0){
             health = 0;
             isDead = true;
@@ -36,42 +36,42 @@ class Monster {
             health -= damage;
         }
     }
-    public void monsterDetails(){
+    void monsterDetails(){
 
     }
 
     // ACCESSOR METHOD
 
 
-    public int getHealth() {
+    int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    void setHealth(int health) {
         this.health = health;
     }
 
-    public boolean isStrong() {
+    boolean isStrong() {
         return isStrong;
     }
 
-    public void setStrong(boolean strong) {
+    void setStrong(boolean strong) {
         isStrong = strong;
     }
 
-    public boolean isSmart() {
+    boolean isSmart() {
         return isSmart;
     }
 
-    public void setSmart(boolean smart) {
+    void setSmart(boolean smart) {
         isSmart = smart;
     }
 
-    public Room getCurrentRoom() {
+    Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public boolean isDead() {
+    boolean isDead() {
         return isDead;
     }
 

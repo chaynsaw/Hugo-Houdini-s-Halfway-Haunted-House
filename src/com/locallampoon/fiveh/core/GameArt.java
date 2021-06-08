@@ -3,7 +3,7 @@ package com.locallampoon.fiveh.core;
 
 class GameArt {
 
-    public static void renderWoman(){
+    static void renderWoman(){
         String imgArt =  """
                            ____ \s
                          /((   ))
@@ -34,7 +34,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderWilly(){
+    static void renderWilly(){
         String imgArt = """
                                      ____...                                 \s
                              .-"--""\"".__    `.                               \s
@@ -60,7 +60,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderMan(){
+    static void renderMan(){
         String imgArt = """
                                     dS$$S$S$S$S$S$S$$Sb                   \s
                                    :$$S^S$S$S$S$S$S^S$$;                  \s
@@ -91,7 +91,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderHouse(){
+    static void renderHouse(){
         String imgArt = """
                                             .     .
                                                !!!!!!!
@@ -130,7 +130,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderHillHouse(){
+    static void renderHillHouse(){
         String imgArt = """
                 \t                                              .-----.
                 \t                                          .'          `.
@@ -166,7 +166,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderHallWay(){
+    static void renderHallWay(){
         String imgArt = """
                      _____________________________________________
                     |.'',                                     ,''.|
@@ -192,7 +192,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderBookcase(){
+    static void renderBookcase(){
         String imgArt = """
                      _________________________________________________________
                     ||-------------------------------------------------------||
@@ -220,7 +220,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderJournal(){
+    static void renderJournal(){
         String imgArt = """
                        __
                      (`/ \\
@@ -235,7 +235,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderKey(){
+    static void renderKey(){
         String imgArt = """
                       ooo,    .---.
                      o`  o   /    |\\________________
@@ -246,7 +246,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderCandle(){
+    static void renderCandle(){
         String imgArt = """
                            ,,;;;;;,,
                          ,;;:::::::;;,
@@ -272,7 +272,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderOregano(){
+    static void renderOregano(){
         String imgArt = """
                                   _________
                                  {_________}
@@ -289,7 +289,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderSerum(){
+    static void renderSerum(){
         String imgArt = """
                      .     |___________________________________
                      |-----|- - -|''''|''''|''''|''''|''''|'##\\|__
@@ -300,7 +300,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderSwordShield(){
+    static void renderSwordShield(){
         String imgArt = """
                            |\\                     /)
                          /\\_\\\\__              (__//_
@@ -321,7 +321,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderAxe(){
+    static void renderAxe(){
         String imgArt = """
                                                            _.gd8888888bp._
                                                         .g88888888888888888p.
@@ -345,7 +345,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderBloodyAxe(){
+    static void renderBloodyAxe(){
         String imgArt = """
                                          _,,--.._
                                         / .` ` .  `.
@@ -381,7 +381,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderBloodySword(){
+    static void renderBloodySword(){
         String imgArt = """
                                    .---.
                                    |---|
@@ -413,7 +413,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderWolf(){
+    static void renderWolf(){
         String imgArt = """
                                                       __
                                                     .d$$b
@@ -445,7 +445,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderTroll(){
+    static void renderTroll(){
         String imgArt = """
                                       -. -. `.  / .-' _.'  _
                                      .--`. `. `| / __.-- _' `
@@ -469,7 +469,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void renderMonster(){
+    static void renderMonster(){
         String imgArt = """
                                          ,     .
                                         /(     )\\               A

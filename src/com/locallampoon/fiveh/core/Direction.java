@@ -1,6 +1,6 @@
 package com.locallampoon.fiveh.core;
 
-public enum Direction {
+enum Direction {
     NORTH(0), SOUTH(1), EAST(2), WEST(3), UP(4), DOWN(5);
 
     private final int direction;
