@@ -27,15 +27,15 @@ public class Game implements Serializable {
 
     // GETTER/SETTER METHODS
 
-    public Player getPlayer() {
+    Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    void setPlayer(Player player) {
         this.player = player;
     }
 
-    public Map<String, Room> getHouseMap() {
+    Map<String, Room> getHouseMap() {
         return houseMap;
     }
 
@@ -43,11 +43,11 @@ public class Game implements Serializable {
         this.houseMap = houseMap;
     }
 
-    public static List<String> getActions() {
+    static List<String> getActions() {
         return ACTIONS;
     }
 
-    public static List<String> getActionItems() {
+    static List<String> getActionItems() {
         return ACTION_ITEMS;
     }
 
@@ -86,7 +86,7 @@ public class Game implements Serializable {
         return wordsList;
     }
 
-    public int playerMovement(String goDirection) {
+    private int playerMovement(String goDirection) {
         int dirIdx;
         switch (goDirection) {
             case "north":

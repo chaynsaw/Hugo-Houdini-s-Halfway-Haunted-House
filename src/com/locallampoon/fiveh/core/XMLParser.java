@@ -17,13 +17,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class XMLParser {
+class XMLParser {
 
     private static final String ROOM_FILE = "src/com/locallampoon/fiveh/data/rooms.xml";
 
 
     // comment out parseRooms() and uncomment main for testing
-    public static Map<String, Room> parseRooms() {
+    static Map<String, Room> parseRooms() {
 //    public static void main(String[] args) {
 
 

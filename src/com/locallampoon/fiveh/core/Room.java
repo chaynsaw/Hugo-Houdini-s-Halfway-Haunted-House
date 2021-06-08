@@ -10,7 +10,7 @@ import java.util.List;
  * @version 0.0.2
  */
 
-public class Room {
+class Room {
     // FIELDS
     private String roomName;
     private String desc;
@@ -30,7 +30,7 @@ public class Room {
      * @param items ArrayList of Strings representing the items that are currently in the room for later use
      */
 
-    public Room(String roomName, String desc, List<String> exits, List<String> items) {
+    Room(String roomName, String desc, List<String> exits, List<String> items) {
         setRoomName(roomName);
         setDesc(desc);
         setExits(exits);

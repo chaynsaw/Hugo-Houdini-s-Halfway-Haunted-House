@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Player {
+class Player {
 
     //INSTANCE VARIABLE
     private String character;
@@ -18,14 +18,14 @@ public class Player {
 //    AttackMonster attackMonster;
 
     // CONSTRUCTOR
-    public Player(){
+    Player(){
         this.health=5;
         this.isDead=false;
         this.maxItemSize=5;
         this.isSmart=false;
         this.isStrong=false;
     }
-    public Player(Room currentRoom) {
+    Player(Room currentRoom) {
         this();
         this.currentRoom = currentRoom;
     }
@@ -38,12 +38,12 @@ public class Player {
 //    }
 
     //METHODS
-    public void move(Room room){
+    void move(Room room){
         // Players will be able to move based on the command. (GO EAST, GO SOUTH..ETC)
         currentRoom = room;
     }
 
-    public void addItem(String item){
+    void addItem(String item){
         // Players will be able to add Items to their inventory until the maximum items are reached
         if (inventory.size()< maxItemSize)
             this.inventory.add(item);
@@ -53,7 +53,7 @@ public class Player {
         }
          }
 
-    public void dropItem(String item){
+    void dropItem(String item){
         // Players will be able to drop Items from inventory if they want to switch to different items.
             if(inventory.contains(item)){
                 inventory.remove(item);
@@ -65,12 +65,12 @@ public class Player {
 
     }
 
-    public void  attack(Player jock){
+    void  attack(Player jock){
         int damage =1;
         jock.takeDamage(damage);
     }
 
-    public void takeDamage (int damage){
+    void takeDamage (int damage){
         if (health - damage <=0){
             health = 0;
             isDead = true;
@@ -79,7 +79,7 @@ public class Player {
         }
     }
 
-    public void getCurrentItemDetails(){
+    void getCurrentItemDetails(){
         if(inventory.isEmpty()){
             System.out.println("Your nothing in your inventory");
         }
@@ -99,39 +99,39 @@ public class Player {
 
     //ACCESSOR METHOD
 
-    public Room getCurrentRoom() {
+    Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public int getMaxItemSize() {
+    int getMaxItemSize() {
         return maxItemSize;
     }
 
-    public String getCharacter() {
+    String getCharacter() {
         return character;
     }
 
-    public void setCharacter(String character) {
+    void setCharacter(String character) {
         this.character = character;
     }
 
-    public List<String> getInventory() {
+    List<String> getInventory() {
         return inventory;
     }
 
-    public int getHealth() {
+    int getHealth() {
         return health;
     }
 
-    public boolean isStrong() {
+    boolean isStrong() {
         return isStrong;
     }
 
-    public boolean isSmart() {
+    boolean isSmart() {
         return isSmart;
     }
 
-    public boolean isDead() {
+    boolean isDead() {
         return isDead;
     }
 
