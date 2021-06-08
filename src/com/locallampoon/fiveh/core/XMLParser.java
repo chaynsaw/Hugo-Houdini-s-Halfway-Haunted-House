@@ -1,16 +1,15 @@
 package com.locallampoon.fiveh.core;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class XMLParser {
 
 
     // comment out parseRooms() and uncomment main for testing
-    public Map<String, Room> parseRooms() {
+    public static Map<String, Room> parseRooms() {
 //    public static void main(String[] args) {
 
 
@@ -46,6 +45,7 @@ public class XMLParser {
             doc.getDocumentElement().normalize();
             // get <room> from xml
             NodeList rooms = doc.getElementsByTagName("room");
+            int roomID;
             // iterate through room nodes to get detailed room info
             for (int i = 0; i < rooms.getLength(); i++) {
                 Node roomNode = rooms.item(i);
@@ -58,13 +58,13 @@ public class XMLParser {
                     String roomName = element.getElementsByTagName("roomName").item(0).getTextContent();
                     String desc = element.getElementsByTagName("desc").item(0).getTextContent();
                     NodeList exitNodes = element.getElementsByTagName("exit");
-                    Map<String, String> exits = new HashMap<>();
+                    List<String> exits = new ArrayList<>();
                     // iterate through exitNodes to get exits array
                     for (int j = 0; j < exitNodes.getLength(); j++) {
                         Node currentNode = exitNodes.item(j);
-                        String key = currentNode.getAttributes().getNamedItem("dir").getNodeValue();
+                        int index = Integer.parseInt(currentNode.getAttributes().getNamedItem("dir").getNodeValue());
                         String value = currentNode.getTextContent();
-                        exits.put(key, value);
+                        exits.add(index, value);
                     }
                     NodeList itemNodes = element.getElementsByTagName("item");
                     List<String> items = new ArrayList<>();
@@ -77,6 +77,7 @@ public class XMLParser {
                     roomMap.put(id, new Room(roomName, desc, exits, items));
                 }
             }
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
@@ -89,6 +90,4 @@ public class XMLParser {
 //        System.out.println(r.getExits());
 //        System.out.println(r.getItems());
     }
-
-
 }

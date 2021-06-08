@@ -1,9 +1,7 @@
 package com.locallampoon.fiveh.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *  This class defines the Room object
@@ -16,11 +14,12 @@ public class Room {
     // FIELDS
     private String roomName;
     private String desc;
-    Map<String,String> exits = new HashMap<>(); // (East : diningRoom) (West : trophyRoom) Go East -> player.setCurrRoom(roomMap.get(trophyRoom))
+    List<String> exits = new ArrayList<>(); // (East : diningRoom) (West : trophyRoom) Go East -> player.setCurrRoom(roomMap.get(trophyRoom))
     private List<String> items = new ArrayList<>();
 
     // METHODS
     // CONSTRUCTOR
+
 
     /**
      * Public constructor to create new room object
@@ -31,7 +30,7 @@ public class Room {
      * @param items ArrayList of Strings representing the items that are currently in the room for later use
      */
 
-    public Room(String roomName, String desc, Map<String, String> exits, List<String> items) {
+    public Room(String roomName, String desc, List<String> exits, List<String> items) {
         setRoomName(roomName);
         setDesc(desc);
         setExits(exits);
@@ -68,11 +67,11 @@ public class Room {
         this.desc = desc;
     }
 
-    public Map<String, String> getExits() {
+    public List<String> getExits() {
         return exits;
     }
 
-    public void setExits(Map<String, String> exits) {
+    public void setExits(List<String> exits) {
         this.exits = exits;
     }
 
