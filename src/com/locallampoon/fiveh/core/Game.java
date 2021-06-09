@@ -2,10 +2,7 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.client.UserInput;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +11,10 @@ import java.util.Map;
 public class Game implements Serializable {
     private Player player;
     private Map<String, Room> houseMap;
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("go", "move","get", "drop", "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("go", "move", "get", "drop", "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
     private static final List<String> ACTION_ITEMS = new ArrayList<>(Arrays.asList("key", "book", "amulet", "oregano", "sword", "duffel",
             "north", "south", "east", "west"));
+    private static final String HELP_FILE = "src/com/locallampoon/fiveh/data/helpmenu.txt";
 
     // CONSTRUCTOR
     public Game() {
@@ -86,6 +84,18 @@ public class Game implements Serializable {
         return wordsList;
     }
 
+    private void getHelp() {
+        GameArt.renderHelper();
+        try (BufferedReader br = new BufferedReader(new FileReader(HELP_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Help Menu!");
+        }
+    }
+
     private int playerMovement(String goDirection) {
         int dirIdx;
         switch (goDirection) {
@@ -135,6 +145,10 @@ public class Game implements Serializable {
                     int dirMovement = playerMovement(output.get(1));
                     Room roomKeyID = houseMap.get(roomExits.get(dirMovement));
                     player.move(roomKeyID);
+                    break;
+                case "help":
+                case "h":
+                    getHelp();
                     break;
                 default:
                     System.out.println("suck it");
