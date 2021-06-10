@@ -4,8 +4,9 @@ import com.locallampoon.fiveh.core.Game;
 
 import java.io.IOException;
 
-class FiveHClient {
+public class FiveHClient {
     static Game game;
+
     public static void main(String[] args) throws IOException {
         game = new Game();
         game.start();

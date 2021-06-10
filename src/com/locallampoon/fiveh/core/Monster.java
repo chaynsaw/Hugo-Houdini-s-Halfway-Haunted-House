@@ -10,7 +10,7 @@ class Monster {
 
     // CONSTRUCTOR
 
-    Monster(){
+    Monster() {
         this.health = 6;
         this.isStrong = false;
         this.isSmart = false;
@@ -24,19 +24,22 @@ class Monster {
         this.currentRoom = currentRoom;
 
     }
-    void  attack(Player ghost){
-        int damage =1;
+
+    void attack(Player ghost) {
+        int damage = 1;
         ghost.takeDamage(damage);
     }
-    void takeDamage (int damage){
-        if (health - damage <=0){
+
+    void takeDamage(int damage) {
+        if (health - damage <= 0) {
             health = 0;
             isDead = true;
         } else {
             health -= damage;
         }
     }
-    void monsterDetails(){
+
+    void monsterDetails() {
 
     }
 

@@ -7,12 +7,13 @@
         <desc>The entry hall to the haunted house is dimly lit, a bowl of candy sitting in the corner. You are able to
             make out the features of two doors and a staircase. To the east, chairs are lined up around a dining room
             table, to the west something metallic enclosed in a glass cabinet catches the candle light. The stairs lead
-            up into the darkness. </desc>
+            up into the darkness.
+        </desc>
         <roomExits type="array">
             <exit dir="0"></exit>
-            <exit dir="1" >study</exit>
-            <exit dir="2" >diningRoom</exit>
-            <exit dir="3" >trophyRoom</exit>
+            <exit dir="1">study</exit>
+            <exit dir="2">diningRoom</exit>
+            <exit dir="3">trophyRoom</exit>
             <exit dir="4">upstairsLanding</exit>
             <exit dir="5"></exit>
         </roomExits>
@@ -24,8 +25,10 @@
         <roomName>Trophy Room</roomName>
         <floor>First</floor>
         <desc>Thick glass cabinets line the perimeter of this room, displaying all sorts of oddities: old playing cards,
-        "magic" wands, antique pistols. Mounted animal heads adorn the high walls, grotesque sneers left on their faces
-        by a taxidermist with an odd sense of taste. A large grisly bear looms over the room from the far corner.</desc>
+            "magic" wands, antique pistols. Mounted animal heads adorn the high walls, grotesque sneers left on their
+            faces
+            by a taxidermist with an odd sense of taste. A large grisly bear looms over the room from the far corner.
+        </desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>

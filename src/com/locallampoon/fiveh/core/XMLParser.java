@@ -23,7 +23,7 @@ class XMLParser {
 
 
     // comment out parseRooms() and uncomment main for testing
-    static Map<String, Room> parseRooms() {
+    public static Map<String, Room> parseRooms() {
 //    public static void main(String[] args) {
 
 
