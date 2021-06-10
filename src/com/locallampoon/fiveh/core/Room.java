@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  This class defines the Room object
+ * This class defines the Room object
  *
  * @author Local Lampoon
  * @version 0.0.2
@@ -25,9 +25,9 @@ class Room {
      * Public constructor to create new room object
      *
      * @param roomName String representing the name of the room.
-     * @param desc String representing the description of the room.
-     * @param exits HashMap of String keys and String values representing the exits from the room to adjacent rooms.
-     * @param items ArrayList of Strings representing the items that are currently in the room for later use
+     * @param desc     String representing the description of the room.
+     * @param exits    HashMap of String keys and String values representing the exits from the room to adjacent rooms.
+     * @param items    ArrayList of Strings representing the items that are currently in the room for later use
      */
 
     Room(String roomName, String desc, List<String> exits, List<String> items) {
