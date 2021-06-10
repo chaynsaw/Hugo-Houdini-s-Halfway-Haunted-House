@@ -10,6 +10,7 @@ class Player {
     private String character;
     private List<String> inventory = new ArrayList<>(5);
     private int health;
+    private int strength;
     private boolean isStrong;//Players will use to move heavy items
     private boolean isSmart;
     private Room currentRoom;
@@ -17,6 +18,7 @@ class Player {
     private int lgBagSize = 10;
     private boolean hasDuffelBag;
     private boolean isDead;
+    private boolean ranAway;
 //    AttackMonster attackMonster;
 
     // CONSTRUCTOR
@@ -24,7 +26,9 @@ class Player {
         this.health = 5;
         this.isDead = false;
         this.isSmart = false;
+        this.strength = 10; // I am debating whether to make it boolean or int.
         this.isStrong = false;
+        this.ranAway = false;
         while (this.inventory.size() < smBagSize) {
             this.inventory.add("");
         }
@@ -43,6 +47,18 @@ class Player {
 //
 //    }
 
+    public static void main(String[] args) {
+        Player p1 = new Player();
+
+
+        System.out.println(p1.inventory);
+
+        p1.dropItem("Water");
+
+
+        System.out.println(p1.inventory);
+    }
+
     //METHODS
     void move(Room room) {
         // Players will be able to move based on the command. (GO EAST, GO SOUTH..ETC)
@@ -51,19 +67,17 @@ class Player {
 
     void addItem(String item) {
         // Players will be able to add Items to their inventory until the maximum items are reached
-        if (item.equals("duffel")){
+        if (item.equals("duffel")) {
             changeInventorySize();
             System.out.println("You now have a Duffel Bag, you can carry twice as many items!\n");
             getInventory();
-        }
-        else if (inventory.contains("")){
+        } else if (inventory.contains("")) {
             int index = inventory.indexOf("");
             inventory.remove(index);
             inventory.add(index, item);
             System.out.println("You added " + item + " to your inventory");
             getInventory();
-        }
-        else {
+        } else {
             System.out.println("You need to drop an item to add more to your inventory");
             getInventory();
         }
@@ -74,7 +88,7 @@ class Player {
         if (inventory.contains(item)) {
             int index = inventory.indexOf(item);
             inventory.remove(item);
-            inventory.add(index,"");
+            inventory.add(index, "");
             System.out.println(item + " Dropped");
             getInventory();
         } else {
@@ -104,7 +118,7 @@ class Player {
     }
 
     void attack(Monster monster) {
-        int damage = 1;
+        int damage = 0;
         monster.takeDamage(damage);
     }
 
@@ -112,10 +126,41 @@ class Player {
         if (health - damage <= 0) {
             health = 0;
             isDead = true;
+            System.out.println("The monster killed you.");
         } else {
             health -= damage;
+            System.out.println(health);
         }
     }
+
+ /*   flee() {
+        var rand = (random*6).floor
+        if (adjacentRoom[rand] == null){
+            flee()
+        }
+        player.move(rand)
+    }
+
+*/
+
+    void flee(Monster monster) {
+        if (monster.getStrength() > 15) {
+            ranAway = true;
+            System.out.println("You have escaped the monster");
+        } else {
+            System.out.println("You can fight this monster and continue to your journey");
+        }
+
+    }
+
+    //        for(Item item : items){
+//            returnString += "Name:" + item.getName() + "\n";
+////            returnString += "Description:" + item.getDescription() + "\n";
+//        }
+    //This method will return a string that gives the player's current status.
+
+
+    //ACCESSOR METHOD
 
     void getCurrentItemDetails() {
         if (inventory.isEmpty()) {
@@ -126,16 +171,7 @@ class Player {
 
         }
 
-
-//        for(Item item : items){
-//            returnString += "Name:" + item.getName() + "\n";
-////            returnString += "Description:" + item.getDescription() + "\n";
-//        }
-//        return returnString;
     }
-
-
-    //ACCESSOR METHOD
 
     Room getCurrentRoom() {
         return currentRoom;
@@ -169,11 +205,19 @@ class Player {
         return isDead;
     }
 
-    public void setHasDuffelBag(boolean hasDuffelBag) {
-        this.hasDuffelBag = hasDuffelBag;
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     public boolean isHasDuffelBag() {
         return hasDuffelBag;
+    }
+
+    public void setHasDuffelBag(boolean hasDuffelBag) {
+        this.hasDuffelBag = hasDuffelBag;
     }
 }
