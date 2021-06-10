@@ -61,6 +61,7 @@ class Player {
             inventory.remove(index);
             inventory.add(index, item);
             System.out.println("You added " + item + " to your inventory");
+            getInventory();
         }
         else {
             System.out.println("You need to drop an item to add more to your inventory");
@@ -71,10 +72,14 @@ class Player {
     void dropItem(String item) {
         // Players will be able to drop Items from inventory if they want to switch to different items.
         if (inventory.contains(item)) {
+            int index = inventory.indexOf(item);
             inventory.remove(item);
+            inventory.add(index,"");
             System.out.println(item + " Dropped");
+            getInventory();
         } else {
             System.out.println("You do not have " + item + " in your inventory");
+            getInventory();
         }
 
     }

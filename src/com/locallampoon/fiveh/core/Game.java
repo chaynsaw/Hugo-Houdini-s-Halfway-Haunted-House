@@ -13,7 +13,6 @@ public class Game implements Serializable {
     // CONSTRUCTOR
     public Game() {
         setHouseMap(XMLParser.parseRooms());
-        System.out.println(houseMap.entrySet());
         this.player = new Player(houseMap.get("hall"));
     }
 
