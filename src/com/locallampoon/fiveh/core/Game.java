@@ -2,7 +2,6 @@ package com.locallampoon.fiveh.core;
 
 import java.io.*;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class Game implements Serializable {
@@ -81,10 +80,14 @@ public class Game implements Serializable {
                 break;
             case "get":
             case "grab":
-                player.addItem(parsedCommandList.get(1));
+                String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
+                player.addItem(grabbedItem);
+                player.getCurrentRoom().removeItem(grabbedItem);
                 break;
             case "drop":
-                player.dropItem(parsedCommandList.get(1));
+                String droppedItem = UserInput.nounItemHelper(parsedCommandList, player);
+                player.dropItem(droppedItem);
+                player.getCurrentRoom().addItem(droppedItem);
                 break;
             case "talk":
                 // TODO: Player needs a Talk method to talk with characters in rooms
@@ -110,7 +113,7 @@ public class Game implements Serializable {
 //                    break;
             case "inventory":
             case "i":
-                player.getInventory();
+                player.printInventoryItems();
                 break;
             case "help":
             case "h":
@@ -118,13 +121,7 @@ public class Game implements Serializable {
                 break;
             case "quit":
             case "q":
-                parsedCommandList.remove(0);
-                try {
-                    parsedCommandList.add(GameState.quitHelper(BUFFERED_READER));
-                } catch (IOException e) {
-                    System.out.println("MUH HA HAHA! Looks like you pesky kids weren't able to stop me and save the day!");
-                    System.out.println("You have to keep playing the game!");
-                }
+            case "requestCommandAgain":
                 break;
             default:
                 System.out.println("invalid command");
@@ -165,13 +162,17 @@ public class Game implements Serializable {
         showIntro();
         do {
             System.out.println(player.getCurrentRoom().getDesc());
+            System.out.println("ITEMS IN ROOM: " + player.getCurrentRoom().getItems() + "\n");
             System.out.print("> ");
 
             input = BUFFERED_READER.readLine();
-            output = UserInput.parseCommand(input, 0, BUFFERED_READER);
+            output = UserInput.parseCommand(input);
             List<String> roomExits = player.getCurrentRoom().getExits();
 
             implementCommand(output, roomExits);
+            if (input.equals("q") || input.equals("quit")){
+                input = GameState.quitHelper(BUFFERED_READER);
+            }
 
         } while (!"q".equals(input));
     }

@@ -66,16 +66,16 @@ class Player {
         if (item.equals("duffel")) {
             changeInventorySize();
             System.out.println("You now have a Duffel Bag, you can carry twice as many items!\n");
-            getInventory();
+            printInventoryItems();
         } else if (inventory.contains("")) {
             int index = inventory.indexOf("");
             inventory.remove(index);
             inventory.add(index, item);
             System.out.println("You added " + item + " to your inventory");
-            getInventory();
+            printInventoryItems();
         } else {
             System.out.println("You need to drop an item to add more to your inventory");
-            getInventory();
+            printInventoryItems();
         }
     }
 
@@ -86,15 +86,19 @@ class Player {
             inventory.remove(item);
             inventory.add(index, "");
             System.out.println(item + " Dropped");
-            getInventory();
+            printInventoryItems();
         } else {
             System.out.println("You do not have " + item + " in your inventory");
-            getInventory();
+            printInventoryItems();
         }
 
     }
 
-    void getInventory() {
+    public List<String> getInventory() {
+        return inventory;
+    }
+
+    void printInventoryItems() {
         String bagName = !isHasDuffelBag() ? "FANNY PACK" : "DUFFEL BAG";
         System.out.println("\n" + bagName + " ITEMS: ");
         for (int i = 0; i < inventory.size(); i++) {

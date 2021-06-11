@@ -1,16 +1,13 @@
 package com.locallampoon.fiveh.core;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class UserInput {
 
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("flee", "go", "move", "get", "grab", "drop", "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
-    private static final List<String> ACTION_ITEMS = new ArrayList<>(Arrays.asList("key", "book", "amulet", "oregano", "sword", "duffel",
-            "north", "south", "east", "west", "up", "down"));
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("go", "move", "get", "grab", "drop",
+            "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
 
 
     private static List<String> inputCleaner(String reducedString) {
@@ -23,52 +20,59 @@ class UserInput {
         return commandList;
     }
 
-    private static String forceHelp(int usrAttempts, BufferedReader userInputReader) throws IOException {
-        System.out.println("try new command or h for help >> ");
-        if (usrAttempts >= 3){
-            Game.getHelp();
+    public static String nounItemHelper(List<String> wordList, Player gamePlayer) {
+        String itemSubstring = wordList.get(1);
+        String verb = wordList.get(0);
+        String noun = "";
+        List<String> tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getItems();
+        List<String> tempItemList;
+        boolean nounPresent = false;
+
+        if (verb.equals("drop")) {
+            tempRoomPlayerItemList.clear();
+            tempRoomPlayerItemList = gamePlayer.getInventory();
         }
-        return userInputReader.readLine();
+
+        for (int i = 0; i < tempRoomPlayerItemList.size(); i++) {
+
+            String singleItem = tempRoomPlayerItemList.get(i);
+            tempItemList = Arrays.asList(singleItem.split(" "));
+
+            for (String word : tempItemList) {
+
+                if (itemSubstring.equalsIgnoreCase(word)) {
+                    nounPresent = true;
+                    break;
+                }
+            }
+            if (nounPresent) {
+                noun = singleItem;
+                break;
+            }else{
+                System.out.println("Noun does not exist in room, please check your spelling");
+            }
+            System.out.println("we looking at this room item!!!!  "+ singleItem);
+            i++;
+        }
+        return noun;
     }
 
-    static List<String> parseCommand(String commandInput, int attempts, BufferedReader userInputReader) throws IOException {
+    public static List<String> parseCommand(String commandInput) {
 
         List<String> wordsList = inputCleaner(commandInput);
         String verb;
-        String noun;
-        String inputRequest;
+        String reqCommandAgain = "requestCommandAgain";
 
-        if ((!wordsList.isEmpty()) && wordsList.size() <= 2) {
-            boolean verbPresent = true;
-            boolean nounPresent = true;
+        if (!wordsList.isEmpty()) {
             verb = wordsList.get(0);
             if (!ACTIONS.contains(verb)) {
-                attempts += 1;
-                verbPresent = false;
                 System.out.println("Not an acceptable action");
-            }
-
-            if (wordsList.size() == 2) {
-                noun = wordsList.get(1);
-                if (!ACTION_ITEMS.contains(noun)) {
-                    System.out.println("Item not in room, check your spelling");
-                    nounPresent = false;
-                }
-            }
-
-            if (attempts > 0){
-
-                if (!nounPresent && verbPresent) attempts = 2;
-
-                inputRequest = forceHelp(attempts, userInputReader);
-                parseCommand(inputRequest, attempts, userInputReader);
             }
         } else {
             System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
-            attempts += 1;
-            inputRequest = forceHelp(attempts, userInputReader);
-            parseCommand(inputRequest, attempts, userInputReader);
+            wordsList.add(0, reqCommandAgain);
         }
         return wordsList;
+
     }
 }
