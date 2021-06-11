@@ -41,7 +41,6 @@ class GameState {
         while (true) {
             String quitResponse = quitReader.readLine().toLowerCase();
 
-            System.out.println(quitResponse);
             if (quitResponse.equals("no") || quitResponse.equals("n")) {
                 quitCommand = "i";
                 break;

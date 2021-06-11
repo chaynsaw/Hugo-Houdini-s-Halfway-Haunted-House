@@ -66,7 +66,7 @@ class UserInput {
         if (!wordsList.isEmpty()) {
             verb = wordsList.get(0);
             if (!ACTIONS.contains(verb)) {
-                System.out.println("Not an acceptable action");
+                System.out.println("Not an acceptable action\n");
             }
         } else {
             System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
