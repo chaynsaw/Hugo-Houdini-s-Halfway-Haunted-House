@@ -2,6 +2,8 @@ package com.locallampoon.fiveh.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 
 class Player {
@@ -39,13 +41,7 @@ class Player {
         this();
         this.currentRoom = currentRoom;
     }
-//    public Player(List<String> inventory, int health, boolean isStrong, boolean isSmart){
-//        this();
-//        this.inventory = inventory;
-//        this.isStrong = isStrong;
-//        this.isSmart = isSmart;
-//
-//    }
+
 
     public static void main(String[] args) {
         Player p1 = new Player();
@@ -133,31 +129,21 @@ class Player {
         }
     }
 
- /*   flee() {
-        var rand = (random*6).floor
-        if (adjacentRoom[rand] == null){
-            flee()
-        }
-        player.move(rand)
-    }
 
-*/
-
-    void flee(Monster monster) {
-        if (monster.getStrength() > 15) {
-            ranAway = true;
-            System.out.println("You have escaped the monster");
-        } else {
-            System.out.println("You can fight this monster and continue to your journey");
+    void flee(Map<String, Room> houseMap) {
+        List<String> roomExits = getCurrentRoom().getExits();
+        List<String> nonEmptyRoomExits = new ArrayList<>();
+        for (String r : roomExits) {
+            if (r.length() > 0)
+                nonEmptyRoomExits.add(r);
         }
+        Random rand = new Random(); //instance of random class
+        int upperbound = nonEmptyRoomExits.size();
+        int int_random = rand.nextInt(upperbound);
+        Room destRoom = houseMap.get(nonEmptyRoomExits.get(int_random));
+        move(destRoom);
 
     }
-
-    //        for(Item item : items){
-//            returnString += "Name:" + item.getName() + "\n";
-////            returnString += "Description:" + item.getDescription() + "\n";
-//        }
-    //This method will return a string that gives the player's current status.
 
 
     //ACCESSOR METHOD
