@@ -8,7 +8,7 @@ import java.util.List;
 
 class UserInput {
 
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("go", "move", "get", "grab", "drop", "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("flee", "go", "move", "get", "grab", "drop", "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
     private static final List<String> ACTION_ITEMS = new ArrayList<>(Arrays.asList("key", "book", "amulet", "oregano", "sword", "duffel",
             "north", "south", "east", "west", "up", "down"));
 

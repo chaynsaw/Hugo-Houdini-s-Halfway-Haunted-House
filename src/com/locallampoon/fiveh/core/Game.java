@@ -25,7 +25,6 @@ public class Game implements Serializable {
     void setPlayer(Player player) {
         this.player = player;
     }
-
     Map<String, Room> getHouseMap() {
         return houseMap;
     }
@@ -65,7 +64,6 @@ public class Game implements Serializable {
         switch (parsedCommandList.get(0)) {
             case "go":
             case "move":
-
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()){
@@ -99,6 +97,8 @@ public class Game implements Serializable {
 //                    }
 //                    break;
             case "flee":
+                player.flee(houseMap);
+                break;
                 // TODO: Player needs a flee method to run from monster, will send player to a random room
 //                    player.flee();
 //                    break;
@@ -145,3 +145,4 @@ public class Game implements Serializable {
         } while (!"q".equals(input));
     }
 }
+
