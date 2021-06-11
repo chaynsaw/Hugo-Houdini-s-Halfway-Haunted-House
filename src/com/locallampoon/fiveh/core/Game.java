@@ -123,9 +123,8 @@ public class Game implements Serializable {
             case "q":
             case "requestCommandAgain":
                 break;
-            default:
-                System.out.println("invalid command");
-                System.out.println(houseMap);
+//            default:
+//                System.out.println("Invalid command");
         }
     }
 
