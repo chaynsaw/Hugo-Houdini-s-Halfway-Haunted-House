@@ -133,20 +133,18 @@ class Player {
     void flee(Map<String, Room> houseMap) {
         List<String> roomExits = getCurrentRoom().getExits();
         List<String> nonEmptyRoomExits = new ArrayList<>();
-        for(String r: roomExits){
-            if(r.length()>0)
+        for (String r : roomExits) {
+            if (r.length() > 0)
+
                 nonEmptyRoomExits.add(r);
         }
         Random rand = new Random(); //instance of random class
         int upperbound = nonEmptyRoomExits.size();
         int int_random = rand.nextInt(upperbound);
-        currentRoom = houseMap.get(nonEmptyRoomExits.get(int_random));
-        move(currentRoom);
-        System.out.println("Room Exits = " + roomExits);
-        System.out.println("nonEmptyRoomExits = " + nonEmptyRoomExits);
-        System.out.println("Destination room = " + currentRoom);
+        Room destRoom = houseMap.get(nonEmptyRoomExits.get(int_random));
+        move(destRoom);
 
-       }
+    }
 
 
     //ACCESSOR METHOD
