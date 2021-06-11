@@ -1,7 +1,5 @@
 package com.locallampoon.fiveh.core;
 
-import java.util.PrimitiveIterator;
-
 class Monster {
     //INSTANCE VARIABLE
     private int health;
