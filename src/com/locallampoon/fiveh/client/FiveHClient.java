@@ -10,7 +10,5 @@ public class FiveHClient {
     public static void main(String[] args) throws IOException {
         game = new Game();
         game.start();
-
-
     }
 }

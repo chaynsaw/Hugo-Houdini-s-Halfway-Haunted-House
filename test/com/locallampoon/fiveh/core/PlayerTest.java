@@ -34,6 +34,7 @@ public class PlayerTest {
         player.move(houseMap.get("diningRoom"));
         assertNotEquals(oldRoom.getRoomName(), player.getCurrentRoom().getRoomName());
     }
+}
 
   /*  @Test
     public void addItem_ShouldReturnTrueWhenTwoItemsAdded() {
@@ -145,3 +146,4 @@ public class PlayerTest {
         assertTrue(player.isDead());
     }
 }
+   */

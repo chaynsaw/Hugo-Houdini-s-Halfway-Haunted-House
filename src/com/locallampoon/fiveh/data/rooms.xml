@@ -37,8 +37,6 @@ faces by a taxidermist with an odd sense of taste. A large grisly bear looms ove
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
-            <item></item>
         </roomItems>
     </room>
     <room id="diningRoom">
@@ -58,7 +56,6 @@ busy kitchen come from a dark room, and to the SOUTH a door opens to the outside
         </roomExits>
         <roomItems type="array">
             <item>Smudged Glass</item>
-            <item></item>
         </roomItems>
     </room>
     <room id="garden">
@@ -77,7 +74,6 @@ back inside.</desc>
         </roomExits>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
-            <item></item>
         </roomItems>
     </room>
     <room id="kitchen">
@@ -96,7 +92,6 @@ door showing a dining room table, and along the EAST wall there is a closed door
         </roomExits>
         <roomItems type="array">
             <item>Bluetooth Speaker</item>
-            <item></item>
         </roomItems>
     </room>
     <room id="pantry">
@@ -114,7 +109,6 @@ glass bottles. Do those jars have eyeballs in them? The only door out is WEST to
         </roomExits>
         <roomItems type="array">
             <item>Eyeball Jar</item>
-            <item></item>
         </roomItems>
     </room>
     <room id="study">
@@ -134,7 +128,6 @@ with bookshelves opens, lit by sconces along the walls.</desc>
         </roomExits>
         <roomItems type="array">
             <item>Pantry Key</item>
-            <item></item>
         </roomItems>
     </room>
     <room id="library">
@@ -151,8 +144,6 @@ flickers incessantly, it seems to be hanging slightly askew. To the EAST a singl
             <exit dir="5">dungeon</exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
-            <item></item>
         </roomItems>
     </room>
     <room id="dungeon">
@@ -169,8 +160,6 @@ by rusted iron gates, manacles chained to the wall. </desc>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
-            <item></item>
         </roomItems>
     </room>
     <room id="sacrificialChamber">
@@ -189,7 +178,6 @@ does not appear to be another exit from this room other than the door to the WES
         </roomExits>
         <roomItems type="array">
             <item>CPR Dummy</item>
-            <item></item>
         </roomItems>
     </room>
     <room id="upstairsLanding">
@@ -206,8 +194,6 @@ WEST beg to be opened. A string dangles from the ceiling, indicating something m
             <exit dir="5">hall</exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
-            <item></item>
         </roomItems>
     </room>
     <room id="nursery">
@@ -226,7 +212,6 @@ is the SOUTH door you came through.</desc>
         </roomExits>
         <roomItems type="array">
             <item>Baby's Rattle</item>
-            <item></item>
         </roomItems>
     </room>
     <room id="masterBedroom">
@@ -262,8 +247,6 @@ from the ceiling. The only exit from this room is the EAST door you entered thro
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
-            <item></item>
         </roomItems>
     </room>
     <room id="attic">
@@ -281,8 +264,6 @@ monitor while another person, the one who yelled at you, handles several radios.
             <exit dir="5">upstairsLanding</exit>
         </roomExits>
         <roomItems type="array">
-            <item></item>
-            <item></item>
         </roomItems>
     </room>
 </house>
