@@ -135,7 +135,6 @@ class Player {
         List<String> nonEmptyRoomExits = new ArrayList<>();
         for (String r : roomExits) {
             if (r.length() > 0)
-
                 nonEmptyRoomExits.add(r);
         }
         Random rand = new Random(); //instance of random class
