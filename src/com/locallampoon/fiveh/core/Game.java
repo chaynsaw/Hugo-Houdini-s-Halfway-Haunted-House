@@ -2,12 +2,14 @@ package com.locallampoon.fiveh.core;
 
 import java.io.*;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Game implements Serializable {
     private Player player;
     private Map<String, Room> houseMap;
     private static final String HELP_FILE = "src/com/locallampoon/fiveh/data/helpmenu.txt";
+    private static final String MENU_FILE = "src/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
 
     // CONSTRUCTOR
@@ -36,25 +38,29 @@ public class Game implements Serializable {
 
     // METHODS
 
-    public static void getHelp() {
-        GameArt.renderHelper();
-        try (BufferedReader br = new BufferedReader(new FileReader(HELP_FILE))) {
+    private static void readFile(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
         } catch (IOException e) {
-            System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Help Menu!");
+            System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
         }
     }
 
-    private Direction movementHelper(String newDirection){
+    public static void getHelp() {
+        GameArt.renderHelper();
+        readFile(HELP_FILE);
+    }
+
+    private Direction movementHelper(String newDirection) {
         newDirection = newDirection.toUpperCase();
         if (newDirection.equals("NORTH") || newDirection.equals("SOUTH") || newDirection.equals("EAST") ||
-                newDirection.equals("WEST") || newDirection.equals("UP") || newDirection.equals("DOWN")){
+                newDirection.equals("WEST") || newDirection.equals("UP") || newDirection.equals("DOWN")) {
 
             return Direction.valueOf(newDirection);
-        }else {
+        } else {
             return null;
         }
     }
@@ -66,7 +72,7 @@ public class Game implements Serializable {
             case "move":
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
-                        roomExits.get(dirMovement.getDirection()).isEmpty()){
+                        roomExits.get(dirMovement.getDirection()).isEmpty()) {
                     System.out.println("You can't travel in that direction!\n");
                     break;
                 }
@@ -126,12 +132,37 @@ public class Game implements Serializable {
         }
     }
 
+    private static void showIntro() throws IOException {
+        GameArt.renderHouse();
+        String menuPrompt = "Type one of the following Commands:\n\"New\" - Start a new game.\n\"Help\" - Help from the Caretaker.\n\"Quit\" - Exit the game.";
+        String input;
+        readFile(MENU_FILE);
+
+        mainMenu:
+        do {
+            System.out.println(menuPrompt);
+            System.out.print("\n> ");
+
+            input = BUFFERED_READER.readLine().toLowerCase();
+
+            switch (input) {
+                case "new":
+                    break mainMenu;
+                case "help":
+                    getHelp();
+                    break;
+                case "quit":
+                    System.exit(0);
+            }
+        } while (input != null);
+    }
+
     public void start() throws IOException {
 
         String input;
         List<String> output;
 
-//        game.showIntro();
+        showIntro();
         do {
             System.out.println(player.getCurrentRoom().getDesc());
             System.out.print("> ");
