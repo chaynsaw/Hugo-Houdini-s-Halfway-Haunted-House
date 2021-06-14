@@ -10,16 +10,14 @@ class Player {
 
     //INSTANCE VARIABLE
     private String character;
-    List<String> inventory = new ArrayList<>(5);
-    private List<String> squad;
+    private final List<String> inventory = new ArrayList<>(5);
+    private final List<String> squad;
     private int health;
     private int strength;
     private boolean isStrong;//Players will use to move heavy items
     private boolean isSmart;
     private boolean isBrave;
     private Room currentRoom;
-    private int smBagSize = 5;
-    private int lgBagSize = 10;
     private boolean hasDuffelBag;
     private boolean isDead;
     private boolean ranAway;
@@ -27,13 +25,14 @@ class Player {
 
     // CONSTRUCTOR
     Player() {
-        this.health = 5;
-        this.isDead = false;
-        this.isSmart = false;
-        this.strength = 1; // I am debating whether to make it boolean or int.
-        this.isStrong = false;
-        this.isBrave = false;
+        setHealth(5);
+        setDead(false);
+        setSmart(false);
+        setStrength(1);// I am debating whether to make it boolean or int.
+        setStrong(false);
+        setBrave(false);
         this.ranAway = false;
+        int smBagSize = 5;
         while (this.inventory.size() < smBagSize) {
             this.inventory.add("");
         }
@@ -77,11 +76,10 @@ class Player {
             inventory.remove(item);
             inventory.add(index, "");
             System.out.println(item + " Dropped");
-            printInventoryItems();
         } else {
             System.out.println("You do not have " + item + " in your inventory");
-            printInventoryItems();
         }
+        printInventoryItems();
     }
 
     void addNpc(String npc) {
@@ -123,21 +121,25 @@ class Player {
     }
 
     void attack(Monster monster) {
-        int damage = 1;
+        int damage = getStrength();
         monster.takeDamage(damage);
+        if (monster.isDead()){
+            getCurrentRoom().addItem(monster.getQuestItem());
+            getCurrentRoom().setRoomMonster(null);
+        }
+        System.out.println("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
     }
 
     void takeDamage(int damage) {
-        if (health - damage <= 0) {
-            health = 0;
-            isDead = true;
+        if (getHealth() - damage <= 0) {
+            setDead(true);
             System.out.println("The monster killed you.");
         } else {
-            health -= damage;
-            System.out.println(health);
+            setHealth(health - damage);
+            System.out.println(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " +damage+
+                    " DAMAGE and have " +health+ " HEALTH left");
         }
     }
-
 
     void flee(Map<String, Room> houseMap) {
         List<String> roomExits = getCurrentRoom().getExits();
@@ -170,11 +172,7 @@ class Player {
     }
 
     int getLgBagSize() {
-        return lgBagSize;
-    }
-
-    int getSmBagSize() {
-        return smBagSize;
+        return 10;
     }
 
     String getCharacter() {
@@ -187,6 +185,10 @@ class Player {
 
     int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     boolean isStrong() {
@@ -207,6 +209,10 @@ class Player {
 
     boolean isDead() {
         return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public int getStrength() {

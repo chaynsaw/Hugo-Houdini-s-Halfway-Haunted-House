@@ -17,7 +17,7 @@ class Room {
     List<String> exits = new ArrayList<>(); // (East : diningRoom) (West : trophyRoom) Go East -> player.setCurrRoom(roomMap.get(trophyRoom))
     private List<String> items = new ArrayList<>();
     private List<String> npcs = new ArrayList<>();
-    Monster roomMonster;
+    private Monster roomMonster;
 
     // METHODS
     // CONSTRUCTOR

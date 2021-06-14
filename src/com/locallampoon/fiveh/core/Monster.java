@@ -27,21 +27,18 @@ class Monster {
     }
 
     void attack(Player player){
-        int damage = 1;
+        int damage = getStrength();
         player.takeDamage(damage);
     }
 
     void takeDamage (int damage){
-        if (health - damage <=0){
-//            health = 0;
-            isDead = true;
-            System.out.println("Player killed the monster");
+        if (getHealth() - damage <=0){
+            setHealth(health - damage);
+            setDead(true);
         } else {
-            health -= damage;
-            System.out.println(health);
+            setHealth(health - damage);
         }
     }
-
 
 
     // ACCESSOR METHOD
