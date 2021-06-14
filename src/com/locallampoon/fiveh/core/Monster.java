@@ -27,7 +27,7 @@ class Monster {
     }
 
     void attack(Player player){
-        int damage =0;
+        int damage = 1;
         player.takeDamage(damage);
     }
 
