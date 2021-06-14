@@ -10,7 +10,7 @@ class Player {
 
     //INSTANCE VARIABLE
     private String character;
-    private List<String> inventory = new ArrayList<>(5);
+    List<String> inventory = new ArrayList<>(5);
     private List<String> squad;
     private int health;
     private int strength;
@@ -30,7 +30,7 @@ class Player {
         this.health = 5;
         this.isDead = false;
         this.isSmart = false;
-        this.strength = 10; // I am debating whether to make it boolean or int.
+        this.strength = 1; // I am debating whether to make it boolean or int.
         this.isStrong = false;
         this.isBrave = false;
         this.ranAway = false;
@@ -123,7 +123,7 @@ class Player {
     }
 
     void attack(Monster monster) {
-        int damage = 0;
+        int damage = 1;
         monster.takeDamage(damage);
     }
 
@@ -171,6 +171,10 @@ class Player {
 
     int getLgBagSize() {
         return lgBagSize;
+    }
+
+    int getSmBagSize() {
+        return smBagSize;
     }
 
     String getCharacter() {

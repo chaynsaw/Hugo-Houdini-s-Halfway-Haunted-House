@@ -1,3 +1,5 @@
+NOTE: REQUIRES JAVA 15+
+
 ### Local Lampoon presents:
 
 # Hugo Houdini’s Half-Way Haunted House
