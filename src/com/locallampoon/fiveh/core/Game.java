@@ -2,7 +2,6 @@ package com.locallampoon.fiveh.core;
 
 import java.io.*;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class Game implements Serializable {
@@ -68,6 +67,7 @@ public class Game implements Serializable {
 
     private void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
         // TODO: Finish switch to contain all Verbs and Noun interaction
+        Room playerCurrentRoom = player.getCurrentRoom();
         switch (parsedCommandList.get(0)) {
             case "go":
             case "move":
@@ -84,12 +84,12 @@ public class Game implements Serializable {
             case "grab":
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.addItem(grabbedItem);
-                player.getCurrentRoom().removeItem(grabbedItem);
+                playerCurrentRoom.removeItem(grabbedItem);
                 break;
             case "drop":
                 String droppedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.dropItem(droppedItem);
-                player.getCurrentRoom().addItem(droppedItem);
+                playerCurrentRoom.addItem(droppedItem);
                 break;
             case "talk":
                 // TODO: Player needs a Talk method to talk with characters in rooms
@@ -100,13 +100,20 @@ public class Game implements Serializable {
 //                    player.inspectItem(output.get(1));
 //                    break;
             case "fight":
-                // TODO: Room needs an attribute to hold monster object and bool to check if it exists in room
-//                    if (player.getCurrentRoom().hasMonster() && Room.monsterName(output.get(1))){
-//                        player.attack(Room.monster);
-//                    } else {
-//                        System.out.println("There is no monster in this room");
-//                    }
-//                    break;
+                Monster monster = playerCurrentRoom.getRoomMonster();
+                if (monster != null &&
+                        monster.getName().equalsIgnoreCase(parsedCommandList.get(1))){
+                    player.attack(monster);
+                    if (monster.isDead()) {
+                        System.out.println(" You killed " + monster.getName());
+                    } else {
+                        monster.attack(player);
+                    }
+                }
+                else {
+                    System.out.println("There is no monster in this room");
+                }
+                break;
             case "flee":
                 player.flee(houseMap);
                 break;
@@ -120,7 +127,7 @@ public class Game implements Serializable {
             case "recruit":
                 String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, player);
                 player.addNpc(recruitedNpc);
-                player.getCurrentRoom().removeNpc(recruitedNpc);
+                playerCurrentRoom.removeNpc(recruitedNpc);
                 switch (recruitedNpc.toLowerCase()) {
                     case "jock":
                         player.setStrong(true);
@@ -176,19 +183,20 @@ public class Game implements Serializable {
 
         showIntro();
         do {
-            System.out.println("YOU ARE IN: " + player.getCurrentRoom().getRoomName() + "\n");
-            System.out.println(player.getCurrentRoom().getDesc());
-            System.out.println("ITEMS IN ROOM: " + player.getCurrentRoom().getItems() + "\n");
-            System.out.println("PEOPLE IN ROOM: " + player.getCurrentRoom().getNpcs() + "\n");
-            if (player.getCurrentRoom().getRoomMonster() != null) {
-                System.out.println("MONSTERS IN ROOM: " + player.getCurrentRoom().getRoomMonster().getName() + "\n");
+            Room playerCurrentRoom = player.getCurrentRoom();
+            System.out.println("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
+            System.out.println(playerCurrentRoom.getDesc());
+            System.out.println("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
+            System.out.println("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+            if (playerCurrentRoom.getRoomMonster() != null) {
+                System.out.println("MONSTERS IN ROOM: " + playerCurrentRoom.getRoomMonster().getName() + "\n");
             }
 
             System.out.print("> ");
 
             input = BUFFERED_READER.readLine();
             output = UserInput.parseCommand(input);
-            List<String> roomExits = player.getCurrentRoom().getExits();
+            List<String> roomExits = playerCurrentRoom.getExits();
 
             implementCommand(output, roomExits);
             if (input.equals("q") || input.equals("quit")) {
