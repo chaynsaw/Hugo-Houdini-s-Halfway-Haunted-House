@@ -2,33 +2,31 @@ package com.locallampoon.fiveh.core;
 
 class Monster {
     //INSTANCE VARIABLE
+    private String name;
     private int health;
     private int strength;
     private boolean isStrong;
     private boolean isSmart;
-    private Room currentRoom;
     private boolean isDead;
+    private String questItem;
 
     // CONSTRUCTOR
 
     Monster(){
-        this.health = 6;
-        this.strength=10;
-        this.isStrong = false;
-        this.isSmart = false;
-        this.isDead = false;
-
+        setHealth(6);
+        setStrength(10);
+        setStrong(false);
+        setSmart(false);
+        setDead(false);
     }
 
-
-    Monster(Room currentRoom) {
+    Monster(String name, String questItem) {
         this();
-        this.currentRoom = currentRoom;
-
+        setName(name);
+        setQuestItem(questItem);
     }
 
-
-    void  attack(Player player){
+    void attack(Player player){
         int damage =0;
         player.takeDamage(damage);
     }
@@ -48,6 +46,14 @@ class Monster {
 
     // ACCESSOR METHOD
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getStrength() {
         return strength;
@@ -81,12 +87,19 @@ class Monster {
         isSmart = smart;
     }
 
-    Room getCurrentRoom() {
-        return currentRoom;
-    }
-
     boolean isDead() {
         return isDead;
     }
 
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
+
+    public String getQuestItem() {
+        return questItem;
+    }
+
+    public void setQuestItem(String questItem) {
+        this.questItem = questItem;
+    }
 }

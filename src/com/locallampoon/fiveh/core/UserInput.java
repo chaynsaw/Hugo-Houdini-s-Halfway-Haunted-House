@@ -31,6 +31,9 @@ class UserInput {
         if (verb.equals("drop")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getInventory();
+        }else if (verb.equals("recruit")){
+            tempRoomPlayerItemList.clear();
+            tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getNpcs();
         }
 
         for (int i = 0; i < tempRoomPlayerItemList.size(); i++) {

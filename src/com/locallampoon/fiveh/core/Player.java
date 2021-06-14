@@ -11,10 +11,12 @@ class Player {
     //INSTANCE VARIABLE
     private String character;
     private List<String> inventory = new ArrayList<>(5);
+    private List<String> squad;
     private int health;
     private int strength;
     private boolean isStrong;//Players will use to move heavy items
     private boolean isSmart;
+    private boolean isBrave;
     private Room currentRoom;
     private int smBagSize = 5;
     private int lgBagSize = 10;
@@ -30,29 +32,18 @@ class Player {
         this.isSmart = false;
         this.strength = 10; // I am debating whether to make it boolean or int.
         this.isStrong = false;
+        this.isBrave = false;
         this.ranAway = false;
         while (this.inventory.size() < smBagSize) {
             this.inventory.add("");
         }
+        this.squad = new ArrayList<>(3);
         this.setHasDuffelBag(false);
     }
 
     Player(Room currentRoom) {
         this();
         this.currentRoom = currentRoom;
-    }
-
-
-    public static void main(String[] args) {
-        Player p1 = new Player();
-
-
-        System.out.println(p1.inventory);
-
-        p1.dropItem("Water");
-
-
-        System.out.println(p1.inventory);
     }
 
     //METHODS
@@ -91,7 +82,18 @@ class Player {
             System.out.println("You do not have " + item + " in your inventory");
             printInventoryItems();
         }
+    }
 
+    void addNpc(String npc) {
+        squad.add(npc);
+    }
+
+    void removeNpc(String npc) {
+        squad.remove(npc);
+    }
+
+    public List getSquad() {
+        return squad;
     }
 
     public List<String> getInventory() {
@@ -103,6 +105,9 @@ class Player {
         System.out.println("\n" + bagName + " ITEMS: ");
         for (int i = 0; i < inventory.size(); i++) {
             System.out.println((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next());
+        }
+        if (!squad.isEmpty()) {
+            System.out.println("\nThe Squad: " + getSquad());
         }
         System.out.println("\n");
     }
@@ -146,7 +151,6 @@ class Player {
         int int_random = rand.nextInt(upperbound);
         Room destRoom = houseMap.get(nonEmptyRoomExits.get(int_random));
         move(destRoom);
-
     }
 
 
@@ -158,9 +162,7 @@ class Player {
         } else {
             System.out.println("You have following items in your inventory ");
             System.out.println(inventory);
-
         }
-
     }
 
     Room getCurrentRoom() {
@@ -187,6 +189,14 @@ class Player {
         return isStrong;
     }
 
+    public void setStrong(boolean strong) {
+        isStrong = strong;
+    }
+
+    public void setSmart(boolean smart) {
+        isSmart = smart;
+    }
+
     boolean isSmart() {
         return isSmart;
     }
@@ -209,5 +219,13 @@ class Player {
 
     public void setHasDuffelBag(boolean hasDuffelBag) {
         this.hasDuffelBag = hasDuffelBag;
+    }
+
+    public boolean isBrave() {
+        return isBrave;
+    }
+
+    public void setBrave(boolean brave) {
+        isBrave = brave;
     }
 }

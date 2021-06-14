@@ -2,6 +2,7 @@ package com.locallampoon.fiveh.core;
 
 import java.io.*;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Game implements Serializable {
@@ -26,6 +27,7 @@ public class Game implements Serializable {
     void setPlayer(Player player) {
         this.player = player;
     }
+
     Map<String, Room> getHouseMap() {
         return houseMap;
     }
@@ -108,13 +110,27 @@ public class Game implements Serializable {
             case "flee":
                 player.flee(houseMap);
                 break;
-                // TODO: Player needs a flee method to run from monster, will send player to a random room
+            // TODO: Player needs a flee method to run from monster, will send player to a random room
 //                    player.flee();
 //                    break;
             case "inventory":
             case "i":
                 player.printInventoryItems();
                 break;
+            case "recruit":
+                String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, player);
+                player.addNpc(recruitedNpc);
+                player.getCurrentRoom().removeNpc(recruitedNpc);
+                switch (recruitedNpc.toLowerCase()) {
+                    case "jock":
+                        player.setStrong(true);
+                        break;
+                    case "chess geek":
+                        player.setSmart(true);
+                        break;
+                    case "bleacher kid":
+                        player.setBrave(true);
+                }
             case "help":
             case "h":
                 getHelp();
@@ -160,8 +176,14 @@ public class Game implements Serializable {
 
         showIntro();
         do {
+            System.out.println("YOU ARE IN: " + player.getCurrentRoom().getRoomName() + "\n");
             System.out.println(player.getCurrentRoom().getDesc());
             System.out.println("ITEMS IN ROOM: " + player.getCurrentRoom().getItems() + "\n");
+            System.out.println("PEOPLE IN ROOM: " + player.getCurrentRoom().getNpcs() + "\n");
+            if (player.getCurrentRoom().getRoomMonster() != null) {
+                System.out.println("MONSTERS IN ROOM: " + player.getCurrentRoom().getRoomMonster().getName() + "\n");
+            }
+
             System.out.print("> ");
 
             input = BUFFERED_READER.readLine();
@@ -169,7 +191,7 @@ public class Game implements Serializable {
             List<String> roomExits = player.getCurrentRoom().getExits();
 
             implementCommand(output, roomExits);
-            if (input.equals("q") || input.equals("quit")){
+            if (input.equals("q") || input.equals("quit")) {
                 input = GameState.quitHelper(BUFFERED_READER);
             }
 

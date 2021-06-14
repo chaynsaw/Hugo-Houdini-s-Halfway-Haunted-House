@@ -20,6 +20,7 @@ UP into the darkness.
         <roomItems type="array">
             <item>Bowl of Candy</item>
         </roomItems>
+        <npc></npc>
     </room>
     <room id="trophyRoom">
         <roomName>Trophy Room</roomName>
@@ -38,6 +39,7 @@ faces by a taxidermist with an odd sense of taste. A large grisly bear looms ove
         </roomExits>
         <roomItems type="array">
         </roomItems>
+        <npc>Jock</npc>
     </room>
     <room id="diningRoom">
         <roomName>Dining Room</roomName>
@@ -48,7 +50,7 @@ lipstick on the rim. When you move it, another identical glass materializes in i
 busy kitchen come from a dark room, and to the SOUTH a door opens to the outside.</desc>
         <roomExits type="array">
             <exit dir="0">kitchen</exit>
-            <exit dir="1">gardens</exit>
+            <exit dir="1">garden</exit>
             <exit dir="2"></exit>
             <exit dir="3">hall</exit>
             <exit dir="4"></exit>
@@ -57,6 +59,7 @@ busy kitchen come from a dark room, and to the SOUTH a door opens to the outside
         <roomItems type="array">
             <item>Smudged Glass</item>
         </roomItems>
+        <npc></npc>
     </room>
     <room id="garden">
         <roomName>Garden</roomName>
@@ -75,6 +78,8 @@ back inside.</desc>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
         </roomItems>
+        <monster questItem="UV Light>">Ware Wolf</monster>
+        <npc>Chess Geek</npc>
     </room>
     <room id="kitchen">
         <roomName>Kitchen</roomName>
@@ -93,6 +98,8 @@ door showing a dining room table, and along the EAST wall there is a closed door
         <roomItems type="array">
             <item>Bluetooth Speaker</item>
         </roomItems>
+        <monster questItem="silver butter knife">Vampire</monster>
+        <npc></npc>
     </room>
     <room id="pantry">
         <roomName>Pantry</roomName>
@@ -110,6 +117,7 @@ glass bottles. Do those jars have eyeballs in them? The only door out is WEST to
         <roomItems type="array">
             <item>Eyeball Jar</item>
         </roomItems>
+        <npc>Bleacher Kid</npc>
     </room>
     <room id="study">
         <roomName>Study</roomName>
@@ -129,6 +137,7 @@ with bookshelves opens, lit by sconces along the walls.</desc>
         <roomItems type="array">
             <item>Pantry Key</item>
         </roomItems>
+        <npc></npc>
     </room>
     <room id="library">
         <roomName>Library</roomName>
@@ -145,6 +154,7 @@ flickers incessantly, it seems to be hanging slightly askew. To the EAST a singl
         </roomExits>
         <roomItems type="array">
         </roomItems>
+        <npc></npc>
     </room>
     <room id="dungeon">
         <roomName>Dungeon</roomName>
@@ -161,6 +171,7 @@ by rusted iron gates, manacles chained to the wall. </desc>
         </roomExits>
         <roomItems type="array">
         </roomItems>
+        <npc></npc>
     </room>
     <room id="sacrificialChamber">
         <roomName>Sacrificial Chamber</roomName>
@@ -179,6 +190,8 @@ does not appear to be another exit from this room other than the door to the WES
         <roomItems type="array">
             <item>CPR Dummy</item>
         </roomItems>
+        <monster questItem="flashlight">Ghost</monster>
+        <npc></npc>
     </room>
     <room id="upstairsLanding">
         <roomName>Upstairs Landing</roomName>
@@ -195,6 +208,7 @@ WEST beg to be opened. A string dangles from the ceiling, indicating something m
         </roomExits>
         <roomItems type="array">
         </roomItems>
+        <npc></npc>
     </room>
     <room id="nursery">
         <roomName>Nursery</roomName>
@@ -213,6 +227,7 @@ is the SOUTH door you came through.</desc>
         <roomItems type="array">
             <item>Baby's Rattle</item>
         </roomItems>
+        <npc></npc>
     </room>
     <room id="masterBedroom">
         <roomName>Master Bedroom</roomName>
@@ -231,6 +246,7 @@ on the bedside table. The only exit is the WEST door you entered through.</desc>
         <roomItems type="array">
             <item>Study Key</item>
         </roomItems>
+        <npc></npc>
     </room>
     <room id="guestRoom">
         <roomName>Guest Room</roomName>
@@ -248,6 +264,7 @@ from the ceiling. The only exit from this room is the EAST door you entered thro
         </roomExits>
         <roomItems type="array">
         </roomItems>
+        <npc></npc>
     </room>
     <room id="attic">
         <roomName>Attic</roomName>
@@ -265,5 +282,6 @@ monitor while another person, the one who yelled at you, handles several radios.
         </roomExits>
         <roomItems type="array">
         </roomItems>
+        <npc></npc>
     </room>
 </house>
