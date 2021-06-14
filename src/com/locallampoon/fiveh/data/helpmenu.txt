@@ -17,12 +17,22 @@ Item Interaction: (Verb + Item)
 Verb: Get, Grab, Pick-up
 Items will be displayed to the user in the room description.
 
+Party Interaction: (Verb + Person)
+Verb: Recruit
+People: Jock, Chess Geek, Bleacher Kid
+
 Ghost Interactions: (Verb)
 Fight Ghost: Attack, Fight, Hit, Punch, Kick
 Run Away: Flee, Run-away
 
 Help:
 To see this menu again: Help, H
+
+Quit:
+To exit the game: Quit, q
+
+
+
 ------------------------------------HELP MENU END-----------------------------------------
 
 

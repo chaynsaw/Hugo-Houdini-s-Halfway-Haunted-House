@@ -21,11 +21,7 @@ class XMLParser {
 
     private static final String ROOM_FILE = "src/com/locallampoon/fiveh/data/rooms.xml";
 
-
-    // comment out parseRooms() and uncomment main for testing
     public static Map<String, Room> parseRooms() {
-//    public static void main(String[] args) {
-
 
         // Instantiate the Factory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -73,8 +69,22 @@ class XMLParser {
                         Node currentNode = itemNodes.item(j);
                         items.add(currentNode.getTextContent());
                     }
-                    // put new KVP into map using id as key and new Room ctor as value
-                    roomMap.put(id, new Room(roomName, desc, exits, items));
+                    NodeList npcsNodes = element.getElementsByTagName("npc");
+                    List<String> npcs = new ArrayList<>();
+                    for (int j = 0; j < npcsNodes.getLength(); j++) {
+                        Node currentNode = npcsNodes.item(j);
+                        npcs.add(currentNode.getTextContent());
+                    }
+//                    Monster Ghost = new Monster
+                    NodeList monsterNodes = element.getElementsByTagName("monster");
+                    Monster monster = null;
+                    for (int j = 0; j < monsterNodes.getLength(); j++) {
+                        Node currentNode = monsterNodes.item(j);
+                        String monsterName = currentNode.getTextContent();
+                        String questItem = currentNode.getAttributes().getNamedItem("questItem").getNodeValue();
+                        monster = new Monster(monsterName, questItem);
+                    }
+                    roomMap.put(id, new Room(roomName, desc, exits, items, npcs, monster));
                 }
             }
 
@@ -82,12 +92,5 @@ class XMLParser {
             e.printStackTrace();
         }
         return roomMap;
-
-        // uncomment to use as main for testing
-//        Room r = roomMap.get("masterBedroom");
-//        System.out.println(r.getRoomName());
-//        System.out.println(r.getDesc());
-//        System.out.println(r.getExits());
-//        System.out.println(r.getItems());
     }
 }
