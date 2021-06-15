@@ -173,6 +173,17 @@ public class Game implements Serializable {
             System.out.println("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
             System.out.println("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
             if (playerCurrentRoom.getRoomMonster() != null) {
+                switch (playerCurrentRoom.getRoomMonster().getName()) {
+                    case "Vampire":
+                        GameArt.renderMan();
+                        break;
+                    case "Ghost":
+                        GameArt.renderGhost();
+                        break;
+                    case "Ware Wolf":
+                        GameArt.renderWolf();
+                        break;
+                }
                 System.out.println("MONSTERS IN ROOM: " + playerCurrentRoom.getRoomMonster().getName() + "\n");
             }
 

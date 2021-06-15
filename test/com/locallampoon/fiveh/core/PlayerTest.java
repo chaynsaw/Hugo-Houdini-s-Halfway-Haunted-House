@@ -57,7 +57,7 @@ public class PlayerTest {
     @Test
     public void move_ShouldReturnFalseWhenPlayerMovesToDiningRoom() {
         Room oldRoom = player.getCurrentRoom();
-        player.move(houseMap.get("kitchen"));
+        player.move(houseMap.get("diningRoom"));
         assertNotEquals(oldRoom.getRoomName(), player.getCurrentRoom().getRoomName());
     }
 

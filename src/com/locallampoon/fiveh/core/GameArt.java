@@ -516,27 +516,22 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    public static void main(String[] args) {
-        renderWoman();
-        renderWilly();
-        renderMan();
-        renderTroll();
-        renderMonster();
-        renderWolf();
-        renderHouse();
-        renderHillHouse();
-        renderHallWay();
-        renderBookcase();
-        renderJournal();
-        renderCandle();
-        renderKey();
-        renderSerum();
-        renderOregano();
-        renderSwordShield();
-        renderAxe();
-        renderBloodyAxe();
-        renderBloodySword();
-        renderHelper();
-
+    static void renderGhost(){
+        String imgArt = """
+                     .-.
+                    .'   `.
+                    :g g   :
+                    : o    `.
+                   :         ``.
+                  :             `.
+                 :  :         .   `.
+                 :   :          ` . `.
+                  `.. :            `. ``;
+                     `:;             `:'
+                        :              `.
+                         `.              `.     .
+                           `'`'`'`---..,___`;.-' 
+                """;
+        System.out.println(imgArt);
     }
 }
