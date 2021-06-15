@@ -14,7 +14,7 @@ class Monster {
 
     Monster(){
         setHealth(6);
-        setStrength(10);
+        setStrength(3);
         setStrong(false);
         setSmart(false);
         setDead(false);
