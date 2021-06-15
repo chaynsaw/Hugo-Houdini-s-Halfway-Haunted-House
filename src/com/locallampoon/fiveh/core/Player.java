@@ -10,7 +10,7 @@ class Player {
 
     //INSTANCE VARIABLE
     private String character;
-    private final List<String> inventory = new ArrayList<>(5);
+    final List<String> inventory = new ArrayList<>(5);
     private final List<String> squad;
     private int health;
     private int strength;
@@ -200,9 +200,6 @@ class Player {
         return 10;
     }
 
-    String getCharacter() {
-        return character;
-    }
 
     void setCharacter(String character) {
         this.character = character;
