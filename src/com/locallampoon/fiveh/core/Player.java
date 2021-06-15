@@ -25,7 +25,7 @@ class Player {
 
     // CONSTRUCTOR
     Player() {
-        setHealth(5);
+        setHealth(20);
         setDead(false);
         setSmart(false);
         setStrength(1);// I am debating whether to make it boolean or int.
