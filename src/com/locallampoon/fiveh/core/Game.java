@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Game implements Serializable {
-    private Player player;
+    private final Player player;
     private Map<String, Room> houseMap;
     private static final String HELP_FILE = "src/com/locallampoon/fiveh/data/helpmenu.txt";
     private static final String MENU_FILE = "src/com/locallampoon/fiveh/data/mainmenu.txt";
@@ -18,18 +18,6 @@ public class Game implements Serializable {
     }
 
     // GETTER/SETTER METHODS
-
-    Player getPlayer() {
-        return player;
-    }
-
-    void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    Map<String, Room> getHouseMap() {
-        return houseMap;
-    }
 
     private void setHouseMap(Map<String, Room> houseMap) {
         this.houseMap = houseMap;
@@ -169,7 +157,7 @@ public class Game implements Serializable {
                 case "quit":
                     System.exit(0);
             }
-        } while (input != null);
+        } while (input.equals(""));
     }
 
     public void start() throws IOException {
