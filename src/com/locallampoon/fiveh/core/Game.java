@@ -117,9 +117,7 @@ public class Game implements Serializable {
             case "flee":
                 player.flee(houseMap);
                 break;
-            // TODO: Player needs a flee method to run from monster, will send player to a random room
-//                    player.flee();
-//                    break;
+
             case "inventory":
             case "i":
                 player.printInventoryItems();
@@ -146,8 +144,6 @@ public class Game implements Serializable {
             case "q":
             case "requestCommandAgain":
                 break;
-//            default:
-//                System.out.println("Invalid command");
         }
     }
 

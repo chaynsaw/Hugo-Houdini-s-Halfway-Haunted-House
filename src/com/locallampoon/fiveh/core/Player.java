@@ -120,6 +120,28 @@ class Player {
         setHasDuffelBag(true);
     }
 
+    // THis is fight loop method that will be used for pokemon style battle.
+//    void fight(Monster monster) {
+//        int fightStage = 1;
+//        int healthDamageRate = 2;
+//        while(this.health > 0 && monster.getHealth()> 0){
+//            monster.setHealth(monster.getHealth()- healthDamageRate);
+//            health = health - healthDamageRate;
+//            if(health > 0 && monster.getHealth() > 0 ) {
+//                System.out.println("After stage " + fightStage + " fight, your health is " + health);
+//                System.out.println("Monster's health is " + monster.getHealth());
+//            }else if ( health <0) {
+//                System.out.println("The monster killed you");
+//                System.exit(0);
+//            }
+//            else {
+//                System.out.println("You killed monster");
+//                this.getCurrentRoom().setMonster(null);
+//            }
+//            fightStage++;
+//        }
+//    }
+
     void attack(Monster monster) {
         int damage = getStrength();
         monster.takeDamage(damage);
@@ -134,12 +156,15 @@ class Player {
         if (getHealth() - damage <= 0) {
             setDead(true);
             System.out.println("The monster killed you.");
+            System.out.println("GAME OVER");
+            System.exit(0);
         } else {
             setHealth(health - damage);
             System.out.println(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " +damage+
                     " DAMAGE and have " +health+ " HEALTH left");
         }
     }
+
 
     void flee(Map<String, Room> houseMap) {
         List<String> roomExits = getCurrentRoom().getExits();
