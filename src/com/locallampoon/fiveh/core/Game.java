@@ -89,13 +89,15 @@ public class Game implements Serializable {
 //                    break;
             case "fight":
                 Monster monster = playerCurrentRoom.getRoomMonster();
-                if (monster != null &&
-                        monster.getName().equalsIgnoreCase(parsedCommandList.get(1))){
+                if (monster != null){
                     player.attack(monster);
                     if (monster.isDead()) {
                         System.out.println(" You killed " + monster.getName());
                     } else {
                         monster.attack(player);
+                    }
+                    if (player.isDead()) {
+                        System.exit(0);
                     }
                 }
                 else {

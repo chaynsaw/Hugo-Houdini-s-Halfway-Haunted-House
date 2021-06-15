@@ -92,16 +92,12 @@ public class PlayerTest {
     @Test
     public void takeDamage_ShouldReturnTrueWHenPlayerTakesDamageLessThanFive() {
         player.takeDamage(3);
-        assertEquals(2, player.getHealth());
-    }
-
-    @Test
-    public void getCurrentItemDetails() {
+        assertEquals(17, player.getHealth());
     }
 
     @Test
     public void getCurrentRoom_ShouldReturnTrueWhenPlayerRoomPassed() {
-        Room r = houseMap.get("hall");
+        Room r = houseMap.get("kitchen");
         assertSame(r, player.getCurrentRoom());
     }
 
@@ -132,7 +128,7 @@ public class PlayerTest {
 
     @Test
     public void getHealth_ShouldReturnTrueWhenPlayerHealthIsFive() {
-        assertEquals(5, player.getHealth());
+        assertEquals(20, player.getHealth());
     }
 
     @Test
@@ -157,7 +153,7 @@ public class PlayerTest {
 
     @Test
     public void isDead_ShouldReturnTrueIfPlayerIsDead() {
-        player.takeDamage(7);
+        player.takeDamage(25);
         assertTrue(player.isDead());
     }
 

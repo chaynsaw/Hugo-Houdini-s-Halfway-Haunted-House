@@ -157,7 +157,6 @@ class Player {
             setDead(true);
             System.out.println("The monster killed you.");
             System.out.println("GAME OVER");
-            System.exit(0);
         } else {
             setHealth(health - damage);
             System.out.println(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " +damage+
