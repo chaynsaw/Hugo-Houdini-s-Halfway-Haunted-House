@@ -25,7 +25,7 @@ public class PlayerTest {
     @Before
     public void setUp() throws Exception {
         houseMap = XMLParser.parseRooms();
-        player = new Player(houseMap.get("hall"));
+        player = new Player(houseMap.get("kitchen"));
         player.addItem("key");
         player.addItem("pencil");
 
@@ -57,7 +57,7 @@ public class PlayerTest {
     @Test
     public void move_ShouldReturnFalseWhenPlayerMovesToDiningRoom() {
         Room oldRoom = player.getCurrentRoom();
-        player.move(houseMap.get("diningRoom"));
+        player.move(houseMap.get("kitchen"));
         assertNotEquals(oldRoom.getRoomName(), player.getCurrentRoom().getRoomName());
     }
 
@@ -106,23 +106,13 @@ public class PlayerTest {
     }
 
     @Test
-    public void getSmBagSize_ShouldReturnTrueWhenFiveIsPassed() {
-        assertEquals(5, player.getSmBagSize());
-    }
-
-    @Test
-    public void getSmBagSize_ShouldReturnTrueWhenWrongNumberIsPassed() {
-        assertEquals(14, player.getSmBagSize());
-    }
-
-    @Test
     public void getLgBagSize_ShouldReturnTrueWhenTenIsPassed() {
         assertEquals(10, player.getLgBagSize());
     }
 
     @Test
     public void getLgBagSize_ShouldReturnTrueWhenWrongNumberIsPassed() {
-        assertEquals(-7, player.getLgBagSize());
+        assertNotEquals(-7, player.getLgBagSize());
     }
 
     @Test
