@@ -6,13 +6,14 @@ import java.util.List;
 
 class UserInput {
 
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("go", "move", "get", "grab", "drop",
-            "talk", "inspect", "h", "help", "i", "inventory", "q", "quit"));
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee" , "move", "get", "grab", "drop",
+            "talk", "inspect", "h", "help", "i", "inventory", "q", "quit", "fight", "attack", "hit", "punch", "kick",
+            "flee", "run", "recruit"));
 
 
     private static List<String> inputCleaner(String reducedString) {
         reducedString = reducedString.trim().toLowerCase();
-        String[] commands = reducedString.split("\\W");
+        String[] commands = reducedString.split("\\W|\\d");
         List<String> commandList = new ArrayList<>(Arrays.asList(commands));
         while (commandList.contains("")) {
             commandList.remove("");
@@ -31,6 +32,9 @@ class UserInput {
         if (verb.equals("drop")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getInventory();
+        }else if (verb.equals("recruit")){
+            tempRoomPlayerItemList.clear();
+            tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getNpcs();
         }
 
         for (int i = 0; i < tempRoomPlayerItemList.size(); i++) {

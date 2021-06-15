@@ -3,7 +3,7 @@ package com.locallampoon.fiveh.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-class GameState {
+public class GameState {
 
     private static String quitSave(BufferedReader saveReader) throws IOException {
         String msg;

@@ -16,6 +16,8 @@ class Room {
     private String desc;
     List<String> exits = new ArrayList<>(); // (East : diningRoom) (West : trophyRoom) Go East -> player.setCurrRoom(roomMap.get(trophyRoom))
     private List<String> items = new ArrayList<>();
+    private List<String> npcs = new ArrayList<>();
+    private Monster roomMonster;
 
     // METHODS
     // CONSTRUCTOR
@@ -28,13 +30,17 @@ class Room {
      * @param desc     String representing the description of the room.
      * @param exits    HashMap of String keys and String values representing the exits from the room to adjacent rooms.
      * @param items    ArrayList of Strings representing the items that are currently in the room for later use
+     * @param npcs     ArrayList of items in the room
+     * @param roomMonster Monster object representing a monster in the room
      */
 
-    Room(String roomName, String desc, List<String> exits, List<String> items) {
+    Room(String roomName, String desc, List<String> exits, List<String> items, List<String> npcs, Monster roomMonster) {
         setRoomName(roomName);
         setDesc(desc);
         setExits(exits);
         setItems(items);
+        setNpcs(npcs);
+        setRoomMonster(roomMonster);
     }
 
     // Helpers
@@ -50,6 +56,9 @@ class Room {
     }
 
     // ACCESSORS
+
+
+
 
     public String getRoomName() {
         return roomName;
@@ -81,5 +90,29 @@ class Room {
 
     private void setItems(List<String> items) {
         this.items = items;
+    }
+
+    public List<String> getNpcs() {
+        return npcs;
+    }
+
+    public void setNpcs(List<String> npcs) {
+        this.npcs = npcs;
+    }
+
+    public void addNpc(String npc) {
+        npcs.add(npc);
+    }
+
+    public void removeNpc(String npc) {
+        npcs.remove(npc);
+    }
+
+    public Monster getRoomMonster() {
+        return roomMonster;
+    }
+
+    public void setRoomMonster(Monster roomMonster) {
+        this.roomMonster = roomMonster;
     }
 }

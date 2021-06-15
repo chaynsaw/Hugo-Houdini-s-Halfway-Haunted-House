@@ -10,14 +10,14 @@ class Player {
 
     //INSTANCE VARIABLE
     private String character;
-    private List<String> inventory = new ArrayList<>(5);
+    final List<String> inventory = new ArrayList<>(5);
+    private final List<String> squad;
     private int health;
     private int strength;
     private boolean isStrong;//Players will use to move heavy items
     private boolean isSmart;
+    private boolean isBrave;
     private Room currentRoom;
-    private int smBagSize = 5;
-    private int lgBagSize = 10;
     private boolean hasDuffelBag;
     private boolean isDead;
     private boolean ranAway;
@@ -25,34 +25,24 @@ class Player {
 
     // CONSTRUCTOR
     Player() {
-        this.health = 5;
-        this.isDead = false;
-        this.isSmart = false;
-        this.strength = 10; // I am debating whether to make it boolean or int.
-        this.isStrong = false;
+        setHealth(20);
+        setDead(false);
+        setSmart(false);
+        setStrength(1);// I am debating whether to make it boolean or int.
+        setStrong(false);
+        setBrave(false);
         this.ranAway = false;
+        int smBagSize = 5;
         while (this.inventory.size() < smBagSize) {
             this.inventory.add("");
         }
+        this.squad = new ArrayList<>(3);
         this.setHasDuffelBag(false);
     }
 
     Player(Room currentRoom) {
         this();
         this.currentRoom = currentRoom;
-    }
-
-
-    public static void main(String[] args) {
-        Player p1 = new Player();
-
-
-        System.out.println(p1.inventory);
-
-        p1.dropItem("Water");
-
-
-        System.out.println(p1.inventory);
     }
 
     //METHODS
@@ -86,12 +76,22 @@ class Player {
             inventory.remove(item);
             inventory.add(index, "");
             System.out.println(item + " Dropped");
-            printInventoryItems();
         } else {
             System.out.println("You do not have " + item + " in your inventory");
-            printInventoryItems();
         }
+        printInventoryItems();
+    }
 
+    void addNpc(String npc) {
+        squad.add(npc);
+    }
+
+    void removeNpc(String npc) {
+        squad.remove(npc);
+    }
+
+    public List getSquad() {
+        return squad;
     }
 
     public List<String> getInventory() {
@@ -103,6 +103,9 @@ class Player {
         System.out.println("\n" + bagName + " ITEMS: ");
         for (int i = 0; i < inventory.size(); i++) {
             System.out.println((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next());
+        }
+        if (!squad.isEmpty()) {
+            System.out.println("\nThe Squad: " + getSquad());
         }
         System.out.println("\n");
     }
@@ -117,19 +120,47 @@ class Player {
         setHasDuffelBag(true);
     }
 
+    // THis is fight loop method that will be used for pokemon style battle.
+//    void fight(Monster monster) {
+//        int fightStage = 1;
+//        int healthDamageRate = 2;
+//        while(this.health > 0 && monster.getHealth()> 0){
+//            monster.setHealth(monster.getHealth()- healthDamageRate);
+//            health = health - healthDamageRate;
+//            if(health > 0 && monster.getHealth() > 0 ) {
+//                System.out.println("After stage " + fightStage + " fight, your health is " + health);
+//                System.out.println("Monster's health is " + monster.getHealth());
+//            }else if ( health <0) {
+//                System.out.println("The monster killed you");
+//                System.exit(0);
+//            }
+//            else {
+//                System.out.println("You killed monster");
+//                this.getCurrentRoom().setMonster(null);
+//            }
+//            fightStage++;
+//        }
+//    }
+
     void attack(Monster monster) {
-        int damage = 0;
+        int damage = getStrength();
         monster.takeDamage(damage);
+        if (monster.isDead()){
+            getCurrentRoom().addItem(monster.getQuestItem());
+            getCurrentRoom().setRoomMonster(null);
+        }
+        System.out.println("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
     }
 
     void takeDamage(int damage) {
-        if (health - damage <= 0) {
-            health = 0;
-            isDead = true;
+        if (getHealth() - damage <= 0) {
+            setDead(true);
             System.out.println("The monster killed you.");
+            System.out.println("GAME OVER");
         } else {
-            health -= damage;
-            System.out.println(health);
+            setHealth(health - damage);
+            System.out.println(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " +damage+
+                    " DAMAGE and have " +health+ " HEALTH left");
         }
     }
 
@@ -146,7 +177,6 @@ class Player {
         int int_random = rand.nextInt(upperbound);
         Room destRoom = houseMap.get(nonEmptyRoomExits.get(int_random));
         move(destRoom);
-
     }
 
 
@@ -158,9 +188,7 @@ class Player {
         } else {
             System.out.println("You have following items in your inventory ");
             System.out.println(inventory);
-
         }
-
     }
 
     Room getCurrentRoom() {
@@ -168,12 +196,9 @@ class Player {
     }
 
     int getLgBagSize() {
-        return lgBagSize;
+        return 10;
     }
 
-    String getCharacter() {
-        return character;
-    }
 
     void setCharacter(String character) {
         this.character = character;
@@ -183,8 +208,20 @@ class Player {
         return health;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     boolean isStrong() {
         return isStrong;
+    }
+
+    public void setStrong(boolean strong) {
+        isStrong = strong;
+    }
+
+    public void setSmart(boolean smart) {
+        isSmart = smart;
     }
 
     boolean isSmart() {
@@ -193,6 +230,10 @@ class Player {
 
     boolean isDead() {
         return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public int getStrength() {
@@ -209,5 +250,13 @@ class Player {
 
     public void setHasDuffelBag(boolean hasDuffelBag) {
         this.hasDuffelBag = hasDuffelBag;
+    }
+
+    public boolean isBrave() {
+        return isBrave;
+    }
+
+    public void setBrave(boolean brave) {
+        isBrave = brave;
     }
 }
