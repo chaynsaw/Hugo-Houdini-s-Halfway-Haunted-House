@@ -9,8 +9,8 @@ import java.util.Map;
 public class Game implements Serializable {
     private final Player player;
     private Map<String, Room> houseMap;
-    private static final String HELP_FILE = "src/com/locallampoon/fiveh/data/helpmenu.txt";
-    private static final String MENU_FILE = "src/com/locallampoon/fiveh/data/mainmenu.txt";
+    private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
+    private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
     private MainPanel mainPanel;
     private NarrativePanel narrativePanel;
@@ -50,6 +50,7 @@ public class Game implements Serializable {
                 narrativePanel.appendTextArea(line);
             }
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
         }
     }
