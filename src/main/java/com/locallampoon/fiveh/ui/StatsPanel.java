@@ -11,6 +11,8 @@ public class StatsPanel {
         panel.setEnabled(false);
         panel.setBounds(600, 250, 400, 250);
         panel.setBackground(Color.GRAY);
+        JTextArea textArea = new JTextArea();
+        panel.add(new JScrollPane(textArea));
     }
 
     public JPanel getPanel() {
