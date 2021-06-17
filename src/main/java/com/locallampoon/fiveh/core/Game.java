@@ -15,6 +15,7 @@ public class Game implements Serializable {
     private MainPanel mainPanel;
     private NarrativePanel narrativePanel;
     private ArtPanel artPanel;
+    private StatsPanel statsPanel;
 
     // CONSTRUCTOR
     public Game() {
@@ -41,6 +42,7 @@ public class Game implements Serializable {
         );
         narrativePanel = mainPanel.getNarrativePanel();
         artPanel = mainPanel.getArtPanel();
+        statsPanel = mainPanel.getStatsPanel();
     }
 
     private void readFile(String filename) {
@@ -190,11 +192,15 @@ public class Game implements Serializable {
             // clear panels
             narrativePanel.setTextArea("");
             artPanel.setTextArea("");
+            statsPanel.setTextArea("");
             Room playerCurrentRoom = player.getCurrentRoom();
             narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
             narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
             narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
             narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+            statsPanel.appendTextArea("HEALTH: " + player.getHealth());
+            statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
+            statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
             if (playerCurrentRoom.getRoomMonster() != null) {
                 switch (playerCurrentRoom.getRoomMonster().getName()) {
                     case "Vampire":
