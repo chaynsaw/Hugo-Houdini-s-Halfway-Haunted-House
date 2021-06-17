@@ -50,7 +50,6 @@ public class Game implements Serializable {
                 narrativePanel.appendTextArea(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
         }
     }
