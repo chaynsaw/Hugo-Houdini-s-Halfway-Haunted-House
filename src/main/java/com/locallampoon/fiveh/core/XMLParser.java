@@ -19,7 +19,7 @@ import java.util.Map;
 
 class XMLParser {
 
-    private static final String ROOM_FILE = "src/com/locallampoon/fiveh/data/rooms.xml";
+    private static final String ROOM_FILE = "src/main/java/com/locallampoon/fiveh/data/rooms.xml";
 
     public static Map<String, Room> parseRooms() {
 
