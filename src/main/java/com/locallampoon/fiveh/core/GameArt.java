@@ -59,7 +59,7 @@ class GameArt {
                 """;
         System.out.println(imgArt);
     }
-    static void renderMan() {
+    static String renderMan() {
         String imgArt = """
                                     dS$$S$S$S$S$S$S$$Sb                   \s
                                    :$$S^S$S$S$S$S$S^S$$;                  \s
@@ -87,9 +87,9 @@ class GameArt {
                 MMOMMMMOMMMOMMOOMMbT8bTSSSSSSSSSPd8OPdOOOMMMMOOMMMMOMMMOOMM
                 MMOMMMOMMMMMOMMOOMMMbT8bTSSSSSPd88PdOOOOMMMMOOMMMMMMMMOOMMM
                 """;
-        System.out.println(imgArt);
+        return imgArt;
     }
-    static void renderHouse() {
+    static String renderHouse() {
         String imgArt = """
                                             .     .
                                                !!!!!!!
@@ -125,7 +125,7 @@ class GameArt {
                  \\\\///\\\\//===============\\\\//\\\\///\\\\////\\\\/////
                  ""'""'""\".'..'. ' '. ''..'.""'""'""'""''"''"''""
                 """;
-        System.out.println(imgArt);
+        return imgArt;
     }
 
     static void renderHillHouse() {
@@ -402,7 +402,7 @@ class GameArt {
                 """;
         System.out.println(imgArt);
     }
-    static void renderWolf() {
+    static String renderWolf() {
         String imgArt = """
                                                       __
                                                     .d$$b
@@ -431,7 +431,7 @@ class GameArt {
                                                    :\\
                                                    ; \s
                 """;
-        System.out.println(imgArt);
+        return imgArt;
     }
 
     static void renderTroll() {
@@ -516,7 +516,7 @@ class GameArt {
         System.out.println(imgArt);
     }
 
-    static void renderGhost(){
+    static String renderGhost(){
         String imgArt = """
                      .-.
                     .'   `.
@@ -532,6 +532,6 @@ class GameArt {
                          `.              `.     .
                            `'`'`'`---..,___`;.-' 
                 """;
-        System.out.println(imgArt);
+        return imgArt;
     }
 }

@@ -1,5 +1,7 @@
 package com.locallampoon.fiveh.core;
 
+import com.locallampoon.fiveh.ui.*;
+
 import java.io.*;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +12,15 @@ public class Game implements Serializable {
     private static final String HELP_FILE = "src/com/locallampoon/fiveh/data/helpmenu.txt";
     private static final String MENU_FILE = "src/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
+    private MainPanel mainPanel;
+    private NarrativePanel narrativePanel;
+    private ArtPanel artPanel;
 
     // CONSTRUCTOR
     public Game() {
         setHouseMap(XMLParser.parseRooms());
         this.player = new Player(houseMap.get("hall"));
+        initializeUI();
     }
 
     // GETTER/SETTER METHODS
@@ -23,21 +29,32 @@ public class Game implements Serializable {
         this.houseMap = houseMap;
     }
 
-
     // METHODS
 
-    private static void readFile(String filename) {
+    private void initializeUI() {
+        mainPanel = new MainPanel(
+                new NarrativePanel(),
+                new ConsolePanel(),
+                new ArtPanel(),
+                new StatsPanel(),
+                new MapPanel()
+        );
+        narrativePanel = mainPanel.getNarrativePanel();
+        artPanel = mainPanel.getArtPanel();
+    }
+
+    private void readFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                narrativePanel.appendTextArea(line);
             }
         } catch (IOException e) {
             System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
         }
     }
 
-    public static void getHelp() {
+    public void getHelp() {
         GameArt.renderHelper();
         readFile(HELP_FILE);
     }
@@ -137,15 +154,15 @@ public class Game implements Serializable {
         }
     }
 
-    private static void showIntro() throws IOException {
-        GameArt.renderHouse();
+    private void showIntro() throws IOException {
+        artPanel.setTextArea(GameArt.renderHouse());
         String menuPrompt = "Type one of the following Commands:\n\"New\" - Start a new game.\n\"Help\" - Help from the Caretaker.\n\"Quit\" - Exit the game.";
         String input;
         readFile(MENU_FILE);
 
         mainMenu:
         do {
-            System.out.println(menuPrompt);
+            narrativePanel.appendTextArea(menuPrompt);
             System.out.print("\n> ");
 
             input = BUFFERED_READER.readLine().toLowerCase();
@@ -169,21 +186,24 @@ public class Game implements Serializable {
 
         showIntro();
         do {
+            // clear panels
+            narrativePanel.setTextArea("");
+            artPanel.setTextArea("");
             Room playerCurrentRoom = player.getCurrentRoom();
-            System.out.println("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
-            System.out.println(playerCurrentRoom.getDesc());
-            System.out.println("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
-            System.out.println("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+            narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
+            narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
+            narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
+            narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
             if (playerCurrentRoom.getRoomMonster() != null) {
                 switch (playerCurrentRoom.getRoomMonster().getName()) {
                     case "Vampire":
-                        GameArt.renderMan();
+                        artPanel.setTextArea(GameArt.renderMan());
                         break;
                     case "Ghost":
-                        GameArt.renderGhost();
+                        artPanel.setTextArea(GameArt.renderGhost());
                         break;
                     case "Ware Wolf":
-                        GameArt.renderWolf();
+                        artPanel.setTextArea(GameArt.renderWolf());
                         break;
                 }
                 System.out.println("MONSTERS IN ROOM: " + playerCurrentRoom.getRoomMonster().getName() + "\n");
