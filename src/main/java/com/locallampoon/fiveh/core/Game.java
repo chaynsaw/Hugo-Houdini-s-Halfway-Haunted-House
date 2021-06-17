@@ -199,6 +199,9 @@ public class Game implements Serializable {
             narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
             narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
             statsPanel.appendTextArea("HEALTH: " + player.getHealth());
+            if (playerCurrentRoom.getRoomMonster() != null) {
+                statsPanel.appendTextArea("ENEMY HEALTH: " + playerCurrentRoom.getRoomMonster().getHealth());
+            }
             statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
             statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
             if (playerCurrentRoom.getRoomMonster() != null) {
