@@ -6,9 +6,9 @@ import java.util.List;
 
 class UserInput {
 
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee" , "move", "get", "grab", "drop",
-            "talk", "inspect", "h", "help", "i", "inventory", "q", "quit", "fight", "attack", "hit", "punch", "kick",
-            "flee", "run", "recruit"));
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList(
+            "attack", "drop", "fight", "flee", "get", "go", "grab", "h", "help", "hit", "i", "inspect", "inventory", "kick", "move", "punch", "q", "quit", "recruit", "run", "talk"
+    ));
 
 
     private static List<String> inputCleaner(String reducedString) {
@@ -32,7 +32,7 @@ class UserInput {
         if (verb.equals("drop")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getInventory();
-        }else if (verb.equals("recruit")){
+        } else if (verb.equals("recruit")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getNpcs();
         }
@@ -52,10 +52,10 @@ class UserInput {
             if (nounPresent) {
                 noun = singleItem;
                 break;
-            }else{
+            } else {
                 System.out.println("Noun does not exist in room, please check your spelling");
             }
-            System.out.println("we looking at this room item!!!!  "+ singleItem);
+            System.out.println("we looking at this room item!!!!  " + singleItem);
             i++;
         }
         return noun;
