@@ -8,20 +8,34 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ConsolePanel implements KeyListener {
-    String currentCommand;
+    public static final int ENTER_KEY = 10;
     JPanel panel;
     JTextArea textArea;
-    Font normalFont = new Font("Arial", Font.PLAIN, 18);
+    Font normalFont = new Font(
+            PanelStyles.FONT_FAMILY,
+            PanelStyles.FONT_WEIGHT,
+            PanelStyles.FONT_SIZE
+    );
 
     public ConsolePanel() {
         panel = new JPanel();
-        panel.setBounds(0, 730, 1000, 100);
-        panel.setBackground(Color.BLUE);
+        panel.setBounds(
+                PanelStyles.CONSOLE_PANEL_X,
+                PanelStyles.CONSOLE_PANEL_Y,
+                PanelStyles.CONSOLE_PANEL_WIDTH,
+                PanelStyles.CONSOLE_PANEL_HEIGHT
+        );
+        panel.setBackground(PanelStyles.BG_COLOR);
         textArea = new JTextArea();
-        textArea.setBounds(0, 0, 540, 200);
+        textArea.setBounds(
+                PanelStyles.CONSOLE_TXT_AREA_X,
+                PanelStyles.CONSOLE_TXT_AREA_Y,
+                PanelStyles.CONSOLE_TXT_AREA_WIDTH,
+                PanelStyles.CONSOLE_TXT_AREA_HEIGHT
+        );
         textArea.setFont(normalFont);
-        textArea.setBackground(Color.BLACK);
-        textArea.setForeground(Color.WHITE);
+        textArea.setBackground(PanelStyles.BG_COLOR);
+        textArea.setForeground(PanelStyles.FG_COLOR);
         textArea.addKeyListener(this);
         panel.add(textArea);
     }
@@ -34,13 +48,20 @@ public class ConsolePanel implements KeyListener {
         textArea.setText(text);
     }
 
-    public String getCurrentCommand() {
-        return currentCommand;
+    public void executeCommand(String command) {
+        Game.handleCommand(command);
     }
 
-    public void setCurrentCommand(String currentCommand) {
-        this.currentCommand = currentCommand;
-        Game.handleCommand();
+    public void clear() {
+        setTextArea("");
+    }
+
+    public void enableConsole() {
+        textArea.setEnabled(true);
+    }
+
+    public void disableConsole() {
+        textArea.setEnabled(false);
     }
 
     @Override
@@ -50,14 +71,20 @@ public class ConsolePanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // when user presses "Enter" key
-        if (e.getKeyCode() == 10) {
-            setCurrentCommand(textArea.getText());
+        if (e.getKeyCode() == ENTER_KEY) {
+            disableConsole();
+            executeCommand(textArea.getText());
+            clear();
+            enableConsole();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        int keyCode = e.getKeyCode();
+        if (keyCode == ENTER_KEY) {
+            // reset caret position
+            textArea.setCaretPosition(textArea.getCaretPosition() - 1);
+        }
     }
 }
