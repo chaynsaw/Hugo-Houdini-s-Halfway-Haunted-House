@@ -78,84 +78,94 @@ public class Game implements Serializable {
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
         // TODO: Finish switch to contain all Verbs and Noun interaction
         Room playerCurrentRoom = player.getCurrentRoom();
-        switch (parsedCommandList.get(0)) {
-            case "go":
-            case "move":
-                Direction dirMovement = movementHelper(parsedCommandList.get(1));
-                if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
-                        roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                    System.out.println("You can't travel in that direction!\n");
+        if (parsedCommandList.size() > 1) {
+            switch (parsedCommandList.get(0)) {
+                case "go":
+                case "move":
+                    Direction dirMovement = movementHelper(parsedCommandList.get(1));
+                    if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
+                            roomExits.get(dirMovement.getDirection()).isEmpty()) {
+                        System.out.println("You can't travel in that direction!\n");
+                        break;
+                    }
+                    Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
+                    player.move(roomKeyID);
                     break;
-                }
-                Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
-                player.move(roomKeyID);
-                break;
-            case "get":
-            case "grab":
-                String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
-                player.addItem(grabbedItem);
-                playerCurrentRoom.removeItem(grabbedItem);
-                break;
-            case "drop":
-                String droppedItem = UserInput.nounItemHelper(parsedCommandList, player);
-                player.dropItem(droppedItem);
-                playerCurrentRoom.addItem(droppedItem);
-                break;
-            case "talk":
-                // TODO: Player needs a Talk method to talk with characters in rooms
+                case "get":
+                case "grab":
+                    String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
+                    player.addItem(grabbedItem);
+                    playerCurrentRoom.removeItem(grabbedItem);
+                    break;
+                case "drop":
+                    String droppedItem = UserInput.nounItemHelper(parsedCommandList, player);
+                    player.dropItem(droppedItem);
+                    playerCurrentRoom.addItem(droppedItem);
+                    break;
+                default:
+                    System.out.println("Invalid action command");
+            }
+        } else if (parsedCommandList.size() == 1) {
+            switch (parsedCommandList.get(0)) {
+                case "talk":
+                    // TODO: Player needs a Talk method to talk with characters in rooms
 //                    player.talkWith(output.get(1));
 //                    break;
-            case "inspect":
-                // TODO: Player needs an Inspect method to items in room
+                case "inspect":
+                    // TODO: Player needs an Inspect method to items in room
 //                    player.inspectItem(output.get(1));
 //                    break;
-            case "fight":
-                Monster monster = playerCurrentRoom.getRoomMonster();
-                if (monster != null){
-                    player.attack(monster);
-                    if (monster.isDead()) {
-                        System.out.println(" You killed " + monster.getName());
+                case "fight":
+                    Monster monster = playerCurrentRoom.getRoomMonster();
+                    if (monster != null) {
+                        player.attack(monster);
+                        if (monster.isDead()) {
+                            System.out.println(" You killed " + monster.getName());
+                        } else {
+                            monster.attack(player);
+                        }
+                        if (player.isDead()) {
+                            System.exit(0);
+                        }
                     } else {
-                        monster.attack(player);
+                        System.out.println("There is no monster in this room");
                     }
-                    if (player.isDead()) {
-                        System.exit(0);
-                    }
-                }
-                else {
-                    System.out.println("There is no monster in this room");
-                }
-                break;
-            case "flee":
-                player.flee(houseMap);
-                break;
+                    break;
+                case "flee":
+                    player.flee(houseMap);
+                    break;
 
-            case "inventory":
-            case "i":
-                player.printInventoryItems();
-                break;
-            case "recruit":
-                String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, player);
-                player.addNpc(recruitedNpc);
-                playerCurrentRoom.removeNpc(recruitedNpc);
-                switch (recruitedNpc.toLowerCase()) {
-                    case "jock":
-                        player.setStrong(true);
-                        break;
-                    case "chess geek":
-                        player.setSmart(true);
-                        break;
-                    case "bleacher kid":
-                        player.setBrave(true);
-                }
-            case "help":
-            case "h":
-                getHelp();
-                break;
-            case "quit":
-            case "q":
-            case "requestCommandAgain":
-                break;
+                case "inventory":
+                case "i":
+                    player.printInventoryItems();
+                    break;
+                case "recruit":
+                    String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, player);
+                    player.addNpc(recruitedNpc);
+                    playerCurrentRoom.removeNpc(recruitedNpc);
+                    switch (recruitedNpc.toLowerCase()) {
+                        case "jock":
+                            player.setStrong(true);
+                            break;
+                        case "chess geek":
+                            player.setSmart(true);
+                            break;
+                        case "bleacher kid":
+                            player.setBrave(true);
+                    }
+                case "help":
+                case "h":
+                    getHelp();
+                    break;
+                case "quit":
+                case "q":
+                case "requestCommandAgain":
+                    break;
+                default:
+                    System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
+            }
+        } else {
+            System.out.println("One or Two word command expected I.E. 'get sword' or 'go north'");
         }
     }
 
