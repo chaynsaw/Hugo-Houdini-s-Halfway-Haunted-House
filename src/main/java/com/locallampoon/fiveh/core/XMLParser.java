@@ -93,7 +93,7 @@ class XMLParser {
                     //roomMap.put(id, new Room(roomName, desc, exits, items, npcs, monster));
                     Room room = new MapRoom(roomName, desc, exits, items, npcs, monster,dX,dY);
                     roomMap.put(id, room);
-                    GameMap.getInstance().getRooms().add(room);
+                    GameMap.getInstance().getRooms().put(id, room); // TODO: redundant only need one map
                 }
             }
 
