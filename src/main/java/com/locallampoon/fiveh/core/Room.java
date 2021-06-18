@@ -43,6 +43,11 @@ public class Room {
         setRoomMonster(roomMonster);
     }
 
+    // for MapRoom only
+    public Room(String roomName){
+        this(roomName, null,null,null,null,null);
+    }
+
     // Helpers
 
     // item being added to room (dropped by player)
