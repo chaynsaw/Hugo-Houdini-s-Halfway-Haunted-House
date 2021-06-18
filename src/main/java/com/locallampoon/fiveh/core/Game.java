@@ -271,8 +271,7 @@ public class Game implements Serializable {
         printDescription();
     }
 
-    public static void handleCommand() {
-        String input = consolePanel.getCurrentCommand();
+    public static void handleCommand(String input) {
         Room playerCurrentRoom = player.getCurrentRoom();
         List<String> output = UserInput.parseCommand(input);
         List<String> roomExits = playerCurrentRoom.getExits();
@@ -291,8 +290,6 @@ public class Game implements Serializable {
         printDescription();
         // handle monster scenario
         checkMonster();
-        // clear ConsolePanel
-        consolePanel.setTextArea("");
     }
 }
 
