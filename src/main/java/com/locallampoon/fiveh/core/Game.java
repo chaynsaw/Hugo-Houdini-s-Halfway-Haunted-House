@@ -76,25 +76,39 @@ public class Game implements Serializable {
         switch (parsedCommandList.get(0)) {
             case "go":
             case "move":
-                Direction dirMovement = movementHelper(parsedCommandList.get(1));
-                if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
-                        roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                    System.out.println("You can't travel in that direction!\n");
+                if (parsedCommandList.size() > 1) {
+                    Direction dirMovement = movementHelper(parsedCommandList.get(1));
+                    if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
+                            roomExits.get(dirMovement.getDirection()).isEmpty()) {
+                        System.out.println("You can't travel in that direction!\n");
+                        break;
+
+                    }
+                    Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
+                    player.move(roomKeyID);
                     break;
+                } else {
+                    System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
                 }
-                Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
-                player.move(roomKeyID);
                 break;
             case "get":
             case "grab":
+                if (parsedCommandList.size() > 1){
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.addItem(grabbedItem);
                 playerCurrentRoom.removeItem(grabbedItem);
+                } else {
+                    System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
+                }
                 break;
             case "drop":
+                if (parsedCommandList.size() > 1){
                 String droppedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.dropItem(droppedItem);
                 playerCurrentRoom.addItem(droppedItem);
+                } else {
+                    System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
+                }
                 break;
             case "talk":
                 // TODO: Player needs a Talk method to talk with characters in rooms
@@ -143,6 +157,7 @@ public class Game implements Serializable {
                     case "bleacher kid":
                         player.setBrave(true);
                 }
+                break;
             case "help":
             case "h":
                 getHelp();

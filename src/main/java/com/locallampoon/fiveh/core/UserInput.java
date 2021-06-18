@@ -22,9 +22,11 @@ class UserInput {
     }
 
     public static String nounItemHelper(List<String> wordList, Player gamePlayer) {
+        String noun = "";
+        if (wordList.size() > 1) {
         String itemSubstring = wordList.get(1);
         String verb = wordList.get(0);
-        String noun = "";
+
         List<String> tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getItems();
         List<String> tempItemList;
         boolean nounPresent = false;
@@ -57,6 +59,9 @@ class UserInput {
             }
             System.out.println("we looking at this room item!!!!  "+ singleItem);
             i++;
+            }
+        } else {
+            System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
         }
         return noun;
     }
