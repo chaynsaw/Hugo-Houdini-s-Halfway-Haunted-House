@@ -10,7 +10,7 @@ import java.util.List;
  * @version 0.0.2
  */
 
-class Room {
+public class Room {
     // FIELDS
     private String roomName;
     private String desc;
