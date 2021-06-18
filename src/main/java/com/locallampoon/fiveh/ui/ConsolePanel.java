@@ -8,14 +8,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ConsolePanel implements KeyListener {
-    String currentCommand;
     JPanel panel;
     JTextArea textArea;
     Font normalFont = new Font("Arial", Font.PLAIN, 18);
 
     public ConsolePanel() {
         panel = new JPanel();
-        panel.setBounds(0, 730, 1000, 100);
+        panel.setBounds(0, 730, 1000, 32);
         panel.setBackground(Color.BLUE);
         textArea = new JTextArea();
         textArea.setBounds(0, 0, 540, 200);
@@ -34,13 +33,8 @@ public class ConsolePanel implements KeyListener {
         textArea.setText(text);
     }
 
-    public String getCurrentCommand() {
-        return currentCommand;
-    }
-
-    public void setCurrentCommand(String currentCommand) {
-        this.currentCommand = currentCommand;
-        Game.handleCommand();
+    public void executeCommand(String command) {
+        Game.handleCommand(command);
     }
 
     @Override
@@ -52,7 +46,7 @@ public class ConsolePanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         // when user presses "Enter" key
         if (e.getKeyCode() == 10) {
-            setCurrentCommand(textArea.getText());
+            executeCommand(textArea.getText());
         }
     }
 
