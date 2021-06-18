@@ -37,6 +37,18 @@ public class ConsolePanel implements KeyListener {
         Game.handleCommand(command);
     }
 
+    public void clear() {
+        setTextArea("");
+    }
+
+    public void enableConsole() {
+        textArea.setEnabled(true);
+    }
+
+    public void disableConsole() {
+        textArea.setEnabled(false);
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -46,12 +58,18 @@ public class ConsolePanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         // when user presses "Enter" key
         if (e.getKeyCode() == 10) {
+            disableConsole();
             executeCommand(textArea.getText());
+            clear();
+            enableConsole();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        int keyCode = e.getKeyCode();
+        if (keyCode == 10) {
+            textArea.setCaretPosition(textArea.getCaretPosition() - 1);
+        }
     }
 }
