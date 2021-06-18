@@ -78,7 +78,7 @@ back inside.</desc>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
         </roomItems>
-        <monster questItem="UV Light>">Ware Wolf</monster>
+        <monster questItem="UV Light">Ware Wolf</monster>
         <npc>Chess Geek</npc>
     </room>
     <room id="kitchen">

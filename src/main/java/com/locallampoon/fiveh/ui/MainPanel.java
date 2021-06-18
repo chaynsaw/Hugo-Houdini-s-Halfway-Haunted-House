@@ -22,6 +22,7 @@ public class MainPanel {
         this.narrativePanel = narrativePanel;
         this.consolePanel = consolePanel;
         this.artPanel = artPanel;
+        this.statsPanel = statsPanel;
         // main window settings
         window = new JFrame();
         window.setSize(1000, 800);
@@ -44,6 +45,10 @@ public class MainPanel {
 
     public ArtPanel getArtPanel() {
         return artPanel;
+    }
+
+    public StatsPanel getStatsPanel() {
+        return statsPanel;
     }
 
     public ConsolePanel getConsolePanel() {

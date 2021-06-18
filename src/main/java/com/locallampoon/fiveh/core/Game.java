@@ -16,6 +16,7 @@ public class Game implements Serializable {
     private static NarrativePanel narrativePanel;
     private static ArtPanel artPanel;
     private static ConsolePanel consolePanel;
+    private static StatsPanel statsPanel;
 
     // CONSTRUCTOR
     public Game() {
@@ -42,6 +43,7 @@ public class Game implements Serializable {
         );
         narrativePanel = mainPanel.getNarrativePanel();
         artPanel = mainPanel.getArtPanel();
+        statsPanel = mainPanel.getStatsPanel();
         consolePanel = mainPanel.getConsolePanel();
     }
 
@@ -192,13 +194,16 @@ public class Game implements Serializable {
             // clear panels
             narrativePanel.setTextArea("");
             artPanel.setTextArea("");
+            statsPanel.setTextArea("");
             Room playerCurrentRoom = player.getCurrentRoom();
             narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
             narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
             narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
             narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
-            if (playerCurrentRoom.getRoomMonster() != null) {
-                switch (playerCurrentRoom.getRoomMonster().getName()) {
+
+            Monster monsterInRoom = playerCurrentRoom.getRoomMonster();
+            if (monsterInRoom != null) {
+                switch (monsterInRoom.getName()) {
                     case "Vampire":
                         artPanel.setTextArea(GameArt.renderMan());
                         break;
@@ -209,8 +214,12 @@ public class Game implements Serializable {
                         artPanel.setTextArea(GameArt.renderWolf());
                         break;
                 }
-                System.out.println("MONSTERS IN ROOM: " + playerCurrentRoom.getRoomMonster().getName() + "\n");
+                System.out.println("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
+                statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());
             }
+            statsPanel.appendTextArea("HEALTH: " + player.getHealth());
+            statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
+            statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
 
             System.out.print("> ");
 
@@ -236,8 +245,9 @@ public class Game implements Serializable {
 
     private static void checkMonster() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        if (playerCurrentRoom.getRoomMonster() != null) {
-            switch (playerCurrentRoom.getRoomMonster().getName()) {
+        Monster monsterInRoom = playerCurrentRoom.getRoomMonster();
+        if (monsterInRoom != null) {
+            switch (monsterInRoom.getName()) {
                 case "Vampire":
                     artPanel.setTextArea(GameArt.renderMan());
                     break;
@@ -248,8 +258,12 @@ public class Game implements Serializable {
                     artPanel.setTextArea(GameArt.renderWolf());
                     break;
             }
-            System.out.println("MONSTERS IN ROOM: " + playerCurrentRoom.getRoomMonster().getName() + "\n");
+            System.out.println("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
+            statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());
         }
+        statsPanel.appendTextArea("HEALTH: " + player.getHealth());
+        statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
+        statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
     }
 
     public void startV2() {
@@ -270,6 +284,7 @@ public class Game implements Serializable {
         // clear panels
         narrativePanel.setTextArea("");
         artPanel.setTextArea("");
+        statsPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
         // print description
