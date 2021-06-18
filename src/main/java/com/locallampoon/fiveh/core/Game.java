@@ -198,14 +198,10 @@ public class Game implements Serializable {
             narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
             narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
             narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
-            statsPanel.appendTextArea("HEALTH: " + player.getHealth());
-            if (playerCurrentRoom.getRoomMonster() != null) {
-                statsPanel.appendTextArea("ENEMY HEALTH: " + playerCurrentRoom.getRoomMonster().getHealth());
-            }
-            statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
-            statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
-            if (playerCurrentRoom.getRoomMonster() != null) {
-                switch (playerCurrentRoom.getRoomMonster().getName()) {
+
+            Monster monsterInRoom = playerCurrentRoom.getRoomMonster();
+            if (monsterInRoom != null) {
+                switch (monsterInRoom.getName()) {
                     case "Vampire":
                         artPanel.setTextArea(GameArt.renderMan());
                         break;
@@ -216,8 +212,12 @@ public class Game implements Serializable {
                         artPanel.setTextArea(GameArt.renderWolf());
                         break;
                 }
-                System.out.println("MONSTERS IN ROOM: " + playerCurrentRoom.getRoomMonster().getName() + "\n");
+                System.out.println("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
+                statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());
             }
+            statsPanel.appendTextArea("HEALTH: " + player.getHealth());
+            statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
+            statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
 
             System.out.print("> ");
 
