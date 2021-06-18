@@ -34,18 +34,13 @@ public class Room {
      * @param roomMonster Monster object representing a monster in the room
      */
 
-    Room(String roomName, String desc, List<String> exits, List<String> items, List<String> npcs, Monster roomMonster) {
+    public Room(String roomName, String desc, List<String> exits, List<String> items, List<String> npcs, Monster roomMonster) {
         setRoomName(roomName);
         setDesc(desc);
         setExits(exits);
         setItems(items);
         setNpcs(npcs);
         setRoomMonster(roomMonster);
-    }
-
-    // for MapRoom only
-    public Room(String roomName){
-        this(roomName, null,null,null,null,null);
     }
 
     // Helpers
