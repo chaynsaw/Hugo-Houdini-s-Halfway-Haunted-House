@@ -10,7 +10,6 @@ class UserInput {
             "attack", "drop", "fight", "flee", "get", "go", "grab", "h", "help", "hit", "i", "inspect", "inventory", "kick", "move", "punch", "q", "quit", "recruit", "run", "talk"
     ));
 
-
     private static List<String> inputCleaner(String reducedString) {
         reducedString = reducedString.trim().toLowerCase();
         String[] commands = reducedString.split("\\W|\\d");
