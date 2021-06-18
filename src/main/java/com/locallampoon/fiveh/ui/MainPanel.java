@@ -50,4 +50,8 @@ public class MainPanel {
     public StatsPanel getStatsPanel() {
         return statsPanel;
     }
+
+    public ConsolePanel getConsolePanel() {
+        return consolePanel;
+    }
 }

@@ -1,11 +1,14 @@
 package com.locallampoon.fiveh.ui;
 
+import com.locallampoon.fiveh.core.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ConsolePanel implements KeyListener {
+    String currentCommand;
     JPanel panel;
     JTextArea textArea;
     Font normalFont = new Font("Arial", Font.PLAIN, 18);
@@ -27,8 +30,17 @@ public class ConsolePanel implements KeyListener {
         return this.panel;
     }
 
-    public JTextArea getTextArea() {
-        return textArea;
+    public void setTextArea(String text) {
+        textArea.setText(text);
+    }
+
+    public String getCurrentCommand() {
+        return currentCommand;
+    }
+
+    public void setCurrentCommand(String currentCommand) {
+        this.currentCommand = currentCommand;
+        Game.handleCommand();
     }
 
     @Override
@@ -40,8 +52,7 @@ public class ConsolePanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         // when user presses "Enter" key
         if (e.getKeyCode() == 10) {
-            System.out.println(textArea.getText());
-            textArea.setText("");
+            setCurrentCommand(textArea.getText());
         }
     }
 
