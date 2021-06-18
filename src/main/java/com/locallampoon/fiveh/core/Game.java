@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Game implements Serializable {
-    private final Player player;
-    private Map<String, Room> houseMap;
+    private static Player player;
+    private static Map<String, Room> houseMap;
     private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
     private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
     private MainPanel mainPanel;
-    private NarrativePanel narrativePanel;
-    private ArtPanel artPanel;
+    private static NarrativePanel narrativePanel;
+    private static ArtPanel artPanel;
+    private static ConsolePanel consolePanel;
 
     // CONSTRUCTOR
     public Game() {
@@ -41,9 +42,10 @@ public class Game implements Serializable {
         );
         narrativePanel = mainPanel.getNarrativePanel();
         artPanel = mainPanel.getArtPanel();
+        consolePanel = mainPanel.getConsolePanel();
     }
 
-    private void readFile(String filename) {
+    private static void readFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -55,12 +57,12 @@ public class Game implements Serializable {
         }
     }
 
-    public void getHelp() {
+    public static void getHelp() {
         GameArt.renderHelper();
         readFile(HELP_FILE);
     }
 
-    private Direction movementHelper(String newDirection) {
+    private static Direction movementHelper(String newDirection) {
         newDirection = newDirection.toUpperCase();
         if (newDirection.equals("NORTH") || newDirection.equals("SOUTH") || newDirection.equals("EAST") ||
                 newDirection.equals("WEST") || newDirection.equals("UP") || newDirection.equals("DOWN")) {
@@ -71,7 +73,7 @@ public class Game implements Serializable {
         }
     }
 
-    private void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
+    private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
         // TODO: Finish switch to contain all Verbs and Noun interaction
         Room playerCurrentRoom = player.getCurrentRoom();
         switch (parsedCommandList.get(0)) {
@@ -222,6 +224,60 @@ public class Game implements Serializable {
             }
 
         } while (!"q".equals(input));
+    }
+
+    private static void printDescription() {
+        Room playerCurrentRoom = player.getCurrentRoom();
+        narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
+        narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
+        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
+        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+    }
+
+    private static void checkMonster() {
+        Room playerCurrentRoom = player.getCurrentRoom();
+        if (playerCurrentRoom.getRoomMonster() != null) {
+            switch (playerCurrentRoom.getRoomMonster().getName()) {
+                case "Vampire":
+                    artPanel.setTextArea(GameArt.renderMan());
+                    break;
+                case "Ghost":
+                    artPanel.setTextArea(GameArt.renderGhost());
+                    break;
+                case "Ware Wolf":
+                    artPanel.setTextArea(GameArt.renderWolf());
+                    break;
+            }
+            System.out.println("MONSTERS IN ROOM: " + playerCurrentRoom.getRoomMonster().getName() + "\n");
+        }
+    }
+
+    public void startV2() {
+        // TODO: add show intro
+        printDescription();
+    }
+
+    public static void handleCommand() {
+        String input = consolePanel.getCurrentCommand();
+        Room playerCurrentRoom = player.getCurrentRoom();
+        List<String> output = UserInput.parseCommand(input);
+        List<String> roomExits = playerCurrentRoom.getExits();
+
+        if (input.equals("q") || input.equals("quit")) {
+            System.exit(0);
+        }
+
+        // clear panels
+        narrativePanel.setTextArea("");
+        artPanel.setTextArea("");
+        // send command to game switch logic
+        implementCommand(output, roomExits);
+        // print description
+        printDescription();
+        // handle monster scenario
+        checkMonster();
+        // clear ConsolePanel
+        consolePanel.setTextArea("");
     }
 }
 

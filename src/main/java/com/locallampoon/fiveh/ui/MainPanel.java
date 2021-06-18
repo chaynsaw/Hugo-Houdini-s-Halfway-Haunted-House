@@ -45,4 +45,8 @@ public class MainPanel {
     public ArtPanel getArtPanel() {
         return artPanel;
     }
+
+    public ConsolePanel getConsolePanel() {
+        return consolePanel;
+    }
 }
