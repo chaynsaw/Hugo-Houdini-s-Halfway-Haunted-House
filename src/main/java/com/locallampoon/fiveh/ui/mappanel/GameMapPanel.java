@@ -3,6 +3,8 @@ package com.locallampoon.fiveh.ui.mappanel; /**
  * Player image palyer.png from https://pngtree.com/freepng/cartoon-animal-game-character-design_4069832.html
  */
 
+import com.locallampoon.fiveh.core.Room;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,10 +13,10 @@ import java.awt.event.MouseListener;
 
 public class GameMapPanel extends JPanel implements ActionListener {
 
-    static final int UNIT_SIZE = 10; // how big each block/unit; player movement length also
+    public static final int UNIT_SIZE = 8; // how big each block/unit; player movement length also
     final int PANEL_WIDTH = 580; // panel size
     final int PANEL_HEIGHT = 480;
-    final int ROOM_FONT = 2; // size of room name
+    final int ROOM_FONT = 1; // size of room name
     final int GAME_UNITS = (PANEL_WIDTH*PANEL_WIDTH)/UNIT_SIZE;
     final int X_ROOM_BOUNDARY = 0; // TODO: need calculation
     final int Y_ROOM_BOUNDARY = 0; // TODO: need calculation
@@ -67,11 +69,11 @@ public class GameMapPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void drawRoom(Graphics graph, Room room){
+    private void drawRoom(Graphics graph, Room mapRoom){
         graph.setColor(new Color(192,192,192));
         graph.setFont(new Font("TimesRoman", Font.BOLD, UNIT_SIZE*2/3));
-        int x_center = room.getDx();
-        int y_center = room.getDy();
+        int x_center = ((MapRoom)mapRoom).getDx();
+        int y_center = ((MapRoom)mapRoom).getDy();
         for(int i = 0; i < ROOM_LENGTH; i++){
             int x = x_center - ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
             int y = y_center - ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
@@ -84,8 +86,8 @@ public class GameMapPanel extends JPanel implements ActionListener {
         // draw room name
         graph.setColor(new Color(255,69,0));
         graph.setFont(new Font("Courier", Font.PLAIN, UNIT_SIZE*ROOM_FONT));
-        for(int i = 0; i < room.getName().length(); i++){
-            graph.drawString(String.valueOf(room.getName().charAt(i)),x_center-ROOM_LENGTH*UNIT_SIZE/2 + i * UNIT_SIZE*ROOM_FONT,y_center-ROOM_LENGTH*UNIT_SIZE/2 - UNIT_SIZE*ROOM_FONT);
+        for(int i = 0; i < mapRoom.getRoomName().length(); i++){
+            graph.drawString(String.valueOf(mapRoom.getRoomName().charAt(i)),x_center-ROOM_LENGTH*UNIT_SIZE/2 + i * UNIT_SIZE*ROOM_FONT,y_center-ROOM_LENGTH*UNIT_SIZE/2 - UNIT_SIZE*ROOM_FONT);
         }
     }
 
@@ -115,24 +117,24 @@ public class GameMapPanel extends JPanel implements ActionListener {
      * helper method for this demo; need another design to skip visitedRoom
      * move from one coordinate to another
      * @param visitedRoom
-     * @param room
+     * @param mapRoom
      */
-    private void moveTo(int visitedRoom, Room room) throws InterruptedException {
-        if(xPlayer[PLAYER_SIZE-1] == room.getDx() && yPlayer[PLAYER_SIZE-1] == room.getDy()) {
+    private void moveTo(int visitedRoom, MapRoom mapRoom) throws InterruptedException {
+        if(xPlayer[PLAYER_SIZE-1] == mapRoom.getDx() && yPlayer[PLAYER_SIZE-1] == mapRoom.getDy()) {
             visited[visitedRoom] = true;
-            System.out.printf("Moved to Room:%s;\n",room.getName());
+            System.out.printf("Moved to Room:%s;\n", mapRoom.getRoomName());
             System.out.printf("Player head: (%d, %d)\n",xPlayer[PLAYER_SIZE-1],yPlayer[PLAYER_SIZE-1]);
             Thread.sleep(1500);
         }
 
-        if(xPlayer[PLAYER_SIZE-1] < room.getDx() )
+        if(xPlayer[PLAYER_SIZE-1] < mapRoom.getDx() )
             xPlayer[PLAYER_SIZE-1] += UNIT_SIZE;
-        else if (xPlayer[PLAYER_SIZE-1] > room.getDx())
+        else if (xPlayer[PLAYER_SIZE-1] > mapRoom.getDx())
             xPlayer[PLAYER_SIZE-1] -= UNIT_SIZE;
 
-        if(yPlayer[PLAYER_SIZE-1] < room.getDy() )
+        if(yPlayer[PLAYER_SIZE-1] < mapRoom.getDy() )
             yPlayer[PLAYER_SIZE-1] += UNIT_SIZE;
-        else if (yPlayer[PLAYER_SIZE-1] > room.getDy())
+        else if (yPlayer[PLAYER_SIZE-1] > mapRoom.getDy())
             yPlayer[PLAYER_SIZE-1] -= UNIT_SIZE;
     }
 
