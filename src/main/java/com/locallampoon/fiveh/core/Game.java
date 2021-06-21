@@ -1,6 +1,7 @@
 package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
+import com.locallampoon.fiveh.ui.mappanel.GameMap;
 
 import java.io.*;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Game implements Serializable {
     public Game() {
         setHouseMap(XMLParser.parseRooms());
         this.player = new Player(houseMap.get("hall"));
+        GameMap.getInstance().setPlayer(this.player); // pass a reference to game map
         initializeUI();
     }
 
