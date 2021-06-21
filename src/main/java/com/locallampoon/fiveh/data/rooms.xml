@@ -274,7 +274,7 @@ on the bedside table. The only exit is the WEST door you entered through.</desc>
         <dx>55</dx>
         <dy>14</dy>
     </room>
-    <room id="guestRoom">
+    <room id="guestBedroom">
         <roomName>Guest</roomName>
         <floor>Second</floor>
         <desc>You enter a modest bedroom, old stained family photos line the walls. There is a slight mildew smell, as
