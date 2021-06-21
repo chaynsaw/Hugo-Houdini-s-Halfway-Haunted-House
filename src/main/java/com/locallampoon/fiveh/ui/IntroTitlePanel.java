@@ -15,7 +15,12 @@ public class IntroTitlePanel {
 
     public IntroTitlePanel() {
         panel = new JPanel();
-        panel.setBounds(100, 100, 780, 150);
+        panel.setBounds(
+                PanelStyles.INTRO_TITLE_X,
+                PanelStyles.INTRO_TITLE_Y,
+                PanelStyles.INTRO_TITLE_WIDTH,
+                PanelStyles.INTRO_TITLE_HEIGHT
+        );
         panel.setBackground(PanelStyles.BG_COLOR);
         title = new JLabel(titleText);
         title.setForeground(PanelStyles.FG_COLOR);
