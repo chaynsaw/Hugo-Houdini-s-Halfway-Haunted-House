@@ -22,7 +22,6 @@ public class PanelStyles {
     public static final int UNIT_SIZE = 8; // how big each block/unit; player movement length also
     public static final int PANEL_WIDTH = 600; // panel size
     public static final int PANEL_HEIGHT = 490;
-    public static final int ROOM_TEXT_FONT = 1; // size of room name
     public static final Font MAP_TEXT_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*2/3);
     public static final String[] MAP_FLOORS = new String[]{"First", "Second", "Basement"};
     public static final int PLAYER_SIZE = 5;
@@ -30,5 +29,10 @@ public class PanelStyles {
     public static int[] YPlayer = new int[PLAYER_SIZE];
     public static final int MAP_PLAYER_DELAY = 100; // how fast the player can move
     public static final int MAP_ROOM_LENGTH = 5; // * unit size
-
+    public static final Color MAP_DEFAULT = new Color(192,192,192);
+    public static final Color ROOM_TEXT_COLOR = new Color(255,69,0);
+    public static final Color PLAYER_COLOR = new Color(45,180,0);
+    public static final Color FLOOR_NAME_COLOR = new Color(255,255,255);
+    public static final Font FLOOR_NAME_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*3/2);
+    public static final Font ROOM_TEXT_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*4/3);
 }
