@@ -291,7 +291,7 @@ public class Game implements Serializable {
         statsPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
-        mapPanel.updateMapGUI(); // need to repaint after player current position updated
+        mapPanel.updateMapGUI(); //need to repaint after player current position updated
         // print description
         printDescription();
         // handle monster scenario
