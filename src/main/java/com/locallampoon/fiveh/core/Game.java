@@ -122,6 +122,7 @@ public class Game implements Serializable {
                     case "jock" -> player.setStrong(true);
                     case "chess geek" -> player.setSmart(true);
                     case "bleacher kid" -> player.setBrave(true);
+                    default -> System.out.println("Invalid Action");
                 }
             }
             default -> {
