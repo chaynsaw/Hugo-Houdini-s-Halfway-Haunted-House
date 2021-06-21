@@ -182,7 +182,7 @@ by rusted iron gates, manacles chained to the wall. </desc>
             <exit dir="1"></exit>
             <exit dir="2">sacrificialChamber</exit>
             <exit dir="3"></exit>
-            <exit dir="4"></exit>
+            <exit dir="4">library</exit>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
@@ -250,8 +250,8 @@ is the SOUTH door you came through.</desc>
             <item>Baby's Rattle</item>
         </roomItems>
         <npc></npc>
-        <dx>30</dx>
-        <dy>21</dy>
+        <dx>40</dx>
+        <dy>7</dy>
     </room>
     <room id="masterBedroom">
         <roomName>Master</roomName>
