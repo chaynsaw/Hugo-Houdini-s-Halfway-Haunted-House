@@ -7,35 +7,16 @@ import com.locallampoon.fiveh.core.Room;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.Map;
 
-public class GameMapPanel extends JPanel implements ActionListener {
+import static com.locallampoon.fiveh.ui.PanelStyles.*;
 
-    public static final int UNIT_SIZE = 8; // how big each block/unit; player movement length also
-    final int PANEL_WIDTH = 600; // panel size
-    final int PANEL_HEIGHT = 490;
-    final int ROOM_FONT = 1; // size of room name
-    final Font mapFont = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*2/3);
-    final String[] FLOORS = new String[]{"First", "Second", "Basement"};
-    final int GAME_UNITS = (PANEL_WIDTH*PANEL_WIDTH)/UNIT_SIZE;
-    final int X_ROOM_BOUNDARY = 0; // TODO: need calculation
-    final int Y_ROOM_BOUNDARY = 0; // TODO: need calculation
-    final int X_PLAYER_BOUNDARY = 0; // TODO: need calculation
-    final int Y_PLAYER_BOUNDARY = 0; // TODO: need calculation
-    final int DELAY = 100; // how fast the player can move
-    final int PLAYER_SIZE = 2;
-    final int ROOM_LENGTH = 5; //TODO: test odd number
-    private int xPlayer[] = new int[PLAYER_SIZE];
-    private int yPlayer[] = new int[PLAYER_SIZE];
-
+public class GameMapPanel extends JPanel{
     private Timer timer;
-
-    private boolean[] visited = new boolean[]{false,false,false,false}; // room is visited?
-    GameMap gameMap = GameMap.getInstance();
+    private PlayerAnimation playerAnimation = new PlayerAnimation();
     private MouseListener mapMouseListener = new GameMapMouseListener();
+    GameMap gameMap = GameMap.getInstance();
 
     public GameMapPanel(){
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -46,12 +27,12 @@ public class GameMapPanel extends JPanel implements ActionListener {
     }
 
     public void startGamePanel(){
-        timer = new Timer(DELAY, this); // delay is how often the timer triggers; listening this;
+        timer = new Timer(MAP_PLAYER_DELAY, this.playerAnimation); // delay is how often the timer triggers; listening this;
         timer.start();
     }
 
     public void draw(Graphics graph){
-        graph.setFont(mapFont);
+        graph.setFont(MAP_TEXT_FONT);
         this.drawGrid(graph); // TODO: remove it in final version
         this.drawFloorLayout(graph);
         for(Map.Entry<String, Room> r : gameMap.getRooms().entrySet()){
@@ -70,7 +51,7 @@ public class GameMapPanel extends JPanel implements ActionListener {
         for(int i = 0; i< PLAYER_SIZE; i++){
             if(i != 0){
                 graph.setColor(Color.GREEN);
-                graph.fillRect(xPlayer[i], yPlayer[i], UNIT_SIZE, UNIT_SIZE);
+                graph.fillRect(XPlayer[i], YPlayer[i], UNIT_SIZE, UNIT_SIZE);
             } else {
                 graph.setColor(new Color(45,180,0));
             }
@@ -87,22 +68,22 @@ public class GameMapPanel extends JPanel implements ActionListener {
         graph.setColor(new Color(192,192,192));
         int x_center = ((MapRoom)mapRoom).getDx();
         int y_center = ((MapRoom)mapRoom).getDy();
-        for(int i = 0; i < ROOM_LENGTH; i++){
-            int x = x_center - ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
-            int y = y_center - ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
-            graph.drawString("R", x, y_center-ROOM_LENGTH*UNIT_SIZE/2);
-            graph.drawString("R", x, y_center+ROOM_LENGTH*UNIT_SIZE/2);
-            graph.drawString("R", x_center-ROOM_LENGTH*UNIT_SIZE/2, y);
-            graph.drawString("R", x_center+ROOM_LENGTH*UNIT_SIZE/2, y);
+        for(int i = 0; i < MAP_ROOM_LENGTH; i++){
+            int x = x_center - MAP_ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
+            int y = y_center - MAP_ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
+            graph.drawString("R", x, y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2);
+            graph.drawString("R", x, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2);
+            graph.drawString("R", x_center- MAP_ROOM_LENGTH *UNIT_SIZE/2, y);
+            graph.drawString("R", x_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2, y);
         }
-        graph.drawString("R", x_center+ROOM_LENGTH*UNIT_SIZE/2, y_center+ROOM_LENGTH*UNIT_SIZE/2);
+        graph.drawString("R", x_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2);
         // draw room name
         graph.setColor(new Color(255,69,0));
         graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*4/3));
         for(int i = 0; i < mapRoom.getRoomName().length(); i++){
-            graph.drawString(String.valueOf(mapRoom.getRoomName().charAt(i)),x_center-ROOM_LENGTH*UNIT_SIZE/2 + i * UNIT_SIZE*ROOM_FONT,y_center-ROOM_LENGTH*UNIT_SIZE/2 - UNIT_SIZE*ROOM_FONT);
+            graph.drawString(String.valueOf(mapRoom.getRoomName().charAt(i)),x_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 + i * UNIT_SIZE* ROOM_TEXT_FONT,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE* ROOM_TEXT_FONT);
         }
-        graph.setFont(mapFont);
+        graph.setFont(MAP_TEXT_FONT);
     }
 
     /**
@@ -122,10 +103,10 @@ public class GameMapPanel extends JPanel implements ActionListener {
         }
         // draw floor name
         graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*3/2));
-        graph.drawString(FLOORS[0], UNIT_SIZE, floorUnit+UNIT_SIZE*7);
-        graph.drawString(FLOORS[1], UNIT_SIZE, UNIT_SIZE*3);
-        graph.drawString(FLOORS[2], UNIT_SIZE, floorUnit*2+UNIT_SIZE*7);
-        graph.setFont(mapFont);
+        graph.drawString(MAP_FLOORS[0], UNIT_SIZE, floorUnit+UNIT_SIZE*7);
+        graph.drawString(MAP_FLOORS[1], UNIT_SIZE, UNIT_SIZE*3);
+        graph.drawString(MAP_FLOORS[2], UNIT_SIZE, floorUnit*2+UNIT_SIZE*7);
+        graph.setFont(MAP_TEXT_FONT);
     }
 
     /**
@@ -151,25 +132,25 @@ public class GameMapPanel extends JPanel implements ActionListener {
         int x_center = ((MapRoom)hall).getDx();
         int y_center = ((MapRoom)hall).getDy();
         // draw horizontal
-        for(int i = 0; i < ROOM_LENGTH*6; i++){
-            int x = x_center - ROOM_LENGTH * UNIT_SIZE*2 + i * UNIT_SIZE; // top left corner
-            graph.drawString("H", x, y_center-ROOM_LENGTH*UNIT_SIZE/2);
-            graph.drawString("H", x, y_center+ROOM_LENGTH*UNIT_SIZE/2);
+        for(int i = 0; i < MAP_ROOM_LENGTH *6; i++){
+            int x = x_center - MAP_ROOM_LENGTH * UNIT_SIZE*2 + i * UNIT_SIZE; // top left corner
+            graph.drawString("H", x, y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2);
+            graph.drawString("H", x, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2);
         }
         // draw vertical
-        for(int i = 0; i < ROOM_LENGTH; i++){
-            int y = y_center - ROOM_LENGTH * UNIT_SIZE/2 + i * UNIT_SIZE; // top left corner
-            graph.drawString("H", x_center-ROOM_LENGTH*UNIT_SIZE*2, y);
-            graph.drawString("H", x_center + ROOM_LENGTH*4 * UNIT_SIZE, y);
+        for(int i = 0; i < MAP_ROOM_LENGTH; i++){
+            int y = y_center - MAP_ROOM_LENGTH * UNIT_SIZE/2 + i * UNIT_SIZE; // top left corner
+            graph.drawString("H", x_center- MAP_ROOM_LENGTH *UNIT_SIZE*2, y);
+            graph.drawString("H", x_center + MAP_ROOM_LENGTH *4 * UNIT_SIZE, y);
         }
-        graph.drawString("H", x_center + ROOM_LENGTH*4 * UNIT_SIZE, y_center+ROOM_LENGTH*UNIT_SIZE/2); // right bottom corner
+        graph.drawString("H", x_center + MAP_ROOM_LENGTH *4 * UNIT_SIZE, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2); // right bottom corner
         // draw room name
         graph.setColor(new Color(255,69,0));
         graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*4/3));
         for(int i = 0; i < hall.getRoomName().length(); i++){
-            graph.drawString(String.valueOf(hall.getRoomName().charAt(i)),x_center-ROOM_LENGTH*UNIT_SIZE/2 + i * UNIT_SIZE*ROOM_FONT,y_center-ROOM_LENGTH*UNIT_SIZE/2 - UNIT_SIZE*ROOM_FONT);
+            graph.drawString(String.valueOf(hall.getRoomName().charAt(i)),x_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 + i * UNIT_SIZE* ROOM_TEXT_FONT,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE* ROOM_TEXT_FONT);
         }
-        graph.setFont(mapFont);
+        graph.setFont(MAP_TEXT_FONT);
     }
 
     /**
@@ -196,60 +177,9 @@ public class GameMapPanel extends JPanel implements ActionListener {
         }
     }
 
-    /**
-     * helper method for this demo; need another design to skip visitedRoom
-     * this also provides animation frames for actionPerformed()
-     * move from one coordinate to another
-     * @param visitedRoom
-     * @param mapRoom
-     */
-    private void moveTo(int visitedRoom, MapRoom mapRoom) throws InterruptedException {
-        if(xPlayer[PLAYER_SIZE-1] == mapRoom.getDx() && yPlayer[PLAYER_SIZE-1] == mapRoom.getDy()) {
-            visited[visitedRoom] = true;
-////          System.out.printf("Moved to Room:%s;\n", mapRoom.getRoomName());
-//            System.out.printf("Player head: (%d, %d)\n",xPlayer[PLAYER_SIZE-1],yPlayer[PLAYER_SIZE-1]);
-//            System.out.printf("Current Room: (%d, %d)\n",mapRoom.getDx(),mapRoom.getDy());
-//            Thread.sleep(2000);
-        }
-
-        if(xPlayer[PLAYER_SIZE-1] < mapRoom.getDx() )
-            xPlayer[PLAYER_SIZE-1] += UNIT_SIZE;
-        else if (xPlayer[PLAYER_SIZE-1] > mapRoom.getDx())
-            xPlayer[PLAYER_SIZE-1] -= UNIT_SIZE;
-
-        if(yPlayer[PLAYER_SIZE-1] < mapRoom.getDy() )
-            yPlayer[PLAYER_SIZE-1] += UNIT_SIZE;
-        else if (yPlayer[PLAYER_SIZE-1] > mapRoom.getDy())
-            yPlayer[PLAYER_SIZE-1] -= UNIT_SIZE;
-    }
-
     @Override
     public void paint(Graphics graph){
         super.paint(graph);
         draw(graph);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO: complete action listener
-        try {
-            this.moveTo(0,(MapRoom) GameMap.getInstance().getPlayer().getCurrentRoom());
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        }
-//        try {
-//            if(!visited[0]){
-//                this.moveTo(0, gameMap.getRooms().get(0));
-//            } else if(!visited[1]){
-//                this.moveTo(1, gameMap.getRooms().get(1));
-//            } else if(!visited[2]){
-//                this.moveTo(2, gameMap.getRooms().get(2));
-//            } else if(!visited[3]){
-//                this.moveTo(3, gameMap.getRooms().get(3));
-//            }
-//        } catch (InterruptedException interruptedException) {
-//            interruptedException.printStackTrace();
-//        }
-        //super.repaint();
     }
 }
