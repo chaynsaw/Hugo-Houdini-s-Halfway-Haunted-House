@@ -1,16 +1,20 @@
 package com.locallampoon.fiveh.ui.mappanel;
 
+import com.locallampoon.fiveh.core.Player;
 import com.locallampoon.fiveh.core.Room;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * load rooms and control positions on the map
  */
 public class GameMap {
     private static GameMap gameMapInstance = new GameMap();
-    private List<Room> mapRooms = new ArrayList<>();
+    private Map<String, Room> mapRooms = new HashMap<>();
+    private Player player;
 
     private GameMap(){
     }
@@ -22,7 +26,15 @@ public class GameMap {
         return GameMap.gameMapInstance;
     }
 
-    public List<Room> getRooms(){
+    public Map<String, Room> getRooms(){
         return this.mapRooms;
+    }
+
+    public Player getPlayer(){
+        return this.player;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 }
