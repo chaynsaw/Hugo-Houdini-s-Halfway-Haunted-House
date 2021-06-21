@@ -76,11 +76,20 @@ public class Game implements Serializable {
     }
 
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
-        // TODO: Finish switch to contain all Verbs and Noun interaction
+        Room playerCurrentRoom = player.getCurrentRoom();
+        if (parsedCommandList.size() == 1) {
+            implementCommandOneWord(parsedCommandList);
+        } else if (parsedCommandList.size() == 2){
+            implementCommandTwoWords(parsedCommandList,roomExits);
+        } else {
+            System.out.println("Invalid Action");
+        }
+    }
+
+    private static void implementCommandTwoWords(List<String> parsedCommandList, List<String> roomExits) {
         Room playerCurrentRoom = player.getCurrentRoom();
         switch (parsedCommandList.get(0)) {
-            case "go":
-            case "move":
+            case "go", "move" -> {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()) {
@@ -89,26 +98,36 @@ public class Game implements Serializable {
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
                 player.move(roomKeyID);
-                break;
-            case "get":
-            case "grab":
+            }
+            case "get", "grab" -> {
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.addItem(grabbedItem);
                 playerCurrentRoom.removeItem(grabbedItem);
-                break;
-            case "drop":
+            }
+            case "drop" -> {
                 String droppedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.dropItem(droppedItem);
                 playerCurrentRoom.addItem(droppedItem);
-                break;
-            case "talk":
-                // TODO: Player needs a Talk method to talk with characters in rooms
-//                    player.talkWith(output.get(1));
-//                    break;
-            case "inspect":
-                // TODO: Player needs an Inspect method to items in room
-//                    player.inspectItem(output.get(1));
-//                    break;
+            }
+            case "recruit" -> {
+                String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, player);
+                player.addNpc(recruitedNpc);
+                playerCurrentRoom.removeNpc(recruitedNpc);
+                switch (recruitedNpc.toLowerCase()) {
+                    case "jock" -> player.setStrong(true);
+                    case "chess geek" -> player.setSmart(true);
+                    case "bleacher kid" -> player.setBrave(true);
+                }
+            }
+            default -> {
+                System.out.println("Invalid Action");
+            }
+        }
+    }
+
+    private static void implementCommandOneWord(List<String> parsedCommandList) {
+        Room playerCurrentRoom = player.getCurrentRoom();
+        switch (parsedCommandList.get(0)) {
             case "fight":
                 Monster monster = playerCurrentRoom.getRoomMonster();
                 if (monster != null){
@@ -134,20 +153,6 @@ public class Game implements Serializable {
             case "i":
                 player.printInventoryItems();
                 break;
-            case "recruit":
-                String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, player);
-                player.addNpc(recruitedNpc);
-                playerCurrentRoom.removeNpc(recruitedNpc);
-                switch (recruitedNpc.toLowerCase()) {
-                    case "jock":
-                        player.setStrong(true);
-                        break;
-                    case "chess geek":
-                        player.setSmart(true);
-                        break;
-                    case "bleacher kid":
-                        player.setBrave(true);
-                }
             case "help":
             case "h":
                 getHelp();
@@ -156,6 +161,9 @@ public class Game implements Serializable {
             case "q":
             case "requestCommandAgain":
                 break;
+            default: {
+                System.out.println("Invalid Action");
+            };
         }
     }
 
