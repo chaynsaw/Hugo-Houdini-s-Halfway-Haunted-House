@@ -38,7 +38,6 @@ public class GameMapPanel extends JPanel {
         for(Map.Entry<String, Room> r : gameMap.getRooms().entrySet()){
             spotLight = this.playerRoomSpotLight(r.getValue(),gameMap.getPlayer());
             neighbour = neighbours.contains(r.getKey()); // original design used <room id=""> as the key to identify room
-            System.out.println("you are my neighbour:" + neighbour + r.getValue().getRoomName());
             if(r.getKey().equalsIgnoreCase("hall") || r.getKey().equalsIgnoreCase("upstairslanding")){
                 this.drawHall(graph, r.getValue(), spotLight, neighbour);
             } else
@@ -63,15 +62,17 @@ public class GameMapPanel extends JPanel {
         return false;
     }
 
-
-
+    /**
+     * draw player on the panel
+     * @param graph
+     */
     private void drawPlayer(Graphics graph){
         for(int i = 0; i< PLAYER_SIZE; i++){
             if(i != 0){
                 graph.setColor(Color.GREEN);
                 graph.fillRect(XPlayer[i], YPlayer[i], UNIT_SIZE, UNIT_SIZE);
             } else {
-                graph.setColor(new Color(45,180,0));
+                graph.setColor(PLAYER_COLOR);
             }
         }
         graph.setColor(MAP_DEFAULT);
@@ -103,7 +104,7 @@ public class GameMapPanel extends JPanel {
         graph.drawString("R", x_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2);
         // draw room name
 
-        graph.setColor(new Color(255,69,0));
+        graph.setColor(ROOM_TEXT_COLOR);
         graph.setFont(ROOM_TEXT_FONT);
         for(int i = 0; i < mapRoom.getRoomName().length(); i++){
             graph.drawString(String.valueOf(mapRoom.getRoomName().charAt(i)),x_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 + i * UNIT_SIZE,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE);
@@ -167,20 +168,6 @@ public class GameMapPanel extends JPanel {
         }
         graph.setFont(MAP_TEXT_FONT);
         graph.setColor(MAP_DEFAULT);
-    }
-
-    /**
-     * easy stairs that only draw square starting from top left corner to bottom right
-     * @param x_topLeft
-     * @param y_topLeft
-     */
-    private void drawStairs(Graphics graph, int x_topLeft, int y_topLeft, int size){
-        // draw vertical
-//        int index = 0;
-//        for(int i = 0; i < height; i++){
-//
-//        }
-        graph.setColor(MAP_DEFAULT); // reset color
     }
 
     /**
