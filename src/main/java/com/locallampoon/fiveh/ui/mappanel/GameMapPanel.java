@@ -12,25 +12,16 @@ import java.util.Map;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.*;
 
-public class GameMapPanel extends JPanel{
-    private Timer timer;
-    private PlayerAnimation playerAnimation = new PlayerAnimation();
+public class GameMapPanel extends JPanel {
     GameMap gameMap = GameMap.getInstance();
 
-    public GameMapPanel(){
+    public GameMapPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
-        this.setFocusable(true);
-        startGamePanel();
         gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }
 
-    public void startGamePanel(){
-        timer = new Timer(MAP_PLAYER_DELAY, this.playerAnimation); // delay is how often the timer triggers; listening this;
-        timer.start();
-    }
-
-    public void draw(Graphics graph){
+    public void draw(Graphics graph) {
         graph.setFont(MAP_TEXT_FONT);
         this.drawGrid(graph); // design purpose only
         this.drawFloorLayout(graph);

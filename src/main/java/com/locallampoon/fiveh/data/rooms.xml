@@ -247,7 +247,7 @@ is the SOUTH door you came through.</desc>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item>Baby's Rattle</item>
+            <item>Baby Rattle</item>
         </roomItems>
         <npc></npc>
         <dx>40</dx>
