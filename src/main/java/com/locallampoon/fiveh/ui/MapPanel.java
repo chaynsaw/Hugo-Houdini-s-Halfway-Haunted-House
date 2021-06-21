@@ -1,12 +1,13 @@
 package com.locallampoon.fiveh.ui;
 
+import com.locallampoon.fiveh.core.Game;
 import com.locallampoon.fiveh.ui.mappanel.GameMapPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MapPanel {
-    JPanel panel;
+    GameMapPanel panel;
 
     public MapPanel() {
         panel = new GameMapPanel();
@@ -17,5 +18,9 @@ public class MapPanel {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public void updateMapGUI(){
+        this.panel.updateGUI();
     }
 }
