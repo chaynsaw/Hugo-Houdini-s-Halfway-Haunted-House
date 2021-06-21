@@ -94,8 +94,6 @@ public class Game implements Serializable {
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
                 player.move(roomKeyID);
-                Game.mapPanel.getPanel().revalidate(); // highlight room
-                Game.mapPanel.getPanel().repaint();
                 break;
             case "get":
             case "grab":
@@ -293,6 +291,7 @@ public class Game implements Serializable {
         statsPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
+        mapPanel.updateMapGUI(); // need to repaint after player current position updated
         // print description
         printDescription();
         // handle monster scenario
