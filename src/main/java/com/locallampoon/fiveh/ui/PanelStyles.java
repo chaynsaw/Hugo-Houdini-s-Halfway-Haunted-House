@@ -25,8 +25,10 @@ public class PanelStyles {
     public static final int ROOM_TEXT_FONT = 1; // size of room name
     public static final Font MAP_TEXT_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*2/3);
     public static final String[] MAP_FLOORS = new String[]{"First", "Second", "Basement"};
-    public static final int PLAYER_SIZE = 2;
-    public static int[] xPlayer = new int[PLAYER_SIZE];
-    public static int[] yPlayer = new int[PLAYER_SIZE];
+    public static final int PLAYER_SIZE = 5;
+    public static int[] XPlayer = new int[PLAYER_SIZE];
+    public static int[] YPlayer = new int[PLAYER_SIZE];
+    public static final int MAP_PLAYER_DELAY = 100; // how fast the player can move
+    public static final int MAP_ROOM_LENGTH = 5; // * unit size
 
 }
