@@ -10,7 +10,7 @@ import java.util.List;
  * @version 0.0.2
  */
 
-class Room {
+public class Room {
     // FIELDS
     private String roomName;
     private String desc;
@@ -34,7 +34,7 @@ class Room {
      * @param roomMonster Monster object representing a monster in the room
      */
 
-    Room(String roomName, String desc, List<String> exits, List<String> items, List<String> npcs, Monster roomMonster) {
+    public Room(String roomName, String desc, List<String> exits, List<String> items, List<String> npcs, Monster roomMonster) {
         setRoomName(roomName);
         setDesc(desc);
         setExits(exits);

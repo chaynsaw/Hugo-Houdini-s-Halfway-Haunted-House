@@ -49,7 +49,7 @@ public class PlayerTest {
 
     @Test
     public void move_ShouldReturnTrueWhenPlayerMovesToDiningRoom() {
-        String roomName = "Dining Room";
+        String roomName = "Dining";
         player.move(houseMap.get("diningRoom"));
         assertEquals(roomName, player.getCurrentRoom().getRoomName());
     }

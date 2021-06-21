@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 
-class Player {
+public class Player {
 
     //INSTANCE VARIABLE
     private String character;
@@ -201,7 +201,7 @@ class Player {
         }
     }
 
-    Room getCurrentRoom() {
+    public Room getCurrentRoom() {
         return currentRoom;
     }
 

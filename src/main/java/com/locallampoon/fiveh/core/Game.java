@@ -1,12 +1,15 @@
 package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
+import com.locallampoon.fiveh.ui.mappanel.GameMap;
+import com.locallampoon.fiveh.ui.mappanel.GameMapPanel;
 
 import java.io.*;
 import java.util.List;
 import java.util.Map;
 
 public class Game implements Serializable {
+
     private static Player player;
     private static Map<String, Room> houseMap;
     private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
@@ -17,6 +20,7 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static ConsolePanel consolePanel;
     private static StatsPanel statsPanel;
+    private static MapPanel mapPanel;
 
     // CONSTRUCTOR
     public Game() {
@@ -45,6 +49,7 @@ public class Game implements Serializable {
         artPanel = mainPanel.getArtPanel();
         statsPanel = mainPanel.getStatsPanel();
         consolePanel = mainPanel.getConsolePanel();
+        mapPanel = mainPanel.getMapPanel();
     }
 
     private static void readFile(String filename) {
@@ -286,10 +291,15 @@ public class Game implements Serializable {
         statsPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
+        mapPanel.updateMapGUI(); // need to repaint after player current position updated
         // print description
         printDescription();
         // handle monster scenario
         checkMonster();
+    }
+
+    public static Player getPlayer() {
+        return player;
     }
 }
 
