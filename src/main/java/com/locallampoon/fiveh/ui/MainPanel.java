@@ -23,6 +23,7 @@ public class MainPanel {
         this.consolePanel = consolePanel;
         this.artPanel = artPanel;
         this.statsPanel = statsPanel;
+        this.mapPanel = mapPanel;
         // main window settings
         window = new JFrame();
         window.setSize(1000, 800);
@@ -53,5 +54,9 @@ public class MainPanel {
 
     public ConsolePanel getConsolePanel() {
         return consolePanel;
+    }
+
+    public MapPanel getMapPanel(){
+        return this.mapPanel;
     }
 }
