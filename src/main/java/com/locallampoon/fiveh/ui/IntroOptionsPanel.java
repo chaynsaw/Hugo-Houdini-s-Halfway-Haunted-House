@@ -14,12 +14,21 @@ public class IntroOptionsPanel implements KeyListener {
     int selectedIndex = 0;
     JPanel panel;
     List<JLabel> optionLabels = new ArrayList<>();
-    Font font = new Font("Arial", Font.PLAIN, 30);
+    Font font = new Font(
+            PanelStyles.FONT_FAMILY,
+            PanelStyles.FONT_WEIGHT,
+            PanelStyles.INTRO_OPTIONS_FONT_SIZE
+    );
 
     public IntroOptionsPanel() {
         panel = new JPanel(new GridLayout(0, 1));
-        panel.setBounds(400, 400, 200, 100);
-        panel.setBackground(Color.BLACK);
+        panel.setBounds(
+                PanelStyles.INTRO_OPTIONS_X,
+                PanelStyles.INTRO_OPTIONS_Y,
+                PanelStyles.INTRO_OPTIONS_WIDTH,
+                PanelStyles.INTRO_OPTIONS_HEIGHT
+        );
+        panel.setBackground(PanelStyles.BG_COLOR);
         panel.setFocusable(true);
         panel.addKeyListener(this);
 

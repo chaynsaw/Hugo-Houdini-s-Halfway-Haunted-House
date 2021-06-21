@@ -1,16 +1,20 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class IntroPanel {
     JPanel panel;
 
     public IntroPanel() {
         this.panel = new JPanel();
-        this.panel.setBounds(0, 0, 1000, 800);
-        this.panel.setBackground(Color.BLACK);
-        this.panel.setForeground(Color.WHITE);
+        this.panel.setBounds(
+                PanelStyles.WINDOW_X,
+                PanelStyles.WINDOW_Y,
+                PanelStyles.WINDOW_WIDTH,
+                PanelStyles.WINDOW_HEIGHT
+        );
+        this.panel.setBackground(PanelStyles.BG_COLOR);
+        this.panel.setForeground(PanelStyles.FG_COLOR);
         this.panel.setLayout(null);
 
         IntroTitlePanel introTitlePanel = new IntroTitlePanel();

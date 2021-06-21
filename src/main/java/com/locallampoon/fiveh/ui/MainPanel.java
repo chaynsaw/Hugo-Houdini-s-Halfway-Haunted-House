@@ -29,7 +29,7 @@ public class MainPanel {
         this.mapPanel = mapPanel;
         // main window settings
         window = new JFrame();
-        window.setSize(1000, 800);
+        window.setSize(PanelStyles.WINDOW_WIDTH, PanelStyles.WINDOW_HEIGHT);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(new BorderLayout());
