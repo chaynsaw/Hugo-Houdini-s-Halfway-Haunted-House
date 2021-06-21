@@ -80,8 +80,9 @@ public class IntroOptionsPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == Key.DOWN.getKey()) {
             // right bounds check
-            if (selectedIndex + 1 <= optionLabels.size() - 1)
-            traverseOption(1);
+            if (selectedIndex + 1 <= optionLabels.size() - 1) {
+                traverseOption(1);
+            }
         }
         if (e.getKeyCode() == Key.UP.getKey()) {
             // left bounds check
