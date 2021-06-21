@@ -10,13 +10,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.util.Map;
 
 public class GameMapPanel extends JPanel implements ActionListener {
 
     public static final int UNIT_SIZE = 8; // how big each block/unit; player movement length also
-    final int PANEL_WIDTH = 580; // panel size
-    final int PANEL_HEIGHT = 480;
+    final int PANEL_WIDTH = 600; // panel size
+    final int PANEL_HEIGHT = 490;
     final int ROOM_FONT = 1; // size of room name
+    final Font mapFont = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*2/3);
+    final String[] FLOORS = new String[]{"First", "Second", "Basement"};
     final int GAME_UNITS = (PANEL_WIDTH*PANEL_WIDTH)/UNIT_SIZE;
     final int X_ROOM_BOUNDARY = 0; // TODO: need calculation
     final int Y_ROOM_BOUNDARY = 0; // TODO: need calculation
@@ -24,7 +27,7 @@ public class GameMapPanel extends JPanel implements ActionListener {
     final int Y_PLAYER_BOUNDARY = 0; // TODO: need calculation
     final int DELAY = 100; // how fast the player can move
     final int PLAYER_SIZE = 2;
-    final int ROOM_LENGTH = 8; //TODO: test odd number
+    final int ROOM_LENGTH = 5; //TODO: test odd number
     private int xPlayer[] = new int[PLAYER_SIZE];
     private int yPlayer[] = new int[PLAYER_SIZE];
 
@@ -48,9 +51,14 @@ public class GameMapPanel extends JPanel implements ActionListener {
     }
 
     public void draw(Graphics graph){
-        this.drawGrid(graph); // TODO: remove it in final version
-        for(Room r : gameMap.getRooms()){
-            this.drawRoom(graph,r);
+        graph.setFont(mapFont);
+        //this.drawGrid(graph); // TODO: remove it in final version
+        this.drawFloorLayout(graph);
+        for(Map.Entry<String, Room> r : gameMap.getRooms().entrySet()){
+            if(r.getKey().toLowerCase().equals("hall") || r.getKey().toLowerCase().equals("upstairslanding")){
+                this.drawHall(graph, r.getValue());
+            } else
+                this.drawRoom(graph,r.getValue());
         }
         this.drawPlayer(graph);
 
@@ -69,9 +77,14 @@ public class GameMapPanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * this will draw all rooms on panel by its coordinates
+     * it doesn't not draw room connections in this method
+     * @param graph
+     * @param mapRoom
+     */
     private void drawRoom(Graphics graph, Room mapRoom){
         graph.setColor(new Color(192,192,192));
-        graph.setFont(new Font("TimesRoman", Font.BOLD, UNIT_SIZE*2/3));
         int x_center = ((MapRoom)mapRoom).getDx();
         int y_center = ((MapRoom)mapRoom).getDy();
         for(int i = 0; i < ROOM_LENGTH; i++){
@@ -85,10 +98,76 @@ public class GameMapPanel extends JPanel implements ActionListener {
         graph.drawString("R", x_center+ROOM_LENGTH*UNIT_SIZE/2, y_center+ROOM_LENGTH*UNIT_SIZE/2);
         // draw room name
         graph.setColor(new Color(255,69,0));
-        graph.setFont(new Font("Courier", Font.PLAIN, UNIT_SIZE*ROOM_FONT));
+        graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*4/3));
         for(int i = 0; i < mapRoom.getRoomName().length(); i++){
             graph.drawString(String.valueOf(mapRoom.getRoomName().charAt(i)),x_center-ROOM_LENGTH*UNIT_SIZE/2 + i * UNIT_SIZE*ROOM_FONT,y_center-ROOM_LENGTH*UNIT_SIZE/2 - UNIT_SIZE*ROOM_FONT);
         }
+        graph.setFont(mapFont);
+    }
+
+    /**
+     * 3 levels: basement, first floor and second
+     * @param graph
+     */
+    private void drawFloorLayout(Graphics graph){
+        int floorUnit = PANEL_HEIGHT/3;
+        // draw floor
+        graph.setColor(new Color(255,255,255));
+        for(int i = 0; i < 4; i ++){
+            if(i == 1 || i == 2)
+                graph.drawLine(0,i*floorUnit+UNIT_SIZE*5,PANEL_WIDTH+UNIT_SIZE,i*floorUnit+UNIT_SIZE*5);
+            else
+                graph.drawLine(0,i*floorUnit+UNIT_SIZE,PANEL_WIDTH+UNIT_SIZE,i*floorUnit+UNIT_SIZE);
+            //draw stairs
+        }
+        // draw floor name
+        graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*3/2));
+        graph.drawString(FLOORS[0], UNIT_SIZE, floorUnit+UNIT_SIZE*7);
+        graph.drawString(FLOORS[1], UNIT_SIZE, UNIT_SIZE*3);
+        graph.drawString(FLOORS[2], UNIT_SIZE, floorUnit*2+UNIT_SIZE*7);
+        graph.setFont(mapFont);
+    }
+
+    /**
+     * easy stairs that only draw square starting from top left corner to bottom right
+     * @param x_topLeft
+     * @param y_topLeft
+     */
+    private void drawStairs(int x_topLeft, int y_topLeft, int size){
+        // draw vertical
+//        int index = 0;
+//        for(int i = 0; i < height; i++){
+//
+//        }
+    }
+
+    /**
+     * hall is a rectangle instead of a square
+     * @param graph
+     * @param hall
+     */
+    private void drawHall(Graphics graph, Room hall){
+        graph.setColor(new Color(192,192,192));
+        int x_center = ((MapRoom)hall).getDx();
+        int y_center = ((MapRoom)hall).getDy();
+        for(int i = 0; i < ROOM_LENGTH*6; i++){
+            int x = x_center - ROOM_LENGTH * UNIT_SIZE*2 + i * UNIT_SIZE; // left corner
+            graph.drawString("H", x, y_center-ROOM_LENGTH*UNIT_SIZE/2);
+            graph.drawString("H", x, y_center+ROOM_LENGTH*UNIT_SIZE/2);
+        }
+        for(int i = 0; i < ROOM_LENGTH; i++){
+            int y = y_center - ROOM_LENGTH * UNIT_SIZE/2 + i * UNIT_SIZE; // left corner
+            graph.drawString("H", x_center-ROOM_LENGTH*UNIT_SIZE*2, y);
+            graph.drawString("H", x_center + ROOM_LENGTH*4 * UNIT_SIZE, y);
+        }
+        graph.drawString("H", x_center + ROOM_LENGTH*4 * UNIT_SIZE, y_center+ROOM_LENGTH*UNIT_SIZE/2); // right bottom corner
+        // draw room name
+        graph.setColor(new Color(255,69,0));
+        graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*4/3));
+        for(int i = 0; i < hall.getRoomName().length(); i++){
+            graph.drawString(String.valueOf(hall.getRoomName().charAt(i)),x_center-ROOM_LENGTH*UNIT_SIZE/2 + i * UNIT_SIZE*ROOM_FONT,y_center-ROOM_LENGTH*UNIT_SIZE/2 - UNIT_SIZE*ROOM_FONT);
+        }
+        graph.setFont(mapFont);
     }
 
     /**
@@ -122,9 +201,10 @@ public class GameMapPanel extends JPanel implements ActionListener {
     private void moveTo(int visitedRoom, MapRoom mapRoom) throws InterruptedException {
         if(xPlayer[PLAYER_SIZE-1] == mapRoom.getDx() && yPlayer[PLAYER_SIZE-1] == mapRoom.getDy()) {
             visited[visitedRoom] = true;
-            System.out.printf("Moved to Room:%s;\n", mapRoom.getRoomName());
-            System.out.printf("Player head: (%d, %d)\n",xPlayer[PLAYER_SIZE-1],yPlayer[PLAYER_SIZE-1]);
-            Thread.sleep(1500);
+////            System.out.printf("Moved to Room:%s;\n", mapRoom.getRoomName());
+//            System.out.printf("Player head: (%d, %d)\n",xPlayer[PLAYER_SIZE-1],yPlayer[PLAYER_SIZE-1]);
+//            System.out.printf("Current Room: (%d, %d)\n",mapRoom.getDx(),mapRoom.getDy());
+//            Thread.sleep(2000);
         }
 
         if(xPlayer[PLAYER_SIZE-1] < mapRoom.getDx() )
@@ -147,6 +227,11 @@ public class GameMapPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO: complete action listener
+        try {
+            this.moveTo(0,(MapRoom) GameMap.getInstance().getPlayer().getCurrentRoom());
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
 //        try {
 //            if(!visited[0]){
 //                this.moveTo(0, gameMap.getRooms().get(0));
@@ -160,6 +245,6 @@ public class GameMapPanel extends JPanel implements ActionListener {
 //        } catch (InterruptedException interruptedException) {
 //            interruptedException.printStackTrace();
 //        }
-//        super.repaint();
+        //super.repaint();
     }
 }
