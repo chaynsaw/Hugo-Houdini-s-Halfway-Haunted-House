@@ -8,28 +8,25 @@ import com.locallampoon.fiveh.core.Room;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.*;
 
 public class GameMapPanel extends JPanel{
-    private Timer timer;
-    private PlayerAnimation playerAnimation = new PlayerAnimation();
     GameMap gameMap = GameMap.getInstance();
 
     public GameMapPanel(){
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
-        this.setFocusable(true);
-        startGamePanel();
-        gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
+        this.gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }
 
-    public void startGamePanel(){
-        timer = new Timer(MAP_PLAYER_DELAY, this.playerAnimation); // delay is how often the timer triggers; listening this;
-        timer.start();
-    }
-
+    /**
+     * draw layers: grid(testing only), floor layout, rooms and the player
+     * @param graph
+     */
     public void draw(Graphics graph){
         graph.setFont(MAP_TEXT_FONT);
         this.drawGrid(graph); // design purpose only
@@ -73,8 +70,13 @@ public class GameMapPanel extends JPanel{
     private void drawRoom(Graphics graph, Room mapRoom, boolean spotLight){
         int x_center = ((MapRoom)mapRoom).getDx();
         int y_center = ((MapRoom)mapRoom).getDy();
+        List<String> roomList = mapRoom.getExits();
+        for(int i = 0; i < roomList.size(); i++){
+            System.out.printf("# %d: %s\n", i, ((ArrayList)roomList).get(i));
+        }
         if(spotLight){
             graph.setColor(PLAYER_COLOR);
+
         }
         for(int i = 0; i < MAP_ROOM_LENGTH; i++){
             int x = x_center - MAP_ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
@@ -189,7 +191,7 @@ public class GameMapPanel extends JPanel{
     }
 
     public void updateGUI(){
-        this.revalidate(); // highlight room
+        //this.revalidate(); // highlight room
         this.repaint();
     }
 
