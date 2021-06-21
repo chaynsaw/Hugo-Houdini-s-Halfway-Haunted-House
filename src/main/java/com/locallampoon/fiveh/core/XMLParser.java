@@ -1,7 +1,6 @@
 package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.mappanel.GameMap;
-import com.locallampoon.fiveh.ui.mappanel.GameMapPanel;
 import com.locallampoon.fiveh.ui.mappanel.MapRoom;
 import static com.locallampoon.fiveh.ui.PanelStyles.UNIT_SIZE;
 import org.w3c.dom.Document;
@@ -94,13 +93,13 @@ class XMLParser {
                     //roomMap.put(id, new Room(roomName, desc, exits, items, npcs, monster));
                     Room room = new MapRoom(roomName, desc, exits, items, npcs, monster,dX,dY);
                     roomMap.put(id, room);
-                    GameMap.getInstance().getRooms().put(id, room); // TODO: redundant only need one map
                 }
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
+        GameMap.getInstance().setRooms(roomMap);
         return roomMap;
     }
 }
