@@ -52,7 +52,7 @@ public class GameMapPanel extends JPanel implements ActionListener {
 
     public void draw(Graphics graph){
         graph.setFont(mapFont);
-        //this.drawGrid(graph); // TODO: remove it in final version
+        this.drawGrid(graph); // TODO: remove it in final version
         this.drawFloorLayout(graph);
         for(Map.Entry<String, Room> r : gameMap.getRooms().entrySet()){
             if(r.getKey().toLowerCase().equals("hall") || r.getKey().toLowerCase().equals("upstairslanding")){
@@ -150,13 +150,15 @@ public class GameMapPanel extends JPanel implements ActionListener {
         graph.setColor(new Color(192,192,192));
         int x_center = ((MapRoom)hall).getDx();
         int y_center = ((MapRoom)hall).getDy();
+        // draw horizontal
         for(int i = 0; i < ROOM_LENGTH*6; i++){
-            int x = x_center - ROOM_LENGTH * UNIT_SIZE*2 + i * UNIT_SIZE; // left corner
+            int x = x_center - ROOM_LENGTH * UNIT_SIZE*2 + i * UNIT_SIZE; // top left corner
             graph.drawString("H", x, y_center-ROOM_LENGTH*UNIT_SIZE/2);
             graph.drawString("H", x, y_center+ROOM_LENGTH*UNIT_SIZE/2);
         }
+        // draw vertical
         for(int i = 0; i < ROOM_LENGTH; i++){
-            int y = y_center - ROOM_LENGTH * UNIT_SIZE/2 + i * UNIT_SIZE; // left corner
+            int y = y_center - ROOM_LENGTH * UNIT_SIZE/2 + i * UNIT_SIZE; // top left corner
             graph.drawString("H", x_center-ROOM_LENGTH*UNIT_SIZE*2, y);
             graph.drawString("H", x_center + ROOM_LENGTH*4 * UNIT_SIZE, y);
         }
@@ -176,9 +178,11 @@ public class GameMapPanel extends JPanel implements ActionListener {
      */
     private void drawGrid(Graphics graph){
         // grid system
+        // vertical lines
         for(int i = 0; i <= PANEL_HEIGHT/UNIT_SIZE; i++){
             graph.drawLine(0,(i+1)*UNIT_SIZE, PANEL_WIDTH+UNIT_SIZE, (i+1)*UNIT_SIZE);
         }
+        // horizontal lines
         for(int j = 0; j <= PANEL_WIDTH/UNIT_SIZE; j++){
             graph.drawLine((j+1)*UNIT_SIZE,0, (j+1)*UNIT_SIZE, PANEL_HEIGHT+UNIT_SIZE);
         }
@@ -194,6 +198,7 @@ public class GameMapPanel extends JPanel implements ActionListener {
 
     /**
      * helper method for this demo; need another design to skip visitedRoom
+     * this also provides animation frames for actionPerformed()
      * move from one coordinate to another
      * @param visitedRoom
      * @param mapRoom
@@ -201,7 +206,7 @@ public class GameMapPanel extends JPanel implements ActionListener {
     private void moveTo(int visitedRoom, MapRoom mapRoom) throws InterruptedException {
         if(xPlayer[PLAYER_SIZE-1] == mapRoom.getDx() && yPlayer[PLAYER_SIZE-1] == mapRoom.getDy()) {
             visited[visitedRoom] = true;
-////            System.out.printf("Moved to Room:%s;\n", mapRoom.getRoomName());
+////          System.out.printf("Moved to Room:%s;\n", mapRoom.getRoomName());
 //            System.out.printf("Player head: (%d, %d)\n",xPlayer[PLAYER_SIZE-1],yPlayer[PLAYER_SIZE-1]);
 //            System.out.printf("Current Room: (%d, %d)\n",mapRoom.getDx(),mapRoom.getDy());
 //            Thread.sleep(2000);
