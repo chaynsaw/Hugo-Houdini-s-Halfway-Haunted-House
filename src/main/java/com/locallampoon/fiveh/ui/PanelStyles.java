@@ -2,7 +2,7 @@ package com.locallampoon.fiveh.ui;
 
 import java.awt.*;
 
-class PanelStyles {
+public class PanelStyles {
     // global styles
     public static final String FONT_FAMILY = "Arial";
     public static final int FONT_WEIGHT = Font.PLAIN;
@@ -18,4 +18,15 @@ class PanelStyles {
     public static final int CONSOLE_TXT_AREA_Y = 0;
     public static final int CONSOLE_TXT_AREA_WIDTH = 540;
     public static final int CONSOLE_TXT_AREA_HEIGHT = 200;
+    // Map panel styles
+    public static final int UNIT_SIZE = 8; // how big each block/unit; player movement length also
+    public static final int PANEL_WIDTH = 600; // panel size
+    public static final int PANEL_HEIGHT = 490;
+    public static final int ROOM_TEXT_FONT = 1; // size of room name
+    public static final Font MAP_TEXT_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*2/3);
+    public static final String[] MAP_FLOORS = new String[]{"First", "Second", "Basement"};
+    public static final int PLAYER_SIZE = 2;
+    public static int[] xPlayer = new int[PLAYER_SIZE];
+    public static int[] yPlayer = new int[PLAYER_SIZE];
+
 }
