@@ -2,6 +2,7 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
 import com.locallampoon.fiveh.ui.mappanel.GameMap;
+import com.locallampoon.fiveh.ui.mappanel.GameMapPanel;
 
 import java.io.*;
 import java.util.List;
@@ -18,6 +19,7 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static ConsolePanel consolePanel;
     private static StatsPanel statsPanel;
+    private static MapPanel mapPanel;
 
     // CONSTRUCTOR
     public Game() {
@@ -47,6 +49,7 @@ public class Game implements Serializable {
         artPanel = mainPanel.getArtPanel();
         statsPanel = mainPanel.getStatsPanel();
         consolePanel = mainPanel.getConsolePanel();
+        mapPanel = mainPanel.getMapPanel();
     }
 
     private static void readFile(String filename) {
@@ -91,6 +94,7 @@ public class Game implements Serializable {
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
                 player.move(roomKeyID);
+                Game.mapPanel.getPanel().repaint(); // highlight room
                 break;
             case "get":
             case "grab":
