@@ -15,14 +15,12 @@ import static com.locallampoon.fiveh.ui.PanelStyles.*;
 public class GameMapPanel extends JPanel{
     private Timer timer;
     private PlayerAnimation playerAnimation = new PlayerAnimation();
-    private MouseListener mapMouseListener = new GameMapMouseListener();
     GameMap gameMap = GameMap.getInstance();
 
     public GameMapPanel(){
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
-        this.addMouseListener(mapMouseListener); // listening mouse motion on this panel
         startGamePanel();
     }
 
