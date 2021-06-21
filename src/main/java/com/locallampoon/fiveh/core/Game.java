@@ -94,7 +94,8 @@ public class Game implements Serializable {
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
                 player.move(roomKeyID);
-                Game.mapPanel.getPanel().repaint(); // highlight room
+                Game.mapPanel.getPanel().revalidate(); // highlight room
+                Game.mapPanel.getPanel().repaint();
                 break;
             case "get":
             case "grab":
