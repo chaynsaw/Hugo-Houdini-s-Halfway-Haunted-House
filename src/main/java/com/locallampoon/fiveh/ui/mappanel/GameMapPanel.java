@@ -15,13 +15,13 @@ import java.util.Map;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.*;
 
-public class GameMapPanel extends JPanel{
+public class GameMapPanel extends JPanel {
     GameMap gameMap = GameMap.getInstance();
 
-    public GameMapPanel(){
+    public GameMapPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
-        this.gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
+        gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }
 
     /**
@@ -185,36 +185,37 @@ public class GameMapPanel extends JPanel{
 
     /**
      * draw grid system for design purpose
+     *
      * @param graph
      */
-    private void drawGrid(Graphics graph){
+    private void drawGrid(Graphics graph) {
         // grid system
         // vertical lines
-        for(int i = 0; i <= PANEL_HEIGHT/UNIT_SIZE; i++){
-            graph.drawLine(0,(i+1)*UNIT_SIZE, PANEL_WIDTH+UNIT_SIZE, (i+1)*UNIT_SIZE);
+        for (int i = 0; i <= PANEL_HEIGHT / UNIT_SIZE; i++) {
+            graph.drawLine(0, (i + 1) * UNIT_SIZE, PANEL_WIDTH + UNIT_SIZE, (i + 1) * UNIT_SIZE);
         }
         // horizontal lines
-        for(int j = 0; j <= PANEL_WIDTH/UNIT_SIZE; j++){
-            graph.drawLine((j+1)*UNIT_SIZE,0, (j+1)*UNIT_SIZE, PANEL_HEIGHT+UNIT_SIZE);
+        for (int j = 0; j <= PANEL_WIDTH / UNIT_SIZE; j++) {
+            graph.drawLine((j + 1) * UNIT_SIZE, 0, (j + 1) * UNIT_SIZE, PANEL_HEIGHT + UNIT_SIZE);
         }
         graph.setColor(Color.RED);
-        graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*2/3));
-        for(int i = 0; i <= PANEL_HEIGHT/UNIT_SIZE; i++) {
-            graph.drawString(String.valueOf(i),0,(i+1)*UNIT_SIZE);
+        graph.setFont(new Font("TimesRoman", Font.PLAIN, UNIT_SIZE * 2 / 3));
+        for (int i = 0; i <= PANEL_HEIGHT / UNIT_SIZE; i++) {
+            graph.drawString(String.valueOf(i), 0, (i + 1) * UNIT_SIZE);
         }
-        for(int i = 0; i <= PANEL_WIDTH/UNIT_SIZE; i++) {
-            graph.drawString(String.valueOf(i),(i)*UNIT_SIZE,UNIT_SIZE);
+        for (int i = 0; i <= PANEL_WIDTH / UNIT_SIZE; i++) {
+            graph.drawString(String.valueOf(i), (i) * UNIT_SIZE, UNIT_SIZE);
         }
         graph.setColor(MAP_DEFAULT); // reset color
     }
 
-    public void updateGUI(){
-        //this.revalidate(); // highlight room
-        this.repaint();
+    public void updateGUI() {
+        super.revalidate(); // highlight room
+        super.repaint();
     }
 
     @Override
-    public void paint(Graphics graph){
+    public void paint(Graphics graph) {
         super.paint(graph);
         draw(graph);
     }
