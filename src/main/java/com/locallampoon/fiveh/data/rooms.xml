@@ -21,8 +21,8 @@ UP into the darkness.
             <item>Bowl of Candy</item>
         </roomItems>
         <npc></npc>
-        <dx>29</dx>
-        <dy>32</dy>
+        <dx>32</dx>
+        <dy>42</dy>
     </room>
     <room id="trophyRoom">
         <roomName>Trophy</roomName>
@@ -43,7 +43,7 @@ faces by a taxidermist with an odd sense of taste. A large grisly bear looms ove
         </roomItems>
         <npc>Jock</npc>
         <dx>14</dx>
-        <dy>32</dy>
+        <dy>42</dy>
     </room>
     <room id="diningRoom">
         <roomName>Dining</roomName>
@@ -65,7 +65,7 @@ busy kitchen come from a dark room, and to the SOUTH a door opens to the outside
         </roomItems>
         <npc></npc>
         <dx>55</dx>
-        <dy>32</dy>
+        <dy>42</dy>
     </room>
     <room id="garden">
         <roomName>Garden</roomName>
@@ -87,7 +87,7 @@ back inside.</desc>
         <monster questItem="UV Light">Ware Wolf</monster>
         <npc>Chess Geek</npc>
         <dx>55</dx>
-        <dy>39</dy>
+        <dy>49</dy>
     </room>
     <room id="kitchen">
         <roomName>Kitchen</roomName>
@@ -108,8 +108,8 @@ door showing a dining room table, and along the EAST wall there is a closed door
         </roomItems>
         <monster questItem="silver butter knife">Vampire</monster>
         <npc></npc>
-        <dx>63</dx>
-        <dy>32</dy>
+        <dx>55</dx>
+        <dy>35</dy>
     </room>
     <room id="pantry">
         <roomName>Pantry</roomName>
@@ -129,7 +129,7 @@ glass bottles. Do those jars have eyeballs in them? The only door out is WEST to
         </roomItems>
         <npc>Bleacher Kid</npc>
         <dx>71</dx>
-        <dy>32</dy>
+        <dy>35</dy>
     </room>
     <room id="study">
         <roomName>Study</roomName>
@@ -150,8 +150,8 @@ with bookshelves opens, lit by sconces along the walls.</desc>
             <item>Pantry Key</item>
         </roomItems>
         <npc></npc>
-        <dx>38</dx>
-        <dy>39</dy>
+        <dx>33</dx>
+        <dy>49</dy>
     </room>
     <room id="library">
         <roomName>Library</roomName>
@@ -169,8 +169,8 @@ flickers incessantly, it seems to be hanging slightly askew. To the EAST a singl
         <roomItems type="array">
         </roomItems>
         <npc></npc>
-        <dx>30</dx>
-        <dy>39</dy>
+        <dx>21</dx>
+        <dy>49</dy>
     </room>
     <room id="dungeon">
         <roomName>Dungeon</roomName>
@@ -188,8 +188,8 @@ by rusted iron gates, manacles chained to the wall. </desc>
         <roomItems type="array">
         </roomItems>
         <npc></npc>
-        <dx>20</dx>
-        <dy>54</dy>
+        <dx>22</dx>
+        <dy>57</dy>
     </room>
     <room id="sacrificialChamber">
         <roomName>Sacrificial Chamber</roomName>
@@ -211,7 +211,7 @@ does not appear to be another exit from this room other than the door to the WES
         <monster questItem="flashlight">Ghost</monster>
         <npc></npc>
         <dx>40</dx>
-        <dy>58</dy>
+        <dy>57</dy>
     </room>
     <room id="upstairsLanding">
         <roomName>Upstairs Landing</roomName>
@@ -229,8 +229,8 @@ WEST beg to be opened. A string dangles from the ceiling, indicating something m
         <roomItems type="array">
         </roomItems>
         <npc></npc>
-        <dx>29</dx>
-        <dy>14</dy>
+        <dx>32</dx>
+        <dy>24</dy>
     </room>
     <room id="nursery">
         <roomName>Nursery</roomName>
@@ -251,7 +251,7 @@ is the SOUTH door you came through.</desc>
         </roomItems>
         <npc></npc>
         <dx>40</dx>
-        <dy>7</dy>
+        <dy>16</dy>
     </room>
     <room id="masterBedroom">
         <roomName>Master</roomName>
@@ -272,7 +272,7 @@ on the bedside table. The only exit is the WEST door you entered through.</desc>
         </roomItems>
         <npc></npc>
         <dx>55</dx>
-        <dy>14</dy>
+        <dy>24</dy>
     </room>
     <room id="guestBedroom">
         <roomName>Guest</roomName>
@@ -292,7 +292,7 @@ from the ceiling. The only exit from this room is the EAST door you entered thro
         </roomItems>
         <npc></npc>
         <dx>14</dx>
-        <dy>14</dy>
+        <dy>24</dy>
     </room>
     <room id="attic">
         <roomName>Attic</roomName>
