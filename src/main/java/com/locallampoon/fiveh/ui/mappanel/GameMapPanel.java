@@ -204,6 +204,11 @@ public class GameMapPanel extends JPanel{
         graph.setColor(MAP_DEFAULT); // reset color
     }
 
+    public void updateGUI(){
+        super.revalidate(); // highlight room
+        super.repaint();
+    }
+
     @Override
     public void paint(Graphics graph){
         super.paint(graph);
