@@ -3,11 +3,11 @@ package com.locallampoon.fiveh.ui.mappanel; /**
  * Player image palyer.png from https://pngtree.com/freepng/cartoon-animal-game-character-design_4069832.html
  */
 
+import com.locallampoon.fiveh.core.Game;
 import com.locallampoon.fiveh.core.Room;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.util.Map;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.*;
@@ -22,6 +22,7 @@ public class GameMapPanel extends JPanel{
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         startGamePanel();
+        gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }
 
     public void startGamePanel(){
