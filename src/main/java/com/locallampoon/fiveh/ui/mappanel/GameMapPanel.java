@@ -4,6 +4,7 @@ package com.locallampoon.fiveh.ui.mappanel; /**
  */
 
 import com.locallampoon.fiveh.core.Game;
+import com.locallampoon.fiveh.core.Player;
 import com.locallampoon.fiveh.core.Room;
 
 import javax.swing.*;
@@ -31,23 +32,38 @@ public class GameMapPanel extends JPanel{
         graph.setFont(MAP_TEXT_FONT);
         this.drawGrid(graph); // design purpose only
         this.drawFloorLayout(graph);
-        boolean spotLight = false;
+        boolean spotLight; // player's current room
+        boolean neighbour; // neighbours of player's current room
+        List<String> neighbours = gameMap.getPlayer().getCurrentRoom().getExits();
         for(Map.Entry<String, Room> r : gameMap.getRooms().entrySet()){
-            if(gameMap.getPlayer().getCurrentRoom().equals(r.getValue())){
-                spotLight = true;
-            } else{
-                spotLight = false;
-            }
-            if(r.getKey().toLowerCase().equals("hall") || r.getKey().toLowerCase().equals("upstairslanding")){
-                this.drawHall(graph, r.getValue(), spotLight);
+            spotLight = this.playerRoomSpotLight(r.getValue(),gameMap.getPlayer());
+            neighbour = neighbours.contains(r.getKey()); // original design used <room id=""> as the key to identify room
+            System.out.println("you are my neighbour:" + neighbour + r.getValue().getRoomName());
+            if(r.getKey().equalsIgnoreCase("hall") || r.getKey().equalsIgnoreCase("upstairslanding")){
+                this.drawHall(graph, r.getValue(), spotLight, neighbour);
             } else
-                this.drawRoom(graph, r.getValue(), spotLight);
+                this.drawRoom(graph, r.getValue(), spotLight, neighbour);
         }
         this.drawPlayer(graph);
 
         // draw map
         // draw other items
     }
+
+    /**
+     * decide whether the Player is in this Room or not
+     * @param room
+     * @param player
+     * @return
+     */
+    private boolean playerRoomSpotLight(Room room, Player player){
+        if(player.getCurrentRoom().equals(room)){
+            return true;
+        }
+        return false;
+    }
+
+
 
     private void drawPlayer(Graphics graph){
         for(int i = 0; i< PLAYER_SIZE; i++){
@@ -67,16 +83,14 @@ public class GameMapPanel extends JPanel{
      * @param graph
      * @param mapRoom
      */
-    private void drawRoom(Graphics graph, Room mapRoom, boolean spotLight){
+    private void drawRoom(Graphics graph, Room mapRoom, boolean spotLight, boolean neighbour){
         int x_center = ((MapRoom)mapRoom).getDx();
         int y_center = ((MapRoom)mapRoom).getDy();
-        List<String> roomList = mapRoom.getExits();
-        for(int i = 0; i < roomList.size(); i++){
-            System.out.printf("# %d: %s\n", i, ((ArrayList)roomList).get(i));
-        }
         if(spotLight){
             graph.setColor(PLAYER_COLOR);
-
+        }
+        if(neighbour){
+            graph.setColor(NEIGHBOUR_COLOR);
         }
         for(int i = 0; i < MAP_ROOM_LENGTH; i++){
             int x = x_center - MAP_ROOM_LENGTH * UNIT_SIZE / 2 + i * UNIT_SIZE;
@@ -88,6 +102,7 @@ public class GameMapPanel extends JPanel{
         }
         graph.drawString("R", x_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2);
         // draw room name
+
         graph.setColor(new Color(255,69,0));
         graph.setFont(ROOM_TEXT_FONT);
         for(int i = 0; i < mapRoom.getRoomName().length(); i++){
@@ -95,6 +110,43 @@ public class GameMapPanel extends JPanel{
         }
         graph.setFont(MAP_TEXT_FONT);
         graph.setColor(MAP_DEFAULT);
+    }
+
+    /**
+     * hall is a rectangle instead of a square
+     * @param graph
+     * @param hall
+     */
+    private void drawHall(Graphics graph, Room hall, boolean spotlight, boolean neighbour){
+        int x_center = ((MapRoom)hall).getDx();
+        int y_center = ((MapRoom)hall).getDy();
+        if(spotlight){
+            graph.setColor(PLAYER_COLOR);
+        }
+        if(neighbour){
+            graph.setColor(NEIGHBOUR_COLOR);
+        }
+        // draw horizontal
+        for(int i = 0; i < MAP_HALL_LENGTH; i++){
+            int x = x_center - MAP_HALL_LENGTH * UNIT_SIZE/3 + i * UNIT_SIZE; // top left corner
+            graph.drawString("H", x, y_center - MAP_ROOM_LENGTH * UNIT_SIZE/2);
+            graph.drawString("H", x, y_center + MAP_ROOM_LENGTH * UNIT_SIZE/2);
+        }
+        // draw vertical
+        for(int i = 0; i < MAP_ROOM_LENGTH; i++){
+            int y = y_center - MAP_ROOM_LENGTH * UNIT_SIZE/2 + i * UNIT_SIZE; // top left corner
+            graph.drawString("H", x_center - MAP_HALL_LENGTH * UNIT_SIZE/3, y);
+            graph.drawString("H", x_center + MAP_HALL_LENGTH * UNIT_SIZE*2/3, y);
+        }
+        graph.drawString("H", x_center + MAP_HALL_LENGTH * UNIT_SIZE*2/3, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2); // right bottom corner
+        // draw room name
+        graph.setColor(ROOM_TEXT_COLOR);
+        graph.setFont(ROOM_TEXT_FONT);
+        for(int i = 0; i < hall.getRoomName().length(); i++){
+            graph.drawString(String.valueOf(hall.getRoomName().charAt(i)), x_center - MAP_HALL_LENGTH * UNIT_SIZE/3 + i * UNIT_SIZE,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE);
+        }
+        graph.setFont(MAP_TEXT_FONT);
+        graph.setColor(MAP_DEFAULT); // reset color
     }
 
     /**
@@ -128,40 +180,6 @@ public class GameMapPanel extends JPanel{
 //        for(int i = 0; i < height; i++){
 //
 //        }
-        graph.setColor(MAP_DEFAULT); // reset color
-    }
-
-    /**
-     * hall is a rectangle instead of a square
-     * @param graph
-     * @param hall
-     */
-    private void drawHall(Graphics graph, Room hall, boolean spotlight){
-        int x_center = ((MapRoom)hall).getDx();
-        int y_center = ((MapRoom)hall).getDy();
-        if(spotlight){
-            graph.setColor(PLAYER_COLOR);
-        }
-        // draw horizontal
-        for(int i = 0; i < MAP_HALL_LENGTH; i++){
-            int x = x_center - MAP_HALL_LENGTH * UNIT_SIZE/3 + i * UNIT_SIZE; // top left corner
-            graph.drawString("H", x, y_center - MAP_ROOM_LENGTH * UNIT_SIZE/2);
-            graph.drawString("H", x, y_center + MAP_ROOM_LENGTH * UNIT_SIZE/2);
-        }
-        // draw vertical
-        for(int i = 0; i < MAP_ROOM_LENGTH; i++){
-            int y = y_center - MAP_ROOM_LENGTH * UNIT_SIZE/2 + i * UNIT_SIZE; // top left corner
-            graph.drawString("H", x_center - MAP_HALL_LENGTH * UNIT_SIZE/3, y);
-            graph.drawString("H", x_center + MAP_HALL_LENGTH * UNIT_SIZE*2/3, y);
-        }
-        graph.drawString("H", x_center + MAP_HALL_LENGTH * UNIT_SIZE*2/3, y_center+ MAP_ROOM_LENGTH *UNIT_SIZE/2); // right bottom corner
-        // draw room name
-        graph.setColor(ROOM_TEXT_COLOR);
-        graph.setFont(ROOM_TEXT_FONT);
-        for(int i = 0; i < hall.getRoomName().length(); i++){
-            graph.drawString(String.valueOf(hall.getRoomName().charAt(i)), x_center - MAP_HALL_LENGTH * UNIT_SIZE/3 + i * UNIT_SIZE,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE);
-        }
-        graph.setFont(MAP_TEXT_FONT);
         graph.setColor(MAP_DEFAULT); // reset color
     }
 
