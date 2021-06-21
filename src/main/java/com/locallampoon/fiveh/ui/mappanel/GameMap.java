@@ -16,8 +16,7 @@ public class GameMap {
     private Map<String, Room> mapRooms = new HashMap<>();
     private Player player;
 
-    private GameMap(){
-    }
+    private GameMap(){}
 
     public static GameMap getInstance(){
         if(gameMapInstance==null){
@@ -28,6 +27,10 @@ public class GameMap {
 
     public Map<String, Room> getRooms(){
         return this.mapRooms;
+    }
+
+    public void setRooms(Map<String, Room> rooms){
+        this.mapRooms = rooms;
     }
 
     public Player getPlayer(){

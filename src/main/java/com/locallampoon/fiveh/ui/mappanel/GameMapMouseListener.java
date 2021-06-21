@@ -6,6 +6,7 @@ class GameMapMouseListener implements MouseInputListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.printf("clicked at location:%s\n", e.getLocationOnScreen());
+        System.out.println("Which room clicked? Do you want to move to that room?");
     }
 
     @Override
