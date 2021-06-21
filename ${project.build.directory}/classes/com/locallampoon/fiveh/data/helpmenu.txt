@@ -1,0 +1,38 @@
+----------------------------------------HELP MENU-------------------------------------------
+A mysterious mustachioed man materializes from the mists.
+
+"So you want to know how to play huh? Follow these simple instructions to navigate through Hugo Houdini's Halfway
+Haunted House, and pray you make it out alive, much less with your sanity!"
+
+Basic commands:
+Hugo Houdini's Halfway Haunted House accepts basic commands that consist of one verb and one noun. For example "Go east"
+will move the player to the room east of their current location, if there is one. "Get Dagger" will pick up a dagger, if
+available, and place it in the player's inventory.
+
+Movement: (Verb + Direction)
+Verbs: Go, Move
+Directions: north, south, east, west, up, down
+
+Item Interaction: (Verb + Item)
+Verb: Get, Grab
+Items will be displayed to the user in the room description.
+
+Party Interaction: (Verb + Person)
+Verb: Recruit
+People: Jock, Chess Geek, Bleacher Kid
+
+Ghost Interactions: (Verb)
+Fight Ghost: Attack, Fight, Hit, Punch, Kick
+Run Away: Flee, Run
+
+Help:
+To see this menu again: Help, H
+
+Quit:
+To exit the game: Quit, q
+
+
+
+------------------------------------HELP MENU END-----------------------------------------
+
+
