@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Game implements Serializable {
+
     private static Player player;
     private static Map<String, Room> houseMap;
     private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
@@ -25,7 +26,6 @@ public class Game implements Serializable {
     public Game() {
         setHouseMap(XMLParser.parseRooms());
         this.player = new Player(houseMap.get("hall"));
-        GameMap.getInstance().setPlayer(this.player); // pass a reference to game map
         initializeUI();
     }
 
@@ -296,6 +296,10 @@ public class Game implements Serializable {
         printDescription();
         // handle monster scenario
         checkMonster();
+    }
+
+    public static Player getPlayer() {
+        return player;
     }
 }
 
