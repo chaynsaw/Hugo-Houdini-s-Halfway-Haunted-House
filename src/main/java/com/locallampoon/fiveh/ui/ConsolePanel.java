@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ConsolePanel implements KeyListener {
-    public static final int ENTER_KEY = 10;
     JPanel panel;
     JTextArea textArea;
     Font normalFont = new Font(
@@ -71,7 +70,7 @@ public class ConsolePanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == ENTER_KEY) {
+        if (e.getKeyCode() == Key.ENTER.getKey()) {
             disableConsole();
             executeCommand(textArea.getText());
             clear();
@@ -82,9 +81,11 @@ public class ConsolePanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        if (keyCode == ENTER_KEY) {
-            // reset caret position
-            textArea.setCaretPosition(textArea.getCaretPosition() - 1);
+        if (keyCode == Key.ENTER.getKey()) {
+            if (textArea.getCaretPosition() != 0) {
+                // reset caret position
+                textArea.setCaretPosition(0);
+            }
         }
     }
 }
