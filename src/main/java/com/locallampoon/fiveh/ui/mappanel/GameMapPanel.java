@@ -189,8 +189,8 @@ public class GameMapPanel extends JPanel{
     }
 
     public void updateGUI(){
-        super.revalidate(); // highlight room
-        super.repaint();
+        this.revalidate(); // highlight room
+        this.repaint();
     }
 
     @Override
