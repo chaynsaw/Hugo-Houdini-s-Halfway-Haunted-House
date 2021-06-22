@@ -52,4 +52,11 @@ public class PanelStyles {
     public static final Color FLOOR_NAME_COLOR = new Color(255,255,255);
     public static final Font FLOOR_NAME_FONT = new Font("Monospaced", Font.PLAIN, UNIT_SIZE*3/2);
     public static final Font ROOM_TEXT_FONT = new Font("Monospaced", Font.PLAIN, UNIT_SIZE*4/3);
+
+    public static class ArtPanel {
+        public static int x = 100;
+        public static int y = 20;
+        public static int width = 250;
+        public static int height = 300;
+    }
 }
