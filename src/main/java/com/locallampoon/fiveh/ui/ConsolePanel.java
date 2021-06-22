@@ -80,8 +80,7 @@ public class ConsolePanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        if (keyCode == Key.ENTER.getKey()) {
+        if (e.getKeyCode() == Key.ENTER.getKey()) {
             if (textArea.getCaretPosition() != 0) {
                 // reset caret position
                 textArea.setCaretPosition(0);
