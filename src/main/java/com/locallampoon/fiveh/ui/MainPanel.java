@@ -41,7 +41,24 @@ public class MainPanel {
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
         container.add(mapPanel.getPanel());
+        hideGame();
         window.setVisible(true);
+    }
+
+    public void hideGame() {
+        narrativePanel.getPanel().setVisible(false);
+        consolePanel.getPanel().setVisible(false);
+        artPanel.getPanel().setVisible(false);
+        statsPanel.getPanel().setVisible(false);
+        mapPanel.getPanel().setVisible(false);
+    }
+
+    public void showGame() {
+        narrativePanel.getPanel().setVisible(true);
+        consolePanel.getPanel().setVisible(true);
+        artPanel.getPanel().setVisible(true);
+        statsPanel.getPanel().setVisible(true);
+        mapPanel.getPanel().setVisible(true);
     }
 
     public void hideIntro() {
