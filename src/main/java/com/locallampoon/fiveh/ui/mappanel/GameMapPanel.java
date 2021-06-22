@@ -45,9 +45,6 @@ public class GameMapPanel extends JPanel {
                 this.drawRoom(graph, r.getValue(), spotLight, neighbour);
         }
         this.drawPlayer(graph);
-
-        // draw map
-        // draw other items
     }
 
     /**
