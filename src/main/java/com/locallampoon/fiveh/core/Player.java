@@ -161,7 +161,9 @@ public class Player {
             getCurrentRoom().addItem(monster.getQuestItem());
             getCurrentRoom().setRoomMonster(null);
         }
-        narrativePanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
+        if (narrativePanel != null) {
+            narrativePanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
+        }
     }
 
     void takeDamage(int damage) {
@@ -171,8 +173,10 @@ public class Player {
             System.out.println("GAME OVER");
         } else {
             setHealth(health - damage);
-            narrativePanel.appendTextArea(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " +damage+
-                    " DAMAGE and have " +health+ " HEALTH left\n");
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " + damage +
+                        " DAMAGE and have " + health + " HEALTH left\n");
+            }
         }
     }
 
