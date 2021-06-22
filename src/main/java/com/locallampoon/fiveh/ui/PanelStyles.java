@@ -21,7 +21,7 @@ public class PanelStyles {
     // Map panel styles
     public static final int UNIT_SIZE = 8; // how big each block/unit; player movement length also
     public static final int PANEL_WIDTH = 600; // panel size
-    public static final int PANEL_HEIGHT = 490;
+    public static final int PANEL_HEIGHT = 500;
     public static final Font MAP_TEXT_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*2/3);
     public static final String[] MAP_FLOORS = new String[]{"Attic", "Second", "First","Basement"};
     public static final int PLAYER_SIZE = 5;
