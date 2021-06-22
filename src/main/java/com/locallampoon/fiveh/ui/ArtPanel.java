@@ -1,6 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class ArtPanel {
@@ -13,6 +14,7 @@ public class ArtPanel {
         pane.setEnabled(false);
         pane.setBounds(600, 0, 400, 250);
         pane.setBackground(Color.BLACK);
+        pane.setBorder(new LineBorder(Color.WHITE));
         textArea = new JTextArea();
         textArea.setBounds(100, 0, 250, 300);
         textArea.setEnabled(false);
