@@ -20,6 +20,7 @@ public class GameMapPanel extends JPanel {
 
     public GameMapPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        this.setOpaque(false); // prevent other panels' text being covered during repaint()
         this.setBackground(Color.BLACK);
         gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }
@@ -197,13 +198,13 @@ public class GameMapPanel extends JPanel {
     }
 
     public void updateGUI() {
-        super.revalidate(); // highlight room
-        super.repaint();
+        this.revalidate();
+        this.repaint();
     }
 
     @Override
-    public void paint(Graphics graph) {
-        super.paint(graph);
+    public void paintComponent(Graphics graph) {
+        super.paintComponent(graph);
         draw(graph);
     }
 }
