@@ -20,8 +20,8 @@ public class GameMapPanel extends JPanel {
 
     public GameMapPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        this.setOpaque(false); // prevent other panels' text being covered during repaint()
         this.setBackground(Color.BLACK);
+        this.setOpaque(false); // prevent other panels' text being covered during repaint()
         gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }
 
@@ -82,6 +82,7 @@ public class GameMapPanel extends JPanel {
     /**
      * this will draw all rooms on panel by its coordinates
      * it doesn't not draw room connections in this method
+     *
      * @param graph
      * @param mapRoom
      */
@@ -116,6 +117,7 @@ public class GameMapPanel extends JPanel {
 
     /**
      * hall is a rectangle instead of a square
+     *
      * @param graph
      * @param hall
      */
@@ -176,7 +178,7 @@ public class GameMapPanel extends JPanel {
      *
      * @param graph
      */
-    private void drawGrid(Graphics graph) {
+    private void drawGrid(Graphics graph){
         // grid system
         // vertical lines
         for (int i = 0; i <= PANEL_HEIGHT / UNIT_SIZE; i++) {
@@ -203,8 +205,8 @@ public class GameMapPanel extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics graph) {
-        super.paintComponent(graph);
+    public void paint(Graphics graph){
+        super.paint(graph);
         draw(graph);
     }
 }
