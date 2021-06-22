@@ -105,9 +105,7 @@ public class GameMapPanel extends JPanel {
 
         graph.setColor(ROOM_TEXT_COLOR);
         graph.setFont(ROOM_TEXT_FONT);
-        for(int i = 0; i < mapRoom.getRoomName().length(); i++){
-            graph.drawString(String.valueOf(mapRoom.getRoomName().charAt(i)),x_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 + i * UNIT_SIZE,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE);
-        }
+        graph.drawString(mapRoom.getRoomName(),x_center- MAP_ROOM_LENGTH *UNIT_SIZE/2,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE);
         graph.setFont(MAP_TEXT_FONT);
         graph.setColor(MAP_DEFAULT);
     }
@@ -143,9 +141,7 @@ public class GameMapPanel extends JPanel {
         // draw room name
         graph.setColor(ROOM_TEXT_COLOR);
         graph.setFont(ROOM_TEXT_FONT);
-        for(int i = 0; i < hall.getRoomName().length(); i++){
-            graph.drawString(String.valueOf(hall.getRoomName().charAt(i)), x_center - MAP_HALL_LENGTH * UNIT_SIZE/3 + i * UNIT_SIZE,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE);
-        }
+        graph.drawString(hall.getRoomName(), x_center - MAP_HALL_LENGTH * UNIT_SIZE/3,y_center- MAP_ROOM_LENGTH *UNIT_SIZE/2 - UNIT_SIZE);
         graph.setFont(MAP_TEXT_FONT);
         graph.setColor(MAP_DEFAULT); // reset color
     }
