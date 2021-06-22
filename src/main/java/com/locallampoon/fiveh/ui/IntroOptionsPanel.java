@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IntroOptionsPanel implements KeyListener {
-    private final String bullet = "- ";
+    private final String bullet = "> ";
     int selectedIndex = 0;
     JPanel panel;
     List<JLabel> optionLabels = new ArrayList<>();
