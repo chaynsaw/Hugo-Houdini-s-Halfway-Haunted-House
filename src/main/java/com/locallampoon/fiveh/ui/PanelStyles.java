@@ -35,6 +35,6 @@ public class PanelStyles {
     public static final Color PLAYER_COLOR = new Color(10,248,8);
     public static final Color NEIGHBOUR_COLOR = new Color(61,184,255);
     public static final Color FLOOR_NAME_COLOR = new Color(255,255,255);
-    public static final Font FLOOR_NAME_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*3/2);
-    public static final Font ROOM_TEXT_FONT = new Font("TimesRoman", Font.PLAIN, UNIT_SIZE*4/3);
+    public static final Font FLOOR_NAME_FONT = new Font("Monospaced", Font.PLAIN, UNIT_SIZE*3/2);
+    public static final Font ROOM_TEXT_FONT = new Font("Monospaced", Font.PLAIN, UNIT_SIZE*4/3);
 }
