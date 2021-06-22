@@ -8,8 +8,8 @@ import com.locallampoon.fiveh.core.Player;
 import com.locallampoon.fiveh.core.Room;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +21,7 @@ public class GameMapPanel extends JPanel {
     public GameMapPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
+        this.setBorder(new LineBorder(Color.WHITE));
         this.setOpaque(false); // prevent other panels' text being covered during repaint()
         gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }
@@ -44,7 +45,6 @@ public class GameMapPanel extends JPanel {
             } else
                 this.drawRoom(graph, r.getValue(), spotLight, neighbour);
         }
-        this.drawPlayer(graph);
     }
 
     /**
