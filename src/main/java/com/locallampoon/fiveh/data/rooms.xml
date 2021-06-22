@@ -65,7 +65,7 @@ busy kitchen come from a dark room, and to the SOUTH a door opens to the outside
         </roomItems>
         <npc></npc>
         <dx>55</dx>
-        <dy>42</dy>
+        <dy>43</dy>
     </room>
     <room id="garden">
         <roomName>Garden</roomName>
@@ -87,7 +87,7 @@ back inside.</desc>
         <monster questItem="UV Light">Ware Wolf</monster>
         <npc>Chess Geek</npc>
         <dx>55</dx>
-        <dy>49</dy>
+        <dy>50</dy>
     </room>
     <room id="kitchen">
         <roomName>Kitchen</roomName>
@@ -109,7 +109,7 @@ door showing a dining room table, and along the EAST wall there is a closed door
         <monster questItem="silver butter knife">Vampire</monster>
         <npc></npc>
         <dx>55</dx>
-        <dy>35</dy>
+        <dy>36</dy>
     </room>
     <room id="pantry">
         <roomName>Pantry</roomName>
@@ -128,8 +128,8 @@ glass bottles. Do those jars have eyeballs in them? The only door out is WEST to
             <item>Eyeball Jar</item>
         </roomItems>
         <npc>Bleacher Kid</npc>
-        <dx>71</dx>
-        <dy>35</dy>
+        <dx>69</dx>
+        <dy>36</dy>
     </room>
     <room id="study">
         <roomName>Study</roomName>
@@ -151,7 +151,7 @@ with bookshelves opens, lit by sconces along the walls.</desc>
         </roomItems>
         <npc></npc>
         <dx>33</dx>
-        <dy>49</dy>
+        <dy>50</dy>
     </room>
     <room id="library">
         <roomName>Library</roomName>
@@ -170,7 +170,7 @@ flickers incessantly, it seems to be hanging slightly askew. To the EAST a singl
         </roomItems>
         <npc></npc>
         <dx>21</dx>
-        <dy>49</dy>
+        <dy>50</dy>
     </room>
     <room id="dungeon">
         <roomName>Dungeon</roomName>
@@ -188,8 +188,8 @@ by rusted iron gates, manacles chained to the wall. </desc>
         <roomItems type="array">
         </roomItems>
         <npc></npc>
-        <dx>22</dx>
-        <dy>57</dy>
+        <dx>21</dx>
+        <dy>58</dy>
     </room>
     <room id="sacrificialChamber">
         <roomName>Sacrificial Chamber</roomName>
@@ -211,7 +211,7 @@ does not appear to be another exit from this room other than the door to the WES
         <monster questItem="flashlight">Ghost</monster>
         <npc></npc>
         <dx>40</dx>
-        <dy>57</dy>
+        <dy>58</dy>
     </room>
     <room id="upstairsLanding">
         <roomName>Upstairs Landing</roomName>
