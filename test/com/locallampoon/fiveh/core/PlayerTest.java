@@ -1,6 +1,5 @@
 package com.locallampoon.fiveh.core;
 
-import com.locallampoon.fiveh.ui.NarrativePanel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +29,6 @@ public class PlayerTest {
         player = new Player(houseMap.get("kitchen"));
         player.addItem("key");
         player.addItem("pencil");
-        Game game = new Game();
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
