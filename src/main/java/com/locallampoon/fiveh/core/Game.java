@@ -1,8 +1,6 @@
 package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
-import com.locallampoon.fiveh.ui.mappanel.GameMap;
-import com.locallampoon.fiveh.ui.mappanel.GameMapPanel;
 
 import java.io.*;
 import java.util.List;
@@ -15,10 +13,9 @@ public class Game implements Serializable {
     private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
     private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
-    private MainPanel mainPanel;
+    static MainPanel mainPanel;
     static NarrativePanel narrativePanel;
     private static ArtPanel artPanel;
-    private static ConsolePanel consolePanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
 
@@ -37,8 +34,9 @@ public class Game implements Serializable {
 
     // METHODS
 
-    private void initializeUI() {
+    private static void initializeUI() {
         mainPanel = new MainPanel(
+                new IntroPanel(),
                 new NarrativePanel(),
                 new ConsolePanel(),
                 new ArtPanel(),
@@ -48,7 +46,6 @@ public class Game implements Serializable {
         narrativePanel = mainPanel.getNarrativePanel();
         artPanel = mainPanel.getArtPanel();
         statsPanel = mainPanel.getStatsPanel();
-        consolePanel = mainPanel.getConsolePanel();
         mapPanel = mainPanel.getMapPanel();
     }
 
@@ -173,80 +170,18 @@ public class Game implements Serializable {
         }
     }
 
-    private void showIntro() throws IOException {
-        artPanel.setTextArea(GameArt.renderHouse());
-        String menuPrompt = "Type one of the following Commands:\n\"New\" - Start a new game.\n\"Help\" - Help from the Caretaker.\n\"Quit\" - Exit the game.";
-        String input;
-        readFile(MENU_FILE);
-
-        mainMenu:
-        do {
-            narrativePanel.appendTextArea(menuPrompt);
-            System.out.print("\n> ");
-
-            input = BUFFERED_READER.readLine().toLowerCase();
-
-            switch (input) {
-                case "new":
-                    break mainMenu;
-                case "help":
-                    getHelp();
-                    break;
-                case "quit":
-                    System.exit(0);
-            }
-        } while (input.equals(""));
-    }
-
-    public void start() throws IOException {
-
-        String input;
-        List<String> output;
-
-        showIntro();
-        do {
-            // clear panels
-            narrativePanel.setTextArea("");
-            artPanel.setTextArea("");
-            statsPanel.setTextArea("");
-            Room playerCurrentRoom = player.getCurrentRoom();
-            narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
-            narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
-            narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
-            narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
-
-            Monster monsterInRoom = playerCurrentRoom.getRoomMonster();
-            if (monsterInRoom != null) {
-                switch (monsterInRoom.getName()) {
-                    case "Vampire":
-                        artPanel.setTextArea(GameArt.renderMan());
-                        break;
-                    case "Ghost":
-                        artPanel.setTextArea(GameArt.renderGhost());
-                        break;
-                    case "Ware Wolf":
-                        artPanel.setTextArea(GameArt.renderWolf());
-                        break;
-                }
-                System.out.println("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
-                statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());
-            }
-            statsPanel.appendTextArea("HEALTH: " + player.getHealth());
-            statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
-            statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
-
-            System.out.print("> ");
-
-            input = BUFFERED_READER.readLine();
-            output = UserInput.parseCommand(input);
-            List<String> roomExits = playerCurrentRoom.getExits();
-
-            implementCommand(output, roomExits);
-            if (input.equals("q") || input.equals("quit")) {
-                input = GameState.quitHelper(BUFFERED_READER);
-            }
-
-        } while (!"q".equals(input));
+    public static void handleIntro(IntroOption option) {
+        switch (option) {
+            case NEW:
+                mainPanel.showGame();
+                mainPanel.hideIntro();
+                break;
+            // TODO: add help option
+            case QUIT:
+                System.exit(0);
+            default:
+                break;
+        }
     }
 
     private static void printDescription() {
@@ -275,7 +210,6 @@ public class Game implements Serializable {
     }
 
     public void startV2() {
-        // TODO: add show intro
         printDescription();
     }
 
@@ -294,7 +228,7 @@ public class Game implements Serializable {
         statsPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
-        mapPanel.updateMapGUI(); // need to repaint after player current position updated
+        mapPanel.updateMapGUI(); //need to repaint after player current position updated
         // print description
         printDescription();
         // handle monster scenario

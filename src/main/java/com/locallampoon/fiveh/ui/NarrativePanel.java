@@ -21,7 +21,7 @@ public class NarrativePanel {
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
-        pane.setBounds(0, 500, 985, 230);
+        pane.setBounds(0, 500, 1000, 340);
     }
 
     public JScrollPane getPanel() {
