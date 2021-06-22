@@ -49,10 +49,6 @@ public class Game implements Serializable {
         mapPanel = mainPanel.getMapPanel();
     }
 
-    public static void hideIntroUI() {
-        mainPanel.hideIntro();
-    }
-
     private static void readFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -177,7 +173,8 @@ public class Game implements Serializable {
     public static void handleIntro(IntroOption option) {
         switch (option) {
             case NEW:
-                hideIntroUI();
+                mainPanel.showGame();
+                mainPanel.hideIntro();
                 break;
             // TODO: add help option
             case QUIT:
