@@ -9,6 +9,21 @@ public class PanelStyles {
     public static final int FONT_SIZE = 18;
     public static final Color BG_COLOR = Color.BLACK;
     public static final Color FG_COLOR = Color.WHITE;
+    public static final int WINDOW_X = 0;
+    public static final int WINDOW_Y = 0;
+    public static final int WINDOW_WIDTH = 1000;
+    public static final int WINDOW_HEIGHT = 800;
+    // intro panel styles
+    public static final int INTRO_TITLE_X = 100;
+    public static final int INTRO_TITLE_Y = 100;
+    public static final int INTRO_TITLE_WIDTH = 780;
+    public static final int INTRO_TITLE_HEIGHT = 150;
+    public static final int INTRO_TITLE_FONT_SIZE = 40;
+    public static final int INTRO_OPTIONS_X = 400;
+    public static final int INTRO_OPTIONS_Y = 400;
+    public static final int INTRO_OPTIONS_WIDTH = 200;
+    public static final int INTRO_OPTIONS_HEIGHT = 100;
+    public static final int INTRO_OPTIONS_FONT_SIZE = 30;
     // console styles
     public static final int CONSOLE_PANEL_X = 0;
     public static final int CONSOLE_PANEL_Y = 730;
