@@ -1,5 +1,6 @@
 package com.locallampoon.fiveh.core;
 
+import com.locallampoon.fiveh.ui.NarrativePanel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,12 +23,14 @@ public class PlayerTest {
     private final PrintStream originalErr = System.err;
 
 
+
     @Before
     public void setUp() throws Exception {
         houseMap = XMLParser.parseRooms();
         player = new Player(houseMap.get("kitchen"));
         player.addItem("key");
         player.addItem("pencil");
+        Game game = new Game();
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
@@ -86,7 +89,7 @@ public class PlayerTest {
         player.attack(m);
         player.attack(m);
         player.attack(m);
-        assertEquals(true, m.isDead());
+        assertTrue(m.isDead());
     }
 
     @Test
