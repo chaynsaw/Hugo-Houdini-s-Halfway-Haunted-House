@@ -1,8 +1,6 @@
 package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
-import com.locallampoon.fiveh.ui.mappanel.GameMap;
-import com.locallampoon.fiveh.ui.mappanel.GameMapPanel;
 
 import java.io.*;
 import java.util.List;
@@ -16,7 +14,7 @@ public class Game implements Serializable {
     private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
     private MainPanel mainPanel;
-    static NarrativePanel narrativePanel;
+    static NarrativePanel narrativePanel = new NarrativePanel();
     private static ArtPanel artPanel;
     private static ConsolePanel consolePanel;
     private static StatsPanel statsPanel;
@@ -25,8 +23,8 @@ public class Game implements Serializable {
     // CONSTRUCTOR
     public Game() {
         setHouseMap(XMLParser.parseRooms());
-        this.player = new Player(houseMap.get("hall"));
-        initializeUI();
+        this.player = new Player(houseMap.get("hall"), narrativePanel);
+        initializeUI(narrativePanel);
     }
 
     // GETTER/SETTER METHODS
@@ -37,15 +35,14 @@ public class Game implements Serializable {
 
     // METHODS
 
-    private void initializeUI() {
+    private void initializeUI(NarrativePanel narrativePanel) {
         mainPanel = new MainPanel(
-                new NarrativePanel(),
+                narrativePanel,
                 new ConsolePanel(),
                 new ArtPanel(),
                 new StatsPanel(),
                 new MapPanel()
         );
-        narrativePanel = mainPanel.getNarrativePanel();
         artPanel = mainPanel.getArtPanel();
         statsPanel = mainPanel.getStatsPanel();
         consolePanel = mainPanel.getConsolePanel();

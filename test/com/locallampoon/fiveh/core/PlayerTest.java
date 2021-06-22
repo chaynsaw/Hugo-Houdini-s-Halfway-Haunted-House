@@ -21,16 +21,17 @@ public class PlayerTest {
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
+    public NarrativePanel narrativePanel = new NarrativePanel();
 
 
 
     @Before
     public void setUp() throws Exception {
         houseMap = XMLParser.parseRooms();
-        player = new Player(houseMap.get("kitchen"));
+
+        player = new Player(houseMap.get("kitchen"), narrativePanel);
         player.addItem("key");
         player.addItem("pencil");
-        Game game = new Game();
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));

@@ -1,17 +1,18 @@
 package com.locallampoon.fiveh.core;
 
+import com.locallampoon.fiveh.ui.NarrativePanel;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import static com.locallampoon.fiveh.core.Game.narrativePanel;
 
 
 public class Player {
 
     //INSTANCE VARIABLE
     private String character;
+    public NarrativePanel narrativePanel;
     final List<String> inventory = new ArrayList<>(5);
     private final List<String> squad;
     private int health;
@@ -42,9 +43,10 @@ public class Player {
         this.setHasDuffelBag(false);
     }
 
-    Player(Room currentRoom) {
+    Player(Room currentRoom, NarrativePanel narrativePanel) {
         this();
         this.currentRoom = currentRoom;
+        this.narrativePanel = narrativePanel;
     }
 
     //METHODS
