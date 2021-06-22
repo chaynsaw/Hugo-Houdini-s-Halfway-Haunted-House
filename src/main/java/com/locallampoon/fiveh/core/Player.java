@@ -172,7 +172,7 @@ public class Player {
         } else {
             setHealth(health - damage);
             narrativePanel.appendTextArea(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " +damage+
-                    " DAMAGE and have " +health+ " HEALTH left");
+                    " DAMAGE and have " +health+ " HEALTH left\n");
         }
     }
 
