@@ -31,7 +31,7 @@ public class GameMapPanel extends JPanel {
      */
     public void draw(Graphics graph){
         graph.setFont(MAP_TEXT_FONT);
-        this.drawGrid(graph); // design purpose only
+        //this.drawGrid(graph); // design purpose only
         this.drawFloorLayout(graph);
         boolean spotLight; // player's current room
         boolean neighbour; // neighbours of player's current room
