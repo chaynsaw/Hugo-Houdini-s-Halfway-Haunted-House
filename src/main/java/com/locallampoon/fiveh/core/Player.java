@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static com.locallampoon.fiveh.core.Game.narrativePanel;
+
 
 public class Player {
 
@@ -159,7 +161,9 @@ public class Player {
             getCurrentRoom().addItem(monster.getQuestItem());
             getCurrentRoom().setRoomMonster(null);
         }
-        System.out.println("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
+        if (narrativePanel != null) {
+            narrativePanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
+        }
     }
 
     void takeDamage(int damage) {
@@ -169,8 +173,10 @@ public class Player {
             System.out.println("GAME OVER");
         } else {
             setHealth(health - damage);
-            System.out.println(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " +damage+
-                    " DAMAGE and have " +health+ " HEALTH left");
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " + damage +
+                        " DAMAGE and have " + health + " HEALTH left\n");
+            }
         }
     }
 
