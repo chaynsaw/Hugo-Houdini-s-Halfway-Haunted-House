@@ -12,7 +12,7 @@ public class PanelStyles {
     public static final int WINDOW_X = 0;
     public static final int WINDOW_Y = 0;
     public static final int WINDOW_WIDTH = 1000;
-    public static final int WINDOW_HEIGHT = 800;
+    public static final int WINDOW_HEIGHT = 910;
     // intro panel styles
     public static final int INTRO_TITLE_X = 100;
     public static final int INTRO_TITLE_Y = 100;
@@ -26,7 +26,7 @@ public class PanelStyles {
     public static final int INTRO_OPTIONS_FONT_SIZE = 30;
     // console styles
     public static final int CONSOLE_PANEL_X = 0;
-    public static final int CONSOLE_PANEL_Y = 730;
+    public static final int CONSOLE_PANEL_Y = 840;
     public static final int CONSOLE_PANEL_WIDTH = 1000;
     public static final int CONSOLE_PANEL_HEIGHT = 32;
     public static final int CONSOLE_TXT_AREA_X = 0;
@@ -56,4 +56,10 @@ public class PanelStyles {
     // narrativePanel styles
     public static final Color ROOM_TEXT_BG_COLOR = new Color(13,148,22);
     public static final Color DIR_TEXT_BG_COLOR = new Color(19, 85, 191);
+    public static class ArtPanel {
+        public static int x = 100;
+        public static int y = 20;
+        public static int width = 250;
+        public static int height = 300;
+    }
 }
