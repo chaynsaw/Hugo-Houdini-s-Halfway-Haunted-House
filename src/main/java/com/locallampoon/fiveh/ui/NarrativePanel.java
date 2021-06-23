@@ -15,8 +15,6 @@ public class NarrativePanel {
         //textArea.setWrapStyleWord(true);
         textArea.setEnabled(false); // this also disable changing foreground color
         textArea.setBackground(Color.BLACK);
-        SimpleAttributeSet attributeSet = new SimpleAttributeSet();
-        textArea.setCharacterAttributes(attributeSet, true);
         pane = new JScrollPane(
                 textArea,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
