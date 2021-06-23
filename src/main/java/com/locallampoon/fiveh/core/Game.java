@@ -53,7 +53,7 @@ public class Game implements Serializable {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
-                narrativePanel.appendTextArea(line);
+                narrativePanel.appendTextArea(line + "\n", PanelStyles.BG_COLOR);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -186,10 +186,19 @@ public class Game implements Serializable {
 
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
-        narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
-        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
-        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", PanelStyles.BG_COLOR);
+        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n",PanelStyles.BG_COLOR);
+        narrativePanel.appendTextArea(playerCurrentRoom.getDesc() + "\n",PanelStyles.BG_COLOR);
+        narrativePanel.appendTextArea("YOUR ADJACENT ROOMS: ", PanelStyles.BG_COLOR);
+        List<String> adjRooms = playerCurrentRoom.getExits();
+        for(int i = 0; i < adjRooms.size(); i++){
+            if(!adjRooms.get(i).isEmpty()){
+                narrativePanel.appendTextArea(PanelStyles.DIRECTIONS[i] + "-" , PanelStyles.DIR_TEXT_BG_COLOR);
+                narrativePanel.appendTextArea(adjRooms.get(i) + " ", PanelStyles.BG_COLOR);
+            }
+        }
+        narrativePanel.appendTextArea("\n\nYOU ARE IN: ", PanelStyles.BG_COLOR);
+        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PanelStyles.ROOM_TEXT_BG_COLOR);
     }
 
     private static void checkMonster() {
