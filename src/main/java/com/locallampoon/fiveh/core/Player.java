@@ -1,5 +1,7 @@
 package com.locallampoon.fiveh.core;
 
+import com.locallampoon.fiveh.ui.PanelStyles;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -162,7 +164,7 @@ public class Player {
             getCurrentRoom().setRoomMonster(null);
         }
         if (narrativePanel != null) {
-            narrativePanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
+            narrativePanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left", PanelStyles.BG_COLOR);
         }
     }
 
@@ -175,7 +177,7 @@ public class Player {
             setHealth(health - damage);
             if (narrativePanel != null) {
                 narrativePanel.appendTextArea(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " + damage +
-                        " DAMAGE and have " + health + " HEALTH left\n");
+                        " DAMAGE and have " + health + " HEALTH left\n", PanelStyles.BG_COLOR);
             }
         }
     }
