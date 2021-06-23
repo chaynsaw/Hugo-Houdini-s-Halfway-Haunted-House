@@ -10,16 +10,16 @@ public class IntroTitlePanel {
     Font font = new Font(
             PanelStyles.FONT_FAMILY,
             PanelStyles.FONT_WEIGHT,
-            PanelStyles.INTRO_TITLE_FONT_SIZE
+            PanelStyles.Intro.titleFontSize
     );
 
     public IntroTitlePanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.INTRO_TITLE_X,
-                PanelStyles.INTRO_TITLE_Y,
-                PanelStyles.INTRO_TITLE_WIDTH,
-                PanelStyles.INTRO_TITLE_HEIGHT
+                PanelStyles.Intro.titleX,
+                PanelStyles.Intro.titleY,
+                PanelStyles.Intro.titleWidth,
+                PanelStyles.Intro.titleHeight
         );
         panel.setBackground(PanelStyles.BG_COLOR);
         title = new JLabel(titleText);

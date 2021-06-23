@@ -3,7 +3,7 @@ package com.locallampoon.fiveh.ui.mappanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.Map.*;
 
 class PlayerAnimation implements ActionListener {
 
@@ -21,13 +21,13 @@ class PlayerAnimation implements ActionListener {
      * @throws InterruptedException
      */
     private void moveTo(MapRoom mapRoom, int unitSize) throws InterruptedException {
-        if(XPlayer[PLAYER_SIZE-1] < mapRoom.getDx() )
-            XPlayer[PLAYER_SIZE-1] += unitSize;
-        else if (XPlayer[PLAYER_SIZE-1] > mapRoom.getDx())
-            XPlayer[PLAYER_SIZE-1] -= unitSize;
-        if(YPlayer[PLAYER_SIZE-1] < mapRoom.getDy() )
-            YPlayer[PLAYER_SIZE-1] += unitSize;
-        else if (YPlayer[PLAYER_SIZE-1] > mapRoom.getDy())
-            YPlayer[PLAYER_SIZE-1] -= unitSize;
+        if(XPlayer[playerSize-1] < mapRoom.getDx() )
+            XPlayer[playerSize-1] += unitSize;
+        else if (XPlayer[playerSize-1] > mapRoom.getDx())
+            XPlayer[playerSize-1] -= unitSize;
+        if(YPlayer[playerSize-1] < mapRoom.getDy() )
+            YPlayer[playerSize-1] += unitSize;
+        else if (YPlayer[playerSize-1] > mapRoom.getDy())
+            YPlayer[playerSize-1] -= unitSize;
     }
 }

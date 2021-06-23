@@ -20,19 +20,19 @@ public class ConsolePanel implements KeyListener {
     public ConsolePanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.CONSOLE_PANEL_X,
-                PanelStyles.CONSOLE_PANEL_Y,
-                PanelStyles.CONSOLE_PANEL_WIDTH,
-                PanelStyles.CONSOLE_PANEL_HEIGHT
+                PanelStyles.ConsolePanel.x,
+                PanelStyles.ConsolePanel.y,
+                PanelStyles.ConsolePanel.width,
+                PanelStyles.ConsolePanel.height
         );
         panel.setBackground(PanelStyles.BG_COLOR);
         panel.setBorder(new MatteBorder(0, 1, 0, 1, Color.WHITE));
         textArea = new JTextArea();
         textArea.setBounds(
-                PanelStyles.CONSOLE_TXT_AREA_X,
-                PanelStyles.CONSOLE_TXT_AREA_Y,
-                PanelStyles.CONSOLE_TXT_AREA_WIDTH,
-                PanelStyles.CONSOLE_TXT_AREA_HEIGHT
+                PanelStyles.ConsolePanel.txtAreaX,
+                PanelStyles.ConsolePanel.txtAreaY,
+                PanelStyles.ConsolePanel.txtAreaWidth,
+                PanelStyles.ConsolePanel.txtAreaHeight
         );
         textArea.setFont(normalFont);
         textArea.setBackground(PanelStyles.BG_COLOR);

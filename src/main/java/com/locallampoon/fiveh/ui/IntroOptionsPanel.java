@@ -17,16 +17,16 @@ public class IntroOptionsPanel implements KeyListener {
     Font font = new Font(
             PanelStyles.FONT_FAMILY,
             PanelStyles.FONT_WEIGHT,
-            PanelStyles.INTRO_OPTIONS_FONT_SIZE
+            PanelStyles.Intro.optionsFontSize
     );
 
     public IntroOptionsPanel() {
         panel = new JPanel(new GridLayout(0, 1));
         panel.setBounds(
-                PanelStyles.INTRO_OPTIONS_X,
-                PanelStyles.INTRO_OPTIONS_Y,
-                PanelStyles.INTRO_OPTIONS_WIDTH,
-                PanelStyles.INTRO_OPTIONS_HEIGHT
+                PanelStyles.Intro.optionsX,
+                PanelStyles.Intro.optionsY,
+                PanelStyles.Intro.optionsWidth,
+                PanelStyles.Intro.optionsHeight
         );
         panel.setBackground(PanelStyles.BG_COLOR);
         panel.setFocusable(true);
