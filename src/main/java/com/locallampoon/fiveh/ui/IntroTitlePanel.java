@@ -8,8 +8,8 @@ public class IntroTitlePanel {
     JPanel panel;
     JLabel title;
     Font font = new Font(
-            PanelStyles.FONT_FAMILY,
-            PanelStyles.FONT_WEIGHT,
+            PanelStyles.Global.fontFamily,
+            PanelStyles.Global.fontWeight,
             PanelStyles.Intro.titleFontSize
     );
 
@@ -21,9 +21,9 @@ public class IntroTitlePanel {
                 PanelStyles.Intro.titleWidth,
                 PanelStyles.Intro.titleHeight
         );
-        panel.setBackground(PanelStyles.BG_COLOR);
+        panel.setBackground(PanelStyles.Global.bgColor);
         title = new JLabel(titleText);
-        title.setForeground(PanelStyles.FG_COLOR);
+        title.setForeground(PanelStyles.Global.fgColor);
         title.setFont(font);
         panel.add(title);
     }

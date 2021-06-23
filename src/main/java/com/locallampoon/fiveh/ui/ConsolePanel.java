@@ -12,9 +12,9 @@ public class ConsolePanel implements KeyListener {
     JPanel panel;
     JTextArea textArea;
     Font normalFont = new Font(
-            PanelStyles.FONT_FAMILY,
-            PanelStyles.FONT_WEIGHT,
-            PanelStyles.FONT_SIZE
+            PanelStyles.Global.fontFamily,
+            PanelStyles.Global.fontWeight,
+            PanelStyles.Global.fontSize
     );
 
     public ConsolePanel() {
@@ -25,7 +25,7 @@ public class ConsolePanel implements KeyListener {
                 PanelStyles.ConsolePanel.width,
                 PanelStyles.ConsolePanel.height
         );
-        panel.setBackground(PanelStyles.BG_COLOR);
+        panel.setBackground(PanelStyles.Global.bgColor);
         panel.setBorder(new MatteBorder(0, 1, 0, 1, Color.WHITE));
         textArea = new JTextArea();
         textArea.setBounds(
@@ -35,8 +35,8 @@ public class ConsolePanel implements KeyListener {
                 PanelStyles.ConsolePanel.txtAreaHeight
         );
         textArea.setFont(normalFont);
-        textArea.setBackground(PanelStyles.BG_COLOR);
-        textArea.setForeground(PanelStyles.FG_COLOR);
+        textArea.setBackground(PanelStyles.Global.bgColor);
+        textArea.setForeground(PanelStyles.Global.fgColor);
         textArea.addKeyListener(this);
         panel.add(textArea);
     }

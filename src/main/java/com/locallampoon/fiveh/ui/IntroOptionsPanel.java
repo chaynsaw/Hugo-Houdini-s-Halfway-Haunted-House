@@ -15,8 +15,8 @@ public class IntroOptionsPanel implements KeyListener {
     JPanel panel;
     List<JLabel> optionLabels = new ArrayList<>();
     Font font = new Font(
-            PanelStyles.FONT_FAMILY,
-            PanelStyles.FONT_WEIGHT,
+            PanelStyles.Global.fontFamily,
+            PanelStyles.Global.fontWeight,
             PanelStyles.Intro.optionsFontSize
     );
 
@@ -28,7 +28,7 @@ public class IntroOptionsPanel implements KeyListener {
                 PanelStyles.Intro.optionsWidth,
                 PanelStyles.Intro.optionsHeight
         );
-        panel.setBackground(PanelStyles.BG_COLOR);
+        panel.setBackground(PanelStyles.Global.bgColor);
         panel.setFocusable(true);
         panel.addKeyListener(this);
 

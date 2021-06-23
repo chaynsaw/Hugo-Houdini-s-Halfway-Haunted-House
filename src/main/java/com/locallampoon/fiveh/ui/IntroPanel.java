@@ -13,8 +13,8 @@ public class IntroPanel {
                 PanelStyles.Window.width,
                 PanelStyles.Window.height
         );
-        this.panel.setBackground(PanelStyles.BG_COLOR);
-        this.panel.setForeground(PanelStyles.FG_COLOR);
+        this.panel.setBackground(PanelStyles.Global.bgColor);
+        this.panel.setForeground(PanelStyles.Global.fgColor);
         this.panel.setLayout(null);
 
         IntroTitlePanel introTitlePanel = new IntroTitlePanel();
