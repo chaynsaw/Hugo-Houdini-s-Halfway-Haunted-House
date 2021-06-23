@@ -13,8 +13,8 @@ public class Game implements Serializable {
     private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
     private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
-    private static MainPanel mainPanel;
-    private static NarrativePanel narrativePanel;
+    static MainPanel mainPanel;
+    static NarrativePanel narrativePanel;
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
@@ -47,10 +47,6 @@ public class Game implements Serializable {
         artPanel = mainPanel.getArtPanel();
         statsPanel = mainPanel.getStatsPanel();
         mapPanel = mainPanel.getMapPanel();
-    }
-
-    public static void hideIntroUI() {
-        mainPanel.hideIntro();
     }
 
     private static void readFile(String filename) {
@@ -177,7 +173,8 @@ public class Game implements Serializable {
     public static void handleIntro(IntroOption option) {
         switch (option) {
             case NEW:
-                hideIntroUI();
+                mainPanel.showGame();
+                mainPanel.hideIntro();
                 break;
             // TODO: add help option
             case QUIT:
@@ -200,17 +197,11 @@ public class Game implements Serializable {
         Monster monsterInRoom = playerCurrentRoom.getRoomMonster();
         if (monsterInRoom != null) {
             switch (monsterInRoom.getName()) {
-                case "Vampire":
-                    artPanel.setTextArea(GameArt.renderMan());
-                    break;
-                case "Ghost":
-                    artPanel.setTextArea(GameArt.renderGhost());
-                    break;
-                case "Ware Wolf":
-                    artPanel.setTextArea(GameArt.renderWolf());
-                    break;
+                case "Vampire" -> artPanel.setTextArea(GameArt.renderMan());
+                case "Ghost" -> artPanel.setTextArea(GameArt.renderGhost());
+                case "Ware Wolf" -> artPanel.setTextArea(GameArt.renderWolf());
             }
-            System.out.println("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
+            narrativePanel.appendTextArea("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
             statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());
         }
         statsPanel.appendTextArea("HEALTH: " + player.getHealth());

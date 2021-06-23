@@ -3,6 +3,7 @@ package com.locallampoon.fiveh.ui;
 import com.locallampoon.fiveh.core.Game;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -25,6 +26,7 @@ public class ConsolePanel implements KeyListener {
                 PanelStyles.CONSOLE_PANEL_HEIGHT
         );
         panel.setBackground(PanelStyles.BG_COLOR);
+        panel.setBorder(new MatteBorder(0, 1, 0, 1, Color.WHITE));
         textArea = new JTextArea();
         textArea.setBounds(
                 PanelStyles.CONSOLE_TXT_AREA_X,
