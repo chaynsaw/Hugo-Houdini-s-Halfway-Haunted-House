@@ -72,7 +72,9 @@ class UserInput {
         if (!wordsList.isEmpty()) {
             verb = wordsList.get(0);
             if (!ACTIONS.contains(verb)) {
-                narrativePanel.appendTextArea("Not an acceptable action\n");
+                if (narrativePanel!=null) {
+                    narrativePanel.appendTextArea("Not an acceptable action\n");
+                }
             }
         } else {
             narrativePanel.appendTextArea("Two word command expected I.E. 'get sword' or 'go north'");
