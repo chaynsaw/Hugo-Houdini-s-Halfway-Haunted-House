@@ -3,6 +3,7 @@ package com.locallampoon.fiveh.core;
 import com.locallampoon.fiveh.ui.*;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -193,9 +194,17 @@ public class Game implements Serializable {
         Room playerCurrentRoom = player.getCurrentRoom();
         narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", PanelStyles.FG_COLOR);
         narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n",PanelStyles.FG_COLOR);
-        narrativePanel.appendTextArea(playerCurrentRoom.getDesc() + "\n",PanelStyles.FG_COLOR);
-        narrativePanel.appendTextArea("YOUR ADJACENT ROOMS: ", PanelStyles.FG_COLOR);
+        String[] desc = playerCurrentRoom.getDesc().split("\\(|\\)");
         List<String> adjRooms = playerCurrentRoom.getExits();
+
+        for(String i : desc){
+            if(Arrays.asList(PanelStyles.DIRECTIONS).contains(i)){
+                narrativePanel.appendTextArea(i,PanelStyles.NEIGHBOUR_COLOR);
+            } else {
+                narrativePanel.appendTextArea(i, PanelStyles.FG_COLOR);
+            }
+        }
+        narrativePanel.appendTextArea("\n\nYOUR ADJACENT ROOMS: ", PanelStyles.FG_COLOR);
         for(int i = 0; i < adjRooms.size(); i++){
             if(!adjRooms.get(i).isEmpty()){
                 narrativePanel.appendTextArea(PanelStyles.DIRECTIONS[i] + "-" , PanelStyles.NEIGHBOUR_COLOR);
