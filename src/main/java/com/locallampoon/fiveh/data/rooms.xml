@@ -21,9 +21,11 @@ UP into the darkness.
             <item>Bowl of Candy</item>
         </roomItems>
         <npc></npc>
+        <dx>32</dx>
+        <dy>42</dy>
     </room>
     <room id="trophyRoom">
-        <roomName>Trophy Room</roomName>
+        <roomName>Trophy</roomName>
         <floor>First</floor>
         <desc>Thick glass cabinets line the perimeter of this room, displaying all sorts of oddities: old playing cards,
 "magic" wands, antique pistols. Mounted animal heads adorn the high walls, grotesque sneers left on their
@@ -40,9 +42,11 @@ faces by a taxidermist with an odd sense of taste. A large grisly bear looms ove
         <roomItems type="array">
         </roomItems>
         <npc>Jock</npc>
+        <dx>14</dx>
+        <dy>42</dy>
     </room>
     <room id="diningRoom">
-        <roomName>Dining Room</roomName>
+        <roomName>Dining</roomName>
         <floor>First</floor>
         <desc>A long table occupies the middle of the room, fully set for a dinner of eight.  Dust covers the fine
 dinnerware and glasses.  A single glass at the head of the table, next to a lit candle, stands out with red
@@ -60,6 +64,8 @@ busy kitchen come from a dark room, and to the SOUTH a door opens to the outside
             <item>Smudged Glass</item>
         </roomItems>
         <npc></npc>
+        <dx>55</dx>
+        <dy>43</dy>
     </room>
     <room id="garden">
         <roomName>Garden</roomName>
@@ -78,8 +84,10 @@ back inside.</desc>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
         </roomItems>
-        <monster questItem="UV Light>">Ware Wolf</monster>
+        <monster questItem="UV Light">Ware Wolf</monster>
         <npc>Chess Geek</npc>
+        <dx>55</dx>
+        <dy>50</dy>
     </room>
     <room id="kitchen">
         <roomName>Kitchen</roomName>
@@ -100,6 +108,8 @@ door showing a dining room table, and along the EAST wall there is a closed door
         </roomItems>
         <monster questItem="silver butter knife">Vampire</monster>
         <npc></npc>
+        <dx>55</dx>
+        <dy>36</dy>
     </room>
     <room id="pantry">
         <roomName>Pantry</roomName>
@@ -118,6 +128,8 @@ glass bottles. Do those jars have eyeballs in them? The only door out is WEST to
             <item>Eyeball Jar</item>
         </roomItems>
         <npc>Bleacher Kid</npc>
+        <dx>69</dx>
+        <dy>36</dy>
     </room>
     <room id="study">
         <roomName>Study</roomName>
@@ -138,6 +150,8 @@ with bookshelves opens, lit by sconces along the walls.</desc>
             <item>Pantry Key</item>
         </roomItems>
         <npc></npc>
+        <dx>33</dx>
+        <dy>50</dy>
     </room>
     <room id="library">
         <roomName>Library</roomName>
@@ -155,6 +169,8 @@ flickers incessantly, it seems to be hanging slightly askew. To the EAST a singl
         <roomItems type="array">
         </roomItems>
         <npc></npc>
+        <dx>21</dx>
+        <dy>50</dy>
     </room>
     <room id="dungeon">
         <roomName>Dungeon</roomName>
@@ -166,12 +182,14 @@ by rusted iron gates, manacles chained to the wall. </desc>
             <exit dir="1"></exit>
             <exit dir="2">sacrificialChamber</exit>
             <exit dir="3"></exit>
-            <exit dir="4"></exit>
+            <exit dir="4">library</exit>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
         </roomItems>
         <npc></npc>
+        <dx>21</dx>
+        <dy>58</dy>
     </room>
     <room id="sacrificialChamber">
         <roomName>Sacrificial Chamber</roomName>
@@ -192,6 +210,8 @@ does not appear to be another exit from this room other than the door to the WES
         </roomItems>
         <monster questItem="flashlight">Ghost</monster>
         <npc></npc>
+        <dx>40</dx>
+        <dy>58</dy>
     </room>
     <room id="upstairsLanding">
         <roomName>Upstairs Landing</roomName>
@@ -209,6 +229,8 @@ WEST beg to be opened. A string dangles from the ceiling, indicating something m
         <roomItems type="array">
         </roomItems>
         <npc></npc>
+        <dx>32</dx>
+        <dy>24</dy>
     </room>
     <room id="nursery">
         <roomName>Nursery</roomName>
@@ -225,12 +247,14 @@ is the SOUTH door you came through.</desc>
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item>Baby's Rattle</item>
+            <item>Baby Rattle</item>
         </roomItems>
         <npc></npc>
+        <dx>40</dx>
+        <dy>16</dy>
     </room>
     <room id="masterBedroom">
-        <roomName>Master Bedroom</roomName>
+        <roomName>Master</roomName>
         <floor>Second</floor>
         <desc>The door opens to reveal a luxurious bedroom, impeccably kept. Not a speck of dust is in sight. A
 phonograph is playing Louis Armstrong's "What a Wonderful World" softly by the bedside. Several silver keys lie
@@ -247,9 +271,11 @@ on the bedside table. The only exit is the WEST door you entered through.</desc>
             <item>Study Key</item>
         </roomItems>
         <npc></npc>
+        <dx>55</dx>
+        <dy>24</dy>
     </room>
-    <room id="guestRoom">
-        <roomName>Guest Room</roomName>
+    <room id="guestBedroom">
+        <roomName>Guest</roomName>
         <floor>Second</floor>
         <desc>You enter a modest bedroom, old stained family photos line the walls. There is a slight mildew smell, as
 there appears to be water damage on WEST wall. On closer inspection, black sludge slowly oozes down the wall
@@ -265,6 +291,8 @@ from the ceiling. The only exit from this room is the EAST door you entered thro
         <roomItems type="array">
         </roomItems>
         <npc></npc>
+        <dx>14</dx>
+        <dy>24</dy>
     </room>
     <room id="attic">
         <roomName>Attic</roomName>
@@ -283,5 +311,7 @@ monitor while another person, the one who yelled at you, handles several radios.
         <roomItems type="array">
         </roomItems>
         <npc></npc>
+        <dx>30</dx>
+        <dy>7</dy>
     </room>
 </house>

@@ -1,6 +1,6 @@
 package com.locallampoon.fiveh.core;
 
-class Monster {
+public class Monster {
     //INSTANCE VARIABLE
     private String name;
     private int health;

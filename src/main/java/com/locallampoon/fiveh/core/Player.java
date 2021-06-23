@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 
-class Player {
+public class Player {
 
     //INSTANCE VARIABLE
     private String character;
@@ -96,6 +96,16 @@ class Player {
 
     public List<String> getInventory() {
         return inventory;
+    }
+
+    public StringBuilder getInventoryItemsString() {
+        StringBuilder result = new StringBuilder();
+        String bagName = !isHasDuffelBag() ? "FANNY PACK" : "DUFFEL BAG";
+        result.append("\n" + bagName + " ITEMS: " + "\n");
+        for (int i = 0; i < inventory.size(); i++) {
+            result.append((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next() + "\n");
+        }
+        return result;
     }
 
     void printInventoryItems() {
@@ -191,7 +201,7 @@ class Player {
         }
     }
 
-    Room getCurrentRoom() {
+    public Room getCurrentRoom() {
         return currentRoom;
     }
 
