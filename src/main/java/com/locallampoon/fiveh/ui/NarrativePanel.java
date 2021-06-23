@@ -3,8 +3,10 @@ package com.locallampoon.fiveh.ui;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
-public class NarrativePanel {
+public class NarrativePanel{
     private JScrollPane pane;
     private JTextPane textArea;
     private Font normalFont = new Font(PanelStyles.FONT_FAMILY, Font.PLAIN, 18);
@@ -12,6 +14,7 @@ public class NarrativePanel {
         textArea = new JTextPane();
         textArea.setFont(normalFont);
         textArea.setBackground(Color.BLACK);
+        textArea.setRequestFocusEnabled(false);
         pane = new JScrollPane(
                 textArea,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
