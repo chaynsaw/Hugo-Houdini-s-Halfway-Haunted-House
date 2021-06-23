@@ -101,7 +101,7 @@ public class Game implements Serializable {
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
                 player.move(roomKeyID);
             }
-            case "get", "grab" -> {
+            case "get", "grab", "take" -> {
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.addItem(grabbedItem);
                 playerCurrentRoom.removeItem(grabbedItem);
@@ -230,16 +230,15 @@ public class Game implements Serializable {
         if (monster != null){
             player.attack(monster);
             if (monster.isDead()) {
-                System.out.println(" You killed " + monster.getName());
+                narrativePanel.appendTextArea(" You killed " + monster.getName());
             } else {
                 monster.attack(player);
             }
             if (player.isDead()) {
                 System.exit(0);
             }
-        }
-        else {
-            System.out.println("There is no monster in this room");
+        } else {
+            narrativePanel.appendTextArea("There is no monster in this room");
         }
     }
 }
