@@ -3,6 +3,8 @@ package com.locallampoon.fiveh.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static com.locallampoon.fiveh.core.Game.narrativePanel;
+
 public class GameState {
 
     private static String quitSave(BufferedReader saveReader) throws IOException {
@@ -10,11 +12,11 @@ public class GameState {
         String saveCommand;
 
         while (true) {
-            System.out.println("Do you want to save the game?");
+            narrativePanel.appendTextArea("Do you want to save the game?");
             String saveResponse = saveReader.readLine().toLowerCase();
 
             if ("yes".equals(saveResponse) || "y".equals(saveResponse)) {
-                System.out.println("Please name your save file:  >   ");
+                narrativePanel.appendTextArea("Please name your save file:  >   ");
                 String saveFileName = saveReader.readLine();
                 //TODO: Write a save game/load game methods
                 //                     saveGame(saveFileName);
@@ -28,7 +30,7 @@ public class GameState {
                 break;
             } else {
                 msg = "INVALID RESPONSE: \n\t Enter Y to save and quit \n\t N to quit without saving \n\t C to continue playing";
-                System.out.println(msg);
+                narrativePanel.appendTextArea(msg);
             }
         }
         return saveCommand;
@@ -36,7 +38,7 @@ public class GameState {
 
     public static String quitHelper(BufferedReader quitReader) throws IOException {
         String quitCommand;
-        System.out.println("Are you sure you want to quit the game?");
+        narrativePanel.appendTextArea("Are you sure you want to quit the game?");
 
         while (true) {
             String quitResponse = quitReader.readLine().toLowerCase();
@@ -48,7 +50,7 @@ public class GameState {
                 quitCommand = quitSave(quitReader);
                 break;
             } else {
-                System.out.println("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue");
+                narrativePanel.appendTextArea("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue");
             }
         }
         return quitCommand;

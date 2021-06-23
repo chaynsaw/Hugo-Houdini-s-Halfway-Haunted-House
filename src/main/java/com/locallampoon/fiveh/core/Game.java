@@ -57,7 +57,7 @@ public class Game implements Serializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
+            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
         }
     }
 
@@ -83,7 +83,7 @@ public class Game implements Serializable {
         } else if (parsedCommandList.size() == 2){
             implementCommandTwoWords(parsedCommandList,roomExits);
         } else {
-            System.out.println("Invalid Action");
+            narrativePanel.appendTextArea("Invalid Action");
         }
     }
 
@@ -94,7 +94,7 @@ public class Game implements Serializable {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                    System.out.println("You can't travel in that direction!\n");
+                    narrativePanel.appendTextArea("You can't travel in that direction!\n");
                     break;
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
@@ -118,11 +118,11 @@ public class Game implements Serializable {
                     case "jock" -> player.setStrong(true);
                     case "chess geek" -> player.setSmart(true);
                     case "bleacher kid" -> player.setBrave(true);
-                    default -> System.out.println("Invalid Action");
+                    default -> narrativePanel.appendTextArea("Invalid Action");
                 }
             }
             default -> {
-                System.out.println("Invalid Action");
+                narrativePanel.appendTextArea("Invalid Action");
             }
         }
     }
@@ -149,7 +149,7 @@ public class Game implements Serializable {
             case "requestCommandAgain":
                 break;
             default: {
-                System.out.println("Invalid Action");
+                narrativePanel.appendTextArea("Invalid Action");
             };
         }
     }
@@ -170,10 +170,8 @@ public class Game implements Serializable {
 
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
-        narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
-        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
-        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+        narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() +" | " + "ITEMS IN ROOM: " + playerCurrentRoom.getItems() + " | " + "PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+        narrativePanel.appendTextArea(playerCurrentRoom.getDesc()+"\n");
     }
 
     private static void checkMonster() {

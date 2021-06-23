@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.locallampoon.fiveh.core.Game.narrativePanel;
+
 class UserInput {
 
     private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee" , "move", "get", "grab", "drop",
@@ -53,9 +55,9 @@ class UserInput {
                 noun = singleItem;
                 break;
             }else{
-                System.out.println("Noun does not exist in room, please check your spelling");
+                narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling");
             }
-            System.out.println("we looking at this room item!!!!  "+ singleItem);
+            narrativePanel.appendTextArea("we looking at this room item!!!!  "+ singleItem);
             i++;
         }
         return noun;
@@ -70,10 +72,12 @@ class UserInput {
         if (!wordsList.isEmpty()) {
             verb = wordsList.get(0);
             if (!ACTIONS.contains(verb)) {
-                System.out.println("Not an acceptable action\n");
+                if (narrativePanel!=null) {
+                    narrativePanel.appendTextArea("Not an acceptable action\n");
+                }
             }
         } else {
-            System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
+            narrativePanel.appendTextArea("Two word command expected I.E. 'get sword' or 'go north'");
             wordsList.add(0, reqCommandAgain);
         }
         return wordsList;
