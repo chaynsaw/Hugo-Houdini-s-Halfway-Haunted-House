@@ -79,17 +79,17 @@ public class ConsolePanel implements KeyListener {
         if (keyCode == Key.ENTER.getKey()) {
             executeCommand(textArea.getText());
         } else if (keyCode == Key.UP.getKey()) {
-            executeCommand("go north");
+            executeCommand(Command.GO_NORTH.getText());
         } else if (keyCode == Key.DOWN.getKey()) {
-            executeCommand("go south");
+            executeCommand(Command.GO_SOUTH.getText());
         } else if (keyCode == Key.LEFT.getKey()) {
-            executeCommand("go west");
+            executeCommand(Command.GO_WEST.getText());
         } else if (keyCode == Key.RIGHT.getKey()) {
-            executeCommand("go east");
+            executeCommand(Command.GO_EAST.getText());
         } else if (keyCode == Key.PG_UP.getKey()) {
-            executeCommand("go up");
+            executeCommand(Command.GO_UP.getText());
         } else if (keyCode == Key.PG_DOWN.getKey()) {
-            executeCommand("go down");
+            executeCommand(Command.GO_DOWN.getText());
         }
     }
 
