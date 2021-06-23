@@ -63,7 +63,9 @@ public class Player {
             int index = inventory.indexOf("");
             inventory.remove(index);
             inventory.add(index, item);
-            narrativePanel.appendTextArea("You added " + item + " to your inventory");
+            if (narrativePanel!=null) {
+                narrativePanel.appendTextArea("You added " + item + " to your inventory");
+            }
             printInventoryItems();
         } else {
             narrativePanel.appendTextArea("You need to drop an item to add more to your inventory");
@@ -77,9 +79,13 @@ public class Player {
             int index = inventory.indexOf(item);
             inventory.remove(item);
             inventory.add(index, "");
-            narrativePanel.appendTextArea(item + " Dropped");
+            if (narrativePanel!=null) {
+                narrativePanel.appendTextArea(item + " Dropped");
+            }
         } else {
-            narrativePanel.appendTextArea("You do not have " + item + " in your inventory");
+            if (narrativePanel!=null) {
+                narrativePanel.appendTextArea("You do not have " + item + " in your inventory");
+            }
         }
         printInventoryItems();
     }
@@ -112,14 +118,22 @@ public class Player {
 
     void printInventoryItems() {
         String bagName = !isHasDuffelBag() ? "FANNY PACK" : "DUFFEL BAG";
+        if (narrativePanel!=null){
         narrativePanel.appendTextArea("\n" + bagName + " ITEMS: ");
+        }
         for (int i = 0; i < inventory.size(); i++) {
-            narrativePanel.appendTextArea((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next());
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next());
+            }
         }
         if (!squad.isEmpty()) {
-            narrativePanel.appendTextArea("\nThe Squad: " + getSquad());
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea("\nThe Squad: " + getSquad());
+            }
         }
-        narrativePanel.appendTextArea("\n");
+        if (narrativePanel != null) {
+            narrativePanel.appendTextArea("\n");
+        }
     }
 
     private void changeInventorySize() {
@@ -169,8 +183,10 @@ public class Player {
     void takeDamage(int damage) {
         if (getHealth() - damage <= 0) {
             setDead(true);
-            narrativePanel.appendTextArea("The monster killed you.");
-            narrativePanel.appendTextArea("GAME OVER");
+            if (narrativePanel!=null) {
+                narrativePanel.appendTextArea("The monster killed you.");
+                narrativePanel.appendTextArea("GAME OVER");
+            }
         } else {
             setHealth(health - damage);
             if (narrativePanel != null) {

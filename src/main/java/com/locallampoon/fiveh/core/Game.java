@@ -186,10 +186,8 @@ public class Game implements Serializable {
 
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() + "\n");
-        narrativePanel.appendTextArea(playerCurrentRoom.getDesc());
-        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n");
-        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+        narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() +" | " + "ITEMS IN ROOM: " + playerCurrentRoom.getItems() + " | " + "PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
+        narrativePanel.appendTextArea(playerCurrentRoom.getDesc()+"\n");
     }
 
     private static void checkMonster() {
