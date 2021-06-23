@@ -129,24 +129,9 @@ public class Game implements Serializable {
     }
 
     private static void implementCommandOneWord(List<String> parsedCommandList) {
-        Room playerCurrentRoom = player.getCurrentRoom();
         switch (parsedCommandList.get(0)) {
             case "fight":
-                Monster monster = playerCurrentRoom.getRoomMonster();
-                if (monster != null){
-                    player.attack(monster);
-                    if (monster.isDead()) {
-                        System.out.println(" You killed " + monster.getName());
-                    } else {
-                        monster.attack(player);
-                    }
-                    if (player.isDead()) {
-                        System.exit(0);
-                    }
-                }
-                else {
-                    System.out.println("There is no monster in this room");
-                }
+                engageInCombat();
                 break;
             case "flee":
                 player.flee(houseMap);
@@ -237,6 +222,25 @@ public class Game implements Serializable {
 
     public static Player getPlayer() {
         return player;
+    }
+
+    public static void engageInCombat() {
+        Monster monster = player.getCurrentRoom().getRoomMonster();
+
+        if (monster != null){
+            player.attack(monster);
+            if (monster.isDead()) {
+                System.out.println(" You killed " + monster.getName());
+            } else {
+                monster.attack(player);
+            }
+            if (player.isDead()) {
+                System.exit(0);
+            }
+        }
+        else {
+            System.out.println("There is no monster in this room");
+        }
     }
 }
 
