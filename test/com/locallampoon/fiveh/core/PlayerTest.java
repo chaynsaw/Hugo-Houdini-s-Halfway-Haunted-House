@@ -74,19 +74,19 @@ public class PlayerTest {
     @Test
     public void attack_ShouldReturnTrueWhenPlayerDealsLessThanSixDamage() {
         Monster m = new Monster();
-        player.attack(m);
+        player.attack(m, 0);
         assertEquals(5, m.getHealth());
     }
 
     @Test
     public void attack_ShouldReturnTrueWhenPlayerKillsMonster() {
         Monster m = new Monster();
-        player.attack(m);
-        player.attack(m);
-        player.attack(m);
-        player.attack(m);
-        player.attack(m);
-        player.attack(m);
+        player.attack(m, 0);
+        player.attack(m, 0);
+        player.attack(m, 0);
+        player.attack(m, 0);
+        player.attack(m, 0);
+        player.attack(m, 0);
         assertTrue(m.isDead());
     }
 

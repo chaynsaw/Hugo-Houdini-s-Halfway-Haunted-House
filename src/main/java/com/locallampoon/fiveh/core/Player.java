@@ -154,8 +154,9 @@ public class Player {
 //        }
 //    }
 
-    void attack(Monster monster) {
+    void attack(Monster monster, int modifier) {
         int damage = getStrength();
+        damage += modifier;
         monster.takeDamage(damage);
         if (monster.isDead()){
             getCurrentRoom().addItem(monster.getQuestItem());
