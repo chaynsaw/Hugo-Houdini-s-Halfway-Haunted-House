@@ -158,7 +158,9 @@ public class Player {
         int damage = getStrength();
         for (String item : this.getInventory()) {
             if (monster.getWeaknesses().contains(item)) {
-                narrativePanel.appendTextArea("You used " + item + "!");
+                if (narrativePanel != null) {
+                    narrativePanel.appendTextArea("You used " + item + "!");
+                }
                 damage += 5;
                 break;
             }
