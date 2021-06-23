@@ -22,6 +22,7 @@ public class PlayerTest {
     private final PrintStream originalErr = System.err;
 
 
+
     @Before
     public void setUp() throws Exception {
         houseMap = XMLParser.parseRooms();
@@ -86,7 +87,7 @@ public class PlayerTest {
         player.attack(m);
         player.attack(m);
         player.attack(m);
-        assertEquals(true, m.isDead());
+        assertTrue(m.isDead());
     }
 
     @Test
