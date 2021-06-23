@@ -22,14 +22,14 @@ public class Game implements Serializable {
     // CONSTRUCTOR
     public Game() {
         setHouseMap(XMLParser.parseRooms());
-        this.player = new Player(houseMap.get("hall"));
+        player = new Player(houseMap.get("hall"));
         initializeUI();
     }
 
     // GETTER/SETTER METHODS
 
     private void setHouseMap(Map<String, Room> houseMap) {
-        this.houseMap = houseMap;
+        Game.houseMap = houseMap;
     }
 
     // METHODS
@@ -78,7 +78,6 @@ public class Game implements Serializable {
     }
 
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
-        Room playerCurrentRoom = player.getCurrentRoom();
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
         } else if (parsedCommandList.size() == 2){
@@ -226,9 +225,8 @@ public class Game implements Serializable {
 
     public static void engageInCombat() {
         Monster monster = player.getCurrentRoom().getRoomMonster();
-        int modifier = 0;
         if (monster != null){
-            player.attack(monster, modifier);
+            player.attack(monster);
             if (monster.isDead()) {
                 narrativePanel.appendTextArea(" You killed " + monster.getName());
             } else {

@@ -92,7 +92,7 @@ public class Player {
         squad.remove(npc);
     }
 
-    public List getSquad() {
+    public List<String> getSquad() {
         return squad;
     }
 
@@ -154,9 +154,15 @@ public class Player {
 //        }
 //    }
 
-    void attack(Monster monster, int modifier) {
+    void attack(Monster monster) {
         int damage = getStrength();
-        damage += modifier;
+        for (String item : this.getInventory()) {
+            if (monster.getWeaknesses().contains(item)) {
+                narrativePanel.appendTextArea("You used " + item + "!");
+                damage += 5;
+                break;
+            }
+        }
         monster.takeDamage(damage);
         if (monster.isDead()){
             getCurrentRoom().addItem(monster.getQuestItem());
