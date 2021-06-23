@@ -50,7 +50,10 @@ public class ConsolePanel implements KeyListener {
     }
 
     public void executeCommand(String command) {
+        disableConsole();
         Game.handleCommand(command);
+        clear();
+        enableConsole();
     }
 
     public void clear() {
@@ -72,17 +75,28 @@ public class ConsolePanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == Key.ENTER.getKey()) {
-            disableConsole();
+        int keyCode = e.getKeyCode();
+        if (keyCode == Key.ENTER.getKey()) {
             executeCommand(textArea.getText());
-            clear();
-            enableConsole();
+        } else if (keyCode == Key.UP.getKey()) {
+            executeCommand(Command.GO_NORTH.getText());
+        } else if (keyCode == Key.DOWN.getKey()) {
+            executeCommand(Command.GO_SOUTH.getText());
+        } else if (keyCode == Key.LEFT.getKey()) {
+            executeCommand(Command.GO_WEST.getText());
+        } else if (keyCode == Key.RIGHT.getKey()) {
+            executeCommand(Command.GO_EAST.getText());
+        } else if (keyCode == Key.PG_UP.getKey()) {
+            executeCommand(Command.GO_UP.getText());
+        } else if (keyCode == Key.PG_DOWN.getKey()) {
+            executeCommand(Command.GO_DOWN.getText());
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == Key.ENTER.getKey()) {
+        int keyCode = e.getKeyCode();
+        if (keyCode == Key.ENTER.getKey()) {
             if (textArea.getCaretPosition() != 0) {
                 // reset caret position
                 textArea.setCaretPosition(0);
