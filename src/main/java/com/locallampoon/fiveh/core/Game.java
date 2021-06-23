@@ -57,7 +57,7 @@ public class Game implements Serializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
+            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
         }
     }
 
@@ -84,7 +84,7 @@ public class Game implements Serializable {
         } else if (parsedCommandList.size() == 2){
             implementCommandTwoWords(parsedCommandList,roomExits);
         } else {
-            System.out.println("Invalid Action");
+            narrativePanel.appendTextArea("Invalid Action");
         }
     }
 
@@ -95,7 +95,7 @@ public class Game implements Serializable {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                    System.out.println("You can't travel in that direction!\n");
+                    narrativePanel.appendTextArea("You can't travel in that direction!\n");
                     break;
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
@@ -119,11 +119,11 @@ public class Game implements Serializable {
                     case "jock" -> player.setStrong(true);
                     case "chess geek" -> player.setSmart(true);
                     case "bleacher kid" -> player.setBrave(true);
-                    default -> System.out.println("Invalid Action");
+                    default -> narrativePanel.appendTextArea("Invalid Action");
                 }
             }
             default -> {
-                System.out.println("Invalid Action");
+                narrativePanel.appendTextArea("Invalid Action");
             }
         }
     }
@@ -136,7 +136,7 @@ public class Game implements Serializable {
                 if (monster != null){
                     player.attack(monster);
                     if (monster.isDead()) {
-                        System.out.println(" You killed " + monster.getName());
+                        narrativePanel.appendTextArea(" You killed " + monster.getName());
                     } else {
                         monster.attack(player);
                     }
@@ -145,7 +145,7 @@ public class Game implements Serializable {
                     }
                 }
                 else {
-                    System.out.println("There is no monster in this room");
+                    narrativePanel.appendTextArea("There is no monster in this room");
                 }
                 break;
             case "flee":
@@ -165,7 +165,7 @@ public class Game implements Serializable {
             case "requestCommandAgain":
                 break;
             default: {
-                System.out.println("Invalid Action");
+                narrativePanel.appendTextArea("Invalid Action");
             };
         }
     }

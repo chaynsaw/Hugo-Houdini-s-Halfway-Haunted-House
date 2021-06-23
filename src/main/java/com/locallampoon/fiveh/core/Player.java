@@ -57,16 +57,16 @@ public class Player {
         // Players will be able to add Items to their inventory until the maximum items are reached
         if (item.equals("duffel")) {
             changeInventorySize();
-            System.out.println("You now have a Duffel Bag, you can carry twice as many items!\n");
+            narrativePanel.appendTextArea("You now have a Duffel Bag, you can carry twice as many items!\n");
             printInventoryItems();
         } else if (inventory.contains("")) {
             int index = inventory.indexOf("");
             inventory.remove(index);
             inventory.add(index, item);
-            System.out.println("You added " + item + " to your inventory");
+            narrativePanel.appendTextArea("You added " + item + " to your inventory");
             printInventoryItems();
         } else {
-            System.out.println("You need to drop an item to add more to your inventory");
+            narrativePanel.appendTextArea("You need to drop an item to add more to your inventory");
             printInventoryItems();
         }
     }
@@ -77,9 +77,9 @@ public class Player {
             int index = inventory.indexOf(item);
             inventory.remove(item);
             inventory.add(index, "");
-            System.out.println(item + " Dropped");
+            narrativePanel.appendTextArea(item + " Dropped");
         } else {
-            System.out.println("You do not have " + item + " in your inventory");
+            narrativePanel.appendTextArea("You do not have " + item + " in your inventory");
         }
         printInventoryItems();
     }
@@ -112,14 +112,14 @@ public class Player {
 
     void printInventoryItems() {
         String bagName = !isHasDuffelBag() ? "FANNY PACK" : "DUFFEL BAG";
-        System.out.println("\n" + bagName + " ITEMS: ");
+        narrativePanel.appendTextArea("\n" + bagName + " ITEMS: ");
         for (int i = 0; i < inventory.size(); i++) {
-            System.out.println((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next());
+            narrativePanel.appendTextArea((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next());
         }
         if (!squad.isEmpty()) {
-            System.out.println("\nThe Squad: " + getSquad());
+            narrativePanel.appendTextArea("\nThe Squad: " + getSquad());
         }
-        System.out.println("\n");
+        narrativePanel.appendTextArea("\n");
     }
 
     private void changeInventorySize() {
@@ -169,8 +169,8 @@ public class Player {
     void takeDamage(int damage) {
         if (getHealth() - damage <= 0) {
             setDead(true);
-            System.out.println("The monster killed you.");
-            System.out.println("GAME OVER");
+            narrativePanel.appendTextArea("The monster killed you.");
+            narrativePanel.appendTextArea("GAME OVER");
         } else {
             setHealth(health - damage);
             if (narrativePanel != null) {
@@ -200,10 +200,10 @@ public class Player {
 
     void getCurrentItemDetails() {
         if (inventory.isEmpty()) {
-            System.out.println("Your nothing in your inventory");
+            narrativePanel.appendTextArea("Your nothing in your inventory");
         } else {
-            System.out.println("You have following items in your inventory ");
-            System.out.println(inventory);
+            narrativePanel.appendTextArea("You have following items in your inventory ");
+            narrativePanel.appendTextArea(inventory.toString());
         }
     }
 
