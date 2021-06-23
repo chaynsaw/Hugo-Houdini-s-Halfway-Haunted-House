@@ -190,6 +190,12 @@ public class Game implements Serializable {
         narrativePanel.appendTextArea(playerCurrentRoom.getDesc()+"\n");
     }
 
+    private static void printPlayerStats() {
+        statsPanel.appendTextArea("PLAYER HEALTH: " + player.getHealth());
+        statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
+        statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
+    }
+
     private static void checkMonster() {
         Room playerCurrentRoom = player.getCurrentRoom();
         Monster monsterInRoom = playerCurrentRoom.getRoomMonster();
@@ -202,13 +208,26 @@ public class Game implements Serializable {
             narrativePanel.appendTextArea("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
             statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());
         }
-        statsPanel.appendTextArea("HEALTH: " + player.getHealth());
-        statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
-        statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
     }
 
-    public void startV2() {
+    public void start() {
         printDescription();
+        printPlayerStats();
+    }
+
+    private static void renderGameUI() {
+        // clear panels
+        narrativePanel.setTextArea("");
+        artPanel.setTextArea("");
+        statsPanel.setTextArea("");
+        // repaint after player current position is updated
+        mapPanel.updateMapGUI();
+        // print description
+        printDescription();
+        // handle monster scenario
+        checkMonster();
+        // print player stats
+        printPlayerStats();
     }
 
     public static void handleCommand(String input) {
@@ -220,17 +239,10 @@ public class Game implements Serializable {
             System.exit(0);
         }
 
-        // clear panels
-        narrativePanel.setTextArea("");
-        artPanel.setTextArea("");
-        statsPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
-        mapPanel.updateMapGUI(); //need to repaint after player current position updated
-        // print description
-        printDescription();
-        // handle monster scenario
-        checkMonster();
+        // render ui after command execution
+        renderGameUI();
     }
 
     public static Player getPlayer() {
