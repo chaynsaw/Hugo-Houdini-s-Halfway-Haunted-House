@@ -5,15 +5,12 @@ import javax.swing.text.*;
 import java.awt.*;
 
 public class NarrativePanel {
-    JScrollPane pane;
-    JTextPane textArea;
-    Font normalFont = new Font(PanelStyles.FONT_FAMILY, Font.PLAIN, 18);
+    private JScrollPane pane;
+    private JTextPane textArea;
+    private Font normalFont = new Font(PanelStyles.FONT_FAMILY, Font.PLAIN, 18);
     public NarrativePanel() {
         textArea = new JTextPane();
         textArea.setFont(normalFont);
-        //textArea.setLineWrap(true);
-        //textArea.setWrapStyleWord(true);
-        textArea.setEnabled(false); // this also disable changing foreground color
         textArea.setBackground(Color.BLACK);
         pane = new JScrollPane(
                 textArea,
@@ -29,28 +26,37 @@ public class NarrativePanel {
 
     public void setTextArea(String text) {
         System.out.println(text);
-        this.textArea.setText(text);
+        textArea.setText(text);
     }
 
     /**
-     * append text in narrative panel with customized background color
-     * JTextPanel.setEnable(false) disable any user input including changing foreground color
+     * append text in narrative panel with customized foreground color
+     * enable and disable capability to edit before and after append
      * @param text
      * @param color
      */
     public void appendTextArea(String text, Color color)
     {
-        Document doc = textArea.getStyledDocument();
+        this.enableNarrative();
+        this.appendToPane(this.textArea, text, color);
+        this.disableNarrative();
+    }
 
-        Style style = textArea.addStyle("", null);
-        // setEnable will disable setting foreground color
-        // style.addAttribute(StyleConstants.Foreground, Color.RED);
-        StyleConstants.setBackground(style, color);
+    public void disableNarrative(){
+        textArea.setEditable(false);
+    }
 
-        try {
-            doc.insertString(doc.getLength(), text, style);
-        } catch (BadLocationException e) {
-            e.printStackTrace();
-        }
+    public void enableNarrative(){
+        textArea.setEditable(true);
+    }
+
+    private void appendToPane(JTextPane textPane, String msg, Color color)
+    {
+        StyleContext style = StyleContext.getDefaultStyleContext();
+        AttributeSet attribute = style.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color); // only change foreground color
+        attribute = style.addAttribute(attribute, StyleConstants.FontFamily, PanelStyles.FONT_FAMILY);
+        textPane.setCaretPosition(textPane.getDocument().getLength());
+        textPane.setCharacterAttributes(attribute, false);
+        textPane.replaceSelection(msg);
     }
 }
