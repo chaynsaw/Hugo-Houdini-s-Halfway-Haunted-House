@@ -136,6 +136,7 @@ public class Game implements Serializable {
                 if (monster != null){
                     player.attack(monster);
                     if (monster.isDead()) {
+                        playerCurrentRoom.addItem("Exit Key - One of Three");
                         narrativePanel.appendTextArea(" You killed " + monster.getName());
                     } else {
                         monster.attack(player);
