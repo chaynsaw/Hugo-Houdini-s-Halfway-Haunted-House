@@ -56,6 +56,7 @@ public class PanelStyles {
     // narrativePanel styles
     public static final Color ROOM_TEXT_BG_COLOR = new Color(13,148,22);
     public static final Color DIR_TEXT_BG_COLOR = new Color(19, 85, 191);
+
     public static class ArtPanel {
         public static int x = 100;
         public static int y = 20;
