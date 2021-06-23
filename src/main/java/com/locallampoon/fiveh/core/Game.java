@@ -233,7 +233,7 @@ public class Game implements Serializable {
     }
 
     public void startV2() {
-        //printDescription();
+        printDescription();
     }
 
     public static void handleCommand(String input) {
