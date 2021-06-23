@@ -226,7 +226,7 @@ public class Game implements Serializable {
 
     public static void engageInCombat() {
         Monster monster = player.getCurrentRoom().getRoomMonster();
-        int modifier = 10;
+        int modifier = 0;
         if (monster != null){
             player.attack(monster, modifier);
             if (monster.isDead()) {
