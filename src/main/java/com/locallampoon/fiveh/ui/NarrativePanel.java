@@ -50,6 +50,13 @@ public class NarrativePanel {
         textArea.setEditable(true);
     }
 
+    /**
+     * apply style change on given JTextPane
+     * it only changes color in this application
+     * @param textPane
+     * @param msg
+     * @param color
+     */
     private void appendToPane(JTextPane textPane, String msg, Color color)
     {
         StyleContext style = StyleContext.getDefaultStyleContext();
