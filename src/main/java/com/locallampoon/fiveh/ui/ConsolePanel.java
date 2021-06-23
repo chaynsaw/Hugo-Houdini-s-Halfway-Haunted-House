@@ -59,6 +59,8 @@ public class ConsolePanel implements KeyListener {
 
     public void enableConsole() {
         textArea.setEnabled(true);
+        textArea.setFocusable(true);
+        textArea.requestFocusInWindow();
     }
 
     public void disableConsole() {
@@ -88,5 +90,9 @@ public class ConsolePanel implements KeyListener {
                 textArea.setCaretPosition(0);
             }
         }
+    }
+
+    public JTextArea getTextArea(){
+        return this.textArea;
     }
 }
