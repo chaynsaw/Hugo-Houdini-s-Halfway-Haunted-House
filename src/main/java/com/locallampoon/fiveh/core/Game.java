@@ -175,6 +175,7 @@ public class Game implements Serializable {
             case NEW:
                 mainPanel.showGame();
                 mainPanel.hideIntro();
+                printDescription();
                 break;
             // TODO: add help option
             case QUIT:
@@ -184,21 +185,26 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * append text with customized color
+     * need to let console panel have the focus at the end
+     */
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", PanelStyles.BG_COLOR);
-        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n",PanelStyles.BG_COLOR);
-        narrativePanel.appendTextArea(playerCurrentRoom.getDesc() + "\n",PanelStyles.BG_COLOR);
-        narrativePanel.appendTextArea("YOUR ADJACENT ROOMS: ", PanelStyles.BG_COLOR);
+        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n",PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea(playerCurrentRoom.getDesc() + "\n",PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea("YOUR ADJACENT ROOMS: ", PanelStyles.FG_COLOR);
         List<String> adjRooms = playerCurrentRoom.getExits();
         for(int i = 0; i < adjRooms.size(); i++){
             if(!adjRooms.get(i).isEmpty()){
-                narrativePanel.appendTextArea(PanelStyles.DIRECTIONS[i] + "-" , PanelStyles.DIR_TEXT_BG_COLOR);
-                narrativePanel.appendTextArea(adjRooms.get(i) + " ", PanelStyles.BG_COLOR);
+                narrativePanel.appendTextArea(PanelStyles.DIRECTIONS[i] + "-" , PanelStyles.NEIGHBOUR_COLOR);
+                narrativePanel.appendTextArea(adjRooms.get(i) + " ", PanelStyles.FG_COLOR);
             }
         }
-        narrativePanel.appendTextArea("\n\nYOU ARE IN: ", PanelStyles.BG_COLOR);
-        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PanelStyles.ROOM_TEXT_BG_COLOR);
+        narrativePanel.appendTextArea("\n\nYOU ARE IN: ", PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PanelStyles.PLAYER_COLOR);
+        mainPanel.getConsolePanel().enableConsole();
     }
 
     private static void checkMonster() {
@@ -219,7 +225,7 @@ public class Game implements Serializable {
     }
 
     public void startV2() {
-        printDescription();
+        //printDescription();
     }
 
     public static void handleCommand(String input) {
@@ -230,7 +236,6 @@ public class Game implements Serializable {
         if (input.equals("q") || input.equals("quit")) {
             System.exit(0);
         }
-
         // clear panels
         narrativePanel.setTextArea("");
         artPanel.setTextArea("");
