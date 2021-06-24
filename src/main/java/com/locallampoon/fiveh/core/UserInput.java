@@ -1,5 +1,7 @@
 package com.locallampoon.fiveh.core;
 
+import com.locallampoon.fiveh.ui.PanelStyles;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +10,7 @@ import static com.locallampoon.fiveh.core.Game.narrativePanel;
 
 class UserInput {
 
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee" , "move", "get", "grab", "drop",
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee", "move", "get", "grab", "drop",
             "talk", "inspect", "h", "help", "i", "inventory", "q", "quit", "fight", "attack", "hit", "punch", "kick",
             "flee", "run", "recruit"));
 
@@ -34,7 +36,7 @@ class UserInput {
         if (verb.equals("drop")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getInventory();
-        }else if (verb.equals("recruit")){
+        } else if (verb.equals("recruit")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getNpcs();
         }
@@ -54,10 +56,10 @@ class UserInput {
             if (nounPresent) {
                 noun = singleItem;
                 break;
-            }else{
-                narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling");
+            } else {
+                narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling\n", PanelStyles.FG_COLOR);
             }
-            narrativePanel.appendTextArea("we looking at this room item!!!!  "+ singleItem);
+            narrativePanel.appendTextArea("we looking at this room item!!!!  " + singleItem, PanelStyles.FG_COLOR);
             i++;
         }
         return noun;
@@ -72,12 +74,12 @@ class UserInput {
         if (!wordsList.isEmpty()) {
             verb = wordsList.get(0);
             if (!ACTIONS.contains(verb)) {
-                if (narrativePanel!=null) {
-                    narrativePanel.appendTextArea("Not an acceptable action\n");
+                if (narrativePanel != null) {
+                    narrativePanel.appendTextArea("Not an acceptable action\n", PanelStyles.FG_COLOR);
                 }
             }
         } else {
-            narrativePanel.appendTextArea("Two word command expected I.E. 'get sword' or 'go north'");
+            narrativePanel.appendTextArea("Two word command expected I.E. 'get sword' or 'go north'", PanelStyles.FG_COLOR);
             wordsList.add(0, reqCommandAgain);
         }
         return wordsList;
