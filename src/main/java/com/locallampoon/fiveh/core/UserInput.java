@@ -1,12 +1,11 @@
 package com.locallampoon.fiveh.core;
 
-import com.locallampoon.fiveh.ui.PanelStyles;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.locallampoon.fiveh.core.Game.narrativePanel;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
 
 class UserInput {
 
@@ -78,11 +77,11 @@ class UserInput {
             verb = wordsList.get(0);
             if (!ACTIONS.contains(verb)) {
                 if (narrativePanel != null) {
-                    narrativePanel.appendTextArea("Not an acceptable action\n", PanelStyles.FG_COLOR);
+                    narrativePanel.appendTextArea("Not an acceptable action\n", FG_COLOR);
                 }
             }
         } else {
-            narrativePanel.appendTextArea("Two word command expected I.E. 'get sword' or 'go north'", PanelStyles.FG_COLOR);
+            narrativePanel.appendTextArea("Two word command expected I.E. 'get sword' or 'go north'", FG_COLOR);
             wordsList.add(0, reqCommandAgain);
         }
         return wordsList;

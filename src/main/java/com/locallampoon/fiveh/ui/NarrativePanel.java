@@ -4,10 +4,12 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
+
 public class NarrativePanel{
     private JScrollPane pane;
     private JTextPane textArea;
-    private Font normalFont = new Font(PanelStyles.FONT_FAMILY, Font.PLAIN, 18);
+    private Font normalFont = new Font(FONT_FAMILY, Font.PLAIN, 18);
     public NarrativePanel() {
         textArea = new JTextPane();
         textArea.setFont(normalFont);
@@ -49,7 +51,7 @@ public class NarrativePanel{
      */
     public void appendTextArea(String text)
     {
-        this.appendTextArea(text, PanelStyles.FG_COLOR);
+        this.appendTextArea(text, FG_COLOR);
     }
 
     public void disableNarrativeTextArea(){
@@ -71,7 +73,7 @@ public class NarrativePanel{
     {
         StyleContext style = StyleContext.getDefaultStyleContext();
         AttributeSet attribute = style.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color); // only change foreground color
-        attribute = style.addAttribute(attribute, StyleConstants.FontFamily, PanelStyles.FONT_FAMILY);
+        attribute = style.addAttribute(attribute, StyleConstants.FontFamily, FONT_FAMILY);
         textPane.setCaretPosition(textPane.getDocument().getLength());
         textPane.setCharacterAttributes(attribute, false);
         textPane.replaceSelection(msg);

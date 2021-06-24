@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
+
 public class Game implements Serializable {
 
     private static Player player;
@@ -180,19 +183,19 @@ public class Game implements Serializable {
      */
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", PanelStyles.FG_COLOR);
-        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n", PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", FG_COLOR);
+        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n", FG_COLOR);
         String[] desc = playerCurrentRoom.getDesc().split("\\(|\\)");
         // color direction keywords from room description
         for (String i : desc) {
-            if (Arrays.asList(PanelStyles.DIRECTIONS).contains(i)) {
-                narrativePanel.appendTextArea(i, PanelStyles.NEIGHBOUR_COLOR);
+            if (Arrays.asList(DIRECTIONS).contains(i)) {
+                narrativePanel.appendTextArea(i, NEIGHBOUR_COLOR);
             } else {
-                narrativePanel.appendTextArea(i, PanelStyles.FG_COLOR);
+                narrativePanel.appendTextArea(i, FG_COLOR);
             }
         }
-        narrativePanel.appendTextArea("\n\nYOU ARE IN: ", PanelStyles.FG_COLOR);
-        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PanelStyles.PLAYER_COLOR);
+        narrativePanel.appendTextArea("\n\nYOU ARE IN: ", FG_COLOR);
+        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PLAYER_COLOR);
         mainPanel.getConsolePanel().enableConsole();
     }
 

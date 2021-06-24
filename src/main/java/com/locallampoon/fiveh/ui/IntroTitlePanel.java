@@ -8,22 +8,22 @@ public class IntroTitlePanel {
     JPanel panel;
     JLabel title;
     Font font = new Font(
-            PanelStyles.FONT_FAMILY,
-            PanelStyles.FONT_WEIGHT,
-            PanelStyles.INTRO_TITLE_FONT_SIZE
+            PanelStyles.Global.FONT_FAMILY,
+            PanelStyles.Global.FONT_WEIGHT,
+            PanelStyles.Intro.TITLE_FONT_SIZE
     );
 
     public IntroTitlePanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.INTRO_TITLE_X,
-                PanelStyles.INTRO_TITLE_Y,
-                PanelStyles.INTRO_TITLE_WIDTH,
-                PanelStyles.INTRO_TITLE_HEIGHT
+                PanelStyles.Intro.TITLE_X,
+                PanelStyles.Intro.TITLE_Y,
+                PanelStyles.Intro.TITLE_WIDTH,
+                PanelStyles.Intro.TITLE_HEIGHT
         );
-        panel.setBackground(PanelStyles.BG_COLOR);
+        panel.setBackground(PanelStyles.Global.BG_COLOR);
         title = new JLabel(titleText);
-        title.setForeground(PanelStyles.FG_COLOR);
+        title.setForeground(PanelStyles.Global.FG_COLOR);
         title.setFont(font);
         panel.add(title);
     }
