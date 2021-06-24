@@ -3,8 +3,6 @@ package com.locallampoon.fiveh.ui;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class NarrativePanel{
     private JScrollPane pane;
@@ -40,16 +38,16 @@ public class NarrativePanel{
      */
     public void appendTextArea(String text, Color color)
     {
-        this.enableNarrative();
+        this.enableNarrativeTextArea();
         this.appendToPane(this.textArea, text, color);
-        this.disableNarrative();
+        this.disableNarrativeTextArea();
     }
 
-    public void disableNarrative(){
+    public void disableNarrativeTextArea(){
         textArea.setEditable(false);
     }
 
-    public void enableNarrative(){
+    public void enableNarrativeTextArea(){
         textArea.setEditable(true);
     }
 
