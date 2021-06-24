@@ -22,14 +22,14 @@ public class Game implements Serializable {
     // CONSTRUCTOR
     public Game() {
         setHouseMap(XMLParser.parseRooms());
-        this.player = new Player(houseMap.get("hall"));
+        player = new Player(houseMap.get("hall"));
         initializeUI();
     }
 
     // GETTER/SETTER METHODS
 
     private void setHouseMap(Map<String, Room> houseMap) {
-        this.houseMap = houseMap;
+        Game.houseMap = houseMap;
     }
 
     // METHODS
