@@ -1,6 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import javax.swing.text.*;
 import java.awt.*;
 
@@ -20,6 +21,7 @@ public class NarrativePanel{
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
+        pane.setBorder(new MatteBorder(1, 1, 0, 0, Color.WHITE));
         pane.setBounds(0, 500, 1000, 190);
     }
 
