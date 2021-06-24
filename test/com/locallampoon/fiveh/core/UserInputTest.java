@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -29,11 +30,17 @@ public class UserInputTest {
 
     Player player;
     Map<String, Room> houseMap;
+    Room playerCurrentRoom;
+    List<String> roomExits;
+    List<String> playerInv;
 
     @Before
     public void setUp() {
         houseMap = XMLParser.parseRooms();
         player = new Player(houseMap.get("kitchen"));
+        playerCurrentRoom = player.getCurrentRoom();
+        roomExits = playerCurrentRoom.getExits();
+        playerInv = player.getInventory();
     }
 
     @Test
@@ -100,8 +107,7 @@ public class UserInputTest {
 
     @Test
     public void implementCommandTwoWords_properlyDropsItemsAddedInSpecificOrder() {
-        Room playerCurrentRoom = player.getCurrentRoom();
-        List<String> roomExits = playerCurrentRoom.getExits();
+
         player.addItem("Bowl of Candy");
         player.addItem("Smudged Glass");
         List<String> wordList = new ArrayList<>();
@@ -112,5 +118,76 @@ public class UserInputTest {
 
         assertTrue(player.getInventory().contains("Bowl of Candy"));
         assertFalse(player.getInventory().contains("Smudged Glass"));
+    }
+
+    @Test
+    public void implementCommandTwoWords_addRemovesCorrectlyInAnyOrder() {
+        player.addItem("Bowl of Candy");
+        List<String> dropCandy = Arrays.asList("drop", "candy");
+        player.addItem("Smudged Glass");
+        List<String> dropGlass = Arrays.asList("drop", "glass");
+        player.addItem("UV Light");
+        List<String> dropLight = Arrays.asList("drop", "light");
+        player.addItem("Bloodied Trowel");
+        List<String> dropTrowel = Arrays.asList("drop", "trowel");
+        player.addItem("Flashlight");
+        List<String> dropFlashlight = Arrays.asList("drop", "flashlight");
+
+        List<String> expectedList = new ArrayList<>(
+                Arrays.asList(
+                        "Bowl of Candy",
+                        "Smudged Glass",
+                        "UV Light",
+                        "Bloodied Trowel",
+                        "Flashlight"
+                )
+        );
+        assertEquals(playerInv, expectedList);
+
+        implementCommandTwoWords(dropCandy, roomExits, player);
+        implementCommandTwoWords(dropFlashlight, roomExits, player);
+        implementCommandTwoWords(dropLight, roomExits, player);
+        implementCommandTwoWords(dropGlass, roomExits, player);
+        implementCommandTwoWords(dropTrowel, roomExits, player);
+        assertEquals(playerInv, new ArrayList<>(Arrays.asList("", "", "", "", "")));
+    }
+
+    @Test
+    public void implementCommandTwoWords_TransfersItemCorrectlyToRoomUponDrop() {
+        player.addItem("Bowl of Candy");
+        List<String> dropCandy = Arrays.asList("drop", "candy");
+        player.addItem("Smudged Glass");
+        List<String> dropGlass = Arrays.asList("drop", "glass");
+        player.addItem("UV Light");
+        List<String> dropLight = Arrays.asList("drop", "light");
+
+        assertTrue(playerInv.contains("Bowl of Candy"));
+        assertFalse(playerCurrentRoom.getItems().contains("Bowl of Candy"));
+        implementCommandTwoWords(dropCandy, roomExits, player);
+        assertFalse(playerInv.contains("Bowl of Candy"));
+        assertTrue(playerCurrentRoom.getItems().contains("Bowl of Candy"));
+
+        assertTrue(playerInv.contains("UV Light"));
+        assertFalse(playerCurrentRoom.getItems().contains("UV Light"));
+        implementCommandTwoWords(dropLight, roomExits, player);
+        assertFalse(playerInv.contains("UV Light"));
+        assertTrue(playerCurrentRoom.getItems().contains("UV Light"));
+
+        assertTrue(playerInv.contains("Smudged Glass"));
+        assertFalse(playerCurrentRoom.getItems().contains("Smudged Glass"));
+        implementCommandTwoWords(dropGlass, roomExits, player);
+        assertFalse(playerInv.contains("Smudged Glass"));
+        assertTrue(playerCurrentRoom.getItems().contains("Smudged Glass"));
+    }
+
+    @Test
+    public void implementCommandTwoWords_DoesntDropPhantomItems() {
+        List<String> dropPhantomItem = Arrays.asList("drop", "");
+        implementCommandTwoWords(dropPhantomItem, roomExits, player);
+        assertEquals(1, playerCurrentRoom.getItems().size());
+
+        List<String> dropPhantomItem2 = Arrays.asList("drop", "glass");
+        implementCommandTwoWords(dropPhantomItem2, roomExits, player);
+        assertEquals(1, playerCurrentRoom.getItems().size());
     }
 }

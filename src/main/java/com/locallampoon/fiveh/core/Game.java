@@ -110,8 +110,10 @@ public class Game implements Serializable {
             }
             case "drop" -> {
                 String droppedItem = UserInput.nounItemHelper(parsedCommandList, playerDependency);
-                playerDependency.dropItem(droppedItem);
-                playerCurrentRoom.addItem(droppedItem);
+                if (!droppedItem.equals("")) {
+                    playerDependency.dropItem(droppedItem);
+                    playerCurrentRoom.addItem(droppedItem);
+                }
             }
             case "recruit" -> {
                 String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, playerDependency);
@@ -124,9 +126,7 @@ public class Game implements Serializable {
                     default -> narrativePanel.appendTextArea("Invalid Action");
                 }
             }
-            default -> {
-                narrativePanel.appendTextArea("Invalid Action");
-            }
+            default -> narrativePanel.appendTextArea("Invalid Action");
         }
     }
 
@@ -168,7 +168,7 @@ public class Game implements Serializable {
                 break;
             default: {
                 narrativePanel.appendTextArea("Invalid Action");
-            };
+            }
         }
     }
 
