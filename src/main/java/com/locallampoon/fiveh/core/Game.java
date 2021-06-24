@@ -199,6 +199,12 @@ public class Game implements Serializable {
                 narrativePanel.appendTextArea(i, FG_COLOR);
             }
         }
+
+        List<String> keyList = Arrays.asList("Vampire Key", "Werewolf Key", "Ghost Key");
+        if (playerCurrentRoom.getRoomName().equalsIgnoreCase("Sacrificial Chamber") && player.getInventory().containsAll(keyList)) {
+            narrativePanel.appendTextArea("\n\nA small passageway reveals itself to you, bathed in a blue glow now emitting from your three keys as well. Maybe you should...", FG_COLOR);
+            narrativePanel.appendTextArea("enter passage?", NEIGHBOUR_COLOR);
+        }
         mainPanel.getConsolePanel().enableConsole();
     }
 
