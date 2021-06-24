@@ -3,6 +3,7 @@ package com.locallampoon.fiveh.core;
 import com.locallampoon.fiveh.ui.*;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +58,7 @@ public class Game implements Serializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!");
+            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
         }
     }
 
@@ -84,7 +85,7 @@ public class Game implements Serializable {
         } else if (parsedCommandList.size() == 2){
             implementCommandTwoWords(parsedCommandList,roomExits);
         } else {
-            narrativePanel.appendTextArea("Invalid Action");
+            narrativePanel.appendTextArea("Invalid Action\n");
         }
     }
 
@@ -119,11 +120,11 @@ public class Game implements Serializable {
                     case "jock" -> player.setStrong(true);
                     case "chess geek" -> player.setSmart(true);
                     case "bleacher kid" -> player.setBrave(true);
-                    default -> narrativePanel.appendTextArea("Invalid Action");
+                    default -> narrativePanel.appendTextArea("Invalid Action\n");
                 }
             }
             default -> {
-                narrativePanel.appendTextArea("Invalid Action");
+                narrativePanel.appendTextArea("Invalid Action\n");
             }
         }
     }
@@ -145,7 +146,7 @@ public class Game implements Serializable {
                     }
                 }
                 else {
-                    narrativePanel.appendTextArea("There is no monster in this room");
+                    narrativePanel.appendTextArea("There is no monster in this room\n");
                 }
                 break;
             case "flee":
@@ -165,7 +166,7 @@ public class Game implements Serializable {
             case "requestCommandAgain":
                 break;
             default: {
-                narrativePanel.appendTextArea("Invalid Action");
+                narrativePanel.appendTextArea("Invalid Action\n");
             };
         }
     }
@@ -184,10 +185,26 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * append text with customized color
+     * need to let console panel have the focus at the end
+     */
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        narrativePanel.appendTextArea("YOU ARE IN: " + playerCurrentRoom.getRoomName() +" | " + "ITEMS IN ROOM: " + playerCurrentRoom.getItems() + " | " + "PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n");
-        narrativePanel.appendTextArea(playerCurrentRoom.getDesc()+"\n");
+        narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n", PanelStyles.FG_COLOR);
+        String[] desc = playerCurrentRoom.getDesc().split("\\(|\\)");
+        // color direction keywords from room description
+        for (String i : desc) {
+            if (Arrays.asList(PanelStyles.DIRECTIONS).contains(i)) {
+                narrativePanel.appendTextArea(i, PanelStyles.NEIGHBOUR_COLOR);
+            } else {
+                narrativePanel.appendTextArea(i, PanelStyles.FG_COLOR);
+            }
+        }
+        narrativePanel.appendTextArea("\n\nYOU ARE IN: ", PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PanelStyles.PLAYER_COLOR);
+        mainPanel.getConsolePanel().enableConsole();
     }
 
     private static void printPlayerStats() {

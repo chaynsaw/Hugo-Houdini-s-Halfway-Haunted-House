@@ -1,5 +1,7 @@
 package com.locallampoon.fiveh.core;
 
+import com.locallampoon.fiveh.ui.PanelStyles;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -12,11 +14,11 @@ public class GameState {
         String saveCommand;
 
         while (true) {
-            narrativePanel.appendTextArea("Do you want to save the game?");
+            narrativePanel.appendTextArea("Do you want to save the game?\n", PanelStyles.FG_COLOR);
             String saveResponse = saveReader.readLine().toLowerCase();
 
             if ("yes".equals(saveResponse) || "y".equals(saveResponse)) {
-                narrativePanel.appendTextArea("Please name your save file:  >   ");
+                narrativePanel.appendTextArea("Please name your save file:  >   ",PanelStyles.FG_COLOR);
                 String saveFileName = saveReader.readLine();
                 //TODO: Write a save game/load game methods
                 //                     saveGame(saveFileName);
@@ -29,8 +31,8 @@ public class GameState {
                 saveCommand = "i";
                 break;
             } else {
-                msg = "INVALID RESPONSE: \n\t Enter Y to save and quit \n\t N to quit without saving \n\t C to continue playing";
-                narrativePanel.appendTextArea(msg);
+                msg = "INVALID RESPONSE: \n\t Enter Y to save and quit \n\t N to quit without saving \n\t C to continue playing\n";
+                narrativePanel.appendTextArea(msg,PanelStyles.FG_COLOR);
             }
         }
         return saveCommand;
@@ -38,7 +40,7 @@ public class GameState {
 
     public static String quitHelper(BufferedReader quitReader) throws IOException {
         String quitCommand;
-        narrativePanel.appendTextArea("Are you sure you want to quit the game?");
+        narrativePanel.appendTextArea("Are you sure you want to quit the game?\n", PanelStyles.FG_COLOR);
 
         while (true) {
             String quitResponse = quitReader.readLine().toLowerCase();
@@ -50,7 +52,7 @@ public class GameState {
                 quitCommand = quitSave(quitReader);
                 break;
             } else {
-                narrativePanel.appendTextArea("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue");
+                narrativePanel.appendTextArea("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue\n", PanelStyles.FG_COLOR);
             }
         }
         return quitCommand;
