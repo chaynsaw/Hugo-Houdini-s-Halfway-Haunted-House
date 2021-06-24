@@ -222,6 +222,7 @@ public class Game implements Serializable {
                 case "Ghost" -> artPanel.setTextArea(GameArt.renderGhost());
                 case "Werewolf" -> artPanel.setTextArea(GameArt.renderWolf());
             }
+            narrativePanel.appendTextArea("\nMONSTERS IN ROOM: " + monsterInRoom.getName() + "\n", FG_COLOR);
             monsterHealthPanel.setHealthBar(monsterInRoom.getHealth());
             playerHealthPanel.setHealthBar(player.getHealth());
         } else {
