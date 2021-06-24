@@ -33,6 +33,7 @@ public class MainPanel {
         // main window settings
         window = new JFrame();
         window.setSize(PanelStyles.Window.WIDTH, PanelStyles.Window.HEIGHT);
+        window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(new BorderLayout());
