@@ -19,6 +19,8 @@ public class Game implements Serializable {
     static MainPanel mainPanel;
     static NarrativePanel narrativePanel;
     static ActionPanel actionPanel;
+    private static HealthBarPanel playerHealthPanel;
+    private static HealthBarPanel monsterHealthPanel;
     private static Player player;
     private static Map<String, Room> houseMap;
     private static ArtPanel artPanel;
@@ -53,6 +55,8 @@ public class Game implements Serializable {
         artPanel = mainPanel.getArtPanel();
         statsPanel = mainPanel.getStatsPanel();
         mapPanel = mainPanel.getMapPanel();
+        playerHealthPanel = mainPanel.getStatsPanel().getPlayerHealthPanel();
+        monsterHealthPanel = mainPanel.getStatsPanel().getMonsterHealthPanel();
     }
 
     // METHODS
@@ -204,22 +208,25 @@ public class Game implements Serializable {
     }
 
     private static void printPlayerStats() {
-        statsPanel.appendTextArea("PLAYER HEALTH: " + player.getHealth());
         statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
-        statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
+        statsPanel.appendTextArea("THE SQUAD: " + player.getSquad());
     }
 
     private static void checkMonster() {
         Room playerCurrentRoom = player.getCurrentRoom();
         Monster monsterInRoom = playerCurrentRoom.getRoomMonster();
         if (monsterInRoom != null) {
+            monsterHealthPanel.setVisible(true);
             switch (monsterInRoom.getName()) {
                 case "Vampire" -> artPanel.setTextArea(GameArt.renderMan());
                 case "Ghost" -> artPanel.setTextArea(GameArt.renderGhost());
                 case "Werewolf" -> artPanel.setTextArea(GameArt.renderWolf());
             }
             narrativePanel.appendTextArea("\nMONSTERS IN ROOM: " + monsterInRoom.getName() + "\n", FG_COLOR);
-            statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());
+            monsterHealthPanel.setHealthBar(monsterInRoom.getHealth());
+            playerHealthPanel.setHealthBar(player.getHealth());
+        } else {
+            monsterHealthPanel.setVisible(false);
         }
     }
 
