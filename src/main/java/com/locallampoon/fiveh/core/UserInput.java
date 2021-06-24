@@ -16,7 +16,7 @@ class UserInput {
 
     private static List<String> inputCleaner(String reducedString) {
         reducedString = reducedString.trim().toLowerCase();
-        String[] commands = reducedString.split("(?<!\\w)'|[\\s,.?\"!][\\s,.?\"'!]*");
+        String[] commands = reducedString.split("\\W|\\d");
         List<String> commandList = new ArrayList<>(Arrays.asList(commands));
         while (commandList.contains("")) {
             commandList.remove("");
