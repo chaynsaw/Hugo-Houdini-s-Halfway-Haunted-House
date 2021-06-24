@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.locallampoon.fiveh.core.Game.implementCommandTwoWords;
+import static com.locallampoon.fiveh.core.UserInput.parseCommand;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
@@ -47,12 +48,12 @@ public class UserInputTest {
     public void parseCommand_normalStringsTest() {
         String[] expectedArray = new String[]{"go", "north"};
 
-        String[] workingArray1 = UserInput.parseCommand(workingString1).toArray(new String[0]);
-        String[] workingArray2 = UserInput.parseCommand(workingString2).toArray(new String[0]);
-        String[] workingArray3 = UserInput.parseCommand(workingString3).toArray(new String[0]);
-        String[] workingArray4 = UserInput.parseCommand(workingString4).toArray(new String[0]);
-        String[] workingArray5 = UserInput.parseCommand(workingString5).toArray(new String[0]);
-        String[] workingArray6 = UserInput.parseCommand(workingString6).toArray(new String[0]);
+        String[] workingArray1 = parseCommand(workingString1).toArray(new String[0]);
+        String[] workingArray2 = parseCommand(workingString2).toArray(new String[0]);
+        String[] workingArray3 = parseCommand(workingString3).toArray(new String[0]);
+        String[] workingArray4 = parseCommand(workingString4).toArray(new String[0]);
+        String[] workingArray5 = parseCommand(workingString5).toArray(new String[0]);
+        String[] workingArray6 = parseCommand(workingString6).toArray(new String[0]);
 
         assertArrayEquals(expectedArray, workingArray1);
         assertArrayEquals(expectedArray, workingArray2);
@@ -66,11 +67,11 @@ public class UserInputTest {
     public void parseCommand_pollutedStringsTest() {
         String[] expectedArray = new String[]{"go", "north"};
 
-        String[] brokenWorkingArray1 = UserInput.parseCommand(brokenString1).toArray(new String[0]);
-        String[] brokenWorkingArray2 = UserInput.parseCommand(brokenString2).toArray(new String[0]);
-        String[] brokenWorkingArray3 = UserInput.parseCommand(brokenString3).toArray(new String[0]);
-        String[] brokenWorkingArray4 = UserInput.parseCommand(brokenString4).toArray(new String[0]);
-        String[] brokenWorkingArray5 = UserInput.parseCommand(brokenString5).toArray(new String[0]);
+        String[] brokenWorkingArray1 = parseCommand(brokenString1).toArray(new String[0]);
+        String[] brokenWorkingArray2 = parseCommand(brokenString2).toArray(new String[0]);
+        String[] brokenWorkingArray3 = parseCommand(brokenString3).toArray(new String[0]);
+        String[] brokenWorkingArray4 = parseCommand(brokenString4).toArray(new String[0]);
+        String[] brokenWorkingArray5 = parseCommand(brokenString5).toArray(new String[0]);
 
         assertArrayEquals(expectedArray, brokenWorkingArray1);
         assertArrayEquals(expectedArray, brokenWorkingArray2);
@@ -83,8 +84,8 @@ public class UserInputTest {
     public void parseCommand_pollutedStrings_middleOfWord_test() {
         String[] expectedArray = new String[]{"go", "north"};
 
-        String[] brokenWorkingArray6 = UserInput.parseCommand(brokenString6).toArray(new String[0]);
-        String[] brokenWorkingArray7 = UserInput.parseCommand(brokenString7).toArray(new String[0]);
+        String[] brokenWorkingArray6 = parseCommand(brokenString6).toArray(new String[0]);
+        String[] brokenWorkingArray7 = parseCommand(brokenString7).toArray(new String[0]);
 
         assertNotEquals(expectedArray[1], brokenWorkingArray6[1]);
         assertNotEquals(expectedArray[0], brokenWorkingArray7[0]);
@@ -213,5 +214,9 @@ public class UserInputTest {
         assertFalse(playerCurrentRoom.getItems().contains("Vampire's Key"));
     }
 
-
+    @Test
+    public void parseCommand_CanParseApostropheWords() {
+        List<String> expected = Arrays.asList("take", "vampire's");
+        assertEquals(expected, parseCommand("take vampire's"));
+    }
 }
