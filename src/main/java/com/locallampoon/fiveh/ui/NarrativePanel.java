@@ -33,14 +33,23 @@ public class NarrativePanel{
     /**
      * append text in narrative panel with customized foreground color
      * enable and disable capability to edit before and after append
-     * @param text
-     * @param color
+     * @param text display text
+     * @param color display color
      */
     public void appendTextArea(String text, Color color)
     {
         this.enableNarrativeTextArea();
         this.appendToPane(this.textArea, text, color);
         this.disableNarrativeTextArea();
+    }
+
+    /**
+     * append text in narrative panel with fixed foreground color
+     * @param text display text
+     */
+    public void appendTextArea(String text)
+    {
+        this.appendTextArea(text, PanelStyles.FG_COLOR);
     }
 
     public void disableNarrativeTextArea(){
