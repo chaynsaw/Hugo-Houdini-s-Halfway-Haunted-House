@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class Game implements Serializable {
 
-    private static Player player;
-    private static Map<String, Room> houseMap;
     private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
     private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
     static MainPanel mainPanel;
     static NarrativePanel narrativePanel;
+    private static Player player;
+    private static Map<String, Room> houseMap;
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
@@ -28,12 +28,6 @@ public class Game implements Serializable {
     }
 
     // GETTER/SETTER METHODS
-
-    private void setHouseMap(Map<String, Room> houseMap) {
-        this.houseMap = houseMap;
-    }
-
-    // METHODS
 
     private static void initializeUI() {
         mainPanel = new MainPanel(
@@ -50,6 +44,8 @@ public class Game implements Serializable {
         mapPanel = mainPanel.getMapPanel();
     }
 
+    // METHODS
+
     private static void readFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -58,7 +54,7 @@ public class Game implements Serializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!",PanelStyles.FG_COLOR);
+            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!", PanelStyles.FG_COLOR);
         }
     }
 
@@ -82,10 +78,10 @@ public class Game implements Serializable {
         Room playerCurrentRoom = player.getCurrentRoom();
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
-        } else if (parsedCommandList.size() == 2){
-            implementCommandTwoWords(parsedCommandList,roomExits);
+        } else if (parsedCommandList.size() == 2) {
+            implementCommandTwoWords(parsedCommandList, roomExits);
         } else {
-            narrativePanel.appendTextArea("Invalid Action",PanelStyles.FG_COLOR);
+            narrativePanel.appendTextArea("Invalid Action", PanelStyles.FG_COLOR);
         }
     }
 
@@ -96,7 +92,7 @@ public class Game implements Serializable {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                    narrativePanel.appendTextArea("You can't travel in that direction!\n",PanelStyles.FG_COLOR);
+                    narrativePanel.appendTextArea("You can't travel in that direction!\n", PanelStyles.FG_COLOR);
                     break;
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
@@ -120,11 +116,11 @@ public class Game implements Serializable {
                     case "jock" -> player.setStrong(true);
                     case "chess geek" -> player.setSmart(true);
                     case "bleacher kid" -> player.setBrave(true);
-                    default -> narrativePanel.appendTextArea("Invalid Action\n",PanelStyles.FG_COLOR);
+                    default -> narrativePanel.appendTextArea("Invalid Action\n", PanelStyles.FG_COLOR);
                 }
             }
             default -> {
-                narrativePanel.appendTextArea("Invalid Action\n",PanelStyles.FG_COLOR);
+                narrativePanel.appendTextArea("Invalid Action\n", PanelStyles.FG_COLOR);
             }
         }
     }
@@ -134,19 +130,18 @@ public class Game implements Serializable {
         switch (parsedCommandList.get(0)) {
             case "fight":
                 Monster monster = playerCurrentRoom.getRoomMonster();
-                if (monster != null){
+                if (monster != null) {
                     player.attack(monster);
                     if (monster.isDead()) {
-                        narrativePanel.appendTextArea(" You killed " + monster.getName() + "\n",PanelStyles.FG_COLOR);
+                        narrativePanel.appendTextArea(" You killed " + monster.getName() + "\n", PanelStyles.FG_COLOR);
                     } else {
                         monster.attack(player);
                     }
                     if (player.isDead()) {
                         System.exit(0);
                     }
-                }
-                else {
-                    narrativePanel.appendTextArea("There is no monster in this room\n",PanelStyles.FG_COLOR);
+                } else {
+                    narrativePanel.appendTextArea("There is no monster in this room\n", PanelStyles.FG_COLOR);
                 }
                 break;
             case "flee":
@@ -166,8 +161,9 @@ public class Game implements Serializable {
             case "requestCommandAgain":
                 break;
             default: {
-                narrativePanel.appendTextArea("Invalid Action\n",PanelStyles.FG_COLOR);
-            };
+                narrativePanel.appendTextArea("Invalid Action\n", PanelStyles.FG_COLOR);
+            }
+            ;
         }
     }
 
@@ -192,22 +188,14 @@ public class Game implements Serializable {
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
         narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", PanelStyles.FG_COLOR);
-        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n",PanelStyles.FG_COLOR);
+        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n", PanelStyles.FG_COLOR);
         String[] desc = playerCurrentRoom.getDesc().split("\\(|\\)");
-        List<String> adjRooms = playerCurrentRoom.getExits();
-
-        for(String i : desc){
-            if(Arrays.asList(PanelStyles.DIRECTIONS).contains(i)){
-                narrativePanel.appendTextArea(i,PanelStyles.NEIGHBOUR_COLOR);
+        // color direction keywords from room description
+        for (String i : desc) {
+            if (Arrays.asList(PanelStyles.DIRECTIONS).contains(i)) {
+                narrativePanel.appendTextArea(i, PanelStyles.NEIGHBOUR_COLOR);
             } else {
                 narrativePanel.appendTextArea(i, PanelStyles.FG_COLOR);
-            }
-        }
-        narrativePanel.appendTextArea("\n\nYOUR ADJACENT ROOMS: ", PanelStyles.FG_COLOR);
-        for(int i = 0; i < adjRooms.size(); i++){
-            if(!adjRooms.get(i).isEmpty()){
-                narrativePanel.appendTextArea(PanelStyles.DIRECTIONS[i] + "-" , PanelStyles.NEIGHBOUR_COLOR);
-                narrativePanel.appendTextArea(adjRooms.get(i) + " ", PanelStyles.FG_COLOR);
             }
         }
         narrativePanel.appendTextArea("\n\nYOU ARE IN: ", PanelStyles.FG_COLOR);
@@ -230,10 +218,6 @@ public class Game implements Serializable {
         statsPanel.appendTextArea("HEALTH: " + player.getHealth());
         statsPanel.appendTextArea((player.getInventoryItemsString().toString()));
         statsPanel.appendTextArea("THE SQUAD: " + player.getSquad() + "\n");
-    }
-
-    public void startV2() {
-        printDescription();
     }
 
     public static void handleCommand(String input) {
@@ -259,6 +243,14 @@ public class Game implements Serializable {
 
     public static Player getPlayer() {
         return player;
+    }
+
+    private void setHouseMap(Map<String, Room> houseMap) {
+        this.houseMap = houseMap;
+    }
+
+    public void startV2() {
+        printDescription();
     }
 }
 
