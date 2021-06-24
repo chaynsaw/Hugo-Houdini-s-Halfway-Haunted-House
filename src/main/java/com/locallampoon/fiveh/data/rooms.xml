@@ -61,6 +61,7 @@ busy kitchen come from a dark room, and to the (SOUTH) a door opens to the outsi
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
+            <item>Holy Salt</item>
             <item>Smudged Glass</item>
         </roomItems>
         <npc></npc>
@@ -84,7 +85,7 @@ back inside.</desc>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
         </roomItems>
-        <monster questItem="UV Light">Ware Wolf</monster>
+        <monster questItem="UV Light" weaknesses="Silver Knife">Ware Wolf</monster>
         <npc>Chess Geek</npc>
         <dx>55</dx>
         <dy>50</dy>
@@ -106,7 +107,7 @@ door showing a dining room table, and along the (EAST) wall there is a closed do
         <roomItems type="array">
             <item>Bluetooth Speaker</item>
         </roomItems>
-        <monster questItem="silver butter knife">Vampire</monster>
+        <monster questItem="Silver Knife" weaknesses="UV Light">Vampire</monster>
         <npc></npc>
         <dx>55</dx>
         <dy>36</dy>
@@ -208,7 +209,7 @@ does not appear to be another exit from this room other than the door to the (WE
         <roomItems type="array">
             <item>CPR Dummy</item>
         </roomItems>
-        <monster questItem="flashlight">Ghost</monster>
+        <monster questItem="flashlight" weaknesses="Holy Salt">Ghost</monster>
         <npc></npc>
         <dx>40</dx>
         <dy>58</dy>

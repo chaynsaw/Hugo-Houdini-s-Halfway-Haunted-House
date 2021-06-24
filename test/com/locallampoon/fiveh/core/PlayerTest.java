@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -88,6 +89,15 @@ public class PlayerTest {
         player.attack(m);
         player.attack(m);
         assertTrue(m.isDead());
+    }
+
+    @Test
+    public void attack_ShouldOneShotKillIfWeaknessItemInInventory() {
+        Monster monster = new Monster();
+        monster.setWeaknesses(Arrays.asList("weaknessItem"));
+        player.addItem("weaknessItem");
+        player.attack(monster);
+        assertTrue(monster.isDead());
     }
 
     @Test

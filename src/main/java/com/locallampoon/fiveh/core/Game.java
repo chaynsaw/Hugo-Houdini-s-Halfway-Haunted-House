@@ -23,14 +23,14 @@ public class Game implements Serializable {
     // CONSTRUCTOR
     public Game() {
         setHouseMap(XMLParser.parseRooms());
-        this.player = new Player(houseMap.get("hall"));
+        player = new Player(houseMap.get("hall"));
         initializeUI();
     }
 
     // GETTER/SETTER METHODS
 
     private void setHouseMap(Map<String, Room> houseMap) {
-        this.houseMap = houseMap;
+        Game.houseMap = houseMap;
     }
 
     // METHODS
@@ -79,7 +79,6 @@ public class Game implements Serializable {
     }
 
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
-        Room playerCurrentRoom = player.getCurrentRoom();
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
         } else if (parsedCommandList.size() == 2){
@@ -102,7 +101,7 @@ public class Game implements Serializable {
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
                 player.move(roomKeyID);
             }
-            case "get", "grab" -> {
+            case "get", "grab", "take" -> {
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
                 player.addItem(grabbedItem);
                 playerCurrentRoom.removeItem(grabbedItem);
@@ -130,24 +129,9 @@ public class Game implements Serializable {
     }
 
     private static void implementCommandOneWord(List<String> parsedCommandList) {
-        Room playerCurrentRoom = player.getCurrentRoom();
         switch (parsedCommandList.get(0)) {
             case "fight":
-                Monster monster = playerCurrentRoom.getRoomMonster();
-                if (monster != null){
-                    player.attack(monster);
-                    if (monster.isDead()) {
-                        narrativePanel.appendTextArea(" You killed " + monster.getName());
-                    } else {
-                        monster.attack(player);
-                    }
-                    if (player.isDead()) {
-                        System.exit(0);
-                    }
-                }
-                else {
-                    narrativePanel.appendTextArea("There is no monster in this room\n");
-                }
+                engageInCombat();
                 break;
             case "flee":
                 player.flee(houseMap);
@@ -264,6 +248,23 @@ public class Game implements Serializable {
 
     public static Player getPlayer() {
         return player;
+    }
+
+    public static void engageInCombat() {
+        Monster monster = player.getCurrentRoom().getRoomMonster();
+        if (monster != null){
+            player.attack(monster);
+            if (monster.isDead()) {
+                narrativePanel.appendTextArea(" You killed " + monster.getName());
+            } else {
+                monster.attack(player);
+            }
+            if (player.isDead()) {
+                System.exit(0);
+            }
+        } else {
+            narrativePanel.appendTextArea("There is no monster in this room");
+        }
     }
 }
 
