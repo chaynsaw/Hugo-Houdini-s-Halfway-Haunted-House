@@ -204,4 +204,14 @@ public class UserInputTest {
         implementCommandTwoWords(pickUpSpeaker, roomExits, player);
         assertTrue(playerCurrentRoom.getItems().contains("Bluetooth Speaker"));
     }
+
+    @Test
+    public void implementCommandTwoWords_CanPickUpItemNamesWithApostrophe() {
+        playerCurrentRoom.addItem("Vampire's Key");
+        implementCommandTwoWords(Arrays.asList("get", "vampire's"), roomExits, player);
+        assertTrue(playerInv.contains("Vampire's Key"));
+        assertFalse(playerCurrentRoom.getItems().contains("Vampire's Key"));
+    }
+
+
 }

@@ -2,14 +2,13 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.*;
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
 
 public class Game implements Serializable {
 
@@ -272,7 +271,7 @@ public class Game implements Serializable {
         if (monster != null) {
             player.attack(monster);
             if (monster.isDead()) {
-                actionPanel.appendTextArea(" You killed " + monster.getName(),FG_COLOR);
+                actionPanel.appendTextArea("You killed " + monster.getName(),FG_COLOR);
             } else {
                 monster.attack(player);
             }

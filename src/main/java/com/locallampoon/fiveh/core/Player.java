@@ -7,7 +7,6 @@ import java.util.Random;
 
 import static com.locallampoon.fiveh.core.Game.actionPanel;
 import static com.locallampoon.fiveh.core.Game.narrativePanel;
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.BG_COLOR;
 import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
 
 
@@ -191,7 +190,7 @@ public class Player {
         }
 
         if (actionPanel != null) {
-            actionPanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left\n", FG_COLOR);
+            actionPanel.appendTextArea(" You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left\n", FG_COLOR);
 
         }
     }
