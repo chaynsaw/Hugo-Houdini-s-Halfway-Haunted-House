@@ -1,6 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -28,6 +29,7 @@ public class ActionPanel {
                 PanelStyles.ActionPanel.Y,
                 PanelStyles.ActionPanel.WIDTH,
                 PanelStyles.ActionPanel.HEIGHT);
+        pane.setBorder(new MatteBorder(0, 1, 1, 0, Color.WHITE));
     }
 
     public JScrollPane getPanel() {

@@ -17,7 +17,7 @@ public class PanelStyles {
     public static class Window {
         public static final int X = 0;
         public static final int Y = 0;
-        public static final int WIDTH = 1000;
+        public static final int WIDTH = 1017;
         public static final int HEIGHT = 910;
     }
 
@@ -40,7 +40,7 @@ public class PanelStyles {
         public static final int X = 0;
         public static final int Y = 840;
         public static final int WIDTH = 1000;
-        public static final int HEIGHT = 32;
+        public static final int HEIGHT = 30;
         public static final int TXT_AREA_X = 0;
         public static final int TXT_AREA_Y = 0;
         public static final int TXT_AREA_WIDTH = 540;
