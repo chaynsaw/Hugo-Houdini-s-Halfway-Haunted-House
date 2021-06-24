@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.Map.UNIT_SIZE;
+import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.UNIT_SIZE;
 
 class XMLParser {
 
