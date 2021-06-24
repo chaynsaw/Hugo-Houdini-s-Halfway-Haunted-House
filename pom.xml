@@ -48,6 +48,17 @@
                 </executions>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>rooms.xml</include>
+                    <include>helpmenu.txt</include>
+
+                </includes>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>

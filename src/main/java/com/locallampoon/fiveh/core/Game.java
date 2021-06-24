@@ -13,7 +13,7 @@ import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
 
 public class Game implements Serializable {
 
-    private static final String HELP_FILE = "src/main/java/com/locallampoon/fiveh/data/helpmenu.txt";
+    private static final String HELP_FILE = "/helpmenu.txt";
     private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
     static MainPanel mainPanel;
@@ -62,7 +62,7 @@ public class Game implements Serializable {
     // METHODS
 
     private static void readFile(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
             while ((line = br.readLine()) != null) {
                 narrativePanel.appendTextArea(line);

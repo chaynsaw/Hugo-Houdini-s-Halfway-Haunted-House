@@ -20,7 +20,7 @@ import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.*;
 
 class XMLParser {
 
-    private static final String ROOM_FILE = "src/main/java/com/locallampoon/fiveh/data/rooms.xml";
+    private static final String ROOM_FILE = "/rooms.xml";
 
     public static Map<String, Room> parseRooms() {
 
@@ -37,7 +37,7 @@ class XMLParser {
             // parse XML file
             DocumentBuilder docBuild = dbf.newDocumentBuilder();
 
-            Document doc = docBuild.parse(new File(ROOM_FILE));
+            Document doc = docBuild.parse(XMLParser.class.getResourceAsStream(ROOM_FILE));
 
             doc.getDocumentElement().normalize();
             // get <room> from xml
