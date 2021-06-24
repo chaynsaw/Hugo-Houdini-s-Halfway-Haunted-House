@@ -39,6 +39,7 @@ public class PanelStyles {
     public static final int PANEL_HEIGHT = 500;
     public static final Font MAP_TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, UNIT_SIZE*2/3);
     public static final String[] MAP_FLOORS = new String[]{"Attic", "Second", "First","Basement"};
+    public static final String[] DIRECTIONS = new String[]{"NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"};
     public static final int PLAYER_SIZE = 5;
     public static int[] XPlayer = new int[PLAYER_SIZE];
     public static int[] YPlayer = new int[PLAYER_SIZE];
@@ -47,8 +48,8 @@ public class PanelStyles {
     public static final int MAP_HALL_LENGTH = 4*MAP_ROOM_LENGTH;
     public static final Color MAP_DEFAULT = new Color(192,192,192);
     public static final Color ROOM_TEXT_COLOR = new Color(255,69,0);
-    public static final Color PLAYER_COLOR = new Color(10,248,8);
-    public static final Color NEIGHBOUR_COLOR = new Color(61,184,255);
+    public static final Color PLAYER_COLOR = new Color(13,148,22);
+    public static final Color NEIGHBOUR_COLOR = new Color(19, 85, 191);
     public static final Color FLOOR_NAME_COLOR = new Color(255,255,255);
     public static final Font FLOOR_NAME_FONT = new Font(FONT_FAMILY, Font.PLAIN, UNIT_SIZE*3/2);
     public static final Font ROOM_TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, UNIT_SIZE*4/3);
