@@ -1,5 +1,8 @@
 package com.locallampoon.fiveh.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Monster {
     //INSTANCE VARIABLE
     private String name;
@@ -9,6 +12,7 @@ public class Monster {
     private boolean isSmart;
     private boolean isDead;
     private String questItem;
+    private List<String> weaknesses = new ArrayList<>();
 
     // CONSTRUCTOR
 
@@ -20,10 +24,19 @@ public class Monster {
         setDead(false);
     }
 
-    Monster(String name, String questItem) {
+    Monster(String name, String questItem, List<String> weaknesses) {
         this();
         setName(name);
         setQuestItem(questItem);
+        setWeaknesses(weaknesses);
+    }
+
+    public void setWeaknesses(List<String> weaknesses) {
+        this.weaknesses = weaknesses;
+    }
+
+    public List<String> getWeaknesses() {
+        return this.weaknesses;
     }
 
     void attack(Player player){

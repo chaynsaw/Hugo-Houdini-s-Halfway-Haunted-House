@@ -1,5 +1,7 @@
 package com.locallampoon.fiveh.core;
 
+import com.locallampoon.fiveh.ui.PanelStyles;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +12,10 @@ import static com.locallampoon.fiveh.core.Game.narrativePanel;
 
 public class Player {
 
-    //INSTANCE VARIABLE
-    private String character;
     final List<String> inventory = new ArrayList<>(5);
     private final List<String> squad;
+    //INSTANCE VARIABLE
+    private String character;
     private int health;
     private int strength;
     private boolean isStrong;//Players will use to move heavy items
@@ -57,18 +59,20 @@ public class Player {
         // Players will be able to add Items to their inventory until the maximum items are reached
         if (item.equals("duffel")) {
             changeInventorySize();
-            narrativePanel.appendTextArea("You now have a Duffel Bag, you can carry twice as many items!\n");
+            narrativePanel.appendTextArea("You now have a Duffel Bag, you can carry twice as many items!\n", PanelStyles.FG_COLOR);
             printInventoryItems();
         } else if (inventory.contains("")) {
             int index = inventory.indexOf("");
             inventory.remove(index);
             inventory.add(index, item);
-            if (narrativePanel!=null) {
-                narrativePanel.appendTextArea("You added " + item + " to your inventory");
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea("You added " + item + " to your inventory\n", PanelStyles.FG_COLOR);
             }
             printInventoryItems();
         } else {
-            narrativePanel.appendTextArea("You need to drop an item to add more to your inventory");
+            if (narrativePanel!=null) {
+                narrativePanel.appendTextArea("You need to drop an item to add more to your inventory");
+            }
             printInventoryItems();
         }
     }
@@ -79,12 +83,12 @@ public class Player {
             int index = inventory.indexOf(item);
             inventory.remove(item);
             inventory.add(index, "");
-            if (narrativePanel!=null) {
-                narrativePanel.appendTextArea(item + " Dropped");
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea(item + " Dropped\n", PanelStyles.FG_COLOR);
             }
         } else {
-            if (narrativePanel!=null) {
-                narrativePanel.appendTextArea("You do not have " + item + " in your inventory");
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea("You do not have " + item + " in your inventory\n", PanelStyles.FG_COLOR);
             }
         }
         printInventoryItems();
@@ -98,7 +102,7 @@ public class Player {
         squad.remove(npc);
     }
 
-    public List getSquad() {
+    public List<String> getSquad() {
         return squad;
     }
 
@@ -118,21 +122,21 @@ public class Player {
 
     void printInventoryItems() {
         String bagName = !isHasDuffelBag() ? "FANNY PACK" : "DUFFEL BAG";
-        if (narrativePanel!=null){
-        narrativePanel.appendTextArea("\n" + bagName + " ITEMS: ");
+        if (narrativePanel != null) {
+            narrativePanel.appendTextArea("\n" + bagName + " ITEMS: ", PanelStyles.FG_COLOR);
         }
         for (int i = 0; i < inventory.size(); i++) {
             if (narrativePanel != null) {
-                narrativePanel.appendTextArea((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next());
+                narrativePanel.appendTextArea((inventory.listIterator(i).nextIndex() + 1) + ".) " + inventory.listIterator(i).next(), PanelStyles.FG_COLOR);
             }
         }
         if (!squad.isEmpty()) {
             if (narrativePanel != null) {
-                narrativePanel.appendTextArea("\nThe Squad: " + getSquad());
+                narrativePanel.appendTextArea("\nThe Squad: " + getSquad(), PanelStyles.FG_COLOR);
             }
         }
         if (narrativePanel != null) {
-            narrativePanel.appendTextArea("\n");
+            narrativePanel.appendTextArea("\n", PanelStyles.FG_COLOR);
         }
     }
 
@@ -170,28 +174,37 @@ public class Player {
 
     void attack(Monster monster) {
         int damage = getStrength();
+        for (String item : this.getInventory()) {
+            if (monster.getWeaknesses().contains(item)) {
+                if (narrativePanel != null) {
+                    narrativePanel.appendTextArea("You used " + item + "!");
+                }
+                damage += 5;
+                break;
+            }
+        }
         monster.takeDamage(damage);
-        if (monster.isDead()){
+        if (monster.isDead()) {
             getCurrentRoom().addItem(monster.getQuestItem());
             getCurrentRoom().setRoomMonster(null);
         }
         if (narrativePanel != null) {
-            narrativePanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left");
+            narrativePanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left", PanelStyles.BG_COLOR);
         }
     }
 
     void takeDamage(int damage) {
         if (getHealth() - damage <= 0) {
             setDead(true);
-            if (narrativePanel!=null) {
-                narrativePanel.appendTextArea("The monster killed you.");
-                narrativePanel.appendTextArea("GAME OVER");
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea("The monster killed you.\n", PanelStyles.FG_COLOR);
+                narrativePanel.appendTextArea("GAME OVER\n", PanelStyles.FG_COLOR);
             }
         } else {
             setHealth(health - damage);
             if (narrativePanel != null) {
                 narrativePanel.appendTextArea(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " + damage +
-                        " DAMAGE and have " + health + " HEALTH left\n");
+                        " DAMAGE and have " + health + " HEALTH left\n", PanelStyles.BG_COLOR);
             }
         }
     }
@@ -216,10 +229,10 @@ public class Player {
 
     void getCurrentItemDetails() {
         if (inventory.isEmpty()) {
-            narrativePanel.appendTextArea("Your nothing in your inventory");
+            narrativePanel.appendTextArea("Your nothing in your inventory\n", PanelStyles.FG_COLOR);
         } else {
-            narrativePanel.appendTextArea("You have following items in your inventory ");
-            narrativePanel.appendTextArea(inventory.toString());
+            narrativePanel.appendTextArea("You have following items in your inventory ", PanelStyles.FG_COLOR);
+            narrativePanel.appendTextArea(inventory.toString(), PanelStyles.FG_COLOR);
         }
     }
 
@@ -252,12 +265,12 @@ public class Player {
         isStrong = strong;
     }
 
-    public void setSmart(boolean smart) {
-        isSmart = smart;
-    }
-
     boolean isSmart() {
         return isSmart;
+    }
+
+    public void setSmart(boolean smart) {
+        isSmart = smart;
     }
 
     boolean isDead() {
@@ -290,5 +303,16 @@ public class Player {
 
     public void setBrave(boolean brave) {
         isBrave = brave;
+    }
+
+    public boolean isInventoryFull() {
+        boolean result = true;
+        for (String item : this.getInventory()) {
+            if (item.equals("")) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }

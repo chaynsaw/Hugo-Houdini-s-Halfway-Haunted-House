@@ -56,6 +56,7 @@ public class MainPanel {
     public void showGame() {
         narrativePanel.getPanel().setVisible(true);
         consolePanel.getPanel().setVisible(true);
+        consolePanel.enableConsole();
         artPanel.getPanel().setVisible(true);
         statsPanel.getPanel().setVisible(true);
         mapPanel.getPanel().setVisible(true);
