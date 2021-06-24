@@ -14,10 +14,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static com.locallampoon.fiveh.ui.PanelStyles.UNIT_SIZE;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.UNIT_SIZE;
 
@@ -86,7 +85,9 @@ class XMLParser {
                         Node currentNode = monsterNodes.item(j);
                         String monsterName = currentNode.getTextContent();
                         String questItem = currentNode.getAttributes().getNamedItem("questItem").getNodeValue();
-                        monster = new Monster(monsterName, questItem);
+                        String strWeaknesses = currentNode.getAttributes().getNamedItem("weaknesses").getNodeValue();
+                        List<String> weaknesses = Arrays.asList(strWeaknesses.split(","));
+                        monster = new Monster(monsterName, questItem, weaknesses);
                     }
                     // grab coordinates
                     int dX = Integer.parseInt(element.getElementsByTagName("dx").item(0).getTextContent())* UNIT_SIZE;

@@ -3,9 +3,7 @@ package com.locallampoon.fiveh.ui.mappanel;
 import com.locallampoon.fiveh.core.Player;
 import com.locallampoon.fiveh.core.Room;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,28 +14,29 @@ public class GameMap {
     private Map<String, Room> mapRooms = new HashMap<>();
     private Player player;
 
-    private GameMap(){}
+    private GameMap() {
+    }
 
-    public static GameMap getInstance(){
-        if(gameMapInstance==null){
+    public static GameMap getInstance() {
+        if (gameMapInstance == null) {
             GameMap.gameMapInstance = new GameMap();
         }
         return GameMap.gameMapInstance;
     }
 
-    public Map<String, Room> getRooms(){
+    public Map<String, Room> getRooms() {
         return this.mapRooms;
     }
 
-    public void setRooms(Map<String, Room> rooms){
+    public void setRooms(Map<String, Room> rooms) {
         this.mapRooms = rooms;
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return this.player;
     }
 
-    public void setPlayer(Player player){
+    public void setPlayer(Player player) {
         this.player = player;
     }
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -21,17 +22,14 @@ public class PlayerTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-
-
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         houseMap = XMLParser.parseRooms();
         player = new Player(houseMap.get("kitchen"));
         player.addItem("key");
         player.addItem("pencil");
-
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
+//        System.setOut(new PrintStream(outContent));
+//        System.setErr(new PrintStream(errContent));
     }
 
     @Test
@@ -91,6 +89,15 @@ public class PlayerTest {
     }
 
     @Test
+    public void attack_ShouldOneShotKillIfWeaknessItemInInventory() {
+        Monster monster = new Monster();
+        monster.setWeaknesses(Arrays.asList("weaknessItem"));
+        player.addItem("weaknessItem");
+        player.attack(monster);
+        assertTrue(monster.isDead());
+    }
+
+    @Test
     public void takeDamage_ShouldReturnTrueWHenPlayerTakesDamageLessThanFive() {
         player.takeDamage(3);
         assertEquals(17, player.getHealth());
@@ -126,6 +133,22 @@ public class PlayerTest {
         assertNotEquals(items, player.getInventory());
     }
 
+    @Test
+    public void isInventoryFull_ShouldReturnFalseWhenThereIsEmptySpace() {
+        player.addItem("bar");
+        player.addItem("lar");
+        player.addItem("star");
+        player.dropItem("bar");
+        assertFalse(player.isInventoryFull());
+    }
+
+    @Test
+    public void isInventoryFull_ShouldReturnTrueWhenThereIsNoEmptySpace() {
+        player.addItem("bar");
+        player.addItem("lar");
+        player.addItem("star");
+        assertTrue(player.isInventoryFull());
+    }
 
     @Test
     public void getHealth_ShouldReturnTrueWhenPlayerHealthIsFive() {
