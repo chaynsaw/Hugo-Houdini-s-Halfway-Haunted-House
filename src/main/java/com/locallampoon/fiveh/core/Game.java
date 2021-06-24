@@ -201,7 +201,7 @@ public class Game implements Serializable {
             switch (monsterInRoom.getName()) {
                 case "Vampire" -> artPanel.setTextArea(GameArt.renderMan());
                 case "Ghost" -> artPanel.setTextArea(GameArt.renderGhost());
-                case "Ware Wolf" -> artPanel.setTextArea(GameArt.renderWolf());
+                case "Werewolf" -> artPanel.setTextArea(GameArt.renderWolf());
             }
             narrativePanel.appendTextArea("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
             statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());

@@ -83,8 +83,9 @@ back inside.</desc>
         </roomExits>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
+            <item>Silver Butter Knife</item>
         </roomItems>
-        <monster questItem="UV Light">Ware Wolf</monster>
+        <monster questItem="Werewolf's Key">Werewolf</monster>
         <npc>Chess Geek</npc>
         <dx>55</dx>
         <dy>50</dy>
@@ -106,7 +107,7 @@ door showing a dining room table, and along the EAST wall there is a closed door
         <roomItems type="array">
             <item>Bluetooth Speaker</item>
         </roomItems>
-        <monster questItem="silver butter knife">Vampire</monster>
+        <monster questItem="Vampire's Key">Vampire</monster>
         <npc></npc>
         <dx>55</dx>
         <dy>36</dy>
@@ -126,6 +127,7 @@ glass bottles. Do those jars have eyeballs in them? The only door out is WEST to
         </roomExits>
         <roomItems type="array">
             <item>Eyeball Jar</item>
+            <item>Holy Salt</item>
         </roomItems>
         <npc>Bleacher Kid</npc>
         <dx>69</dx>
@@ -208,7 +210,7 @@ does not appear to be another exit from this room other than the door to the WES
         <roomItems type="array">
             <item>CPR Dummy</item>
         </roomItems>
-        <monster questItem="flashlight">Ghost</monster>
+        <monster questItem="Ghost's Key">Ghost</monster>
         <npc></npc>
         <dx>40</dx>
         <dy>58</dy>
@@ -309,6 +311,7 @@ monitor while another person, the one who yelled at you, handles several radios.
             <exit dir="5">upstairsLanding</exit>
         </roomExits>
         <roomItems type="array">
+            <item>UV Light</item>
         </roomItems>
         <npc></npc>
         <dx>30</dx>
