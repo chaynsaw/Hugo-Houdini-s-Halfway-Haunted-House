@@ -226,6 +226,7 @@ public class Game implements Serializable {
             monsterHealthPanel.setHealthBar(monsterInRoom.getHealth());
             playerHealthPanel.setHealthBar(player.getHealth());
         } else {
+            artPanel.setTextArea(GameArt.renderHouse());
             monsterHealthPanel.setVisible(false);
         }
     }
@@ -233,6 +234,7 @@ public class Game implements Serializable {
     public void start() {
         printDescription();
         printPlayerStats();
+        artPanel.setTextArea(GameArt.renderHouse());
     }
 
     private static void renderGameUI() {
