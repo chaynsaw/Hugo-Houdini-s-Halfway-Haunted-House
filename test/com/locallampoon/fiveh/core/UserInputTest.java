@@ -190,4 +190,18 @@ public class UserInputTest {
         implementCommandTwoWords(dropPhantomItem2, roomExits, player);
         assertEquals(1, playerCurrentRoom.getItems().size());
     }
+
+    @Test
+    public void implementCommandTwoWords_ShouldntDisappearItemsEvenIfPlayerInvFull() {
+        player.addItem("Bowl of Candy");
+        player.addItem("Smudged Glass");
+        player.addItem("UV Light");
+        player.addItem("Bloodied Trowel");
+        player.addItem("Flashlight");
+        List<String> pickUpSpeaker = Arrays.asList("get", "speaker");
+        assertTrue(playerCurrentRoom.getItems().contains("Bluetooth Speaker"));
+
+        implementCommandTwoWords(pickUpSpeaker, roomExits, player);
+        assertTrue(playerCurrentRoom.getItems().contains("Bluetooth Speaker"));
+    }
 }

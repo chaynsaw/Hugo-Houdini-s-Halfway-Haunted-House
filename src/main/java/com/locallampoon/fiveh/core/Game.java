@@ -105,8 +105,10 @@ public class Game implements Serializable {
             }
             case "get", "grab" -> {
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, playerDependency);
-                playerDependency.addItem(grabbedItem);
-                playerCurrentRoom.removeItem(grabbedItem);
+                if (!playerDependency.isInventoryFull()) {
+                    playerDependency.addItem(grabbedItem);
+                    playerCurrentRoom.removeItem(grabbedItem);
+                }
             }
             case "drop" -> {
                 String droppedItem = UserInput.nounItemHelper(parsedCommandList, playerDependency);
