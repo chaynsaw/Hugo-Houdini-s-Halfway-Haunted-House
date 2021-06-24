@@ -8,6 +8,7 @@ public class MainPanel {
     Container container;
     IntroPanel introPanel;
     NarrativePanel narrativePanel;
+    ActionPanel actionPanel;
     ConsolePanel consolePanel;
     ArtPanel artPanel;
     StatsPanel statsPanel;
@@ -16,6 +17,7 @@ public class MainPanel {
     public MainPanel(
             IntroPanel introPanel,
             NarrativePanel narrativePanel,
+            ActionPanel actionPanel,
             ConsolePanel consolePanel,
             ArtPanel artPanel,
             StatsPanel statsPanel,
@@ -23,6 +25,7 @@ public class MainPanel {
     ) {
         this.introPanel = introPanel;
         this.narrativePanel = narrativePanel;
+        this.actionPanel = actionPanel;
         this.consolePanel = consolePanel;
         this.artPanel = artPanel;
         this.statsPanel = statsPanel;
@@ -37,6 +40,7 @@ public class MainPanel {
         // add individual panels
         container.add(introPanel.getPanel());
         container.add(narrativePanel.getPanel());
+        container.add(actionPanel.getPanel());
         container.add(consolePanel.getPanel());
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
@@ -47,6 +51,7 @@ public class MainPanel {
 
     public void hideGame() {
         narrativePanel.getPanel().setVisible(false);
+        actionPanel.getPanel().setVisible(false);
         consolePanel.getPanel().setVisible(false);
         artPanel.getPanel().setVisible(false);
         statsPanel.getPanel().setVisible(false);
@@ -55,6 +60,7 @@ public class MainPanel {
 
     public void showGame() {
         narrativePanel.getPanel().setVisible(true);
+        actionPanel.getPanel().setVisible(true);
         consolePanel.getPanel().setVisible(true);
         consolePanel.enableConsole();
         artPanel.getPanel().setVisible(true);
@@ -69,6 +75,8 @@ public class MainPanel {
     public NarrativePanel getNarrativePanel() {
         return narrativePanel;
     }
+
+    public ActionPanel getActionPanel() { return actionPanel; }
 
     public ArtPanel getArtPanel() {
         return artPanel;

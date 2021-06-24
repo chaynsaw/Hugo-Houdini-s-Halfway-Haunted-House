@@ -3,6 +3,7 @@ package com.locallampoon.fiveh.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static com.locallampoon.fiveh.core.Game.actionPanel;
 import static com.locallampoon.fiveh.core.Game.narrativePanel;
 import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
 
@@ -39,7 +40,7 @@ public class GameState {
 
     public static String quitHelper(BufferedReader quitReader) throws IOException {
         String quitCommand;
-        narrativePanel.appendTextArea("Are you sure you want to quit the game?\n", FG_COLOR);
+        actionPanel.appendTextArea("Are you sure you want to quit the game?\n");
 
         while (true) {
             String quitResponse = quitReader.readLine().toLowerCase();
@@ -51,7 +52,7 @@ public class GameState {
                 quitCommand = quitSave(quitReader);
                 break;
             } else {
-                narrativePanel.appendTextArea("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue\n", FG_COLOR);
+                actionPanel.appendTextArea("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue");
             }
         }
         return quitCommand;

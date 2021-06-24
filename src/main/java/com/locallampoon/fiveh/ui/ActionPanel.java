@@ -1,16 +1,21 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FONT_FAMILY;
 
-public class NarrativePanel{
+public class ActionPanel {
     private JScrollPane pane;
     private JTextPane textArea;
     private Font normalFont = new Font(FONT_FAMILY, Font.PLAIN, 18);
-    public NarrativePanel() {
+
+    public ActionPanel(){
         textArea = new JTextPane();
         textArea.setFont(normalFont);
         textArea.setBackground(Color.BLACK);
@@ -20,7 +25,7 @@ public class NarrativePanel{
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
-        pane.setBounds(0, 500, 1000, 190);
+        pane.setBounds(0, 690, 1000, 150);
     }
 
     public JScrollPane getPanel() {
@@ -32,12 +37,6 @@ public class NarrativePanel{
         textArea.setText(text);
     }
 
-    /**
-     * append text in narrative panel with customized foreground color
-     * enable and disable capability to edit before and after append
-     * @param text display text
-     * @param color display color
-     */
     public void appendTextArea(String text, Color color)
     {
         this.enableNarrativeTextArea();
@@ -45,10 +44,6 @@ public class NarrativePanel{
         this.disableNarrativeTextArea();
     }
 
-    /**
-     * append text in narrative panel with fixed foreground color
-     * @param text display text
-     */
     public void appendTextArea(String text)
     {
         this.appendTextArea(text, FG_COLOR);
@@ -62,13 +57,6 @@ public class NarrativePanel{
         textArea.setEditable(true);
     }
 
-    /**
-     * apply style change on given JTextPane
-     * it only changes color in this application
-     * @param textPane
-     * @param msg
-     * @param color
-     */
     private void appendToPane(JTextPane textPane, String msg, Color color)
     {
         StyleContext style = StyleContext.getDefaultStyleContext();
