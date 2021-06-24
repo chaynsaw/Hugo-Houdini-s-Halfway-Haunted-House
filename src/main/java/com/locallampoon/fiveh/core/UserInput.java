@@ -55,10 +55,13 @@ class UserInput {
                 noun = singleItem;
                 break;
             }else{
-                narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling");
+                if (narrativePanel != null) {
+                    narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling");
+                }
             }
-            narrativePanel.appendTextArea("we looking at this room item!!!!  "+ singleItem);
-            i++;
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea("we looking at this room item!!!!  "+ singleItem);
+            }
         }
         return noun;
     }

@@ -1,7 +1,14 @@
 package com.locallampoon.fiveh.core;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static com.locallampoon.fiveh.core.Game.implementCommandTwoWords;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 public class UserInputTest {
@@ -19,6 +26,15 @@ public class UserInputTest {
     String brokenString5 = "go##% north363";
     String brokenString6 = "go n0rth";
     String brokenString7 = "g0 north";
+
+    Player player;
+    Map<String, Room> houseMap;
+
+    @Before
+    public void setUp() {
+        houseMap = XMLParser.parseRooms();
+        player = new Player(houseMap.get("kitchen"));
+    }
 
     @Test
     public void parseCommand_normalStringsTest() {
@@ -65,5 +81,36 @@ public class UserInputTest {
 
         assertNotEquals(expectedArray[1], brokenWorkingArray6[1]);
         assertNotEquals(expectedArray[0], brokenWorkingArray7[0]);
+    }
+
+    @Test
+    public void implementCommandTwoWords_properlyDropsAddedItem() {
+        Room playerCurrentRoom = player.getCurrentRoom();
+        List<String> roomExits = playerCurrentRoom.getExits();
+        player.addItem("Bowl of Candy");
+        List<String> wordList = new ArrayList<>();
+        wordList.add("drop");
+        wordList.add("candy");
+        assertTrue(player.getInventory().contains("Bowl of Candy"));
+
+        implementCommandTwoWords(wordList, roomExits, player);
+
+        assertFalse(player.getInventory().contains("Bowl of Candy"));
+    }
+
+    @Test
+    public void implementCommandTwoWords_properlyDropsItemsAddedInSpecificOrder() {
+        Room playerCurrentRoom = player.getCurrentRoom();
+        List<String> roomExits = playerCurrentRoom.getExits();
+        player.addItem("Bowl of Candy");
+        player.addItem("Smudged Glass");
+        List<String> wordList = new ArrayList<>();
+        wordList.add("drop");
+        wordList.add("glass");
+
+        implementCommandTwoWords(wordList, roomExits, player);
+
+        assertTrue(player.getInventory().contains("Bowl of Candy"));
+        assertFalse(player.getInventory().contains("Smudged Glass"));
     }
 }
