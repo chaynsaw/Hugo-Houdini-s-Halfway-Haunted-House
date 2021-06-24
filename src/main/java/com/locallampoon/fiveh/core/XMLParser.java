@@ -16,9 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.UNIT_SIZE;
-
-import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.UNIT_SIZE;
+import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.*;
 
 class XMLParser {
 

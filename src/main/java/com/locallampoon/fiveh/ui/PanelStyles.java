@@ -49,6 +49,7 @@ public class PanelStyles {
 
     // Map panel styles
     public static class GameMap {
+        public static final String[] DIRECTIONS = new String[]{"NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"};
         public static final int UNIT_SIZE = 8; // how big each block/unit; player movement length also
         public static final int PANEL_WIDTH = 600; // panel size
         public static final int PANEL_HEIGHT = 500;
