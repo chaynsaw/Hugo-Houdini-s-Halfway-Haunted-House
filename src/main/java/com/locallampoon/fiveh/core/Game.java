@@ -82,14 +82,17 @@ public class Game implements Serializable {
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
         } else if (parsedCommandList.size() == 2){
-            implementCommandTwoWords(parsedCommandList,roomExits);
+            implementCommandTwoWords(parsedCommandList, roomExits, null);
         } else {
             narrativePanel.appendTextArea("Invalid Action\n");
         }
     }
 
-    private static void implementCommandTwoWords(List<String> parsedCommandList, List<String> roomExits) {
-        Room playerCurrentRoom = player.getCurrentRoom();
+    static void implementCommandTwoWords(List<String> parsedCommandList, List<String> roomExits, Player playerDependency) {
+        if (playerDependency == null) {
+            playerDependency = player;
+        }
+        Room playerCurrentRoom = playerDependency.getCurrentRoom();
         switch (parsedCommandList.get(0)) {
             case "go", "move" -> {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
@@ -99,32 +102,34 @@ public class Game implements Serializable {
                     break;
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
-                player.move(roomKeyID);
+                playerDependency.move(roomKeyID);
             }
             case "get", "grab", "take" -> {
-                String grabbedItem = UserInput.nounItemHelper(parsedCommandList, player);
-                player.addItem(grabbedItem);
-                playerCurrentRoom.removeItem(grabbedItem);
-            }
-            case "drop" -> {
-                String droppedItem = UserInput.nounItemHelper(parsedCommandList, player);
-                player.dropItem(droppedItem);
-                playerCurrentRoom.addItem(droppedItem);
-            }
-            case "recruit" -> {
-                String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, player);
-                player.addNpc(recruitedNpc);
-                playerCurrentRoom.removeNpc(recruitedNpc);
-                switch (recruitedNpc.toLowerCase()) {
-                    case "jock" -> player.setStrong(true);
-                    case "chess geek" -> player.setSmart(true);
-                    case "bleacher kid" -> player.setBrave(true);
-                    default -> narrativePanel.appendTextArea("Invalid Action\n");
+                String grabbedItem = UserInput.nounItemHelper(parsedCommandList, playerDependency);
+                if (!playerDependency.isInventoryFull()) {
+                    playerDependency.addItem(grabbedItem);
+                    playerCurrentRoom.removeItem(grabbedItem);
                 }
             }
-            default -> {
-                narrativePanel.appendTextArea("Invalid Action\n");
+            case "drop" -> {
+                String droppedItem = UserInput.nounItemHelper(parsedCommandList, playerDependency);
+                if (!droppedItem.equals("")) {
+                    playerDependency.dropItem(droppedItem);
+                    playerCurrentRoom.addItem(droppedItem);
+                }
             }
+            case "recruit" -> {
+                String recruitedNpc = UserInput.nounItemHelper(parsedCommandList, playerDependency);
+                playerDependency.addNpc(recruitedNpc);
+                playerCurrentRoom.removeNpc(recruitedNpc);
+                switch (recruitedNpc.toLowerCase()) {
+                    case "jock" -> playerDependency.setStrong(true);
+                    case "chess geek" -> playerDependency.setSmart(true);
+                    case "bleacher kid" -> playerDependency.setBrave(true);
+                    default -> narrativePanel.appendTextArea("Invalid Action");
+                }
+            }
+            default -> narrativePanel.appendTextArea("Invalid Action");
         }
     }
 
@@ -151,7 +156,7 @@ public class Game implements Serializable {
                 break;
             default: {
                 narrativePanel.appendTextArea("Invalid Action\n");
-            };
+            }
         }
     }
 
@@ -204,7 +209,7 @@ public class Game implements Serializable {
             switch (monsterInRoom.getName()) {
                 case "Vampire" -> artPanel.setTextArea(GameArt.renderMan());
                 case "Ghost" -> artPanel.setTextArea(GameArt.renderGhost());
-                case "Ware Wolf" -> artPanel.setTextArea(GameArt.renderWolf());
+                case "Werewolf" -> artPanel.setTextArea(GameArt.renderWolf());
             }
             narrativePanel.appendTextArea("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n");
             statsPanel.appendTextArea("MONSTER HEALTH: " + monsterInRoom.getHealth());

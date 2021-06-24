@@ -70,7 +70,9 @@ public class Player {
             }
             printInventoryItems();
         } else {
-            narrativePanel.appendTextArea("You need to drop an item to add more to your inventory\n", PanelStyles.FG_COLOR);
+            if (narrativePanel!=null) {
+                narrativePanel.appendTextArea("You need to drop an item to add more to your inventory");
+            }
             printInventoryItems();
         }
     }
@@ -301,5 +303,16 @@ public class Player {
 
     public void setBrave(boolean brave) {
         isBrave = brave;
+    }
+
+    public boolean isInventoryFull() {
+        boolean result = true;
+        for (String item : this.getInventory()) {
+            if (item.equals("")) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }

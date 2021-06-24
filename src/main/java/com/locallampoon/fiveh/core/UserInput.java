@@ -29,7 +29,7 @@ class UserInput {
         String itemSubstring = wordList.get(1);
         String verb = wordList.get(0);
         String noun = "";
-        List<String> tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getItems();
+        List<String> tempRoomPlayerItemList = new ArrayList<>(gamePlayer.getCurrentRoom().getItems());
         List<String> tempItemList;
         boolean nounPresent = false;
 
@@ -41,9 +41,8 @@ class UserInput {
             tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getNpcs();
         }
 
-        for (int i = 0; i < tempRoomPlayerItemList.size(); i++) {
+        for (String singleItem : tempRoomPlayerItemList) {
 
-            String singleItem = tempRoomPlayerItemList.get(i);
             tempItemList = Arrays.asList(singleItem.split(" "));
 
             for (String word : tempItemList) {
@@ -57,10 +56,14 @@ class UserInput {
                 noun = singleItem;
                 break;
             } else {
-                narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling\n", PanelStyles.FG_COLOR);
+                if (narrativePanel != null) {
+                    narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling");
+                }
             }
-            narrativePanel.appendTextArea("we looking at this room item!!!!  " + singleItem, PanelStyles.FG_COLOR);
-            i++;
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea("we looking at this room item!!!!  " + singleItem);
+            }
+
         }
         return noun;
     }
