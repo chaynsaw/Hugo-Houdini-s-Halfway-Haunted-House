@@ -72,4 +72,11 @@ public class PanelStyles {
         public static int WIDTH = 250;
         public static int HEIGHT = 300;
     }
+
+    public static class ActionPanel {
+        public static int X = 0;
+        public static int Y = 690;
+        public static int WIDTH = 1000;
+        public static int HEIGHT = 150;
+    }
 }

@@ -7,25 +7,27 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.FONT_FAMILY;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
 
 public class ActionPanel {
     private JScrollPane pane;
     private JTextPane textArea;
-    private Font normalFont = new Font(FONT_FAMILY, Font.PLAIN, 18);
+    private Font normalFont = new Font(FONT_FAMILY,FONT_WEIGHT,FONT_SIZE);
 
     public ActionPanel(){
         textArea = new JTextPane();
         textArea.setFont(normalFont);
-        textArea.setBackground(Color.BLACK);
+        textArea.setBackground(BG_COLOR);
         textArea.setRequestFocusEnabled(false);
         pane = new JScrollPane(
                 textArea,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
-        pane.setBounds(0, 690, 1000, 150);
+        pane.setBounds(PanelStyles.ActionPanel.X,
+                PanelStyles.ActionPanel.Y,
+                PanelStyles.ActionPanel.WIDTH,
+                PanelStyles.ActionPanel.HEIGHT);
     }
 
     public JScrollPane getPanel() {
