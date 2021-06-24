@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.Map.unitSize;
+import static com.locallampoon.fiveh.ui.PanelStyles.Map.UNIT_SIZE;
 
 class XMLParser {
 
@@ -89,8 +89,8 @@ class XMLParser {
                         monster = new Monster(monsterName, questItem);
                     }
                     // grab coordinates
-                    int dX = Integer.parseInt(element.getElementsByTagName("dx").item(0).getTextContent())*unitSize;
-                    int dY = Integer.parseInt(element.getElementsByTagName("dy").item(0).getTextContent())*unitSize;
+                    int dX = Integer.parseInt(element.getElementsByTagName("dx").item(0).getTextContent())* UNIT_SIZE;
+                    int dY = Integer.parseInt(element.getElementsByTagName("dy").item(0).getTextContent())* UNIT_SIZE;
                     //roomMap.put(id, new Room(roomName, desc, exits, items, npcs, monster));
                     roomMap.put(id, new MapRoom(roomName, desc, exits, items, npcs, monster,dX,dY));
                 }

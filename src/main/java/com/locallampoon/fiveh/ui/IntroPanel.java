@@ -8,13 +8,13 @@ public class IntroPanel {
     public IntroPanel() {
         this.panel = new JPanel();
         this.panel.setBounds(
-                PanelStyles.Window.x,
-                PanelStyles.Window.y,
-                PanelStyles.Window.width,
-                PanelStyles.Window.height
+                PanelStyles.Window.X,
+                PanelStyles.Window.Y,
+                PanelStyles.Window.WIDTH,
+                PanelStyles.Window.HEIGHT
         );
-        this.panel.setBackground(PanelStyles.Global.bgColor);
-        this.panel.setForeground(PanelStyles.Global.fgColor);
+        this.panel.setBackground(PanelStyles.Global.BG_COLOR);
+        this.panel.setForeground(PanelStyles.Global.FG_COLOR);
         this.panel.setLayout(null);
 
         IntroTitlePanel introTitlePanel = new IntroTitlePanel();

@@ -12,31 +12,31 @@ public class ConsolePanel implements KeyListener {
     JPanel panel;
     JTextArea textArea;
     Font normalFont = new Font(
-            PanelStyles.Global.fontFamily,
-            PanelStyles.Global.fontWeight,
-            PanelStyles.Global.fontSize
+            PanelStyles.Global.FONT_FAMILY,
+            PanelStyles.Global.FONT_WEIGHT,
+            PanelStyles.Global.FONT_SIZE
     );
 
     public ConsolePanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.ConsolePanel.x,
-                PanelStyles.ConsolePanel.y,
-                PanelStyles.ConsolePanel.width,
-                PanelStyles.ConsolePanel.height
+                PanelStyles.ConsolePanel.X,
+                PanelStyles.ConsolePanel.Y,
+                PanelStyles.ConsolePanel.WIDTH,
+                PanelStyles.ConsolePanel.HEIGHT
         );
-        panel.setBackground(PanelStyles.Global.bgColor);
+        panel.setBackground(PanelStyles.Global.BG_COLOR);
         panel.setBorder(new MatteBorder(0, 1, 0, 1, Color.WHITE));
         textArea = new JTextArea();
         textArea.setBounds(
-                PanelStyles.ConsolePanel.txtAreaX,
-                PanelStyles.ConsolePanel.txtAreaY,
-                PanelStyles.ConsolePanel.txtAreaWidth,
-                PanelStyles.ConsolePanel.txtAreaHeight
+                PanelStyles.ConsolePanel.TXT_AREA_X,
+                PanelStyles.ConsolePanel.TXT_AREA_Y,
+                PanelStyles.ConsolePanel.TXT_AREA_WIDTH,
+                PanelStyles.ConsolePanel.TXT_AREA_HEIGHT
         );
         textArea.setFont(normalFont);
-        textArea.setBackground(PanelStyles.Global.bgColor);
-        textArea.setForeground(PanelStyles.Global.fgColor);
+        textArea.setBackground(PanelStyles.Global.BG_COLOR);
+        textArea.setForeground(PanelStyles.Global.FG_COLOR);
         textArea.addKeyListener(this);
         panel.add(textArea);
     }

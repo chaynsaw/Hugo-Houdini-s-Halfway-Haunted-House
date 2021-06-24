@@ -14,13 +14,11 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.*;
-
 public class GameMapPanel extends JPanel {
     GameMap gameMap = GameMap.getInstance();
 
     public GameMapPanel() {
-        this.setPreferredSize(new Dimension(PanelStyles.Map.panelWidth, PanelStyles.Map.panelHeight));
+        this.setPreferredSize(new Dimension(PanelStyles.Map.PANEL_WIDTH, PanelStyles.Map.PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setBorder(new LineBorder(Color.WHITE));
         this.setOpaque(false); // prevent other panels' text being covered during repaint()
@@ -32,7 +30,7 @@ public class GameMapPanel extends JPanel {
      * @param graph
      */
     public void draw(Graphics graph){
-        graph.setFont(PanelStyles.Map.mapTextFont);
+        graph.setFont(PanelStyles.Map.MAP_TEXT_FONT);
         //this.drawGrid(graph); // design purpose only
         this.drawFloorLayout(graph);
         boolean spotLight; // player's current room
@@ -72,27 +70,27 @@ public class GameMapPanel extends JPanel {
         int x_center = ((MapRoom)mapRoom).getDx();
         int y_center = ((MapRoom)mapRoom).getDy();
         if(spotLight){
-            graph.setColor(PanelStyles.Map.playerColor);
+            graph.setColor(PanelStyles.Map.PLAYER_COLOR);
         }
         if(neighbour){
-            graph.setColor(PanelStyles.Map.neighbourColor);
+            graph.setColor(PanelStyles.Map.NEIGHBOUR_COLOR);
         }
-        for(int i = 0; i < PanelStyles.Map.mapRoomLength; i++){
-            int x = x_center - PanelStyles.Map.mapRoomLength * PanelStyles.Map.unitSize / 2 + i * PanelStyles.Map.unitSize;
-            int y = y_center - PanelStyles.Map.mapRoomLength * PanelStyles.Map.unitSize / 2 + i * PanelStyles.Map.unitSize;
-            graph.drawString("R", x, y_center- PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2);
-            graph.drawString("R", x, y_center+ PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2);
-            graph.drawString("R", x_center- PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2, y);
-            graph.drawString("R", x_center+ PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2, y);
+        for(int i = 0; i < PanelStyles.Map.MAP_ROOM_LENGTH; i++){
+            int x = x_center - PanelStyles.Map.MAP_ROOM_LENGTH * PanelStyles.Map.UNIT_SIZE / 2 + i * PanelStyles.Map.UNIT_SIZE;
+            int y = y_center - PanelStyles.Map.MAP_ROOM_LENGTH * PanelStyles.Map.UNIT_SIZE / 2 + i * PanelStyles.Map.UNIT_SIZE;
+            graph.drawString("R", x, y_center- PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2);
+            graph.drawString("R", x, y_center+ PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2);
+            graph.drawString("R", x_center- PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2, y);
+            graph.drawString("R", x_center+ PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2, y);
         }
-        graph.drawString("R", x_center+ PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2, y_center+ PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2);
+        graph.drawString("R", x_center+ PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2, y_center+ PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2);
         // draw room name
 
-        graph.setColor(PanelStyles.Map.roomTextColor);
-        graph.setFont(PanelStyles.Map.roomTextFont);
-        graph.drawString(mapRoom.getRoomName(),x_center- PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2,y_center- PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2 - PanelStyles.Map.unitSize);
-        graph.setFont(PanelStyles.Map.mapTextFont);
-        graph.setColor(PanelStyles.Map.mapDefault);
+        graph.setColor(PanelStyles.Map.ROOM_TEXT_COLOR);
+        graph.setFont(PanelStyles.Map.ROOM_TEXT_FONT);
+        graph.drawString(mapRoom.getRoomName(),x_center- PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2,y_center- PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2 - PanelStyles.Map.UNIT_SIZE);
+        graph.setFont(PanelStyles.Map.MAP_TEXT_FONT);
+        graph.setColor(PanelStyles.Map.MAP_DEFAULT);
     }
 
     /**
@@ -105,30 +103,30 @@ public class GameMapPanel extends JPanel {
         int x_center = ((MapRoom)hall).getDx();
         int y_center = ((MapRoom)hall).getDy();
         if(spotlight){
-            graph.setColor(PanelStyles.Map.playerColor);
+            graph.setColor(PanelStyles.Map.PLAYER_COLOR);
         }
         if(neighbour){
-            graph.setColor(PanelStyles.Map.neighbourColor);
+            graph.setColor(PanelStyles.Map.NEIGHBOUR_COLOR);
         }
         // draw horizontal
-        for(int i = 0; i < PanelStyles.Map.mapHallLength; i++){
-            int x = x_center - PanelStyles.Map.mapHallLength * PanelStyles.Map.unitSize/3 + i * PanelStyles.Map.unitSize; // top left corner
-            graph.drawString("H", x, y_center - PanelStyles.Map.mapRoomLength * PanelStyles.Map.unitSize/2);
-            graph.drawString("H", x, y_center + PanelStyles.Map.mapRoomLength * PanelStyles.Map.unitSize/2);
+        for(int i = 0; i < PanelStyles.Map.MAP_HALL_LENGTH; i++){
+            int x = x_center - PanelStyles.Map.MAP_HALL_LENGTH * PanelStyles.Map.UNIT_SIZE /3 + i * PanelStyles.Map.UNIT_SIZE; // top left corner
+            graph.drawString("H", x, y_center - PanelStyles.Map.MAP_ROOM_LENGTH * PanelStyles.Map.UNIT_SIZE /2);
+            graph.drawString("H", x, y_center + PanelStyles.Map.MAP_ROOM_LENGTH * PanelStyles.Map.UNIT_SIZE /2);
         }
         // draw vertical
-        for(int i = 0; i < PanelStyles.Map.mapRoomLength; i++){
-            int y = y_center - PanelStyles.Map.mapRoomLength * PanelStyles.Map.unitSize/2 + i * PanelStyles.Map.unitSize; // top left corner
-            graph.drawString("H", x_center - PanelStyles.Map.mapHallLength * PanelStyles.Map.unitSize/3, y);
-            graph.drawString("H", x_center + PanelStyles.Map.mapHallLength * PanelStyles.Map.unitSize*2/3, y);
+        for(int i = 0; i < PanelStyles.Map.MAP_ROOM_LENGTH; i++){
+            int y = y_center - PanelStyles.Map.MAP_ROOM_LENGTH * PanelStyles.Map.UNIT_SIZE /2 + i * PanelStyles.Map.UNIT_SIZE; // top left corner
+            graph.drawString("H", x_center - PanelStyles.Map.MAP_HALL_LENGTH * PanelStyles.Map.UNIT_SIZE /3, y);
+            graph.drawString("H", x_center + PanelStyles.Map.MAP_HALL_LENGTH * PanelStyles.Map.UNIT_SIZE *2/3, y);
         }
-        graph.drawString("H", x_center + PanelStyles.Map.mapHallLength * PanelStyles.Map.unitSize*2/3, y_center+ PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2); // right bottom corner
+        graph.drawString("H", x_center + PanelStyles.Map.MAP_HALL_LENGTH * PanelStyles.Map.UNIT_SIZE *2/3, y_center+ PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2); // right bottom corner
         // draw room name
-        graph.setColor(PanelStyles.Map.roomTextColor);
-        graph.setFont(PanelStyles.Map.roomTextFont);
-        graph.drawString(hall.getRoomName(), x_center - PanelStyles.Map.mapHallLength * PanelStyles.Map.unitSize/3,y_center- PanelStyles.Map.mapRoomLength *PanelStyles.Map.unitSize/2 - PanelStyles.Map.unitSize);
-        graph.setFont(PanelStyles.Map.mapTextFont);
-        graph.setColor(PanelStyles.Map.mapDefault); // reset color
+        graph.setColor(PanelStyles.Map.ROOM_TEXT_COLOR);
+        graph.setFont(PanelStyles.Map.ROOM_TEXT_FONT);
+        graph.drawString(hall.getRoomName(), x_center - PanelStyles.Map.MAP_HALL_LENGTH * PanelStyles.Map.UNIT_SIZE /3,y_center- PanelStyles.Map.MAP_ROOM_LENGTH *PanelStyles.Map.UNIT_SIZE /2 - PanelStyles.Map.UNIT_SIZE);
+        graph.setFont(PanelStyles.Map.MAP_TEXT_FONT);
+        graph.setColor(PanelStyles.Map.MAP_DEFAULT); // reset color
     }
 
     /**
@@ -136,19 +134,19 @@ public class GameMapPanel extends JPanel {
      * @param graph
      */
     private void drawFloorLayout(Graphics graph){
-        int[] floorUnit = {10*PanelStyles.Map.unitSize,(PanelStyles.Map.panelHeight-20*PanelStyles.Map.unitSize)/2, (PanelStyles.Map.panelHeight-20*PanelStyles.Map.unitSize)/2, 10*PanelStyles.Map.unitSize};
+        int[] floorUnit = {10*PanelStyles.Map.UNIT_SIZE,(PanelStyles.Map.PANEL_HEIGHT -20*PanelStyles.Map.UNIT_SIZE)/2, (PanelStyles.Map.PANEL_HEIGHT -20*PanelStyles.Map.UNIT_SIZE)/2, 10*PanelStyles.Map.UNIT_SIZE};
         // draw floor
-        graph.setColor(PanelStyles.Map.floorNameColor);
-        graph.setFont(PanelStyles.Map.floorNameFont);
+        graph.setColor(PanelStyles.Map.FLOOR_NAME_COLOR);
+        graph.setFont(PanelStyles.Map.FLOOR_NAME_FONT);
 
         int floorHeight = 0;
         for(int i = 0; i < floorUnit.length; i++){
             floorHeight +=floorUnit[i];
-            graph.drawLine(0,floorHeight,PanelStyles.Map.panelWidth+PanelStyles.Map.unitSize,floorHeight);
-            graph.drawString(PanelStyles.Map.mapFloors[i], PanelStyles.Map.unitSize, floorHeight-PanelStyles.Map.unitSize);
+            graph.drawLine(0,floorHeight,PanelStyles.Map.PANEL_WIDTH +PanelStyles.Map.UNIT_SIZE,floorHeight);
+            graph.drawString(PanelStyles.Map.MAP_FLOORS[i], PanelStyles.Map.UNIT_SIZE, floorHeight-PanelStyles.Map.UNIT_SIZE);
         }
-        graph.setFont(PanelStyles.Map.mapTextFont);
-        graph.setColor(PanelStyles.Map.mapDefault);
+        graph.setFont(PanelStyles.Map.MAP_TEXT_FONT);
+        graph.setColor(PanelStyles.Map.MAP_DEFAULT);
     }
 
     /**
@@ -159,22 +157,22 @@ public class GameMapPanel extends JPanel {
     private void drawGrid(Graphics graph){
         // grid system
         // vertical lines
-        for (int i = 0; i <= PanelStyles.Map.panelHeight / PanelStyles.Map.unitSize; i++) {
-            graph.drawLine(0, (i + 1) * PanelStyles.Map.unitSize, PanelStyles.Map.panelWidth + PanelStyles.Map.unitSize, (i + 1) * PanelStyles.Map.unitSize);
+        for (int i = 0; i <= PanelStyles.Map.PANEL_HEIGHT / PanelStyles.Map.UNIT_SIZE; i++) {
+            graph.drawLine(0, (i + 1) * PanelStyles.Map.UNIT_SIZE, PanelStyles.Map.PANEL_WIDTH + PanelStyles.Map.UNIT_SIZE, (i + 1) * PanelStyles.Map.UNIT_SIZE);
         }
         // horizontal lines
-        for (int j = 0; j <= PanelStyles.Map.panelWidth / PanelStyles.Map.unitSize; j++) {
-            graph.drawLine((j + 1) * PanelStyles.Map.unitSize, 0, (j + 1) * PanelStyles.Map.unitSize, PanelStyles.Map.panelHeight + PanelStyles.Map.unitSize);
+        for (int j = 0; j <= PanelStyles.Map.PANEL_WIDTH / PanelStyles.Map.UNIT_SIZE; j++) {
+            graph.drawLine((j + 1) * PanelStyles.Map.UNIT_SIZE, 0, (j + 1) * PanelStyles.Map.UNIT_SIZE, PanelStyles.Map.PANEL_HEIGHT + PanelStyles.Map.UNIT_SIZE);
         }
         graph.setColor(Color.RED);
-        graph.setFont(new Font("TimesRoman", Font.PLAIN, PanelStyles.Map.unitSize * 2 / 3));
-        for (int i = 0; i <= PanelStyles.Map.panelHeight / PanelStyles.Map.unitSize; i++) {
-            graph.drawString(String.valueOf(i), 0, (i + 1) * PanelStyles.Map.unitSize);
+        graph.setFont(new Font("TimesRoman", Font.PLAIN, PanelStyles.Map.UNIT_SIZE * 2 / 3));
+        for (int i = 0; i <= PanelStyles.Map.PANEL_HEIGHT / PanelStyles.Map.UNIT_SIZE; i++) {
+            graph.drawString(String.valueOf(i), 0, (i + 1) * PanelStyles.Map.UNIT_SIZE);
         }
-        for (int i = 0; i <= PanelStyles.Map.panelWidth / PanelStyles.Map.unitSize; i++) {
-            graph.drawString(String.valueOf(i), (i) * PanelStyles.Map.unitSize, PanelStyles.Map.unitSize);
+        for (int i = 0; i <= PanelStyles.Map.PANEL_WIDTH / PanelStyles.Map.UNIT_SIZE; i++) {
+            graph.drawString(String.valueOf(i), (i) * PanelStyles.Map.UNIT_SIZE, PanelStyles.Map.UNIT_SIZE);
         }
-        graph.setColor(PanelStyles.Map.mapDefault); // reset color
+        graph.setColor(PanelStyles.Map.MAP_DEFAULT); // reset color
     }
 
     public void updateGUI() {
