@@ -1,7 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class StatsPanel {
@@ -25,7 +25,7 @@ public class StatsPanel {
                 PanelStyles.StatsPanel.HEIGHT
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
-        panel.setBorder(new LineBorder(Color.WHITE));
+        panel.setBorder(new MatteBorder(1, 1, 0, 0, Color.WHITE));
         textArea.setEnabled(false);
         textArea.setBackground(PanelStyles.Global.BG_COLOR);
         textArea.setForeground(PanelStyles.Global.FG_COLOR);

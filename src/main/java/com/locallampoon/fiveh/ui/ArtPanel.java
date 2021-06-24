@@ -14,7 +14,7 @@ public class ArtPanel {
         pane.setEnabled(false);
         pane.setBounds(600, 0, 400, 250);
         pane.setBackground(Color.BLACK);
-        pane.setBorder(new MatteBorder(1, 1, 0, 1, Color.WHITE));
+        pane.setBorder(new MatteBorder(1, 1, 0, 0, Color.WHITE));
         textArea = new JTextArea();
         textArea.setBounds(
                 PanelStyles.ArtPanel.X,
