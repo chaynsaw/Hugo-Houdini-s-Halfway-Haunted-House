@@ -184,11 +184,11 @@ public class UserInputTest {
     public void implementCommandTwoWords_DoesntDropPhantomItems() {
         List<String> dropPhantomItem = Arrays.asList("drop", "");
         implementCommandTwoWords(dropPhantomItem, roomExits, player);
-        assertEquals(1, playerCurrentRoom.getItems().size());
+        assertEquals(2, playerCurrentRoom.getItems().size());
 
         List<String> dropPhantomItem2 = Arrays.asList("drop", "glass");
         implementCommandTwoWords(dropPhantomItem2, roomExits, player);
-        assertEquals(1, playerCurrentRoom.getItems().size());
+        assertEquals(2, playerCurrentRoom.getItems().size());
     }
 
     @Test
