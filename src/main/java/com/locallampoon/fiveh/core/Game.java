@@ -197,16 +197,21 @@ public class Game implements Serializable {
         }
     }
 
+    private static void printLocation() {
+        Room playerCurrentRoom = player.getCurrentRoom();
+        narrativePanel.appendTextArea("YOU ARE IN: ", FG_COLOR);
+        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PLAYER_COLOR);
+    }
+
     /**
      * append text with customized color
      * need to let console panel have the focus at the end
      */
     private static void printDescription() {
         Room playerCurrentRoom = player.getCurrentRoom();
-        narrativePanel.appendTextArea("YOU ARE IN: ", FG_COLOR);
-        narrativePanel.appendTextArea(playerCurrentRoom.getRoomName() + "\n", PLAYER_COLOR);
         narrativePanel.appendTextArea("ITEMS IN ROOM: " + playerCurrentRoom.getItems() + "\n", FG_COLOR);
-        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n", FG_COLOR);
+        narrativePanel.appendTextArea("PEOPLE IN ROOM: " + playerCurrentRoom.getNpcs() + "\n\n", FG_COLOR);
+
         String[] desc = playerCurrentRoom.getDesc().split("\\(|\\)");
         // color direction keywords from room description
         for (String i : desc) {
@@ -240,7 +245,7 @@ public class Game implements Serializable {
                 case "Ghost" -> artPanel.setTextArea(GameArt.renderGhost());
                 case "Werewolf" -> artPanel.setTextArea(GameArt.renderWolf());
             }
-            narrativePanel.appendTextArea("\nMONSTERS IN ROOM: " + monsterInRoom.getName() + "\n", FG_COLOR);
+            narrativePanel.appendTextArea("MONSTERS IN ROOM: " + monsterInRoom.getName() + "\n", FG_COLOR);
             monsterHealthPanel.setHealthBar(monsterInRoom.getHealth());
             playerHealthPanel.setHealthBar(player.getHealth());
         } else {
@@ -250,6 +255,7 @@ public class Game implements Serializable {
     }
 
     public void start() {
+        printLocation();
         printDescription();
         printPlayerStats();
         artPanel.setTextArea(GameArt.renderHouse());
@@ -258,10 +264,12 @@ public class Game implements Serializable {
     private static void renderGameUI() {
         // repaint after player current position is updated
         mapPanel.updateMapGUI();
-        // print description
-        printDescription();
+        // print location
+        printLocation();
         // handle monster scenario
         checkMonster();
+        // print description
+        printDescription();
         // print player stats
         printPlayerStats();
     }
