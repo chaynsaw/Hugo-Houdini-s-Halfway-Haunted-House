@@ -1,0 +1,5 @@
+Move the player|go|north, east, south, west, up or down
+Pick an item|get|item name
+Fight a monster|fight|
+Quit the game|quit or q|
+Display Help menu|help or h|

@@ -3,6 +3,7 @@ package com.locallampoon.fiveh.core;
 import com.locallampoon.fiveh.ui.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +15,8 @@ import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
 public class Game implements Serializable {
 
     private static final String HELP_FILE = "/helpmenu.txt";
+    private static final String HELP_FILE_ACTIONS = "/helpmenuActions.txt";
+
     private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
     private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
     static MainPanel mainPanel;
@@ -73,9 +76,43 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * only dealing with help menu
+     * color keywords in help menu
+     * @param filename
+     */
+    private static void readHelpMenu(String filename) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
+            String line;
+            int index = 0;
+            while ((line = br.readLine()) != null) {
+                if(index == 0){
+                    narrativePanel.appendTextArea( "Action\tCommand\tObjects\n", FG_COLOR);
+                    narrativePanel.appendTextArea("---------------------------------", FG_COLOR);
+                    narrativePanel.appendTextArea("---------------------------------" + "\n", FG_COLOR);
+                    index++;
+                }
+                String[] tokens = line.split("\\|");
+                if(tokens.length > 3){
+                    narrativePanel.appendTextArea("Invalid help menu. No more than tokens");
+                } else {
+                    Color[] colors = {FG_COLOR, PLAYER_COLOR, NEIGHBOUR_COLOR};
+                    for (int i = 0; i < tokens.length; i++) {
+                        narrativePanel.appendTextArea( tokens[i] + "\t\t", colors[i]);
+                    }
+                    narrativePanel.appendTextArea("\n");
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
+        }
+    }
+
     public static void getHelp() {
         GameArt.renderHelper();
-        readFile(HELP_FILE);
+        readHelpMenu(HELP_FILE_ACTIONS);
     }
 
     private static Direction movementHelper(String newDirection) {

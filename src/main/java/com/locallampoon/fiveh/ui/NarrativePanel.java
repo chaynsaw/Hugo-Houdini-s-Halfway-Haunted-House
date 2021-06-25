@@ -35,6 +35,15 @@ public class NarrativePanel{
     }
 
     /**
+     * append text in narrative panel with fixed foreground color
+     * @param text display text
+     */
+    public void appendTextArea(String text)
+    {
+        this.appendTextArea(text, FG_COLOR);
+    }
+
+    /**
      * append text in narrative panel with customized foreground color
      * enable and disable capability to edit before and after append
      * @param text display text
@@ -42,18 +51,23 @@ public class NarrativePanel{
      */
     public void appendTextArea(String text, Color color)
     {
-        this.enableNarrativeTextArea();
-        this.appendToPane(this.textArea, text, color);
-        this.disableNarrativeTextArea();
+        this.appendTextArea(text, color, false);
     }
 
     /**
-     * append text in narrative panel with fixed foreground color
+     * append text in narrative panel with customized foreground color
+     * enable and disable capability to edit before and after append
      * @param text display text
+     * @param color display color
      */
-    public void appendTextArea(String text)
+    public void appendTextArea(String text, Color color, boolean tab)
     {
-        this.appendTextArea(text, FG_COLOR);
+        this.enableNarrativeTextArea();
+        if(tab)
+            this.appendToPaneWithSpacing(this.textArea, text, color);
+        else
+            this.appendToPane(this.textArea, text, color);
+        this.disableNarrativeTextArea();
     }
 
     public void disableNarrativeTextArea(){
@@ -76,6 +90,30 @@ public class NarrativePanel{
         StyleContext style = StyleContext.getDefaultStyleContext();
         AttributeSet attribute = style.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color); // only change foreground color
         attribute = style.addAttribute(attribute, StyleConstants.FontFamily, FONT_FAMILY);
+        attribute = style.addAttribute(attribute, StyleConstants.Alignment, StyleConstants.ALIGN_LEFT);
+        textPane.setCaretPosition(textPane.getDocument().getLength());
+        textPane.setCharacterAttributes(attribute, false);
+        textPane.replaceSelection(msg);
+    }
+
+    /**
+     * apply style change on given JTextPane
+     * it only changes color in this application
+     * @param textPane
+     * @param msg
+     * @param color
+     */
+    private void appendToPaneWithSpacing(JTextPane textPane, String msg, Color color)
+    {
+        StyleContext style = StyleContext.getDefaultStyleContext();
+        AttributeSet attribute = style.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color); // only change foreground color
+        attribute = style.addAttribute(attribute, StyleConstants.FontFamily, FONT_FAMILY);
+        attribute = style.addAttribute(attribute, StyleConstants.SpaceBelow, 2000f);
+        attribute = style.addAttribute(attribute, StyleConstants.TabSet, new TabSet(new TabStop[] {
+                new TabStop(2000f, TabStop.ALIGN_RIGHT, TabStop.LEAD_NONE),
+                new TabStop(2000f, TabStop.ALIGN_LEFT, TabStop.LEAD_NONE),
+                new TabStop(2000f, TabStop.ALIGN_CENTER, TabStop.LEAD_NONE)}));
+        textPane.setParagraphAttributes(attribute,false);
         textPane.setCaretPosition(textPane.getDocument().getLength());
         textPane.setCharacterAttributes(attribute, false);
         textPane.replaceSelection(msg);
