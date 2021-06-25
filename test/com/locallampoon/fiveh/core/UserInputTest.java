@@ -184,11 +184,11 @@ public class UserInputTest {
     public void implementCommandTwoWords_DoesntDropPhantomItems() {
         List<String> dropPhantomItem = Arrays.asList("drop", "");
         implementCommandTwoWords(dropPhantomItem, roomExits, player);
-        assertEquals(1, playerCurrentRoom.getItems().size());
+        assertEquals(2, playerCurrentRoom.getItems().size());
 
         List<String> dropPhantomItem2 = Arrays.asList("drop", "glass");
         implementCommandTwoWords(dropPhantomItem2, roomExits, player);
-        assertEquals(1, playerCurrentRoom.getItems().size());
+        assertEquals(2, playerCurrentRoom.getItems().size());
     }
 
     @Test
@@ -204,4 +204,13 @@ public class UserInputTest {
         implementCommandTwoWords(pickUpSpeaker, roomExits, player);
         assertTrue(playerCurrentRoom.getItems().contains("Bluetooth Speaker"));
     }
+
+    @Test
+    public void implementCommandTwoWords_CanPickUpItemNamesWithApostrophe() {
+        playerCurrentRoom.addItem("Vampire's Key");
+        implementCommandTwoWords(Arrays.asList("get", "vampire's"), roomExits, player);
+        assertTrue(playerInv.contains("Vampire's Key"));
+        assertFalse(playerCurrentRoom.getItems().contains("Vampire's Key"));
+    }
+
 }

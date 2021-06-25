@@ -2,14 +2,13 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.*;
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
 
 public class Game implements Serializable {
 
@@ -26,6 +25,7 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
+    public static boolean hasWon = false;
 
     // CONSTRUCTOR
     public Game() {
@@ -140,8 +140,20 @@ public class Game implements Serializable {
                     default -> actionPanel.appendTextArea("Invalid Action",FG_COLOR);
                 }
             }
+            case "enter" -> {
+                if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
+                    playerCurrentRoom.setDesc("""
+                    \tA passageway is opened to you and it glows a warm blue, like the keys in your pack, brighter and brighter as you approach. Its warmth lifts the spirits and fills your wearied mind with hope... but each time you pass through it - nothing. You transport to the same place. It matters not how many times you cross.  
+                    \tThe realization that dawns upon you is as clear as it is maddening and final. There is no end. There is no beginning. There is no escape. This is a prison. 
+                    """);
+                }
+            }
             default -> actionPanel.appendTextArea("Invalid Action",FG_COLOR);
         }
+    }
+
+    public static boolean checkWinCondition() {
+        return (player.getCurrentRoom().getRoomName().equalsIgnoreCase("Sacrificial Chamber") && player.getInventory().containsAll(Arrays.asList("Vampire Key", "Ghost Key", "Werewolf Key")));
     }
 
     private static void implementCommandOneWord(List<String> parsedCommandList) {
@@ -203,6 +215,12 @@ public class Game implements Serializable {
             } else {
                 narrativePanel.appendTextArea(i, FG_COLOR);
             }
+        }
+
+        if (Game.checkWinCondition() && !hasWon) {
+            narrativePanel.appendTextArea("\n\nA small passageway reveals itself, glowing blue like the keys in your pack. Should you...", FG_COLOR);
+            narrativePanel.appendTextArea("enter passage?", NEIGHBOUR_COLOR);
+            hasWon = true;
         }
         mainPanel.getConsolePanel().enableConsole();
     }
@@ -281,7 +299,7 @@ public class Game implements Serializable {
         if (monster != null) {
             player.attack(monster);
             if (monster.isDead()) {
-                actionPanel.appendTextArea(" You killed " + monster.getName(),FG_COLOR);
+                actionPanel.appendTextArea("You killed " + monster.getName(),FG_COLOR);
             } else {
                 monster.attack(player);
             }
