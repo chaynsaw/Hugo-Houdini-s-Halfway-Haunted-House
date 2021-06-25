@@ -59,7 +59,6 @@ lipstick on the rim. When you move it, another identical glass materializes in i
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item>Holy Salt</item>
             <item>Smudged Glass</item>
         </roomItems>
         <npc></npc>
@@ -82,9 +81,8 @@ back inside.</desc>
         </roomExits>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
-            <item>Silver Butter Knife</item>
         </roomItems>
-        <monster questItem="Werewolf's Key" weaknesses="Silver Knife">Werewolf</monster>
+        <monster questItem="Werewolf Key" weaknesses="Silver Butter Knife">Werewolf</monster>
         <npc>Chess Geek</npc>
         <dx>55</dx>
         <dy>50</dy>
@@ -105,8 +103,9 @@ door showing a dining room table, and along the (EAST) wall there is a closed do
         </roomExits>
         <roomItems type="array">
             <item>Bluetooth Speaker</item>
+            <item>Silver Butter Knife</item>
         </roomItems>
-        <monster questItem="Vampire's Key" weaknesses="UV Light">Vampire</monster>
+        <monster questItem="Vampire Key" weaknesses="UV Light">Vampire</monster>
         <npc></npc>
         <dx>55</dx>
         <dy>36</dy>
@@ -209,7 +208,7 @@ does not appear to be another exit from this room other than the door to the (WE
         <roomItems type="array">
             <item>CPR Dummy</item>
         </roomItems>
-        <monster questItem="Ghost's Key" weaknesses="Holy Salt">Ghost</monster>
+        <monster questItem="Ghost Key" weaknesses="Holy Salt">Ghost</monster>
         <npc></npc>
         <dx>40</dx>
         <dy>58</dy>

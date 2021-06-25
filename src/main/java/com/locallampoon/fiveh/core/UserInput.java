@@ -11,7 +11,7 @@ class UserInput {
 
     private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee", "move", "get", "grab", "drop",
             "talk", "inspect", "h", "help", "i", "inventory", "q", "quit", "fight", "attack", "hit", "punch", "kick",
-            "flee", "run", "recruit"));
+            "flee", "run", "recruit", "enter"));
 
 
     private static List<String> inputCleaner(String reducedString) {

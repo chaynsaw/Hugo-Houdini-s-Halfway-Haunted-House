@@ -72,7 +72,7 @@ public class Room {
         return desc;
     }
 
-    private void setDesc(String desc) {
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 

@@ -2,11 +2,11 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +28,18 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
+    public static boolean hasWon = false;
 
     // CONSTRUCTOR
     public Game() {
         setHouseMap(XMLParser.parseRooms());
         player = new Player(houseMap.get("hall"));
         initializeUI();
+    }
+
+    // GETTER/SETTER METHODS
+    private void setHouseMap(Map<String, Room> houseMap) {
+        Game.houseMap = houseMap;
     }
 
     // METHODS
@@ -145,7 +151,7 @@ public class Game implements Serializable {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                    actionPanel.appendTextArea("You can't travel in that direction!\n", FG_COLOR);
+                    actionPanel.appendTextArea("You can't travel in that direction!\n");
                     break;
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
@@ -173,11 +179,23 @@ public class Game implements Serializable {
                     case "jock" -> playerDependency.setStrong(true);
                     case "chess geek" -> playerDependency.setSmart(true);
                     case "bleacher kid" -> playerDependency.setBrave(true);
-                    default -> actionPanel.appendTextArea("Invalid Action", FG_COLOR);
+                    default -> actionPanel.appendTextArea("Invalid Action");
                 }
             }
-            default -> actionPanel.appendTextArea("Invalid Action", FG_COLOR);
+            case "enter" -> {
+                if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
+                    playerCurrentRoom.setDesc("""
+                    \tA passageway is opened to you and it glows a warm blue, like the keys in your pack, brighter and brighter as you approach. Its warmth lifts the spirits and fills your wearied mind with hope... but each time you pass through it - nothing. You transport to the same place. It matters not how many times you cross.  
+                    \tThe realization that dawns upon you is as clear as it is maddening and final. There is no end. There is no beginning. There is no escape. This is a prison. 
+                    """);
+                }
+            }
+            default -> actionPanel.appendTextArea("Invalid Action");
         }
+    }
+
+    public static boolean checkWinCondition() {
+        return (player.getCurrentRoom().getRoomName().equalsIgnoreCase("Sacrificial Chamber") && player.getInventory().containsAll(Arrays.asList("Vampire Key", "Ghost Key", "Werewolf Key")));
     }
 
     private static void implementCommandOneWord(List<String> parsedCommandList) {
@@ -240,6 +258,12 @@ public class Game implements Serializable {
                 narrativePanel.appendTextArea(i, FG_COLOR);
             }
         }
+
+        if (Game.checkWinCondition() && !hasWon) {
+            narrativePanel.appendTextArea("\n\nA small passageway reveals itself, glowing blue like the keys in your pack. Should you...", FG_COLOR);
+            narrativePanel.appendTextArea("enter passage?", NEIGHBOUR_COLOR);
+            hasWon = true;
+        }
         mainPanel.getConsolePanel().enableConsole();
     }
 
@@ -265,6 +289,12 @@ public class Game implements Serializable {
             artPanel.setTextArea(GameArt.renderHouse());
             monsterHealthPanel.setVisible(false);
         }
+    }
+
+    public void start() {
+        printDescription();
+        printPlayerStats();
+        artPanel.setTextArea(GameArt.renderHouse());
     }
 
     private static void renderGameUI() {
@@ -313,7 +343,7 @@ public class Game implements Serializable {
         if (monster != null) {
             player.attack(monster);
             if (monster.isDead()) {
-                actionPanel.appendTextArea(" You killed " + monster.getName(), FG_COLOR);
+                actionPanel.appendTextArea("You killed " + monster.getName(),FG_COLOR);
             } else {
                 monster.attack(player);
             }
@@ -325,19 +355,8 @@ public class Game implements Serializable {
         }
     }
 
-    // GETTER/SETTER METHODS
-    private void setHouseMap(Map<String, Room> houseMap) {
-        Game.houseMap = houseMap;
-    }
-
-    public void start() {
-        printDescription();
-        printPlayerStats();
-        artPanel.setTextArea(GameArt.renderHouse());
-    }
-
-    public void startV2() {
-        printDescription();
-    }
+    public void startV2 () {
+            printDescription();
+        }
 }
 
