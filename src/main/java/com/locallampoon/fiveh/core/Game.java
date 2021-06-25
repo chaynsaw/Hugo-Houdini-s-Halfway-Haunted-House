@@ -2,6 +2,7 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -297,15 +298,17 @@ public class Game implements Serializable {
         artPanel.setTextArea(GameArt.renderHouse());
     }
 
-    private static void renderGameUI() {
+    private static void renderGameUI(boolean help) {
         // clear panels
-        narrativePanel.setTextArea("");
         artPanel.setTextArea("");
         statsPanel.setTextArea("");
         // repaint after player current position is updated
         mapPanel.updateMapGUI();
-        // print description
-        printDescription();
+        // print description when no help menu displaying
+        if(help) {
+            narrativePanel.setTextArea("");
+            printDescription();
+        }
         // handle monster scenario
         checkMonster();
         // print player stats
@@ -330,8 +333,9 @@ public class Game implements Serializable {
         implementCommand(output, roomExits);
         // render ui after command execution
         if (!output.get(0).equals("help") && !output.get(0).equals("h")) {
-            renderGameUI();
-        }
+            renderGameUI(true);
+        } else
+            renderGameUI(false);
     }
 
     public static Player getPlayer() {
