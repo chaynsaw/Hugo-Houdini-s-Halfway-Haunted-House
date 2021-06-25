@@ -1,0 +1,5 @@
+Move the Player|"go" or Keyboard|"direction"
+Pick an Item|"get"|"item name"
+Fight a Monster|"fight"|
+Quit the Game|"quit"|
+Help Menu|"help"|
