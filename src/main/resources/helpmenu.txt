@@ -1,10 +1,7 @@
 ----------------------------------------HELP MENU-------------------------------------------
 A mysterious mustachioed man materializes from the mists.
 
-"So you want to know how to play huh? Follow these simple instructions to navigate through Hugo Houdini's Halfway
-Haunted House, and pray you make it out alive, much less with your sanity!"
+"So you want to know how to play huh? Follow these simple instructions to navigate through Hugo Houdini's Halfway Haunted House, and pray you make it out alive, much less with your sanity!"
 
 Basic commands:
-Hugo Houdini's Halfway Haunted House accepts basic commands that consist of one verb and one noun. For example "Go east"
-will move the player to the room east of their current location, if there is one. "Get Dagger" will pick up a dagger, if
-available, and place it in the player's inventory.
+Hugo Houdini's Halfway Haunted House accepts basic commands that consist of one verb and one noun. For example "Go east" will move the player to the room east of their current location, if there is one. "Get Dagger" will pick up a dagger, if available, and place it in the player's inventory.

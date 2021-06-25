@@ -85,6 +85,7 @@ public class Game implements Serializable {
      */
     private static void readHelpMenu(String filename) {
         readFile(HELP_FILE);
+        narrativePanel.appendTextArea("\n");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
             int index = 0;
