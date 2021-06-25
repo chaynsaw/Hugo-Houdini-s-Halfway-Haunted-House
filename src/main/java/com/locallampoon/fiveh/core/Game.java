@@ -2,23 +2,22 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.*;
 
-import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.*;
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
 
 public class Game implements Serializable {
 
     private static final String HELP_FILE = "/helpmenu.txt";
     private static final String HELP_FILE_ACTIONS = "/helpmenuActions.txt";
-
-    private static final String MENU_FILE = "src/main/java/com/locallampoon/fiveh/data/mainmenu.txt";
-    private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
     static MainPanel mainPanel;
     static NarrativePanel narrativePanel;
     static ActionPanel actionPanel;
@@ -35,11 +34,6 @@ public class Game implements Serializable {
         setHouseMap(XMLParser.parseRooms());
         player = new Player(houseMap.get("hall"));
         initializeUI();
-    }
-
-    // GETTER/SETTER METHODS
-    private void setHouseMap(Map<String, Room> houseMap) {
-        Game.houseMap = houseMap;
     }
 
     // METHODS
@@ -62,8 +56,6 @@ public class Game implements Serializable {
         monsterHealthPanel = mainPanel.getStatsPanel().getMonsterHealthPanel();
     }
 
-    // METHODS
-
     private static void readFile(String filename) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
@@ -76,33 +68,40 @@ public class Game implements Serializable {
         }
     }
 
+    // METHODS
+
     /**
      * only dealing with help menu
      * color keywords in help menu
+     *
      * @param filename
      */
     private static void readHelpMenu(String filename) {
+        readFile(HELP_FILE);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
             int index = 0;
             while ((line = br.readLine()) != null) {
-                if(index == 0){
-                    narrativePanel.appendTextArea( "Action\tCommand\tObjects\n", FG_COLOR);
-                    narrativePanel.appendTextArea("---------------------------------", FG_COLOR);
-                    narrativePanel.appendTextArea("---------------------------------" + "\n", FG_COLOR);
+                if (index == 0) {
+                    narrativePanel.appendTextArea("Action\t\t\tCommand\t\tObjects\n", FG_COLOR);
+                    narrativePanel.appendTextArea("--------------------------------------", FG_COLOR);
+                    narrativePanel.appendTextArea("--------------------------------------" + "\n", FG_COLOR);
                     index++;
                 }
                 String[] tokens = line.split("\\|");
-                if(tokens.length > 3){
+                if (tokens.length > 3) {
                     narrativePanel.appendTextArea("Invalid help menu. No more than tokens");
                 } else {
                     Color[] colors = {FG_COLOR, PLAYER_COLOR, NEIGHBOUR_COLOR};
                     for (int i = 0; i < tokens.length; i++) {
-                        narrativePanel.appendTextArea( tokens[i] + "\t\t", colors[i]);
+                        if (tokens[i].length() >= 9)
+                            narrativePanel.appendTextArea(tokens[i] + "\t\t", colors[i]);
+                        else if (tokens[i].length() < 9) {
+                            narrativePanel.appendTextArea(tokens[i] + "\t\t\t", colors[i]);
+                        }
                     }
                     narrativePanel.appendTextArea("\n");
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -129,7 +128,7 @@ public class Game implements Serializable {
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
-        } else if (parsedCommandList.size() == 2){
+        } else if (parsedCommandList.size() == 2) {
             implementCommandTwoWords(parsedCommandList, roomExits, null);
         } else {
             actionPanel.appendTextArea("Invalid Action", FG_COLOR);
@@ -146,8 +145,8 @@ public class Game implements Serializable {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                        actionPanel.appendTextArea("You can't travel in that direction!\n", FG_COLOR);
-                        break;
+                    actionPanel.appendTextArea("You can't travel in that direction!\n", FG_COLOR);
+                    break;
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
                 playerDependency.move(roomKeyID);
@@ -174,10 +173,10 @@ public class Game implements Serializable {
                     case "jock" -> playerDependency.setStrong(true);
                     case "chess geek" -> playerDependency.setSmart(true);
                     case "bleacher kid" -> playerDependency.setBrave(true);
-                    default -> actionPanel.appendTextArea("Invalid Action",FG_COLOR);
+                    default -> actionPanel.appendTextArea("Invalid Action", FG_COLOR);
                 }
             }
-            default -> actionPanel.appendTextArea("Invalid Action",FG_COLOR);
+            default -> actionPanel.appendTextArea("Invalid Action", FG_COLOR);
         }
     }
 
@@ -268,12 +267,6 @@ public class Game implements Serializable {
         }
     }
 
-    public void start() {
-        printDescription();
-        printPlayerStats();
-        artPanel.setTextArea(GameArt.renderHouse());
-    }
-
     private static void renderGameUI() {
         // clear panels
         narrativePanel.setTextArea("");
@@ -306,7 +299,7 @@ public class Game implements Serializable {
         // send command to game switch logic
         implementCommand(output, roomExits);
         // render ui after command execution
-        if(!output.get(0).equals("help") && !output.get(0).equals("h")){
+        if (!output.get(0).equals("help") && !output.get(0).equals("h")) {
             renderGameUI();
         }
     }
@@ -320,7 +313,7 @@ public class Game implements Serializable {
         if (monster != null) {
             player.attack(monster);
             if (monster.isDead()) {
-                actionPanel.appendTextArea(" You killed " + monster.getName(),FG_COLOR);
+                actionPanel.appendTextArea(" You killed " + monster.getName(), FG_COLOR);
             } else {
                 monster.attack(player);
             }
@@ -332,8 +325,19 @@ public class Game implements Serializable {
         }
     }
 
-    public void startV2 () {
-            printDescription();
-        }
+    // GETTER/SETTER METHODS
+    private void setHouseMap(Map<String, Room> houseMap) {
+        Game.houseMap = houseMap;
+    }
+
+    public void start() {
+        printDescription();
+        printPlayerStats();
+        artPanel.setTextArea(GameArt.renderHouse());
+    }
+
+    public void startV2() {
+        printDescription();
+    }
 }
 

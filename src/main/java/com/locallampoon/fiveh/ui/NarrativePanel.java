@@ -63,10 +63,7 @@ public class NarrativePanel{
     public void appendTextArea(String text, Color color, boolean tab)
     {
         this.enableNarrativeTextArea();
-        if(tab)
-            this.appendToPaneWithSpacing(this.textArea, text, color);
-        else
-            this.appendToPane(this.textArea, text, color);
+        this.appendToPane(this.textArea, text, color, tab);
         this.disableNarrativeTextArea();
     }
 
@@ -85,35 +82,16 @@ public class NarrativePanel{
      * @param msg
      * @param color
      */
-    private void appendToPane(JTextPane textPane, String msg, Color color)
+    private void appendToPane(JTextPane textPane, String msg, Color color, boolean tab)
     {
         StyleContext style = StyleContext.getDefaultStyleContext();
         AttributeSet attribute = style.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color); // only change foreground color
         attribute = style.addAttribute(attribute, StyleConstants.FontFamily, FONT_FAMILY);
         attribute = style.addAttribute(attribute, StyleConstants.Alignment, StyleConstants.ALIGN_LEFT);
-        textPane.setCaretPosition(textPane.getDocument().getLength());
-        textPane.setCharacterAttributes(attribute, false);
-        textPane.replaceSelection(msg);
-    }
-
-    /**
-     * apply style change on given JTextPane
-     * it only changes color in this application
-     * @param textPane
-     * @param msg
-     * @param color
-     */
-    private void appendToPaneWithSpacing(JTextPane textPane, String msg, Color color)
-    {
-        StyleContext style = StyleContext.getDefaultStyleContext();
-        AttributeSet attribute = style.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color); // only change foreground color
-        attribute = style.addAttribute(attribute, StyleConstants.FontFamily, FONT_FAMILY);
-        attribute = style.addAttribute(attribute, StyleConstants.SpaceBelow, 2000f);
-        attribute = style.addAttribute(attribute, StyleConstants.TabSet, new TabSet(new TabStop[] {
-                new TabStop(2000f, TabStop.ALIGN_RIGHT, TabStop.LEAD_NONE),
-                new TabStop(2000f, TabStop.ALIGN_LEFT, TabStop.LEAD_NONE),
-                new TabStop(2000f, TabStop.ALIGN_CENTER, TabStop.LEAD_NONE)}));
-        textPane.setParagraphAttributes(attribute,false);
+        if(tab){
+            attribute = style.addAttribute(attribute, StyleConstants.TabSet, new TabSet(new TabStop[] {
+                    new TabStop(200f, TabStop.ALIGN_LEFT, TabStop.LEAD_NONE)}));
+        }
         textPane.setCaretPosition(textPane.getDocument().getLength());
         textPane.setCharacterAttributes(attribute, false);
         textPane.replaceSelection(msg);
