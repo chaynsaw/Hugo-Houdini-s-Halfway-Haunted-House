@@ -12,15 +12,14 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.UNIT_SIZE;
 
 class XMLParser {
 
-    private static final String ROOM_FILE = "src/main/java/com/locallampoon/fiveh/data/rooms.xml";
+    private static final String ROOM_FILE = "/rooms.xml";
 
     public static Map<String, Room> parseRooms() {
 
@@ -37,7 +36,7 @@ class XMLParser {
             // parse XML file
             DocumentBuilder docBuild = dbf.newDocumentBuilder();
 
-            Document doc = docBuild.parse(new File(ROOM_FILE));
+            Document doc = docBuild.parse(XMLParser.class.getResourceAsStream(ROOM_FILE));
 
             doc.getDocumentElement().normalize();
             // get <room> from xml
