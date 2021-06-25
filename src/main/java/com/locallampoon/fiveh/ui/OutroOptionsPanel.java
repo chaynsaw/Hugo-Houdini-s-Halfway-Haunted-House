@@ -1,7 +1,6 @@
 package com.locallampoon.fiveh.ui;
 
 import com.locallampoon.fiveh.core.Game;
-import com.locallampoon.fiveh.core.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntroOptionsPanel implements KeyListener {
+public class OutroOptionsPanel implements KeyListener {
     private final String bullet = "> ";
     int selectedIndex = 0;
     JPanel panel;
@@ -21,7 +20,7 @@ public class IntroOptionsPanel implements KeyListener {
             PanelStyles.Intro.OPTIONS_FONT_SIZE
     );
 
-    public IntroOptionsPanel() {
+    public OutroOptionsPanel() {
         panel = new JPanel(new GridLayout(0, 1));
         panel.setBounds(
                 PanelStyles.Intro.OPTIONS_X,
@@ -33,12 +32,12 @@ public class IntroOptionsPanel implements KeyListener {
         panel.setFocusable(true);
         panel.addKeyListener(this);
 
-        for (IntroOption option : IntroOption.values()) {
-            JLabel label = new JLabel(option.toString(), SwingConstants.CENTER);
-            setLabelStyle(label);
-            optionLabels.add(label);
-            panel.add(label);
-        }
+
+        JLabel label = new JLabel(IntroOption.QUIT.toString(), SwingConstants.CENTER);
+        setLabelStyle(label);
+        optionLabels.add(label);
+        panel.add(label);
+
         setSelected();
     }
 

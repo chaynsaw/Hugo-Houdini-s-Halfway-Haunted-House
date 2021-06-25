@@ -7,6 +7,7 @@ public class MainPanel {
     JFrame window;
     Container container;
     IntroPanel introPanel;
+    OutroPanel outroPanel;
     NarrativePanel narrativePanel;
     ActionPanel actionPanel;
     ConsolePanel consolePanel;
@@ -16,6 +17,7 @@ public class MainPanel {
 
     public MainPanel(
             IntroPanel introPanel,
+            OutroPanel outroPanel,
             NarrativePanel narrativePanel,
             ActionPanel actionPanel,
             ConsolePanel consolePanel,
@@ -24,6 +26,7 @@ public class MainPanel {
             MapPanel mapPanel
     ) {
         this.introPanel = introPanel;
+        this.outroPanel = outroPanel;
         this.narrativePanel = narrativePanel;
         this.actionPanel = actionPanel;
         this.consolePanel = consolePanel;
@@ -46,6 +49,7 @@ public class MainPanel {
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
         container.add(mapPanel.getPanel());
+        container.add(outroPanel.getPanel()).setVisible(false);
         hideGame();
         window.setVisible(true);
     }
@@ -72,6 +76,8 @@ public class MainPanel {
     public void hideIntro() {
         introPanel.getPanel().setVisible(false);
     }
+
+    public void showOutro() { outroPanel.getPanel().setVisible(true);}
 
     public NarrativePanel getNarrativePanel() {
         return narrativePanel;

@@ -43,6 +43,7 @@ public class Game implements Serializable {
     private static void initializeUI() {
         mainPanel = new MainPanel(
                 new IntroPanel(),
+                new OutroPanel(),
                 new NarrativePanel(),
                 new ActionPanel(),
                 new ConsolePanel(),
@@ -284,7 +285,8 @@ public class Game implements Serializable {
                 monster.attack(player);
             }
             if (player.isDead()) {
-                System.exit(0);
+                mainPanel.hideGame();
+                mainPanel.showOutro();
             }
         } else {
             actionPanel.appendTextArea("There is no monster in this room", FG_COLOR);

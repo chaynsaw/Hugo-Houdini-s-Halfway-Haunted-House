@@ -1,12 +1,11 @@
 package com.locallampoon.fiveh.ui;
 
-
 import javax.swing.*;
 
-public class IntroPanel {
+public class OutroPanel {
     JPanel panel;
 
-    public IntroPanel() {
+    public OutroPanel() {
         this.panel = new JPanel();
         this.panel.setBounds(
                 PanelStyles.Window.X,
@@ -18,11 +17,12 @@ public class IntroPanel {
         this.panel.setForeground(PanelStyles.Global.FG_COLOR);
         this.panel.setLayout(null);
 
-        IntroTitlePanel introTitlePanel = new IntroTitlePanel();
-        IntroOptionsPanel introOptionsPanel = new IntroOptionsPanel();
+        OutroTitlePanel outroTitlePanel = new OutroTitlePanel();
+        OutroOptionsPanel outroOptionsPanel = new OutroOptionsPanel();
 
-        this.panel.add(introTitlePanel.getPanel());
-        this.panel.add(introOptionsPanel.getPanel());
+        this.panel.add(outroTitlePanel.getPanel());
+        this.panel.add(outroOptionsPanel.getPanel());
+
     }
 
     public JPanel getPanel() {
