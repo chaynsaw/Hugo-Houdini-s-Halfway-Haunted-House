@@ -518,19 +518,31 @@ class GameArt {
 
     static String renderGhost(){
         String imgArt = """
-                     .-.
-                    .'   `.
-                    :g g   :
-                    : o    `.
-                   :         ``.
-                  :             `.
-                 :  :         .   `.
-                 :   :          ` . `.
-                  `.. :            `. ``;
-                     `:;             `:'
-                        :              `.
-                         `.              `.     .
-                           `'`'`'`---..,___`;.-' 
+                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNK0OO0KNWMMMMMMMM
+                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMNkl;..    .':xKWMMMMM
+                MMMMMMMMMMMMMMMMMMMMMMMMMMW0l'             .lKWMMM
+                MMMMMMMMMMMMMMMMMMMMMMMW0kl.                 'kWMM
+                MMMMMMMMMMMMMMMMMMMMMWKl.         .:c.        .kWM
+                MMMMMMMMMMMMMMMMMMMWKo.          .xWK:.        ;KM
+                MMMMMMMMMMMMMMMMMWKo.            .lKN0l..cxc.  .kM
+                MMMMMMMMMMMMMMMWKo.                .''. :XM0l, .dM
+                MMMMMMMMMMMMMW0l.            .ckl  .    .lO0x; .xM
+                MMMMMMMMMMWKx;.             cKWMOlxx. ..       ,KM
+                MMMMMMWXOd:.               .dWWWWWMXxxKl.;;.  .dWM
+                MMNOoc;.                    :kloXMWWMMMX0NO.  :XMM
+                MMWKxc,.                       'xd:kWNNWMM0' ,0MMM
+                MMMMMMWKOl.                        ;o,cXXd, 'OWMMM
+                MMMMMMWKo'                            .;.  'kWMMMM
+                MMMN0d:.                                  'OWMMMMM
+                MWKd:'.'',;'                             ;0MMMMMMM
+                MMWWNNNNNKl.                           .lXMMMMMMMM
+                MMMMMMWKo.                            'kWMMMMMMMMM
+                MMMMNOc.       .,ld,                .lKMMMMMMMMMMM
+                MMXx:....';:ldOKWWx.        'dl.   ;OWMMMMMMMMMMMM
+                MWX000KXNNWMMMMMMO'     .':xXWo  ,kNMMMMMMMMMMMMMM
+                MMMMMMMMMMMMMMMWO' ..;lkKNWMMKc;xNMMMMMMMMMMMMMMMM
+                MMMMMMMMMMMMMMMXxox0XWMMMMMMMXKNMMMMMMMMMMMMMMMMMM
+                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
                 """;
         return imgArt;
     }

@@ -5,9 +5,8 @@
         <roomName>Hall</roomName>
         <floor>First</floor>
         <desc>The entry hall to the haunted house is dimly lit, bowls of candy sit in the corner. You are able to
-make out the features of two doors and a staircase. To the (EAST), chairs are lined UP around a dining room
-table, to the (WEST) something metallic enclosed in a glass cabinet catches the candle light. The stairs lead
-(UP) into the darkness.
+make out the features of two doors and a staircase. To the (EAST), chairs are lined up around a dining room
+table, to the (WEST) something metallic enclosed in a glass cabinet catches the candle light, to the (SOUTH), a single lit desk sits alone in a room. The stairs lead (UP) into the darkness.
         </desc>
         <roomExits type="array">
             <exit dir="0"></exit>
@@ -29,7 +28,7 @@ table, to the (WEST) something metallic enclosed in a glass cabinet catches the 
         <floor>First</floor>
         <desc>Thick glass cabinets line the perimeter of this room, displaying all sorts of oddities: old playing cards,
 "magic" wands, antique pistols. Mounted animal heads adorn the high walls, grotesque sneers left on their
-faces by a taxidermist with an odd sense of taste. A large grisly bear looms over the room from the far corner.
+faces by a taxidermist with an odd sense of taste. A large grisly bear looms over the room from the far corner. The only exit is the (EAST) door you entered through.
         </desc>
         <roomExits type="array">
             <exit dir="0"></exit>
@@ -50,8 +49,7 @@ faces by a taxidermist with an odd sense of taste. A large grisly bear looms ove
         <floor>First</floor>
         <desc>A long table occupies the middle of the room, fully set for a dinner of eight.  Dust covers the fine
 dinnerware and glasses.  A single glass at the head of the table, next to a lit candle, stands out with red
-lipstick on the rim. When you move it, another identical glass materializes in its place. To the (NORTH), the sounds of a
-busy kitchen come from a dark room, and to the (SOUTH) a door opens to the outside.</desc>
+lipstick on the rim. When you move it, another identical glass materializes in its place. The entry hall opens to the (WEST), To the (NORTH), the sounds of a busy kitchen come from a dark room, and to the (SOUTH) a door opens to the outside.</desc>
         <roomExits type="array">
             <exit dir="0">kitchen</exit>
             <exit dir="1">garden</exit>
@@ -61,7 +59,6 @@ busy kitchen come from a dark room, and to the (SOUTH) a door opens to the outsi
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item>Holy Salt</item>
             <item>Smudged Glass</item>
         </roomItems>
         <npc></npc>
@@ -84,9 +81,8 @@ back inside.</desc>
         </roomExits>
         <roomItems type="array">
             <item>Bloodied Trowel</item>
-            <item>Silver Butter Knife</item>
         </roomItems>
-        <monster questItem="Werewolf's Key" weaknesses="Silver Knife">Werewolf</monster>
+        <monster questItem="Werewolf Key" weaknesses="Silver Butter Knife">Werewolf</monster>
         <npc>Chess Geek</npc>
         <dx>55</dx>
         <dy>50</dy>
@@ -107,8 +103,9 @@ door showing a dining room table, and along the (EAST) wall there is a closed do
         </roomExits>
         <roomItems type="array">
             <item>Bluetooth Speaker</item>
+            <item>Silver Butter Knife</item>
         </roomItems>
-        <monster questItem="Vampire's Key" weaknesses="UV Light">Vampire</monster>
+        <monster questItem="Vampire Key" weaknesses="UV Light">Vampire</monster>
         <npc></npc>
         <dx>55</dx>
         <dy>36</dy>
@@ -159,8 +156,8 @@ with bookshelves opens, lit by sconces along the walls.</desc>
     <room id="library">
         <roomName>Library</roomName>
         <floor>First</floor>
-        <desc>Book shelves line the walls, lit by three sconces along the (NORTH), (SOUTH), and (EAST) walls. The (NORTH) sconce
-flickers incessantly, it seems to be hanging slightly askew. To the (EAST) a single lit desk sits alone in a room.</desc>
+        <desc>Book shelves line the walls, lit by three sconces along the north, south, and east walls. The north sconce
+flickers incessantly, it seems to be hanging slightly askew. To the (EAST) a single lit desk sits alone in a room. A staircase leads (DOWN) to the dungeon.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
@@ -179,7 +176,7 @@ flickers incessantly, it seems to be hanging slightly askew. To the (EAST) a sin
         <roomName>Dungeon</roomName>
         <floor>Basement</floor>
         <desc>A long subterranean hall leads (EAST) to a large iron door. On either side of the hall, several cells are barred
-by rusted iron gates, manacles chained to the wall. </desc>
+by rusted iron gates, manacles chained to the wall. A staircase leads (UP) to the library.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
             <exit dir="1"></exit>
@@ -211,7 +208,7 @@ does not appear to be another exit from this room other than the door to the (WE
         <roomItems type="array">
             <item>CPR Dummy</item>
         </roomItems>
-        <monster questItem="Ghost's Key" weaknesses="Holy Salt">Ghost</monster>
+        <monster questItem="Ghost Key" weaknesses="Holy Salt">Ghost</monster>
         <npc></npc>
         <dx>40</dx>
         <dy>58</dy>
@@ -220,7 +217,7 @@ does not appear to be another exit from this room other than the door to the (WE
         <roomName>Upstairs Landing</roomName>
         <floor>Second</floor>
         <desc>A small landing at the top of the stairs emerges from the darkness. Closed doors to the (NORTH), (EAST) and
-(WEST) beg to be opened. A string dangles from the ceiling, indicating something might lie in the attic (UP).</desc>
+(WEST) beg to be opened. A string dangles from the ceiling, indicating something might lie in the attic (UP). The stairs lead back (DOWN) to the entry hall.</desc>
         <roomExits type="array">
             <exit dir="0">nursery</exit>
             <exit dir="1"></exit>
@@ -281,7 +278,7 @@ on the bedside table. The only exit is the (WEST) door you entered through.</des
         <roomName>Guest</roomName>
         <floor>Second</floor>
         <desc>You enter a modest bedroom, old stained family photos line the walls. There is a slight mildew smell, as
-there appears to be water damage on (WEST) wall. On closer inspection, black sludge slowly oozes down the wall
+there appears to be water damage on the west wall. On closer inspection, black sludge slowly oozes down the wall
 from the ceiling. The only exit from this room is the (EAST) door you entered through.</desc>
         <roomExits type="array">
             <exit dir="0"></exit>
