@@ -1,7 +1,6 @@
 package com.locallampoon.fiveh.ui;
 
 import com.locallampoon.fiveh.core.Game;
-import com.locallampoon.fiveh.core.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +8,6 @@ import java.awt.*;
 public class OutroTitlePanel {
     private static final String looseText = "GAME OVER";
     private static final String winText = "YOU WON";
-    Player player;
     JPanel panel;
     JLabel title;
     Font font = new Font(
@@ -27,11 +25,7 @@ public class OutroTitlePanel {
                 PanelStyles.Intro.TITLE_HEIGHT
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
-        if (Game.hasWon) {
-            title = new JLabel(winText);
-        } else {
-            title = new JLabel(looseText);
-        }
+        title = new JLabel();
         title.setForeground(PanelStyles.Global.FG_COLOR);
         title.setFont(font);
         panel.add(title);
@@ -39,5 +33,14 @@ public class OutroTitlePanel {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public void renderTitle() {
+        System.out.println(Game.hasWon);
+        if (Game.hasWon) {
+            title.setText(winText);
+        } else {
+            title.setText(looseText);
+        }
     }
 }

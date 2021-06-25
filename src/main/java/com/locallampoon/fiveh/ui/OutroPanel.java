@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class OutroPanel {
     JPanel panel;
+    OutroTitlePanel outroTitlePanel;
+    OutroOptionsPanel outroOptionsPanel;
 
     public OutroPanel() {
         this.panel = new JPanel();
@@ -17,8 +19,8 @@ public class OutroPanel {
         this.panel.setForeground(PanelStyles.Global.FG_COLOR);
         this.panel.setLayout(null);
 
-        OutroTitlePanel outroTitlePanel = new OutroTitlePanel();
-        OutroOptionsPanel outroOptionsPanel = new OutroOptionsPanel();
+        outroTitlePanel = new OutroTitlePanel();
+        outroOptionsPanel = new OutroOptionsPanel();
 
         this.panel.add(outroTitlePanel.getPanel());
         this.panel.add(outroOptionsPanel.getPanel());
@@ -27,5 +29,9 @@ public class OutroPanel {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public OutroTitlePanel getOutroTitlePanel() {
+        return outroTitlePanel;
     }
 }

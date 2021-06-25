@@ -100,4 +100,12 @@ public class MainPanel {
     public MapPanel getMapPanel(){
         return this.mapPanel;
     }
+
+    public OutroPanel getOutroPanel(){
+        return outroPanel;
+    }
+
+    public OutroTitlePanel getOutroTitlePanel(){
+        return outroPanel.getOutroTitlePanel();
+    }
 }

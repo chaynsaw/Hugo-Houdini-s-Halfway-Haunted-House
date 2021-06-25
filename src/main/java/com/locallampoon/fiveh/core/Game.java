@@ -25,6 +25,8 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
+    private static OutroPanel outroPanel;
+
     public static boolean hasWon = false;
 
     // CONSTRUCTOR
@@ -58,6 +60,7 @@ public class Game implements Serializable {
         mapPanel = mainPanel.getMapPanel();
         playerHealthPanel = mainPanel.getStatsPanel().getPlayerHealthPanel();
         monsterHealthPanel = mainPanel.getStatsPanel().getMonsterHealthPanel();
+        outroPanel = mainPanel.getOutroPanel();
     }
 
     // METHODS
@@ -143,10 +146,13 @@ public class Game implements Serializable {
             }
             case "enter" -> {
                 if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
-                    playerCurrentRoom.setDesc("""
-                    \tA passageway is opened to you and it glows a warm blue, like the keys in your pack, brighter and brighter as you approach. Its warmth lifts the spirits and fills your wearied mind with hope... but each time you pass through it - nothing. You transport to the same place. It matters not how many times you cross.  
-                    \tThe realization that dawns upon you is as clear as it is maddening and final. There is no end. There is no beginning. There is no escape. This is a prison. 
-                    """);
+//                    playerCurrentRoom.setDesc("""
+//                    \tA passageway is opened to you and it glows a warm blue, like the keys in your pack, brighter and brighter as you approach. Its warmth lifts the spirits and fills your wearied mind with hope... but each time you pass through it - nothing. You transport to the same place. It matters not how many times you cross.
+//                    \tThe realization that dawns upon you is as clear as it is maddening and final. There is no end. There is no beginning. There is no escape. This is a prison.
+//                    """);
+                    mainPanel.hideGame();
+                    mainPanel.getOutroTitlePanel().renderTitle();
+                    mainPanel.showOutro();
                 }
             }
             default -> actionPanel.appendTextArea("Invalid Action",FG_COLOR);
@@ -306,6 +312,7 @@ public class Game implements Serializable {
             }
             if (player.isDead()) {
                 mainPanel.hideGame();
+                mainPanel.getOutroTitlePanel().renderTitle();
                 mainPanel.showOutro();
             }
         } else {
