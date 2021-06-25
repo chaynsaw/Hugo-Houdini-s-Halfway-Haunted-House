@@ -256,10 +256,6 @@ public class Game implements Serializable {
     }
 
     private static void renderGameUI() {
-        // clear panels
-        narrativePanel.setTextArea("");
-        artPanel.setTextArea("");
-        statsPanel.setTextArea("");
         // repaint after player current position is updated
         mapPanel.updateMapGUI();
         // print description
