@@ -55,7 +55,7 @@
                 <includes>
                     <include>rooms.xml</include>
                     <include>helpmenu.txt</include>
-
+                    <include>helpmenuActions.txt</include>
                 </includes>
             </resource>
         </resources>
