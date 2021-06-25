@@ -61,7 +61,6 @@ busy kitchen come from a dark room, and to the (SOUTH) a door opens to the outsi
             <exit dir="5"></exit>
         </roomExits>
         <roomItems type="array">
-            <item>Holy Salt</item>
             <item>Smudged Glass</item>
         </roomItems>
         <npc></npc>
