@@ -65,7 +65,7 @@ public class Game implements Serializable {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
             while ((line = br.readLine()) != null) {
-                narrativePanel.appendTextArea(line);
+                narrativePanel.appendTextArea(line + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -267,7 +267,9 @@ public class Game implements Serializable {
         // send command to game switch logic
         implementCommand(output, roomExits);
         // render ui after command execution
-        renderGameUI();
+        if(!output.get(0).equals("help") && !output.get(0).equals("h")){
+            renderGameUI();
+        }
     }
 
     public static Player getPlayer() {
