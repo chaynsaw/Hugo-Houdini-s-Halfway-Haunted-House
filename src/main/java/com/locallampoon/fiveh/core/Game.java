@@ -28,10 +28,11 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
-    private static SplashPanel splashPanel;
+    private static HelpPanel helpPanel;
 
     public static boolean hasWon = false;
     public static boolean hasLost = false;
+    public static boolean isHelp = false;
 
     // CONSTRUCTOR
     public Game() {
@@ -54,32 +55,20 @@ public class Game implements Serializable {
                 new ConsolePanel(),
                 new ArtPanel(),
                 new StatsPanel(),
-                new MapPanel()
+                new MapPanel(),
+                new HelpPanel()
         );
         narrativePanel = mainPanel.getNarrativePanel();
         actionPanel = mainPanel.getActionPanel();
         artPanel = mainPanel.getArtPanel();
         statsPanel = mainPanel.getStatsPanel();
         mapPanel = mainPanel.getMapPanel();
+        helpPanel = mainPanel.getHelpPanel();
         playerHealthPanel = mainPanel.getStatsPanel().getPlayerHealthPanel();
         monsterHealthPanel = mainPanel.getStatsPanel().getMonsterHealthPanel();
-        splashPanel = mainPanel.getSplashPanel();
-    }
-
-    private static void readFile(String filename) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                narrativePanel.appendTextArea(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
-        }
     }
 
     // METHODS
-
     /**
      * only dealing with help menu
      * color keywords in help menu
@@ -87,36 +76,35 @@ public class Game implements Serializable {
      * @param filename
      */
     private static void readHelpMenu(String filename) {
-        readFile(HELP_FILE);
-        narrativePanel.appendTextArea("\n");
+        helpPanel.appendTextArea("\n");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
             int index = 0;
             while ((line = br.readLine()) != null) {
                 if (index == 0) {
-                    narrativePanel.appendTextArea("Action\t\t\tCommand\t\tObjects\n", FG_COLOR);
-                    narrativePanel.appendTextArea("--------------------------------------", FG_COLOR);
-                    narrativePanel.appendTextArea("--------------------------------------" + "\n", FG_COLOR);
+                    helpPanel.appendTextArea("Action\t\t\tCommand\t\tObjects\n", FG_COLOR);
+                    helpPanel.appendTextArea("--------------------------------------", FG_COLOR);
+                    helpPanel.appendTextArea("--------------------------------------" + "\n", FG_COLOR);
                     index++;
                 }
                 String[] tokens = line.split("\\|");
                 if (tokens.length > 3) {
-                    narrativePanel.appendTextArea("Invalid help menu. No more than tokens");
+                    helpPanel.appendTextArea("Invalid help menu. No more than tokens");
                 } else {
                     Color[] colors = {FG_COLOR, PLAYER_COLOR, NEIGHBOUR_COLOR};
                     for (int i = 0; i < tokens.length; i++) {
                         if (tokens[i].length() >= 9)
-                            narrativePanel.appendTextArea(tokens[i] + "\t\t", colors[i]);
+                            helpPanel.appendTextArea(tokens[i] + "\t\t", colors[i]);
                         else if (tokens[i].length() < 9) {
-                            narrativePanel.appendTextArea(tokens[i] + "\t\t\t", colors[i]);
+                            helpPanel.appendTextArea(tokens[i] + "\t\t\t", colors[i]);
                         }
                     }
-                    narrativePanel.appendTextArea("\n");
+                    helpPanel.appendTextArea("\n");
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
-            narrativePanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
+            helpPanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
         }
     }
 
@@ -137,6 +125,7 @@ public class Game implements Serializable {
     }
 
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
+        isHelp = false;
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
         } else if (parsedCommandList.size() >= 2){
@@ -219,6 +208,7 @@ public class Game implements Serializable {
                 break;
             case "help":
             case "h":
+                isHelp = true;
                 getHelp();
                 break;
             case "quit":

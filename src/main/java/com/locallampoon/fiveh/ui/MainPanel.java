@@ -13,6 +13,7 @@ public class MainPanel {
     ArtPanel artPanel;
     StatsPanel statsPanel;
     MapPanel mapPanel;
+    HelpPanel helpPanel;
 
     public MainPanel(
             SplashPanel splashPanel,
@@ -21,7 +22,8 @@ public class MainPanel {
             ConsolePanel consolePanel,
             ArtPanel artPanel,
             StatsPanel statsPanel,
-            MapPanel mapPanel
+            MapPanel mapPanel,
+            HelpPanel helpPanel
     ) {
         this.splashPanel = splashPanel;
         this.narrativePanel = narrativePanel;
@@ -30,6 +32,7 @@ public class MainPanel {
         this.artPanel = artPanel;
         this.statsPanel = statsPanel;
         this.mapPanel = mapPanel;
+        this.helpPanel = helpPanel;
         // main window settings
         window = new JFrame();
         window.setSize(PanelStyles.Window.WIDTH, PanelStyles.Window.HEIGHT);
@@ -38,7 +41,6 @@ public class MainPanel {
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(new BorderLayout());
         container = window.getContentPane();
-        // add individual panels
         container.add(splashPanel.getPanel());
         hideGame();
         window.setVisible(true);
@@ -60,6 +62,7 @@ public class MainPanel {
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
         container.add(mapPanel.getPanel());
+        container.add(helpPanel.getPanel());
         narrativePanel.getPanel().setVisible(true);
         actionPanel.getPanel().setVisible(true);
         consolePanel.getPanel().setVisible(true);
@@ -67,6 +70,7 @@ public class MainPanel {
         artPanel.getPanel().setVisible(true);
         statsPanel.getPanel().setVisible(true);
         mapPanel.getPanel().setVisible(true);
+        helpPanel.getPanel().setVisible(false);
     }
 
     public void hideSplash() {
@@ -102,8 +106,8 @@ public class MainPanel {
         return this.mapPanel;
     }
 
-    public SplashPanel getSplashPanel(){
-        return splashPanel;
+    public HelpPanel getHelpPanel(){
+        return this.helpPanel;
     }
 
     public SplashTitlePanel getSplashTitlePanel(){
