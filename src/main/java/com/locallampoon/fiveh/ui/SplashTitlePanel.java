@@ -1,25 +1,29 @@
 package com.locallampoon.fiveh.ui;
 
+import com.locallampoon.fiveh.core.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class IntroTitlePanel {
+public class SplashTitlePanel {
     private static final String titleText = "Hugo Houdini\'s Halfway Haunted House";
+    private static final String loseText = "YOU DIED. GAME OVER!";
+    private static final String winText = "YOU WON?";
     JPanel panel;
     JLabel title;
     Font font = new Font(
             PanelStyles.Global.FONT_FAMILY,
             PanelStyles.Global.FONT_WEIGHT,
-            PanelStyles.Intro.TITLE_FONT_SIZE
+            PanelStyles.Splash.TITLE_FONT_SIZE
     );
 
-    public IntroTitlePanel() {
+    public SplashTitlePanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.Intro.TITLE_X,
-                PanelStyles.Intro.TITLE_Y,
-                PanelStyles.Intro.TITLE_WIDTH,
-                PanelStyles.Intro.TITLE_HEIGHT
+                PanelStyles.Splash.TITLE_X,
+                PanelStyles.Splash.TITLE_Y,
+                PanelStyles.Splash.TITLE_WIDTH,
+                PanelStyles.Splash.TITLE_HEIGHT
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
         title = new JLabel(titleText);
@@ -30,5 +34,13 @@ public class IntroTitlePanel {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public void renderTitle() {
+        if (Game.hasWon) {
+            title.setText(winText);
+        } else {
+            title.setText(loseText);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.locallampoon.fiveh.ui;
 
-public enum IntroOption {
+public enum SplashOption {
     // TODO: add help
     NEW(), QUIT();
 }
