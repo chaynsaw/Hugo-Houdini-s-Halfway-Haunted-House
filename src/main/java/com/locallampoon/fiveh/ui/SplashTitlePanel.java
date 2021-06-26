@@ -23,7 +23,7 @@ public class SplashTitlePanel {
                 PanelStyles.Splash.TITLE_X,
                 PanelStyles.Splash.TITLE_Y,
                 PanelStyles.Splash.TITLE_WIDTH,
-                PanelStyles.Splash.TITLE_HEIGHT - 100
+                PanelStyles.Splash.TITLE_HEIGHT
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
         title = new JLabel(titleText);

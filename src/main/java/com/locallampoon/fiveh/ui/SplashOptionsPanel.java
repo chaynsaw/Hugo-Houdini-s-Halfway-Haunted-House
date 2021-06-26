@@ -24,7 +24,7 @@ public class SplashOptionsPanel implements KeyListener {
         panel = new JPanel(new GridLayout(0, 1));
         panel.setBounds(
                 PanelStyles.Splash.OPTIONS_X,
-                PanelStyles.Splash.OPTIONS_Y + 100,
+                PanelStyles.Splash.OPTIONS_Y,
                 PanelStyles.Splash.OPTIONS_WIDTH,
                 PanelStyles.Splash.OPTIONS_HEIGHT
         );
