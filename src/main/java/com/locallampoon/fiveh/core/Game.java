@@ -185,7 +185,7 @@ public class Game implements Serializable {
         }
     }
 
-    public static void handleIntro(IntroOption option) {
+    public static void handleIntro(SplashOption option) {
         switch (option) {
             case NEW:
                 mainPanel.showGame();

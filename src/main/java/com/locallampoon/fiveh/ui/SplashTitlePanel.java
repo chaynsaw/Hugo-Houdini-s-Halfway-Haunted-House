@@ -14,16 +14,16 @@ public class SplashTitlePanel {
     Font font = new Font(
             PanelStyles.Global.FONT_FAMILY,
             PanelStyles.Global.FONT_WEIGHT,
-            PanelStyles.Intro.TITLE_FONT_SIZE
+            PanelStyles.Splash.TITLE_FONT_SIZE
     );
 
     public SplashTitlePanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.Intro.TITLE_X,
-                PanelStyles.Intro.TITLE_Y,
-                PanelStyles.Intro.TITLE_WIDTH,
-                PanelStyles.Intro.TITLE_HEIGHT - 100
+                PanelStyles.Splash.TITLE_X,
+                PanelStyles.Splash.TITLE_Y,
+                PanelStyles.Splash.TITLE_WIDTH,
+                PanelStyles.Splash.TITLE_HEIGHT - 100
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
         title = new JLabel(titleText);

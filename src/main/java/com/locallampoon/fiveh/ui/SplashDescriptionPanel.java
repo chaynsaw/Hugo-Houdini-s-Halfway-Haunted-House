@@ -21,20 +21,20 @@ public class SplashDescriptionPanel {
     public SplashDescriptionPanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.Intro.TITLE_X,
-                PanelStyles.Intro.TITLE_Y + 100,
-                PanelStyles.Intro.TITLE_WIDTH,
-                PanelStyles.Intro.TITLE_HEIGHT + 150
+                PanelStyles.Splash.TITLE_X,
+                PanelStyles.Splash.TITLE_Y + 100,
+                PanelStyles.Splash.TITLE_WIDTH,
+                PanelStyles.Splash.TITLE_HEIGHT + 150
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
         description = new JTextArea();
         description.setEnabled(false);
         description.setWrapStyleWord(true);
         description.setBounds(
-                PanelStyles.Intro.TITLE_X,
-                PanelStyles.Intro.TITLE_Y,
-                PanelStyles.Intro.TITLE_WIDTH,
-                PanelStyles.Intro.TITLE_HEIGHT + 150
+                PanelStyles.Splash.TITLE_X,
+                PanelStyles.Splash.TITLE_Y,
+                PanelStyles.Splash.TITLE_WIDTH,
+                PanelStyles.Splash.TITLE_HEIGHT + 150
         );
         description.setBackground(PanelStyles.Global.BG_COLOR);
         description.setForeground(PanelStyles.Global.FG_COLOR);

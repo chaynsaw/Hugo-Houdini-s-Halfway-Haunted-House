@@ -21,8 +21,8 @@ public class PanelStyles {
         public static final int HEIGHT = 910;
     }
 
-    // intro panel styles
-    public static class Intro {
+    // splash panel styles
+    public static class Splash {
         public static final int TITLE_X = 100;
         public static final int TITLE_Y = 100;
         public static final int TITLE_WIDTH = 780;
