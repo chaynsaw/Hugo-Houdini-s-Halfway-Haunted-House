@@ -28,6 +28,11 @@ public class PanelStyles {
         public static final int TITLE_WIDTH = 780;
         public static final int TITLE_HEIGHT = 50;
         public static final int TITLE_FONT_SIZE = 40;
+        public static final int DESCRIPTION_X = 100;
+        public static final int DESCRIPTION_Y = 200;
+        public static final int DESCRIPTION_WIDTH = 780;
+        public static final int DESCRIPTION_HEIGHT = 200;
+        public static final int DESCRIPTION_FONT_SIZE = 18;
         public static final int OPTIONS_X = 400;
         public static final int OPTIONS_Y = 500;
         public static final int OPTIONS_WIDTH = 200;

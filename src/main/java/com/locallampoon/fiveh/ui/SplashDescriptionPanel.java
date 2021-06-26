@@ -15,26 +15,26 @@ public class SplashDescriptionPanel {
     Font font = new Font(
             PanelStyles.Global.FONT_FAMILY,
             PanelStyles.Global.FONT_WEIGHT,
-            18
+            PanelStyles.Splash.DESCRIPTION_FONT_SIZE
     );
 
     public SplashDescriptionPanel() {
         panel = new JPanel();
         panel.setBounds(
-                PanelStyles.Splash.TITLE_X,
-                PanelStyles.Splash.TITLE_Y + 100,
-                PanelStyles.Splash.TITLE_WIDTH,
-                PanelStyles.Splash.TITLE_HEIGHT + 150
+                PanelStyles.Splash.DESCRIPTION_X,
+                PanelStyles.Splash.DESCRIPTION_Y,
+                PanelStyles.Splash.DESCRIPTION_WIDTH,
+                PanelStyles.Splash.DESCRIPTION_HEIGHT
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
         description = new JTextArea();
         description.setEnabled(false);
         description.setWrapStyleWord(true);
         description.setBounds(
-                PanelStyles.Splash.TITLE_X,
-                PanelStyles.Splash.TITLE_Y,
-                PanelStyles.Splash.TITLE_WIDTH,
-                PanelStyles.Splash.TITLE_HEIGHT + 150
+                PanelStyles.Splash.DESCRIPTION_X,
+                PanelStyles.Splash.DESCRIPTION_Y - 100,
+                PanelStyles.Splash.DESCRIPTION_WIDTH,
+                PanelStyles.Splash.DESCRIPTION_HEIGHT
         );
         description.setBackground(PanelStyles.Global.BG_COLOR);
         description.setForeground(PanelStyles.Global.FG_COLOR);
