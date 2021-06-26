@@ -364,9 +364,5 @@ public class Game implements Serializable {
             actionPanel.appendTextArea("There is no monster in this room", FG_COLOR);
         }
     }
-
-    public void startV2 () {
-            printDescription();
-        }
 }
 
