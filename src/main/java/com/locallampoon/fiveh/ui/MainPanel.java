@@ -6,7 +6,7 @@ import java.awt.*;
 public class MainPanel {
     JFrame window;
     Container container;
-    IntroPanel introPanel;
+//    IntroPanel introPanel;
     OutroPanel outroPanel;
     NarrativePanel narrativePanel;
     ActionPanel actionPanel;
@@ -16,7 +16,7 @@ public class MainPanel {
     MapPanel mapPanel;
 
     public MainPanel(
-            IntroPanel introPanel,
+//            IntroPanel introPanel,
             OutroPanel outroPanel,
             NarrativePanel narrativePanel,
             ActionPanel actionPanel,
@@ -25,7 +25,7 @@ public class MainPanel {
             StatsPanel statsPanel,
             MapPanel mapPanel
     ) {
-        this.introPanel = introPanel;
+//        this.introPanel = introPanel;
         this.outroPanel = outroPanel;
         this.narrativePanel = narrativePanel;
         this.actionPanel = actionPanel;
@@ -42,14 +42,14 @@ public class MainPanel {
         window.setLayout(new BorderLayout());
         container = window.getContentPane();
         // add individual panels
-        container.add(introPanel.getPanel());
+//        container.add(introPanel.getPanel());
         container.add(narrativePanel.getPanel());
         container.add(actionPanel.getPanel());
         container.add(consolePanel.getPanel());
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
         container.add(mapPanel.getPanel());
-        container.add(outroPanel.getPanel()).setVisible(false);
+        container.add(outroPanel.getPanel());
         hideGame();
         window.setVisible(true);
     }
@@ -73,8 +73,8 @@ public class MainPanel {
         mapPanel.getPanel().setVisible(true);
     }
 
-    public void hideIntro() {
-        introPanel.getPanel().setVisible(false);
+    public void hideOutro() {
+        outroPanel.getPanel().setVisible(false);
     }
 
     public void showOutro() { outroPanel.getPanel().setVisible(true);}
@@ -107,5 +107,13 @@ public class MainPanel {
 
     public OutroTitlePanel getOutroTitlePanel(){
         return outroPanel.getOutroTitlePanel();
+    }
+
+    public OutroDescriptionPanel getOutroDescriptionPanel(){
+        return outroPanel.getOutroDescriptionPanel();
+    }
+
+    public OutroOptionsPanel getOutroOptionsPanel(){
+        return outroPanel.getOutroOptionsPanel();
     }
 }

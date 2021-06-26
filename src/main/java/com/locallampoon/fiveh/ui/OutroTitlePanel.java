@@ -6,8 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OutroTitlePanel {
-    private static final String looseText = "GAME OVER";
-    private static final String winText = "YOU WON";
+    private static final String titleText = "Hugo Houdini\'s Halfway Haunted House";
+    private static final String loseText = "YOU DIED. GAME OVER!";
+    private static final String winText = "YOU WON?";
     JPanel panel;
     JLabel title;
     Font font = new Font(
@@ -22,10 +23,10 @@ public class OutroTitlePanel {
                 PanelStyles.Intro.TITLE_X,
                 PanelStyles.Intro.TITLE_Y,
                 PanelStyles.Intro.TITLE_WIDTH,
-                PanelStyles.Intro.TITLE_HEIGHT
+                PanelStyles.Intro.TITLE_HEIGHT - 100
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
-        title = new JLabel();
+        title = new JLabel(titleText);
         title.setForeground(PanelStyles.Global.FG_COLOR);
         title.setFont(font);
         panel.add(title);
@@ -36,11 +37,10 @@ public class OutroTitlePanel {
     }
 
     public void renderTitle() {
-        System.out.println(Game.hasWon);
         if (Game.hasWon) {
             title.setText(winText);
         } else {
-            title.setText(looseText);
+            title.setText(loseText);
         }
     }
 }

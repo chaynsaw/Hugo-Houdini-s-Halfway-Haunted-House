@@ -24,7 +24,7 @@ public class OutroOptionsPanel implements KeyListener {
         panel = new JPanel(new GridLayout(0, 1));
         panel.setBounds(
                 PanelStyles.Intro.OPTIONS_X,
-                PanelStyles.Intro.OPTIONS_Y,
+                PanelStyles.Intro.OPTIONS_Y + 100,
                 PanelStyles.Intro.OPTIONS_WIDTH,
                 PanelStyles.Intro.OPTIONS_HEIGHT
         );
@@ -32,12 +32,12 @@ public class OutroOptionsPanel implements KeyListener {
         panel.setFocusable(true);
         panel.addKeyListener(this);
 
-
-        JLabel label = new JLabel(IntroOption.QUIT.toString(), SwingConstants.CENTER);
-        setLabelStyle(label);
-        optionLabels.add(label);
-        panel.add(label);
-
+        for (IntroOption option : IntroOption.values()) {
+            JLabel label = new JLabel(option.toString(), SwingConstants.CENTER);
+            setLabelStyle(label);
+            optionLabels.add(label);
+            panel.add(label);
+        }
         setSelected();
     }
 
@@ -69,6 +69,14 @@ public class OutroOptionsPanel implements KeyListener {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public void renderOptions() {
+        if (Game.hasWon || Game.hasLost) {
+            optionLabels.get(0).setVisible(false);
+            optionLabels.remove(0);
+            setSelected();
+        }
     }
 
     @Override

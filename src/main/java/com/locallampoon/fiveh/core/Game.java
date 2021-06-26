@@ -28,6 +28,7 @@ public class Game implements Serializable {
     private static OutroPanel outroPanel;
 
     public static boolean hasWon = false;
+    public static boolean hasLost = false;
 
     // CONSTRUCTOR
     public Game() {
@@ -44,7 +45,7 @@ public class Game implements Serializable {
     // METHODS
     private static void initializeUI() {
         mainPanel = new MainPanel(
-                new IntroPanel(),
+//                new IntroPanel(),
                 new OutroPanel(),
                 new NarrativePanel(),
                 new ActionPanel(),
@@ -146,12 +147,10 @@ public class Game implements Serializable {
             }
             case "enter" -> {
                 if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
-//                    playerCurrentRoom.setDesc("""
-//                    \tA passageway is opened to you and it glows a warm blue, like the keys in your pack, brighter and brighter as you approach. Its warmth lifts the spirits and fills your wearied mind with hope... but each time you pass through it - nothing. You transport to the same place. It matters not how many times you cross.
-//                    \tThe realization that dawns upon you is as clear as it is maddening and final. There is no end. There is no beginning. There is no escape. This is a prison.
-//                    """);
                     mainPanel.hideGame();
                     mainPanel.getOutroTitlePanel().renderTitle();
+                    mainPanel.getOutroDescriptionPanel().renderDescription();
+                    mainPanel.getOutroOptionsPanel().renderOptions();
                     mainPanel.showOutro();
                 }
             }
@@ -194,7 +193,7 @@ public class Game implements Serializable {
         switch (option) {
             case NEW:
                 mainPanel.showGame();
-                mainPanel.hideIntro();
+                mainPanel.hideOutro();
                 break;
             // TODO: add help option
             case QUIT:
@@ -311,8 +310,11 @@ public class Game implements Serializable {
                 monster.attack(player);
             }
             if (player.isDead()) {
+                hasLost = true;
                 mainPanel.hideGame();
                 mainPanel.getOutroTitlePanel().renderTitle();
+                mainPanel.getOutroDescriptionPanel().renderDescription();
+                mainPanel.getOutroOptionsPanel().renderOptions();
                 mainPanel.showOutro();
             }
         } else {

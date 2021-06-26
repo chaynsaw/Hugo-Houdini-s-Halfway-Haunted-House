@@ -6,6 +6,7 @@ public class OutroPanel {
     JPanel panel;
     OutroTitlePanel outroTitlePanel;
     OutroOptionsPanel outroOptionsPanel;
+    OutroDescriptionPanel outroDescriptionPanel;
 
     public OutroPanel() {
         this.panel = new JPanel();
@@ -20,11 +21,12 @@ public class OutroPanel {
         this.panel.setLayout(null);
 
         outroTitlePanel = new OutroTitlePanel();
+        outroDescriptionPanel = new OutroDescriptionPanel();
         outroOptionsPanel = new OutroOptionsPanel();
 
         this.panel.add(outroTitlePanel.getPanel());
+        this.panel.add(outroDescriptionPanel.getPanel());
         this.panel.add(outroOptionsPanel.getPanel());
-
     }
 
     public JPanel getPanel() {
@@ -33,5 +35,13 @@ public class OutroPanel {
 
     public OutroTitlePanel getOutroTitlePanel() {
         return outroTitlePanel;
+    }
+
+    public OutroDescriptionPanel getOutroDescriptionPanel() {
+        return outroDescriptionPanel;
+    }
+
+    public OutroOptionsPanel getOutroOptionsPanel() {
+        return outroOptionsPanel;
     }
 }
