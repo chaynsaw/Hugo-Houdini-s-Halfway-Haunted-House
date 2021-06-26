@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -140,10 +139,8 @@ public class Game implements Serializable {
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
-        } else if (parsedCommandList.size() == 2) {
+        } else if (parsedCommandList.size() >= 2){
             implementCommandTwoWords(parsedCommandList, roomExits, null);
-        } else {
-            actionPanel.appendTextArea("Invalid Action", FG_COLOR);
         }
     }
 
@@ -165,9 +162,13 @@ public class Game implements Serializable {
             }
             case "get", "grab", "take" -> {
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, playerDependency);
-                if (!playerDependency.isInventoryFull()) {
+                if (!playerDependency.isInventoryFull() && grabbedItem.split(" ").length > 1) {
                     playerDependency.addItem(grabbedItem);
                     playerCurrentRoom.removeItem(grabbedItem);
+                } else {
+                    if (actionPanel != null) {
+                        actionPanel.appendTextArea("Invalid Action",FG_COLOR);
+                    }
                 }
             }
             case "drop" -> {
@@ -190,6 +191,7 @@ public class Game implements Serializable {
             }
             case "enter" -> {
                 if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
+                    hasWon = true;
                     mainPanel.hideGame();
                     mainPanel.showSplash();
                 }
@@ -266,7 +268,6 @@ public class Game implements Serializable {
         if (Game.checkWinCondition() && !hasWon) {
             narrativePanel.appendTextArea("\n\nA small passageway reveals itself, glowing blue like the keys in your pack. Should you...", FG_COLOR);
             narrativePanel.appendTextArea("enter passage?", NEIGHBOUR_COLOR);
-            hasWon = true;
         }
         mainPanel.getConsolePanel().enableConsole();
     }
