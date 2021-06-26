@@ -1,6 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class MainPanel {
@@ -39,7 +40,7 @@ public class MainPanel {
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.BLACK);
-        window.setLayout(new BorderLayout());
+        window.getRootPane().setBorder(new MatteBorder(1, 1, 1, 1, Color.WHITE));
         container = window.getContentPane();
         container.add(splashPanel.getPanel());
         hideGame();

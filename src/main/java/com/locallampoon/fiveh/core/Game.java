@@ -216,7 +216,7 @@ public class Game implements Serializable {
             case "requestCommandAgain":
                 break;
             default: {
-                actionPanel.appendTextArea("Invalid Action\n", FG_COLOR);
+                actionPanel.appendTextArea("Invalid Action", FG_COLOR);
             }
         }
     }

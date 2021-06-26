@@ -24,7 +24,7 @@ public class HelpPanel {
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
         pane.setBorder(new MatteBorder(1, 1, 0, 0, Color.WHITE));
-        pane.setBounds(0, 500, 1000, 190);
+        pane.setBounds(0, 500, 1000, 305);
     }
 
     public JScrollPane getPanel() {
