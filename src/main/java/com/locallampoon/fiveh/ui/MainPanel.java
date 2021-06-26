@@ -6,7 +6,7 @@ import java.awt.*;
 public class MainPanel {
     JFrame window;
     Container container;
-    IntroPanel introPanel;
+    SplashPanel splashPanel;
     NarrativePanel narrativePanel;
     ActionPanel actionPanel;
     ConsolePanel consolePanel;
@@ -15,7 +15,7 @@ public class MainPanel {
     MapPanel mapPanel;
 
     public MainPanel(
-            IntroPanel introPanel,
+            SplashPanel splashPanel,
             NarrativePanel narrativePanel,
             ActionPanel actionPanel,
             ConsolePanel consolePanel,
@@ -23,7 +23,7 @@ public class MainPanel {
             StatsPanel statsPanel,
             MapPanel mapPanel
     ) {
-        this.introPanel = introPanel;
+        this.splashPanel = splashPanel;
         this.narrativePanel = narrativePanel;
         this.actionPanel = actionPanel;
         this.consolePanel = consolePanel;
@@ -39,7 +39,7 @@ public class MainPanel {
         window.setLayout(new BorderLayout());
         container = window.getContentPane();
         // add individual panels
-        container.add(introPanel.getPanel());
+        container.add(splashPanel.getPanel());
         hideGame();
         window.setVisible(true);
     }
@@ -69,8 +69,15 @@ public class MainPanel {
         mapPanel.getPanel().setVisible(true);
     }
 
-    public void hideIntro() {
-        introPanel.getPanel().setVisible(false);
+    public void hideSplash() {
+        splashPanel.getPanel().setVisible(false);
+    }
+
+    public void showSplash() {
+        getSplashTitlePanel().renderTitle();
+        getSplashDescriptionPanel().renderDescription();
+        getSplashOptionsPanel().renderOptions();
+        splashPanel.getPanel().setVisible(true);
     }
 
     public NarrativePanel getNarrativePanel() {
@@ -93,5 +100,21 @@ public class MainPanel {
 
     public MapPanel getMapPanel(){
         return this.mapPanel;
+    }
+
+    public SplashPanel getSplashPanel(){
+        return splashPanel;
+    }
+
+    public SplashTitlePanel getSplashTitlePanel(){
+        return splashPanel.getSplashTitlePanel();
+    }
+
+    public SplashDescriptionPanel getSplashDescriptionPanel(){
+        return splashPanel.getSplashDescriptionPanel();
+    }
+
+    public SplashOptionsPanel getSplashOptionsPanel(){
+        return splashPanel.getSplashOptionsPanel();
     }
 }
