@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,10 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
+    private static SplashPanel splashPanel;
+
     public static boolean hasWon = false;
+    public static boolean hasLost = false;
 
     // CONSTRUCTOR
     public Game() {
@@ -46,7 +48,7 @@ public class Game implements Serializable {
     // METHODS
     private static void initializeUI() {
         mainPanel = new MainPanel(
-                new IntroPanel(),
+                new SplashPanel(),
                 new NarrativePanel(),
                 new ActionPanel(),
                 new ConsolePanel(),
@@ -61,6 +63,7 @@ public class Game implements Serializable {
         mapPanel = mainPanel.getMapPanel();
         playerHealthPanel = mainPanel.getStatsPanel().getPlayerHealthPanel();
         monsterHealthPanel = mainPanel.getStatsPanel().getMonsterHealthPanel();
+        splashPanel = mainPanel.getSplashPanel();
     }
 
     private static void readFile(String filename) {
@@ -136,10 +139,8 @@ public class Game implements Serializable {
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
-        } else if (parsedCommandList.size() == 2) {
+        } else if (parsedCommandList.size() >= 2){
             implementCommandTwoWords(parsedCommandList, roomExits, null);
-        } else {
-            actionPanel.appendTextArea("Invalid Action", FG_COLOR);
         }
     }
 
@@ -161,9 +162,13 @@ public class Game implements Serializable {
             }
             case "get", "grab", "take" -> {
                 String grabbedItem = UserInput.nounItemHelper(parsedCommandList, playerDependency);
-                if (!playerDependency.isInventoryFull()) {
+                if (!playerDependency.isInventoryFull() && grabbedItem.split(" ").length > 1) {
                     playerDependency.addItem(grabbedItem);
                     playerCurrentRoom.removeItem(grabbedItem);
+                } else {
+                    if (actionPanel != null) {
+                        actionPanel.appendTextArea("Invalid Action",FG_COLOR);
+                    }
                 }
             }
             case "drop" -> {
@@ -186,10 +191,9 @@ public class Game implements Serializable {
             }
             case "enter" -> {
                 if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
-                    playerCurrentRoom.setDesc("""
-                    \tA passageway is opened to you and it glows a warm blue, like the keys in your pack, brighter and brighter as you approach. Its warmth lifts the spirits and fills your wearied mind with hope... but each time you pass through it - nothing. You transport to the same place. It matters not how many times you cross.  
-                    \tThe realization that dawns upon you is as clear as it is maddening and final. There is no end. There is no beginning. There is no escape. This is a prison. 
-                    """);
+                    hasWon = true;
+                    mainPanel.hideGame();
+                    mainPanel.showSplash();
                 }
             }
             default -> actionPanel.appendTextArea("Invalid Action");
@@ -227,11 +231,11 @@ public class Game implements Serializable {
         }
     }
 
-    public static void handleIntro(IntroOption option) {
+    public static void handleIntro(SplashOption option) {
         switch (option) {
             case NEW:
                 mainPanel.showGame();
-                mainPanel.hideIntro();
+                mainPanel.hideSplash();
                 break;
             // TODO: add help option
             case QUIT:
@@ -269,7 +273,6 @@ public class Game implements Serializable {
         if (Game.checkWinCondition() && !hasWon) {
             narrativePanel.appendTextArea("\n\nA small passageway reveals itself, glowing blue like the keys in your pack. Should you...", FG_COLOR);
             narrativePanel.appendTextArea("enter passage?", NEIGHBOUR_COLOR);
-            hasWon = true;
         }
         mainPanel.getConsolePanel().enableConsole();
     }
@@ -353,7 +356,9 @@ public class Game implements Serializable {
                 monster.attack(player);
             }
             if (player.isDead()) {
-                System.exit(0);
+                hasLost = true;
+                mainPanel.hideGame();
+                mainPanel.showSplash();
             }
         } else {
             actionPanel.appendTextArea("There is no monster in this room", FG_COLOR);
