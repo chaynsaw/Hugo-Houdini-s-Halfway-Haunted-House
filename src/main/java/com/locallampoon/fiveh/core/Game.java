@@ -45,7 +45,6 @@ public class Game implements Serializable {
     // METHODS
     private static void initializeUI() {
         mainPanel = new MainPanel(
-//                new IntroPanel(),
                 new OutroPanel(),
                 new NarrativePanel(),
                 new ActionPanel(),

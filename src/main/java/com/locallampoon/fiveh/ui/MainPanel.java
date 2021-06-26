@@ -6,7 +6,6 @@ import java.awt.*;
 public class MainPanel {
     JFrame window;
     Container container;
-//    IntroPanel introPanel;
     OutroPanel outroPanel;
     NarrativePanel narrativePanel;
     ActionPanel actionPanel;
@@ -16,7 +15,6 @@ public class MainPanel {
     MapPanel mapPanel;
 
     public MainPanel(
-//            IntroPanel introPanel,
             OutroPanel outroPanel,
             NarrativePanel narrativePanel,
             ActionPanel actionPanel,
@@ -25,7 +23,6 @@ public class MainPanel {
             StatsPanel statsPanel,
             MapPanel mapPanel
     ) {
-//        this.introPanel = introPanel;
         this.outroPanel = outroPanel;
         this.narrativePanel = narrativePanel;
         this.actionPanel = actionPanel;
@@ -42,7 +39,6 @@ public class MainPanel {
         window.setLayout(new BorderLayout());
         container = window.getContentPane();
         // add individual panels
-//        container.add(introPanel.getPanel());
         container.add(narrativePanel.getPanel());
         container.add(actionPanel.getPanel());
         container.add(consolePanel.getPanel());
