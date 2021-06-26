@@ -73,7 +73,12 @@ public class MainPanel {
         splashPanel.getPanel().setVisible(false);
     }
 
-    public void showSplash() { splashPanel.getPanel().setVisible(true);}
+    public void showSplash() {
+        getSplashTitlePanel().renderTitle();
+        getSplashDescriptionPanel().renderDescription();
+        getSplashOptionsPanel().renderOptions();
+        splashPanel.getPanel().setVisible(true);
+    }
 
     public NarrativePanel getNarrativePanel() {
         return narrativePanel;

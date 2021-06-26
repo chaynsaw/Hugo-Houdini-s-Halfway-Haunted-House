@@ -147,9 +147,6 @@ public class Game implements Serializable {
             case "enter" -> {
                 if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
                     mainPanel.hideGame();
-                    mainPanel.getSplashTitlePanel().renderTitle();
-                    mainPanel.getSplashDescriptionPanel().renderDescription();
-                    mainPanel.getSplashOptionsPanel().renderOptions();
                     mainPanel.showSplash();
                 }
             }
@@ -311,9 +308,6 @@ public class Game implements Serializable {
             if (player.isDead()) {
                 hasLost = true;
                 mainPanel.hideGame();
-                mainPanel.getSplashTitlePanel().renderTitle();
-                mainPanel.getSplashDescriptionPanel().renderDescription();
-                mainPanel.getSplashOptionsPanel().renderOptions();
                 mainPanel.showSplash();
             }
         } else {
