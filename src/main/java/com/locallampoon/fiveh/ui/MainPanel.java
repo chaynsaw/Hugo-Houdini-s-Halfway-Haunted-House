@@ -39,12 +39,6 @@ public class MainPanel {
         window.setLayout(new BorderLayout());
         container = window.getContentPane();
         // add individual panels
-        container.add(narrativePanel.getPanel());
-        container.add(actionPanel.getPanel());
-        container.add(consolePanel.getPanel());
-        container.add(artPanel.getPanel());
-        container.add(statsPanel.getPanel());
-        container.add(mapPanel.getPanel());
         container.add(splashPanel.getPanel());
         hideGame();
         window.setVisible(true);
@@ -60,6 +54,12 @@ public class MainPanel {
     }
 
     public void showGame() {
+        container.add(narrativePanel.getPanel());
+        container.add(actionPanel.getPanel());
+        container.add(consolePanel.getPanel());
+        container.add(artPanel.getPanel());
+        container.add(statsPanel.getPanel());
+        container.add(mapPanel.getPanel());
         narrativePanel.getPanel().setVisible(true);
         actionPanel.getPanel().setVisible(true);
         consolePanel.getPanel().setVisible(true);
