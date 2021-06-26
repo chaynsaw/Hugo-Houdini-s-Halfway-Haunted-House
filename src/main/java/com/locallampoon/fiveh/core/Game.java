@@ -76,11 +76,12 @@ public class Game implements Serializable {
      * @param filename
      */
     private static void readHelpMenu(String filename) {
-        helpPanel.appendTextArea("\n");
+//        helpPanel.appendTextArea("\n");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
             int index = 0;
             while ((line = br.readLine()) != null) {
+                System.out.println("INSIDE LOOP");
                 if (index == 0) {
                     helpPanel.appendTextArea("Action\t\t\tCommand\t\tObjects\n", FG_COLOR);
                     helpPanel.appendTextArea("--------------------------------------", FG_COLOR);
@@ -109,7 +110,7 @@ public class Game implements Serializable {
     }
 
     public static void getHelp() {
-        GameArt.renderHelper();
+//        GameArt.renderHelper();
         readHelpMenu(HELP_FILE_ACTIONS);
     }
 
@@ -213,6 +214,7 @@ public class Game implements Serializable {
                 break;
             case "quit":
             case "q":
+                System.exit(0);
             case "requestCommandAgain":
                 break;
             default: {
@@ -316,10 +318,6 @@ public class Game implements Serializable {
         Room playerCurrentRoom = player.getCurrentRoom();
         List<String> output = UserInput.parseCommand(input);
         List<String> roomExits = playerCurrentRoom.getExits();
-
-        if (input.equals("q") || input.equals("quit")) {
-            System.exit(0);
-        }
 
         // clear panels
         narrativePanel.setTextArea("");
