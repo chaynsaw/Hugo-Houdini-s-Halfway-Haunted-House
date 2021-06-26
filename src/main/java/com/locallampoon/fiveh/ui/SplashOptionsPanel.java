@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutroOptionsPanel implements KeyListener {
+public class SplashOptionsPanel implements KeyListener {
     private final String bullet = "> ";
     int selectedIndex = 0;
     JPanel panel;
@@ -20,7 +20,7 @@ public class OutroOptionsPanel implements KeyListener {
             PanelStyles.Intro.OPTIONS_FONT_SIZE
     );
 
-    public OutroOptionsPanel() {
+    public SplashOptionsPanel() {
         panel = new JPanel(new GridLayout(0, 1));
         panel.setBounds(
                 PanelStyles.Intro.OPTIONS_X,

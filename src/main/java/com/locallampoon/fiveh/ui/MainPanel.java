@@ -6,7 +6,7 @@ import java.awt.*;
 public class MainPanel {
     JFrame window;
     Container container;
-    OutroPanel outroPanel;
+    SplashPanel splashPanel;
     NarrativePanel narrativePanel;
     ActionPanel actionPanel;
     ConsolePanel consolePanel;
@@ -15,7 +15,7 @@ public class MainPanel {
     MapPanel mapPanel;
 
     public MainPanel(
-            OutroPanel outroPanel,
+            SplashPanel splashPanel,
             NarrativePanel narrativePanel,
             ActionPanel actionPanel,
             ConsolePanel consolePanel,
@@ -23,7 +23,7 @@ public class MainPanel {
             StatsPanel statsPanel,
             MapPanel mapPanel
     ) {
-        this.outroPanel = outroPanel;
+        this.splashPanel = splashPanel;
         this.narrativePanel = narrativePanel;
         this.actionPanel = actionPanel;
         this.consolePanel = consolePanel;
@@ -45,7 +45,7 @@ public class MainPanel {
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
         container.add(mapPanel.getPanel());
-        container.add(outroPanel.getPanel());
+        container.add(splashPanel.getPanel());
         hideGame();
         window.setVisible(true);
     }
@@ -69,11 +69,11 @@ public class MainPanel {
         mapPanel.getPanel().setVisible(true);
     }
 
-    public void hideOutro() {
-        outroPanel.getPanel().setVisible(false);
+    public void hideSplash() {
+        splashPanel.getPanel().setVisible(false);
     }
 
-    public void showOutro() { outroPanel.getPanel().setVisible(true);}
+    public void showSplash() { splashPanel.getPanel().setVisible(true);}
 
     public NarrativePanel getNarrativePanel() {
         return narrativePanel;
@@ -97,19 +97,19 @@ public class MainPanel {
         return this.mapPanel;
     }
 
-    public OutroPanel getOutroPanel(){
-        return outroPanel;
+    public SplashPanel getSplashPanel(){
+        return splashPanel;
     }
 
-    public OutroTitlePanel getOutroTitlePanel(){
-        return outroPanel.getOutroTitlePanel();
+    public SplashTitlePanel getSplashTitlePanel(){
+        return splashPanel.getSplashTitlePanel();
     }
 
-    public OutroDescriptionPanel getOutroDescriptionPanel(){
-        return outroPanel.getOutroDescriptionPanel();
+    public SplashDescriptionPanel getSplashDescriptionPanel(){
+        return splashPanel.getSplashDescriptionPanel();
     }
 
-    public OutroOptionsPanel getOutroOptionsPanel(){
-        return outroPanel.getOutroOptionsPanel();
+    public SplashOptionsPanel getSplashOptionsPanel(){
+        return splashPanel.getSplashOptionsPanel();
     }
 }

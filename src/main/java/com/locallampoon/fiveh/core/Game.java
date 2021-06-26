@@ -25,7 +25,7 @@ public class Game implements Serializable {
     private static ArtPanel artPanel;
     private static StatsPanel statsPanel;
     private static MapPanel mapPanel;
-    private static OutroPanel outroPanel;
+    private static SplashPanel splashPanel;
 
     public static boolean hasWon = false;
     public static boolean hasLost = false;
@@ -45,7 +45,7 @@ public class Game implements Serializable {
     // METHODS
     private static void initializeUI() {
         mainPanel = new MainPanel(
-                new OutroPanel(),
+                new SplashPanel(),
                 new NarrativePanel(),
                 new ActionPanel(),
                 new ConsolePanel(),
@@ -60,7 +60,7 @@ public class Game implements Serializable {
         mapPanel = mainPanel.getMapPanel();
         playerHealthPanel = mainPanel.getStatsPanel().getPlayerHealthPanel();
         monsterHealthPanel = mainPanel.getStatsPanel().getMonsterHealthPanel();
-        outroPanel = mainPanel.getOutroPanel();
+        splashPanel = mainPanel.getSplashPanel();
     }
 
     // METHODS
@@ -147,10 +147,10 @@ public class Game implements Serializable {
             case "enter" -> {
                 if (parsedCommandList.get(1).equalsIgnoreCase("passage") && Game.checkWinCondition()) {
                     mainPanel.hideGame();
-                    mainPanel.getOutroTitlePanel().renderTitle();
-                    mainPanel.getOutroDescriptionPanel().renderDescription();
-                    mainPanel.getOutroOptionsPanel().renderOptions();
-                    mainPanel.showOutro();
+                    mainPanel.getSplashTitlePanel().renderTitle();
+                    mainPanel.getSplashDescriptionPanel().renderDescription();
+                    mainPanel.getSplashOptionsPanel().renderOptions();
+                    mainPanel.showSplash();
                 }
             }
             default -> actionPanel.appendTextArea("Invalid Action",FG_COLOR);
@@ -192,7 +192,7 @@ public class Game implements Serializable {
         switch (option) {
             case NEW:
                 mainPanel.showGame();
-                mainPanel.hideOutro();
+                mainPanel.hideSplash();
                 break;
             // TODO: add help option
             case QUIT:
@@ -311,10 +311,10 @@ public class Game implements Serializable {
             if (player.isDead()) {
                 hasLost = true;
                 mainPanel.hideGame();
-                mainPanel.getOutroTitlePanel().renderTitle();
-                mainPanel.getOutroDescriptionPanel().renderDescription();
-                mainPanel.getOutroOptionsPanel().renderOptions();
-                mainPanel.showOutro();
+                mainPanel.getSplashTitlePanel().renderTitle();
+                mainPanel.getSplashDescriptionPanel().renderDescription();
+                mainPanel.getSplashOptionsPanel().renderOptions();
+                mainPanel.showSplash();
             }
         } else {
             actionPanel.appendTextArea("There is no monster in this room", FG_COLOR);

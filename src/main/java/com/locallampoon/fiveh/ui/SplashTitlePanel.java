@@ -5,7 +5,7 @@ import com.locallampoon.fiveh.core.Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class OutroTitlePanel {
+public class SplashTitlePanel {
     private static final String titleText = "Hugo Houdini\'s Halfway Haunted House";
     private static final String loseText = "YOU DIED. GAME OVER!";
     private static final String winText = "YOU WON?";
@@ -17,7 +17,7 @@ public class OutroTitlePanel {
             PanelStyles.Intro.TITLE_FONT_SIZE
     );
 
-    public OutroTitlePanel() {
+    public SplashTitlePanel() {
         panel = new JPanel();
         panel.setBounds(
                 PanelStyles.Intro.TITLE_X,

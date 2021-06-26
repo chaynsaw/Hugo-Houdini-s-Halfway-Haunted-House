@@ -5,7 +5,7 @@ import com.locallampoon.fiveh.core.Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class OutroDescriptionPanel {
+public class SplashDescriptionPanel {
     private static final String winText = """
                     \tA passageway is opened to you and it glows a warm blue, like the keys in your pack, brighter and brighter as you approach. Its warmth lifts the spirits and fills your wearied mind with hope... but each time you pass through it - nothing. You transport to the same place. It matters not how many times you cross.
                     \tThe realization that dawns upon you is as clear as it is maddening and final. There is no end. There is no beginning. There is no escape. This is a prison.
@@ -18,7 +18,7 @@ public class OutroDescriptionPanel {
             18
     );
 
-    public OutroDescriptionPanel() {
+    public SplashDescriptionPanel() {
         panel = new JPanel();
         panel.setBounds(
                 PanelStyles.Intro.TITLE_X,
