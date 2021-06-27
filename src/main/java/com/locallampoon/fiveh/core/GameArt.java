@@ -1,7 +1,7 @@
 // art from https://www.asciiart.eu/
 package com.locallampoon.fiveh.core;
 
-class GameArt {
+public class GameArt {
 
     static void renderWoman() {
         String imgArt = """
@@ -89,7 +89,7 @@ class GameArt {
                 """;
         return imgArt;
     }
-    static String renderHouse() {
+    public static String renderHouse() {
         String imgArt = """
                                             .     .
                                                !!!!!!!

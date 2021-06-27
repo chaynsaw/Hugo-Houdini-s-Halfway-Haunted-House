@@ -358,6 +358,7 @@ public class Game implements Serializable {
             if (player.isDead()) {
                 hasLost = true;
                 mainPanel.hideGame();
+                mainPanel.getSplashTitlePanel();
                 mainPanel.showSplash();
             }
         } else {

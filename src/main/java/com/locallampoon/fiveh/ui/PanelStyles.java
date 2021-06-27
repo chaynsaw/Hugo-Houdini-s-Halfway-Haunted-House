@@ -23,7 +23,7 @@ public class PanelStyles {
 
     // splash panel styles
     public static class Splash {
-        public static final int TITLE_X = 100;
+        public static final int TITLE_X = 125;
         public static final int TITLE_Y = 100;
         public static final int TITLE_WIDTH = 780;
         public static final int TITLE_HEIGHT = 50;
@@ -34,7 +34,7 @@ public class PanelStyles {
         public static final int DESCRIPTION_HEIGHT = 200;
         public static final int DESCRIPTION_FONT_SIZE = 18;
         public static final int OPTIONS_X = 400;
-        public static final int OPTIONS_Y = 500;
+        public static final int OPTIONS_Y = 750;
         public static final int OPTIONS_WIDTH = 200;
         public static final int OPTIONS_HEIGHT = 100;
         public static final int OPTIONS_FONT_SIZE = 30;
@@ -76,6 +76,13 @@ public class PanelStyles {
         public static int Y = 20;
         public static int WIDTH = 250;
         public static int HEIGHT = 300;
+    }
+
+    public static class TitleSplashImage {
+        public static int X = 315;
+        public static int Y = 180;
+        public static int WIDTH = 500;
+        public static int HEIGHT = 550;
     }
 
     public static class ActionPanel {

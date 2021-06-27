@@ -13,6 +13,7 @@ public class MainPanel {
     ArtPanel artPanel;
     StatsPanel statsPanel;
     MapPanel mapPanel;
+    SplashImage splashImagePanel = new SplashImage();
 
     public MainPanel(
             SplashPanel splashPanel,
@@ -39,6 +40,7 @@ public class MainPanel {
         window.setLayout(new BorderLayout());
         container = window.getContentPane();
         // add individual panels
+        container.add(splashImagePanel.getPanel());
         container.add(splashPanel.getPanel());
         hideGame();
         window.setVisible(true);
@@ -54,6 +56,7 @@ public class MainPanel {
     }
 
     public void showGame() {
+        splashImagePanel.getPanel().setVisible(false);
         container.add(narrativePanel.getPanel());
         container.add(actionPanel.getPanel());
         container.add(consolePanel.getPanel());
