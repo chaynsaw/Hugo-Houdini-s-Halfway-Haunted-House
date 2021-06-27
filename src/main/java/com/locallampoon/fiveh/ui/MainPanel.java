@@ -79,6 +79,7 @@ public class MainPanel {
     }
 
     public void showSplash() {
+        window.remove(narrativePanel.getPanel());
         getSplashTitlePanel().renderTitle();
         getSplashDescriptionPanel().renderDescription();
         getSplashOptionsPanel().renderOptions();

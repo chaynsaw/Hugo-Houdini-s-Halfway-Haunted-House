@@ -20,11 +20,11 @@ public class HelpPanel {
         textArea.setRequestFocusEnabled(false);
         pane = new JScrollPane(
                 textArea,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.VERTICAL_SCROLLBAR_NEVER,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
         pane.setBorder(new MatteBorder(1, 0, 0, 0, Color.WHITE));
-        pane.setBounds(0, 500, 1000, 305);
+        pane.setBounds(0, 500, 1000, 275);
         pane.setBackground(Color.BLUE);
     }
 

@@ -85,7 +85,6 @@ public class Game implements Serializable {
                     index++;
                 }
                 String[] tokens = line.split("\\|");
-                System.out.println("TOKENS: " + String.join(",", tokens));
                 if (tokens.length > 4) {
                     helpPanel.appendTextArea("Invalid help menu. No more than tokens");
                 } else {
@@ -100,9 +99,6 @@ public class Game implements Serializable {
                     helpPanel.appendTextArea("\n");
                 }
             }
-            helpPanel.appendTextArea("\nEnter command, ");
-            helpPanel.appendTextArea("\"quit help\"", NEIGHBOUR_COLOR);
-            helpPanel.appendTextArea(" to exit help menu.");
         } catch (IOException e) {
             e.printStackTrace();
             helpPanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
@@ -110,7 +106,6 @@ public class Game implements Serializable {
     }
 
     public static void getHelp() {
-//        GameArt.renderHelper();
         readHelpMenu(HELP_FILE_ACTIONS);
     }
 
@@ -208,11 +203,6 @@ public class Game implements Serializable {
             case "flee":
                 player.flee(houseMap);
                 break;
-
-            case "inventory":
-            case "i":
-                player.printInventoryItems();
-                break;
             case "help":
             case "h":
                 isHelp = true;
@@ -305,32 +295,43 @@ public class Game implements Serializable {
         artPanel.setTextArea(GameArt.renderHouse());
     }
 
-    private static void checkHelp() {
-        System.out.println("IS HELP: " + isHelp);
-        if (isHelp) {
-            getHelp();
-            mainPanel.getHelpPanel().getPanel().setVisible(true);
-            mainPanel.getNarrativePanel().getPanel().setVisible(false);
-            return;
-        } else {
-            mainPanel.getHelpPanel().getPanel().setVisible(false);
-            mainPanel.getNarrativePanel().getPanel().setVisible(true);
-        }
+    private static void showHelp() {
+        getHelp();
+        helpPanel.getPanel().setVisible(true);
+        narrativePanel.getPanel().setVisible(false);
+    }
+
+    private static void hideHelp() {
+        helpPanel.getPanel().setVisible(false);
+        narrativePanel.getPanel().setVisible(true);
+    }
+
+    private static void clearPanels() {
+        // clear panels
+        narrativePanel.setTextArea("");
+        artPanel.setTextArea("");
+        statsPanel.setTextArea("");
+        helpPanel.setTextArea("");
     }
 
     private static void renderGameUI() {
-        // check for help menu
-        checkHelp();
+        clearPanels();
         // repaint after player current position is updated
         mapPanel.updateMapGUI();
         // print location
         printLocation();
         // handle monster scenario
         checkMonster();
-        // print description
-        printDescription();
         // print player stats
         printPlayerStats();
+
+        if (!Game.isHelp) {
+            hideHelp();
+            // print description
+            printDescription();
+        } else {
+            showHelp();
+        }
     }
 
 
@@ -339,12 +340,7 @@ public class Game implements Serializable {
         List<String> output = UserInput.parseCommand(input);
         List<String> roomExits = playerCurrentRoom.getExits();
 
-        // clear panels
-        narrativePanel.setTextArea("");
         actionPanel.setTextArea("");
-        artPanel.setTextArea("");
-        statsPanel.setTextArea("");
-        helpPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
         // render ui after command execution

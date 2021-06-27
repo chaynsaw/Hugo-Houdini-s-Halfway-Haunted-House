@@ -22,7 +22,7 @@ public class NarrativePanel{
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
         pane.setBorder(new MatteBorder(1, 0, 0, 0, Color.WHITE));
-        pane.setBounds(0, 500, 1000, 305);
+        pane.setBounds(0, 500, 1000, 275);
     }
 
     public JScrollPane getPanel() {

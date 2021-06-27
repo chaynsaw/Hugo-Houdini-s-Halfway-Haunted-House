@@ -6,5 +6,6 @@ Move the Player|"go"|"north"|up arrow
 |"go"|"down"|pg dn
 Pick an Item|"get"|"item" (1 word)
 Fight a Monster|"fight"|
-Quit the Game|"quit"|
 Help Menu|"help"|
+Quit Help Menu|"quit"|"help"
+Quit the Game|"quit"|

@@ -78,9 +78,9 @@ public class PanelStyles {
 
     public static class ActionPanel {
         public static int X = 0;
-        public static int Y = 805;
+        public static int Y = 775;
         public static int WIDTH = 1000;
-        public static int HEIGHT = 30;
+        public static int HEIGHT = 60;
     }
 
     public static class StatsPanel {
