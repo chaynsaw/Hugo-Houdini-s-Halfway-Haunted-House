@@ -5,24 +5,27 @@ import javax.swing.border.MatteBorder;
 import javax.swing.text.*;
 import java.awt.*;
 
-import static com.locallampoon.fiveh.ui.PanelStyles.Global.*;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FONT_FAMILY;
 
-public class NarrativePanel{
+public class HelpPanel {
     private JScrollPane pane;
     private JTextPane textArea;
     private Font normalFont = new Font(FONT_FAMILY, Font.PLAIN, 18);
-    public NarrativePanel() {
+
+    public HelpPanel() {
         textArea = new JTextPane();
         textArea.setFont(normalFont);
         textArea.setBackground(Color.BLACK);
         textArea.setRequestFocusEnabled(false);
         pane = new JScrollPane(
                 textArea,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.VERTICAL_SCROLLBAR_NEVER,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
         pane.setBorder(new MatteBorder(1, 0, 0, 0, Color.WHITE));
         pane.setBounds(0, 500, 1000, 275);
+        pane.setBackground(Color.BLUE);
     }
 
     public JScrollPane getPanel() {
@@ -34,8 +37,12 @@ public class NarrativePanel{
         textArea.setText(text);
     }
 
+    public JTextPane getTextArea() {
+        return textArea;
+    }
+
     /**
-     * append text in narrative panel with fixed foreground color
+     * append text in help panel with fixed foreground color
      * @param text display text
      */
     public void appendTextArea(String text)
@@ -44,7 +51,7 @@ public class NarrativePanel{
     }
 
     /**
-     * append text in narrative panel with customized foreground color
+     * append text in help panel with customized foreground color
      * enable and disable capability to edit before and after append
      * @param text display text
      * @param color display color
@@ -55,23 +62,23 @@ public class NarrativePanel{
     }
 
     /**
-     * append text in narrative panel with customized foreground color
+     * append text in help panel with customized foreground color
      * enable and disable capability to edit before and after append
      * @param text display text
      * @param color display color
      */
     public void appendTextArea(String text, Color color, boolean tab)
     {
-        this.enableNarrativeTextArea();
+        this.enableHelpTextArea();
         this.appendToPane(this.textArea, text, color, tab);
-        this.disableNarrativeTextArea();
+        this.disableHelpTextArea();
     }
 
-    public void disableNarrativeTextArea(){
+    public void disableHelpTextArea(){
         textArea.setEditable(false);
     }
 
-    public void enableNarrativeTextArea(){
+    public void enableHelpTextArea(){
         textArea.setEditable(true);
     }
 

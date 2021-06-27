@@ -6,7 +6,11 @@ public enum Command {
     GO_WEST("go west"),
     GO_EAST("go east"),
     GO_UP("go up"),
-    GO_DOWN("go down");
+    GO_DOWN("go down"),
+    FIGHT("fight"),
+    HELP("help"),
+    QUIT_HELP("quit help"),
+    QUIT("quit");
 
     private final String text;
 

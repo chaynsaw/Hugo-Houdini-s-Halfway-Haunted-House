@@ -190,7 +190,7 @@ public class Player {
         }
 
         if (actionPanel != null) {
-            actionPanel.appendTextArea(" You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left\n", FG_COLOR);
+            actionPanel.appendTextArea("You hit the monster, it took " + damage + " DAMAGE and has " + monster.getHealth() + " HEALTH left\n", FG_COLOR);
 
         }
     }
@@ -207,7 +207,7 @@ public class Player {
             setHealth(health - damage);
             if (actionPanel != null) {
                 actionPanel.appendTextArea(getCurrentRoom().getRoomMonster().getName() + " used attack!  You to took " + damage +
-                        " DAMAGE and have " + health + " HEALTH left\n", FG_COLOR);
+                        " DAMAGE and have " + health + " HEALTH left", FG_COLOR);
             }
         }
     }

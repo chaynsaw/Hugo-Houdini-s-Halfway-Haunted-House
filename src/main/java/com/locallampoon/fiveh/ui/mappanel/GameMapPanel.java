@@ -21,7 +21,6 @@ public class GameMapPanel extends JPanel {
     public GameMapPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
-        this.setBorder(new LineBorder(Color.WHITE));
         this.setOpaque(false); // prevent other panels' text being covered during repaint()
         gameMap.setPlayer(Game.getPlayer()); // pass a reference to game map
     }

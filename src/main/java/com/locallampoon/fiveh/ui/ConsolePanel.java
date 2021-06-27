@@ -26,13 +26,14 @@ public class ConsolePanel implements KeyListener {
                 PanelStyles.ConsolePanel.HEIGHT
         );
         panel.setBackground(PanelStyles.Global.BG_COLOR);
-        panel.setBorder(new MatteBorder(0, 1, 0, 0, Color.WHITE));
+        panel.setBorder(new MatteBorder(0, 0, 0, 0, Color.WHITE));
         textArea = new JTextArea();
+        disableKeys(textArea.getInputMap());
         textArea.setBounds(
                 PanelStyles.ConsolePanel.TXT_AREA_X,
                 PanelStyles.ConsolePanel.TXT_AREA_Y,
-                PanelStyles.ConsolePanel.TXT_AREA_WIDTH,
-                PanelStyles.ConsolePanel.TXT_AREA_HEIGHT
+                PanelStyles.ConsolePanel.WIDTH,
+                PanelStyles.ConsolePanel.HEIGHT
         );
         textArea.setFont(normalFont);
         textArea.setBackground(PanelStyles.Global.BG_COLOR);
@@ -70,6 +71,13 @@ public class ConsolePanel implements KeyListener {
         textArea.setEnabled(false);
     }
 
+    private void disableKeys(InputMap inputMap) {
+        String[] keys = {"UP", "DOWN", "LEFT", "RIGHT", "TAB"};
+        for (String key : keys) {
+            inputMap.put(KeyStroke.getKeyStroke(key), "none");
+        }
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -92,6 +100,14 @@ public class ConsolePanel implements KeyListener {
             executeCommand(Command.GO_UP.getText());
         } else if (keyCode == Key.PG_DOWN.getKey()) {
             executeCommand(Command.GO_DOWN.getText());
+        } else if (keyCode == Key.TAB.getKey()) {
+            executeCommand(Command.FIGHT.getText());
+        } else if (keyCode == Key.F1.getKey() && !Game.isHelp) {
+            executeCommand(Command.HELP.getText());
+        } else if (keyCode == Key.F1.getKey()) {
+            executeCommand(Command.QUIT_HELP.getText());
+        } else if (keyCode == Key.ESC.getKey()) {
+            executeCommand(Command.QUIT.getText());
         }
     }
 
@@ -106,7 +122,7 @@ public class ConsolePanel implements KeyListener {
         }
     }
 
-    public JTextArea getTextArea(){
+    public JTextArea getTextArea() {
         return this.textArea;
     }
 }
