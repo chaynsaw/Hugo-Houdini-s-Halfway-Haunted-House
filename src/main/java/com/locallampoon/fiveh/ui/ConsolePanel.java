@@ -28,6 +28,7 @@ public class ConsolePanel implements KeyListener {
         panel.setBackground(PanelStyles.Global.BG_COLOR);
         panel.setBorder(new MatteBorder(0, 0, 0, 0, Color.WHITE));
         textArea = new JTextArea();
+        disableKeys(textArea.getInputMap());
         textArea.setBounds(
                 PanelStyles.ConsolePanel.TXT_AREA_X,
                 PanelStyles.ConsolePanel.TXT_AREA_Y,
@@ -70,6 +71,13 @@ public class ConsolePanel implements KeyListener {
         textArea.setEnabled(false);
     }
 
+    private void disableKeys(InputMap inputMap) {
+        String[] keys = {"UP", "DOWN", "LEFT", "RIGHT", "TAB"};
+        for (String key : keys) {
+            inputMap.put(KeyStroke.getKeyStroke(key), "none");
+        }
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -93,7 +101,15 @@ public class ConsolePanel implements KeyListener {
                 executeCommand(Command.GO_UP.getText());
             } else if (keyCode == Key.PG_DOWN.getKey()) {
                 executeCommand(Command.GO_DOWN.getText());
+            } else if (keyCode == Key.TAB.getKey()) {
+                executeCommand(Command.FIGHT.getText());
+            } else if (keyCode == Key.F1.getKey()) {
+                executeCommand(Command.HELP.getText());
+            } else if (keyCode == Key.ESC.getKey()) {
+                executeCommand(Command.QUIT.getText());
             }
+        } else if (keyCode == Key.F1.getKey()) {
+            executeCommand(Command.QUIT_HELP.getText());
         }
     }
 
