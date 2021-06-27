@@ -37,6 +37,10 @@ public class HelpPanel {
         textArea.setText(text);
     }
 
+    public JTextPane getTextArea() {
+        return textArea;
+    }
+
     /**
      * append text in help panel with fixed foreground color
      * @param text display text

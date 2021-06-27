@@ -99,6 +99,7 @@ public class Game implements Serializable {
                     helpPanel.appendTextArea("\n");
                 }
             }
+            helpPanel.getTextArea().setCaretPosition(0);
         } catch (IOException e) {
             e.printStackTrace();
             helpPanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
