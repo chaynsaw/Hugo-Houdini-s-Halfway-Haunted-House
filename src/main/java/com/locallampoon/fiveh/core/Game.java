@@ -76,23 +76,20 @@ public class Game implements Serializable {
      * @param filename
      */
     private static void readHelpMenu(String filename) {
-//        helpPanel.appendTextArea("\n");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Game.class.getResourceAsStream(filename)))) {
             String line;
             int index = 0;
             while ((line = br.readLine()) != null) {
-                System.out.println("INSIDE LOOP");
                 if (index == 0) {
-                    helpPanel.appendTextArea("Action\t\t\tCommand\t\tObjects\n", FG_COLOR);
-                    helpPanel.appendTextArea("--------------------------------------", FG_COLOR);
-                    helpPanel.appendTextArea("--------------------------------------" + "\n", FG_COLOR);
+                    helpPanel.appendTextArea("Action\t\t\tVerb\t\t\tNoun\t\t\tKeyboard\n", ROOM_TEXT_COLOR);
                     index++;
                 }
                 String[] tokens = line.split("\\|");
-                if (tokens.length > 3) {
+                System.out.println("TOKENS: " + String.join(",", tokens));
+                if (tokens.length > 4) {
                     helpPanel.appendTextArea("Invalid help menu. No more than tokens");
                 } else {
-                    Color[] colors = {FG_COLOR, PLAYER_COLOR, NEIGHBOUR_COLOR};
+                    Color[] colors = {FG_COLOR, PLAYER_COLOR, NEIGHBOUR_COLOR, FG_COLOR};
                     for (int i = 0; i < tokens.length; i++) {
                         if (tokens[i].length() >= 9)
                             helpPanel.appendTextArea(tokens[i] + "\t\t", colors[i]);
@@ -103,6 +100,9 @@ public class Game implements Serializable {
                     helpPanel.appendTextArea("\n");
                 }
             }
+            helpPanel.appendTextArea("\nEnter command, ");
+            helpPanel.appendTextArea("\"quit help\"", NEIGHBOUR_COLOR);
+            helpPanel.appendTextArea(" to exit help menu.");
         } catch (IOException e) {
             e.printStackTrace();
             helpPanel.appendTextArea("UH OH! If it weren't for you pesky kids, I would have printed the Menu!\n");
@@ -126,7 +126,6 @@ public class Game implements Serializable {
     }
 
     private static void implementCommand(List<String> parsedCommandList, List<String> roomExits) {
-        isHelp = false;
         if (parsedCommandList.size() == 1) {
             implementCommandOneWord(parsedCommandList);
         } else if (parsedCommandList.size() >= 2){
@@ -144,7 +143,7 @@ public class Game implements Serializable {
                 Direction dirMovement = movementHelper(parsedCommandList.get(1));
                 if (dirMovement == null || roomExits.get(dirMovement.getDirection()).isBlank() ||
                         roomExits.get(dirMovement.getDirection()).isEmpty()) {
-                    actionPanel.appendTextArea("You can't travel in that direction!\n");
+                    actionPanel.appendTextArea("You can't travel in that direction!");
                     break;
                 }
                 Room roomKeyID = houseMap.get(roomExits.get(dirMovement.getDirection()));
@@ -186,6 +185,13 @@ public class Game implements Serializable {
                     mainPanel.showSplash();
                 }
             }
+            case "quit" -> {
+                if (isHelp && parsedCommandList.get(1).equalsIgnoreCase("help")) {
+                    isHelp = false;
+                } else {
+                    actionPanel.appendTextArea("Invalid Action");
+                }
+            }
             default -> actionPanel.appendTextArea("Invalid Action");
         }
     }
@@ -210,7 +216,6 @@ public class Game implements Serializable {
             case "help":
             case "h":
                 isHelp = true;
-                getHelp();
                 break;
             case "quit":
             case "q":
@@ -300,7 +305,22 @@ public class Game implements Serializable {
         artPanel.setTextArea(GameArt.renderHouse());
     }
 
+    private static void checkHelp() {
+        System.out.println("IS HELP: " + isHelp);
+        if (isHelp) {
+            getHelp();
+            mainPanel.getHelpPanel().getPanel().setVisible(true);
+            mainPanel.getNarrativePanel().getPanel().setVisible(false);
+            return;
+        } else {
+            mainPanel.getHelpPanel().getPanel().setVisible(false);
+            mainPanel.getNarrativePanel().getPanel().setVisible(true);
+        }
+    }
+
     private static void renderGameUI() {
+        // check for help menu
+        checkHelp();
         // repaint after player current position is updated
         mapPanel.updateMapGUI();
         // print location
@@ -324,6 +344,7 @@ public class Game implements Serializable {
         actionPanel.setTextArea("");
         artPanel.setTextArea("");
         statsPanel.setTextArea("");
+        helpPanel.setTextArea("");
         // send command to game switch logic
         implementCommand(output, roomExits);
         // render ui after command execution

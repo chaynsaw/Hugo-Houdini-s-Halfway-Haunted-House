@@ -23,8 +23,9 @@ public class HelpPanel {
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
-        pane.setBorder(new MatteBorder(1, 1, 0, 0, Color.WHITE));
+        pane.setBorder(new MatteBorder(1, 0, 0, 0, Color.WHITE));
         pane.setBounds(0, 500, 1000, 305);
+        pane.setBackground(Color.BLUE);
     }
 
     public JScrollPane getPanel() {
@@ -37,7 +38,7 @@ public class HelpPanel {
     }
 
     /**
-     * append text in narrative panel with fixed foreground color
+     * append text in help panel with fixed foreground color
      * @param text display text
      */
     public void appendTextArea(String text)
@@ -46,7 +47,7 @@ public class HelpPanel {
     }
 
     /**
-     * append text in narrative panel with customized foreground color
+     * append text in help panel with customized foreground color
      * enable and disable capability to edit before and after append
      * @param text display text
      * @param color display color
@@ -57,7 +58,7 @@ public class HelpPanel {
     }
 
     /**
-     * append text in narrative panel with customized foreground color
+     * append text in help panel with customized foreground color
      * enable and disable capability to edit before and after append
      * @param text display text
      * @param color display color

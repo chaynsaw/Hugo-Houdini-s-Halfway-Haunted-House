@@ -58,20 +58,20 @@ public class MainPanel {
 
     public void showGame() {
         container.add(narrativePanel.getPanel());
+        container.add(helpPanel.getPanel());
         container.add(actionPanel.getPanel());
         container.add(consolePanel.getPanel());
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
         container.add(mapPanel.getPanel());
-        container.add(helpPanel.getPanel());
         narrativePanel.getPanel().setVisible(true);
+        helpPanel.getPanel().setVisible(true);
         actionPanel.getPanel().setVisible(true);
         consolePanel.getPanel().setVisible(true);
         consolePanel.enableConsole();
         artPanel.getPanel().setVisible(true);
         statsPanel.getPanel().setVisible(true);
         mapPanel.getPanel().setVisible(true);
-        helpPanel.getPanel().setVisible(false);
     }
 
     public void hideSplash() {
