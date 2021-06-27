@@ -88,28 +88,26 @@ public class ConsolePanel implements KeyListener {
         int keyCode = e.getKeyCode();
         if (keyCode == Key.ENTER.getKey()) {
             executeCommand(textArea.getText());
-        } else if (!Game.isHelp) {
-            if (keyCode == Key.UP.getKey()) {
-                executeCommand(Command.GO_NORTH.getText());
-            } else if (keyCode == Key.DOWN.getKey()) {
-                executeCommand(Command.GO_SOUTH.getText());
-            } else if (keyCode == Key.LEFT.getKey()) {
-                executeCommand(Command.GO_WEST.getText());
-            } else if (keyCode == Key.RIGHT.getKey()) {
-                executeCommand(Command.GO_EAST.getText());
-            } else if (keyCode == Key.PG_UP.getKey()) {
-                executeCommand(Command.GO_UP.getText());
-            } else if (keyCode == Key.PG_DOWN.getKey()) {
-                executeCommand(Command.GO_DOWN.getText());
-            } else if (keyCode == Key.TAB.getKey()) {
-                executeCommand(Command.FIGHT.getText());
-            } else if (keyCode == Key.F1.getKey()) {
-                executeCommand(Command.HELP.getText());
-            } else if (keyCode == Key.ESC.getKey()) {
-                executeCommand(Command.QUIT.getText());
-            }
+        } else if (keyCode == Key.UP.getKey()) {
+            executeCommand(Command.GO_NORTH.getText());
+        } else if (keyCode == Key.DOWN.getKey()) {
+            executeCommand(Command.GO_SOUTH.getText());
+        } else if (keyCode == Key.LEFT.getKey()) {
+            executeCommand(Command.GO_WEST.getText());
+        } else if (keyCode == Key.RIGHT.getKey()) {
+            executeCommand(Command.GO_EAST.getText());
+        } else if (keyCode == Key.PG_UP.getKey()) {
+            executeCommand(Command.GO_UP.getText());
+        } else if (keyCode == Key.PG_DOWN.getKey()) {
+            executeCommand(Command.GO_DOWN.getText());
+        } else if (keyCode == Key.TAB.getKey()) {
+            executeCommand(Command.FIGHT.getText());
+        } else if (keyCode == Key.F1.getKey() && !Game.isHelp) {
+            executeCommand(Command.HELP.getText());
         } else if (keyCode == Key.F1.getKey()) {
             executeCommand(Command.QUIT_HELP.getText());
+        } else if (keyCode == Key.ESC.getKey()) {
+            executeCommand(Command.QUIT.getText());
         }
     }
 
@@ -124,7 +122,7 @@ public class ConsolePanel implements KeyListener {
         }
     }
 
-    public JTextArea getTextArea(){
+    public JTextArea getTextArea() {
         return this.textArea;
     }
 }

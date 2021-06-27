@@ -337,6 +337,7 @@ public class Game implements Serializable {
 
 
     public static void handleCommand(String input) {
+        isHelp = false;
         Room playerCurrentRoom = player.getCurrentRoom();
         List<String> output = UserInput.parseCommand(input);
         List<String> roomExits = playerCurrentRoom.getExits();
