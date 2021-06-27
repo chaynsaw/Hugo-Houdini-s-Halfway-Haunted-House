@@ -1,5 +1,11 @@
-Move the Player|"go" or Keyboard|"direction"
-Pick an Item|"get"|"item name"
-Fight a Monster|"fight"|
-Quit the Game|"quit"|
-Help Menu|"help"|
+Move the Player|"go"|"north"|up arrow
+|"go"|"south"|down arrow
+|"go"|"east"|right arrow
+|"go"|"west"|left arrow
+|"go"|"up"|pg up
+|"go"|"down"|pg dn
+Pick an Item|"get"|"item" (1 word)
+Fight a Monster|"fight"||tab
+Help Menu|"help"||f1
+Quit Help Menu|"quit"|"help"|f1
+Quit the Game|"quit"||esc

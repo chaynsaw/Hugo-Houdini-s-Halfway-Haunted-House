@@ -7,7 +7,10 @@ public enum Key {
     LEFT(37),
     RIGHT(39),
     PG_UP(33),
-    PG_DOWN(34);
+    PG_DOWN(34),
+    TAB(9),
+    F1(112),
+    ESC(27);
 
     private final int key;
 

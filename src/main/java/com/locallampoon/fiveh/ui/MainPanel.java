@@ -1,6 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class MainPanel {
@@ -13,6 +14,7 @@ public class MainPanel {
     ArtPanel artPanel;
     StatsPanel statsPanel;
     MapPanel mapPanel;
+    HelpPanel helpPanel;
 
     public MainPanel(
             SplashPanel splashPanel,
@@ -21,7 +23,8 @@ public class MainPanel {
             ConsolePanel consolePanel,
             ArtPanel artPanel,
             StatsPanel statsPanel,
-            MapPanel mapPanel
+            MapPanel mapPanel,
+            HelpPanel helpPanel
     ) {
         this.splashPanel = splashPanel;
         this.narrativePanel = narrativePanel;
@@ -30,15 +33,15 @@ public class MainPanel {
         this.artPanel = artPanel;
         this.statsPanel = statsPanel;
         this.mapPanel = mapPanel;
+        this.helpPanel = helpPanel;
         // main window settings
         window = new JFrame();
         window.setSize(PanelStyles.Window.WIDTH, PanelStyles.Window.HEIGHT);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.BLACK);
-        window.setLayout(new BorderLayout());
+        window.getRootPane().setBorder(new MatteBorder(1, 1, 1, 1, Color.WHITE));
         container = window.getContentPane();
-        // add individual panels
         container.add(splashPanel.getPanel());
         hideGame();
         window.setVisible(true);
@@ -55,12 +58,14 @@ public class MainPanel {
 
     public void showGame() {
         container.add(narrativePanel.getPanel());
+        container.add(helpPanel.getPanel());
         container.add(actionPanel.getPanel());
         container.add(consolePanel.getPanel());
         container.add(artPanel.getPanel());
         container.add(statsPanel.getPanel());
         container.add(mapPanel.getPanel());
         narrativePanel.getPanel().setVisible(true);
+        helpPanel.getPanel().setVisible(true);
         actionPanel.getPanel().setVisible(true);
         consolePanel.getPanel().setVisible(true);
         consolePanel.enableConsole();
@@ -74,6 +79,7 @@ public class MainPanel {
     }
 
     public void showSplash() {
+        window.remove(narrativePanel.getPanel());
         getSplashTitlePanel().renderTitle();
         getSplashDescriptionPanel().renderDescription();
         getSplashOptionsPanel().renderOptions();
@@ -102,8 +108,8 @@ public class MainPanel {
         return this.mapPanel;
     }
 
-    public SplashPanel getSplashPanel(){
-        return splashPanel;
+    public HelpPanel getHelpPanel(){
+        return this.helpPanel;
     }
 
     public SplashTitlePanel getSplashTitlePanel(){

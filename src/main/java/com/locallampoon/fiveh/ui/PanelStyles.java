@@ -43,13 +43,11 @@ public class PanelStyles {
     // console styles
     public static class ConsolePanel {
         public static final int X = 0;
-        public static final int Y = 840;
+        public static final int Y = 835;
         public static final int WIDTH = 1000;
         public static final int HEIGHT = 30;
         public static final int TXT_AREA_X = 0;
         public static final int TXT_AREA_Y = 0;
-        public static final int TXT_AREA_WIDTH = 540;
-        public static final int TXT_AREA_HEIGHT = 200;
     }
 
     // Map panel styles
@@ -80,9 +78,9 @@ public class PanelStyles {
 
     public static class ActionPanel {
         public static int X = 0;
-        public static int Y = 690;
+        public static int Y = 775;
         public static int WIDTH = 1000;
-        public static int HEIGHT = 150;
+        public static int HEIGHT = 60;
     }
 
     public static class StatsPanel {

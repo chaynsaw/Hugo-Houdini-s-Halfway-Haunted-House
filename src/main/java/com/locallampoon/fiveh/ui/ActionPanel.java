@@ -29,7 +29,7 @@ public class ActionPanel {
                 PanelStyles.ActionPanel.Y,
                 PanelStyles.ActionPanel.WIDTH,
                 PanelStyles.ActionPanel.HEIGHT);
-        pane.setBorder(new MatteBorder(0, 1, 1, 0, Color.WHITE));
+        pane.setBorder(new MatteBorder(0, 0, 1, 0, Color.WHITE));
     }
 
     public JScrollPane getPanel() {
