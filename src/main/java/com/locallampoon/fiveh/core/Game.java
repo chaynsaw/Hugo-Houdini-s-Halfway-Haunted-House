@@ -184,8 +184,6 @@ public class Game implements Serializable {
             case "quit" -> {
                 if (isHelp && parsedCommandList.get(1).equalsIgnoreCase("help")) {
                     isHelp = false;
-                } else {
-                    actionPanel.appendTextArea("Invalid Action");
                 }
             }
             default -> actionPanel.appendTextArea("Invalid Action");
