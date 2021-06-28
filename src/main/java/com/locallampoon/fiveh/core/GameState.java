@@ -3,6 +3,10 @@ package com.locallampoon.fiveh.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static com.locallampoon.fiveh.core.Game.actionPanel;
+import static com.locallampoon.fiveh.core.Game.narrativePanel;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
+
 public class GameState {
 
     private static String quitSave(BufferedReader saveReader) throws IOException {
@@ -10,11 +14,11 @@ public class GameState {
         String saveCommand;
 
         while (true) {
-            System.out.println("Do you want to save the game?");
+            narrativePanel.appendTextArea("Do you want to save the game?\n", FG_COLOR);
             String saveResponse = saveReader.readLine().toLowerCase();
 
             if ("yes".equals(saveResponse) || "y".equals(saveResponse)) {
-                System.out.println("Please name your save file:  >   ");
+                narrativePanel.appendTextArea("Please name your save file:  >   ",FG_COLOR);
                 String saveFileName = saveReader.readLine();
                 //TODO: Write a save game/load game methods
                 //                     saveGame(saveFileName);
@@ -27,8 +31,8 @@ public class GameState {
                 saveCommand = "i";
                 break;
             } else {
-                msg = "INVALID RESPONSE: \n\t Enter Y to save and quit \n\t N to quit without saving \n\t C to continue playing";
-                System.out.println(msg);
+                msg = "INVALID RESPONSE: \n\t Enter Y to save and quit \n\t N to quit without saving \n\t C to continue playing\n";
+                narrativePanel.appendTextArea(msg, FG_COLOR);
             }
         }
         return saveCommand;
@@ -36,7 +40,7 @@ public class GameState {
 
     public static String quitHelper(BufferedReader quitReader) throws IOException {
         String quitCommand;
-        System.out.println("Are you sure you want to quit the game?");
+        actionPanel.appendTextArea("Are you sure you want to quit the game?\n");
 
         while (true) {
             String quitResponse = quitReader.readLine().toLowerCase();
@@ -48,7 +52,7 @@ public class GameState {
                 quitCommand = quitSave(quitReader);
                 break;
             } else {
-                System.out.println("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue");
+                actionPanel.appendTextArea("INVALID RESPONSE: \n\tEnter Y to quit \n\t N to continue");
             }
         }
         return quitCommand;

@@ -2,7 +2,6 @@ package com.locallampoon.fiveh.core;
 
 import com.locallampoon.fiveh.ui.mappanel.GameMap;
 import com.locallampoon.fiveh.ui.mappanel.MapRoom;
-import static com.locallampoon.fiveh.ui.PanelStyles.UNIT_SIZE;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,16 +12,14 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static com.locallampoon.fiveh.ui.PanelStyles.GameMap.UNIT_SIZE;
 
 class XMLParser {
 
-    private static final String ROOM_FILE = "src/main/java/com/locallampoon/fiveh/data/rooms.xml";
+    private static final String ROOM_FILE = "/rooms.xml";
 
     public static Map<String, Room> parseRooms() {
 
@@ -39,7 +36,7 @@ class XMLParser {
             // parse XML file
             DocumentBuilder docBuild = dbf.newDocumentBuilder();
 
-            Document doc = docBuild.parse(new File(ROOM_FILE));
+            Document doc = docBuild.parse(XMLParser.class.getResourceAsStream(ROOM_FILE));
 
             doc.getDocumentElement().normalize();
             // get <room> from xml
@@ -85,11 +82,13 @@ class XMLParser {
                         Node currentNode = monsterNodes.item(j);
                         String monsterName = currentNode.getTextContent();
                         String questItem = currentNode.getAttributes().getNamedItem("questItem").getNodeValue();
-                        monster = new Monster(monsterName, questItem);
+                        String strWeaknesses = currentNode.getAttributes().getNamedItem("weaknesses").getNodeValue();
+                        List<String> weaknesses = Arrays.asList(strWeaknesses.split(","));
+                        monster = new Monster(monsterName, questItem, weaknesses);
                     }
                     // grab coordinates
-                    int dX = Integer.parseInt(element.getElementsByTagName("dx").item(0).getTextContent())*UNIT_SIZE;
-                    int dY = Integer.parseInt(element.getElementsByTagName("dy").item(0).getTextContent())*UNIT_SIZE;
+                    int dX = Integer.parseInt(element.getElementsByTagName("dx").item(0).getTextContent())* UNIT_SIZE;
+                    int dY = Integer.parseInt(element.getElementsByTagName("dy").item(0).getTextContent())* UNIT_SIZE;
                     //roomMap.put(id, new Room(roomName, desc, exits, items, npcs, monster));
                     roomMap.put(id, new MapRoom(roomName, desc, exits, items, npcs, monster,dX,dY));
                 }

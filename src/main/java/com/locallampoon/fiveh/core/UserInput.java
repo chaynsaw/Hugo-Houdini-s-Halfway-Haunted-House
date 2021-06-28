@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.locallampoon.fiveh.core.Game.narrativePanel;
+import static com.locallampoon.fiveh.ui.PanelStyles.Global.FG_COLOR;
+
 class UserInput {
 
-    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee" , "move", "get", "grab", "drop",
+    private static final List<String> ACTIONS = new ArrayList<>(Arrays.asList("fight", "go", "flee", "move", "get", "grab", "drop",
             "talk", "inspect", "h", "help", "i", "inventory", "q", "quit", "fight", "attack", "hit", "punch", "kick",
-            "flee", "run", "recruit"));
+            "flee", "run", "recruit", "enter"));
 
 
     private static List<String> inputCleaner(String reducedString) {
@@ -25,21 +28,20 @@ class UserInput {
         String itemSubstring = wordList.get(1);
         String verb = wordList.get(0);
         String noun = "";
-        List<String> tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getItems();
+        List<String> tempRoomPlayerItemList = new ArrayList<>(gamePlayer.getCurrentRoom().getItems());
         List<String> tempItemList;
         boolean nounPresent = false;
 
         if (verb.equals("drop")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getInventory();
-        }else if (verb.equals("recruit")){
+        } else if (verb.equals("recruit")) {
             tempRoomPlayerItemList.clear();
             tempRoomPlayerItemList = gamePlayer.getCurrentRoom().getNpcs();
         }
 
-        for (int i = 0; i < tempRoomPlayerItemList.size(); i++) {
+        for (String singleItem : tempRoomPlayerItemList) {
 
-            String singleItem = tempRoomPlayerItemList.get(i);
             tempItemList = Arrays.asList(singleItem.split(" "));
 
             for (String word : tempItemList) {
@@ -52,11 +54,15 @@ class UserInput {
             if (nounPresent) {
                 noun = singleItem;
                 break;
-            }else{
-                System.out.println("Noun does not exist in room, please check your spelling");
+            } else {
+                if (narrativePanel != null) {
+                    narrativePanel.appendTextArea("Noun does not exist in room, please check your spelling");
+                }
             }
-            System.out.println("we looking at this room item!!!!  "+ singleItem);
-            i++;
+            if (narrativePanel != null) {
+                narrativePanel.appendTextArea("we looking at this room item!!!!  " + singleItem);
+            }
+
         }
         return noun;
     }
@@ -70,10 +76,12 @@ class UserInput {
         if (!wordsList.isEmpty()) {
             verb = wordsList.get(0);
             if (!ACTIONS.contains(verb)) {
-                System.out.println("Not an acceptable action\n");
+                if (narrativePanel != null) {
+                    narrativePanel.appendTextArea("Not an acceptable action\n", FG_COLOR);
+                }
             }
         } else {
-            System.out.println("Two word command expected I.E. 'get sword' or 'go north'");
+            narrativePanel.appendTextArea("Two word command expected I.E. 'get sword' or 'go north'", FG_COLOR);
             wordsList.add(0, reqCommandAgain);
         }
         return wordsList;

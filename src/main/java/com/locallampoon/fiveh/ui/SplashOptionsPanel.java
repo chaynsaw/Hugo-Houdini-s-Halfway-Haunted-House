@@ -9,30 +9,30 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntroOptionsPanel implements KeyListener {
+public class SplashOptionsPanel implements KeyListener {
     private final String bullet = "> ";
     int selectedIndex = 0;
     JPanel panel;
     List<JLabel> optionLabels = new ArrayList<>();
     Font font = new Font(
-            PanelStyles.FONT_FAMILY,
-            PanelStyles.FONT_WEIGHT,
-            PanelStyles.INTRO_OPTIONS_FONT_SIZE
+            PanelStyles.Global.FONT_FAMILY,
+            PanelStyles.Global.FONT_WEIGHT,
+            PanelStyles.Splash.OPTIONS_FONT_SIZE
     );
 
-    public IntroOptionsPanel() {
+    public SplashOptionsPanel() {
         panel = new JPanel(new GridLayout(0, 1));
         panel.setBounds(
-                PanelStyles.INTRO_OPTIONS_X,
-                PanelStyles.INTRO_OPTIONS_Y,
-                PanelStyles.INTRO_OPTIONS_WIDTH,
-                PanelStyles.INTRO_OPTIONS_HEIGHT
+                PanelStyles.Splash.OPTIONS_X,
+                PanelStyles.Splash.OPTIONS_Y,
+                PanelStyles.Splash.OPTIONS_WIDTH,
+                PanelStyles.Splash.OPTIONS_HEIGHT
         );
-        panel.setBackground(PanelStyles.BG_COLOR);
+        panel.setBackground(PanelStyles.Global.BG_COLOR);
         panel.setFocusable(true);
         panel.addKeyListener(this);
 
-        for (IntroOption option : IntroOption.values()) {
+        for (SplashOption option : SplashOption.values()) {
             JLabel label = new JLabel(option.toString(), SwingConstants.CENTER);
             setLabelStyle(label);
             optionLabels.add(label);
@@ -71,6 +71,14 @@ public class IntroOptionsPanel implements KeyListener {
         return panel;
     }
 
+    public void renderOptions() {
+        if (Game.hasWon || Game.hasLost) {
+            optionLabels.get(0).setVisible(false);
+            optionLabels.remove(0);
+            setSelected();
+        }
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -92,7 +100,7 @@ public class IntroOptionsPanel implements KeyListener {
         }
         if (e.getKeyCode() == Key.ENTER.getKey()) {
             String selectedOption = optionLabels.get(selectedIndex).getText();
-            IntroOption option = IntroOption.valueOf(selectedOption.replace(bullet, ""));
+            SplashOption option = SplashOption.valueOf(selectedOption.replace(bullet, ""));
             Game.handleIntro(option);
         }
     }
