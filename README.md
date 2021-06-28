@@ -46,14 +46,14 @@ The following command will let you ADD or DROP items from your inventory. You ca
 *	DROP “Item”
 *	ADD “Item”
 
-The following command will help you utilize your items in your inventory
-*	TURN ON LIGHTS
+See the help menu in game for more options. 
 
-The following command will let you see the items in your inventory.
-*	INVENTORY
-
-The following command will open the door if the door is locked.
-*	OPEN DOOR
-
-The following command will give you a full description of your location.
-*	GPS
+## BUILD INSTRUCTIONS 
+1. Install Java 15+
+2. Clone this repository
+3. Using IntelliJ IDEA, open the folder you cloned the repository into (Note, you may need to go File -> Invalidate Caches and Restart) 
+4. Open the Project side-tab, right-click Hugo-Houdinis-Halfway-Haunted-House, and click Add Framework Support
+5. Click Maven and continue
+6. After completing that process, the right side-tab Maven
+7. Click it, expand Lifecycle, and double-click install
+8. You should be able to run the build by right-clicking the Jar in target/ and clicking run
