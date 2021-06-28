@@ -1,7 +1,5 @@
 package com.locallampoon.fiveh.ui;
 
-import com.locallampoon.fiveh.core.Game;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,11 +34,11 @@ public class SplashTitlePanel {
         return panel;
     }
 
-    public void renderTitle() {
-        if (Game.hasWon) {
-            title.setText(winText);
-        } else {
-            title.setText(loseText);
-        }
+    public void renderWinTitle() {
+        title.setText(winText);
+    }
+
+    public void renderLoseTitle() {
+        title.setText(loseText);
     }
 }

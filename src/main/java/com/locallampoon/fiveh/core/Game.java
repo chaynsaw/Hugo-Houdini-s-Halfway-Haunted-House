@@ -363,6 +363,20 @@ public class Game implements Serializable {
             if (player.isDead()) {
                 hasLost = true;
                 mainPanel.hideGame();
+                mainPanel.getSplashTitlePanel();
+                String art = "";
+                switch (monster.getName().toLowerCase()) {
+                    case "vampire" -> {
+                        art = GameArt.renderMan();
+                    }
+                    case "ghost" -> {
+                        art = GameArt.renderGhost();
+                    }
+                    case "werewolf" -> {
+                        art = GameArt.renderWolf();
+                    }
+                }
+                mainPanel.getSplashImagePanel().setTextArea(art);
                 mainPanel.showSplash();
             }
         } else {

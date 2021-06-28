@@ -1,5 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
+import com.locallampoon.fiveh.core.Game;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -14,6 +16,8 @@ public class MainPanel {
     ArtPanel artPanel;
     StatsPanel statsPanel;
     MapPanel mapPanel;
+    Thread splashAnimation;
+    SplashImage splashImagePanel = new SplashImage();
     HelpPanel helpPanel;
 
     public MainPanel(
@@ -42,7 +46,11 @@ public class MainPanel {
         window.getContentPane().setBackground(Color.BLACK);
         window.getRootPane().setBorder(new MatteBorder(1, 1, 1, 1, Color.WHITE));
         container = window.getContentPane();
+        // add individual panels
+        container.add(splashImagePanel.getPanel());
         container.add(splashPanel.getPanel());
+        splashAnimation = new Thread(splashImagePanel);
+        splashAnimation.start();
         hideGame();
         window.setVisible(true);
     }
@@ -57,6 +65,8 @@ public class MainPanel {
     }
 
     public void showGame() {
+        splashImagePanel.cancel();
+        splashImagePanel.getPanel().setVisible(false);
         container.add(narrativePanel.getPanel());
         container.add(helpPanel.getPanel());
         container.add(actionPanel.getPanel());
@@ -80,10 +90,16 @@ public class MainPanel {
 
     public void showSplash() {
         window.remove(narrativePanel.getPanel());
-        getSplashTitlePanel().renderTitle();
+        if (Game.hasWon) {
+            window.remove(splashImagePanel.getPanel());
+            getSplashTitlePanel().renderWinTitle();
+        } else {
+            getSplashTitlePanel().renderLoseTitle();
+        }
         getSplashDescriptionPanel().renderDescription();
         getSplashOptionsPanel().renderOptions();
         splashPanel.getPanel().setVisible(true);
+        splashImagePanel.getPanel().setVisible(true);
     }
 
     public NarrativePanel getNarrativePanel() {
@@ -110,6 +126,10 @@ public class MainPanel {
 
     public HelpPanel getHelpPanel(){
         return this.helpPanel;
+    }
+
+    public SplashImage getSplashImagePanel() {
+        return this.splashImagePanel;
     }
 
     public SplashTitlePanel getSplashTitlePanel(){
