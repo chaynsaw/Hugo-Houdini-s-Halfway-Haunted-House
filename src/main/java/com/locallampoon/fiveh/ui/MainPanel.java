@@ -1,5 +1,7 @@
 package com.locallampoon.fiveh.ui;
 
+import com.locallampoon.fiveh.core.Game;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -88,7 +90,12 @@ public class MainPanel {
 
     public void showSplash() {
         window.remove(narrativePanel.getPanel());
-        getSplashTitlePanel().renderTitle();
+        if (Game.hasWon) {
+            window.remove(splashImagePanel.getPanel());
+            getSplashTitlePanel().renderWinTitle();
+        } else {
+            getSplashTitlePanel().renderLoseTitle();
+        }
         getSplashDescriptionPanel().renderDescription();
         getSplashOptionsPanel().renderOptions();
         splashPanel.getPanel().setVisible(true);
