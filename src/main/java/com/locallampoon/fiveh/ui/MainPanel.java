@@ -14,6 +14,7 @@ public class MainPanel {
     ArtPanel artPanel;
     StatsPanel statsPanel;
     MapPanel mapPanel;
+    Thread splashAnimation;
     SplashImage splashImagePanel = new SplashImage();
     HelpPanel helpPanel;
 
@@ -46,6 +47,8 @@ public class MainPanel {
         // add individual panels
         container.add(splashImagePanel.getPanel());
         container.add(splashPanel.getPanel());
+        splashAnimation = new Thread(splashImagePanel);
+        splashAnimation.start();
         hideGame();
         window.setVisible(true);
     }
@@ -60,6 +63,7 @@ public class MainPanel {
     }
 
     public void showGame() {
+        splashImagePanel.cancel();
         splashImagePanel.getPanel().setVisible(false);
         container.add(narrativePanel.getPanel());
         container.add(helpPanel.getPanel());

@@ -5,8 +5,9 @@ import com.locallampoon.fiveh.core.GameArt;
 import javax.swing.*;
 import java.awt.*;
 
-public class SplashImage {
+public class SplashImage implements Runnable {
     JTextArea textArea;
+    volatile boolean cancel = false;
     Font normalFont = new Font("Monospaced", Font.PLAIN, 14);
 
     public SplashImage() {
@@ -29,7 +30,24 @@ public class SplashImage {
     }
 
     public void setTextArea(String text) {
-        System.out.println(text);
         textArea.setText(text);
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (!cancel) {
+                this.setTextArea(GameArt.renderHouseBatsFrame1());
+                Thread.sleep(1000);
+                this.setTextArea(GameArt.renderHouseBatsFrame2());
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void cancel() {
+        cancel = true;
     }
 }
